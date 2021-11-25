@@ -1,48 +1,79 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BACKEND_HTML_DOT_NET</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/fontawesome-free/css/all.min.css")">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/icheck-bootstrap/icheck-bootstrap.min.css")">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="@Url.Content("~/css/adminlte.min.css")">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/overlayScrollbars/css/OverlayScrollbars.min.css")">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/daterangepicker/daterangepicker.css")">
+    <!-- summernote -->
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/summernote/summernote-bs4.css")">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BACKEND_HTML_DOT_NET</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        @{Html.RenderPartial("_header");}
+
+        @{Html.RenderPartial("_sidebar");}
+
+        @RenderBody()
+
+        @{Html.RenderPartial("_footer");}
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - BACKEND_HTML_DOT_NET - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- jQuery -->
+    <script src="@Url.Content("~/css/plugins/jquery/jquery.min.js")"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="@Url.Content("~/css/plugins/jquery-ui/jquery-ui.min.js")"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="@Url.Content("~/css/plugins/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <!-- ChartJS -->
+    <script src="@Url.Content("~/css/plugins/chart.js/Chart.min.js")"></script>
+    <!-- Sparkline -->
+    <script src="@Url.Content("~/css/plugins/sparklines/sparkline.js")"></script>
+    <!-- JQVMap -->
+    <script src="@Url.Content("~/css/plugins/jqvmap/jquery.vmap.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jqvmap/maps/jquery.vmap.usa.js")"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="@Url.Content("~/css/plugins/jquery-knob/jquery.knob.min.js")"></script>
+    <!-- daterangepicker -->
+    <script src="@Url.Content("~/css/plugins/moment/moment.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/daterangepicker/daterangepicker.js")"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="@Url.Content("~/css/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js")"></script>
+    <!-- Summernote -->
+    <script src="@Url.Content("~/css/plugins/summernote/summernote-bs4.min.js")"></script>
+    <!-- overlayScrollbars -->
+    <script src="@Url.Content("~/css/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")"></script>
+    <!-- AdminLTE App -->
+    <script src="@Url.Content("~/js/adminlte.js")"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="@Url.Content("~/js/pages/dashboard.js")"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="@Url.Content("~/js/demo.js")"></script>
+
 </body>
+
 </html>
+

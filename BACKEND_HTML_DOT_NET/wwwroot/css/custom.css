@@ -1,0 +1,17 @@
+.login-page {
+    background-image: url(../img/Login/login_bg.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.login-box {
+    width: 420px;
+    padding: 0px 30px 0 30px;
+    background: #dad8d873;
+    border: 1px solid #dad8d8;
+}
+
+td,
+th {
+    text-align: center;
+}
