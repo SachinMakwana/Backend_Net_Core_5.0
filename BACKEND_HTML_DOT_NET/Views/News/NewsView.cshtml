@@ -1,0 +1,108 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "NewsView"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>News Details</h1>
+                </div>
+                <div class="col-sm-6" style="margin-top:10px;">
+                    <a href="@Url.Action("NewsAdd","News")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
+                            <li>Add New Details</li>
+                        </ol>
+                    </a>
+                </div>
+                <div class="container-fluid">
+                    <!-- <div class="row">
+               <form>
+                <button type="submit" class="btn btn-info" style="margin-left: 916px;margin-top: -56px;"><a href="about.html" style="color: white;">ADD NEW DETAILS</a></button>
+
+
+                    </form>
+            </div>
+            </div> -->
+                    <!-- <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">DataTables</li>
+              </ol>
+            </div> -->
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="card-title" style="font-size: 25px;">List Of News Details</h1>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>News Link</th>
+                                        <th>Image</th>
+                                        <th>Edit Details</th>
+                                        <th>Delete Details</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>COVID NEWS</td>
+                                        <td>news link</td>
+                                        <td>news Image</td>
+                                        <td><a href="@Url.Action("NewsAdd","News")"><i class="nav-icon fas fa-edit"></i></a></td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Holiday news</td>
+                                        <td>news link</td>
+                                        <td>news Image</td>
+                                        <td><a href="@Url.Action("NewsAdd","News")"><i class="nav-icon fas fa-edit"></i></a></td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>News Link</th>
+                                        <th>Image</th>
+                                        <th>Edit Details</th>
+                                        <th>Delete Details</th>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+</div>
+<!-- /.container-fluid -->
+            
+<!-- /.content -->
+        

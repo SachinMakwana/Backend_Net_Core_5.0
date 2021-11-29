@@ -1,0 +1,73 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "LabAllView"; }
+
+<div class="content-wrapper">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb float-sm-right">
+                    <li style="margin-left: 00px;">
+                        <a href="@Url.Action("LabWorkshopsView","LabWorkshops")">
+                            <i class="nav-icon fas fa-minus-circle"></i>
+                        </a>
+                    </li>
+                    <li style="margin-left: px;"><a href="labAndWorkshop_view.html">Back to Details</a></li>
+                </ol>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Details Of Lab And Workshop</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="preview col-md-5">
+                                <div class="tab-pane active" id="pic-1">
+                                    <img src="@Url.Content("~/img/lab.png")"
+                                         class="img-rounded" alt="Cinque Terre" width="400" height="230">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h6><b>NAME OF LAB AND WORKSHOP:</b></h6><span>Mechanical Workshop</span>
+                                <h6><b>CATEGORY:</b></h6><span>Workshop</span>
+                                <h6><b>DEPARTMENT:</b></h6><span>Mechanical</span>
+                            </div>
+                            <div class="col-md-12 mt-4">
+
+                                <h6><b>DETAIL DESCRIPTION:</b></h6> <span>
+                                    Dynamic loads and undesired
+                                    oscillations increase with higher speed of machines. At that time, knowledge
+                                    and practical exposure is required for better vibration reduction. The
+                                    Laboratory deals with balancing of mechanisms, torsional and bending
+                                    vibrations, vibration isolation, and the dynamic behavior of drives and
+                                    machine frames as complex systems using static and dynamic balancing
+                                    apparatus, whirling of shaft apparatus and universal vibration apparatus.
+                                    Main objective of study about dynamics is to understand how a static and
+                                    dynamic mass is balanced, To study about different types of
+                                    vibration.
+                                </span>
+
+                            </div>
+                            <div class="input-group col-md-12 mt-4">
+                                <div class="col-sm-6">
+                                    <a href="labAndWorkshop_add.html">
+                                        <button type="submit"
+                                                class="btn btn-primary float-right col-md-2">
+                                            Edit
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+        </div>
+    </section>
+</div>

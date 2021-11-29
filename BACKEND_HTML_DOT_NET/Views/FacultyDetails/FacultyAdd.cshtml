@@ -1,0 +1,229 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "FacultyAdd"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("FacultyView","FacultyDetails")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i> </li>
+                        <li style="margin-left: px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- your contents here -->
+                            <!-- form start -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add New Faculty</h3>
+                                </div>
+                                <form role="form">
+                                    <div class="card-body">
+                                        <div class="form-group">
+
+                                            <!-- Name Controls -->
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+                                                    <div class="col-md-1">
+                                                        <label for="ddlprefix">Prefix</label>
+                                                        <select class="form-control select2"
+                                                                style="width: 100%;" id="ddlprefix">
+                                                            <option selected="selected">Mr</option>
+                                                            <option>Mr</option>
+                                                            <option>Ms</option>
+                                                            <option>Mrs</option>
+                                                            <option>Dr</option>
+                                                            <option>Prof</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <label for="fname">First Name</label>
+                                                        <input type="text" class="form-control" id="fname"
+                                                               placeholder="First Name">
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <label for="lname">Last Name</label>
+                                                        <input type="text" class="form-control" id="lname"
+                                                               placeholder="Last Name">
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <label for="surname">Surname</label>
+                                                        <input type="text" class="form-control" id="surname"
+                                                               placeholder="Surname">
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <label for="dateofjoining">Date Of Joining</label>
+                                                        <div class="input-group date" id="reservationdate"
+                                                             data-target-input="nearest">
+                                                            <div class="input-group-append"
+                                                                 data-target="#reservationdate"
+                                                                 data-toggle="datetimepicker">
+                                                                <div class="input-group-text">
+                                                                    <i class="far fa-calendar-alt"></i>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+                                                    <div class="col-md-2">
+                                                        <label for="ddldesgn">Designation</label>
+                                                        <select class="form-control select2"
+                                                                style="width: 100%;" id="ddldesgn">
+                                                            <option selected="selected">Professor</option>
+                                                            <option>Professor</option>
+                                                            <option>HOD</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <label for="qual">Qualification</label>
+                                                        <input type="text" class="form-control" id="qual"
+                                                               placeholder="M.E.">
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <label for="exp">Experience</label>
+                                                        <input type="text" class="form-control" id="exp"
+                                                               placeholder="2 Years">
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <label for="exp">Area Of Interest</label>
+                                                        <input type="text" class="form-control" id="exp"
+                                                               placeholder="AI And ML">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+                                                    <div class="col-md-2">
+                                                        <label for="ddlgender">Gender</label>
+                                                        <select class="form-control select2"
+                                                                style="width: 100%;" id="ddlgender">
+                                                            <option selected="selected">Other</option>
+                                                            <option>Male</option>
+                                                            <option>Female</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="col-md-2">
+                                                        <label for="dateofbirth">Date Of Birth</label>
+                                                        <div class="input-group date" id="dateofbirth"
+                                                             data-target-input="nearest">
+                                                            <div class="input-group-append"
+                                                                 data-target="#dateofbirth"
+                                                                 data-toggle="datetimepicker">
+                                                                <div class="input-group-text">
+                                                                    <i class="far fa-calendar-alt"></i>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateofbirth" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <label for="maritialstatus">Maritial Status</label>
+                                                        <select class="form-control select2"
+                                                                style="width: 100%;" id="maritialstatus">
+                                                            <option selected="selected">Other</option>
+                                                            <option>Married</option>
+                                                            <option>Unmarried</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <label for="department">Department</label>
+                                                        <select class="form-control select2"
+                                                                style="width: 100%;" id="department">
+                                                            <option selected="selected">Computer</option>
+                                                            <option>Civil</option>
+                                                            <option>Electrical</option>
+                                                            <option>Mechanical</option>
+                                                            <option>Electronics & Communication</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label for="email">Email Address</label>
+                                                        <input type="email" class="form-control" id="email"
+                                                               placeholder="gecp@gmail.com">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div>
+                                                                <label for="contact1">Contact No</label>
+                                                                <input type="tel" class="form-control"
+                                                                       id="contact1" placeholder="Contact No">
+                                                            </div>
+                                                            <div>
+                                                                <label for="contact2">Phone No</label>
+                                                                <input type="tel" class="form-control"
+                                                                       id="contact2" placeholder="Phone No">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="address">Address</label>
+                                                        <textarea type="text" class="form-control" id="address"
+                                                                  rows="4"
+                                                                  placeholder="24, Sardar Society, NR. Rajesh Tower, Gotri, Vadodara - 380061"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6">
+                                                <button type="submit"
+                                                        class="btn btn-primary float-right col-md-2">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="clear"
+                                                        class="btn btn-default col-md-2">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </section>
+<!-- /.content -->
+</div>

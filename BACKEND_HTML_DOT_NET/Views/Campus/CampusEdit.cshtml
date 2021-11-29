@@ -1,0 +1,101 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CampusEdit"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Edit Campus Details</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <a href="@Url.Action("CampusView","Campus")" class="btn btn-primary">Back To Campus</a>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <!--ur contents here-->
+                    <div class="card card-primary">
+                        <form role="form">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="campusName">Name Of Campus</label>
+                                    <input type="text" class="form-control" id="campusName" placeholder="Enter Campus name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="category">Category Of Campus</label>
+                                    <input type="text" class="form-control" id="campusCategory" placeholder="Enter Campus Category">
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <div class="form-group">
+                                                    <label>Dapartment</label>
+                                                    <select class="form-control select2" style="width: 100%;">
+                                                        <option selected="selected">Computer Engineering</option>
+                                                        <option>Electronics & Communication Engineering</option>
+                                                        <option>Electrical Engineering</option>
+                                                        <option>Civil Engineering</option>
+                                                        <option>Mechanical Engineering</option>
+                                                        <option>Administrative Department</option>
+                                                        <option>Workshop</option>
+                                                        <option>library</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Upload Image File For Campus</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <label class="custom-file-label" for="exampleInputFile">
+                                                                Choose
+                                                                file
+                                                            </label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="">Upload</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary float-right">Update</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary float-left">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                
+            </div>
+
+        </div>
+
+<!-- /.container-fluid -->
+    </section>
+</div>
