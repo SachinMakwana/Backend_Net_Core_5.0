@@ -1,0 +1,126 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "GreivanceCellComplaintView"; }
+
+<div class="content-wrapper">
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb float-sm-right">
+                    <li style="margin-left: 00px;">
+                            <!-- Edit it when department controller is created -->
+                        <a href="dept_view.html">
+                            <i class="nav-icon fas fa-minus-circle"></i>
+                        </a>
+                    </li>
+                    <li style="margin-left: px;"><a href="@Url.Action("GreivanceCellView","GrievanceCell")">Back to Details</a></li>
+                </ol>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Details Of Grievance Complaint</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="col-3">
+                                    Enrollment No.
+                                </label>
+                                <span class="col-9">
+                                    180220107050
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="col-3">
+                                    Reason
+                                </label>
+                                <span class="col-9">
+                                    Drinking Water Is Not Clean.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="col-3">
+                                    Recieved By
+                                </label>
+                                <span class="col-9">
+                                    Prof. Jay Darji
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="col-3">
+                                    Complaint Description
+                                </label>
+                                <span class="col-9">
+                                    Dear Sir,
+                                    I am in Computer Department, The water supply is usually very
+                                    dirty and smelly.Due to this dirty water people are suffering through
+                                    lot of problems like stomach ache and Dirrhoea.
+
+                                    This water is creating many health issues therefore,i request the
+                                    concerned authorities to supply clean and hygienic water to all
+                                    departments.
+
+                                    Hope for a quick and positive response.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="col-3">
+                                    Complaint Status
+                                </label>
+                                <span class="col-9">
+                                    Pending
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="col-3">
+                                    Date Of Complaint
+                                </label>
+                                <span class="col-9">
+                                    16/02/2020
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="col-3">
+                                    Remarks
+                                </label>
+                                <span class="col-9">
+                                    No Remarks
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="input-group col-12 justify-content-center">
+                            <div><a href="@Url.Action("GreivanceCellAdd","GrievanceCell")" class="btn btn-primary">Edit Progress</a></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+</div>
+<!-- /.content -->
+    

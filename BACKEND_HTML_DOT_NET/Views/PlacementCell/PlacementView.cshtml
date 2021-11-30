@@ -1,0 +1,337 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "PlacementView"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Placement Cell</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6" style="margin-top:10px;">
+                    <a href="@Url.Action("PlacementAdd","PlacementCell")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
+                            <li>Add New Details</li>
+                        </ol>
+                    </a>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Placement Details</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Company Name</th>
+                                                <th>Department</th>
+                                                <th>
+                                                    Students Taken
+                                                </th>
+                                                <th>
+                                                    Lowest Package
+                                                </th>
+                                                <th>
+                                                    Highest Package
+                                                </th>
+                                                <th>Date Of Campus</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Microsoft</td>
+                                                <td>Computer</td>
+                                                <td>20</td>
+                                                <td>1,50,000₹</td>
+                                                <td>2,00,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>L & T PVT LTD</td>
+                                                <td>Civil</td>
+                                                <td>15</td>
+                                                <td>1,00,000₹</td>
+                                                <td>1,50,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>L & T PVT LTD</td>
+                                                <td>Civil</td>
+                                                <td>15</td>
+                                                <td>1,00,000₹</td>
+                                                <td>1,50,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Microsoft</td>
+                                                <td>Computer</td>
+                                                <td>20</td>
+                                                <td>1,50,000₹</td>
+                                                <td>2,00,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>L & T PVT LTD</td>
+                                                <td>Civil</td>
+                                                <td>15</td>
+                                                <td>1,00,000₹</td>
+                                                <td>1,50,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Microsoft</td>
+                                                <td>Computer</td>
+                                                <td>20</td>
+                                                <td>1,50,000₹</td>
+                                                <td>2,00,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>L & T PVT LTD</td>
+                                                <td>Civil</td>
+                                                <td>15</td>
+                                                <td>1,00,000₹</td>
+                                                <td>1,50,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>L & T PVT LTD</td>
+                                                <td>Civil</td>
+                                                <td>15</td>
+                                                <td>1,00,000₹</td>
+                                                <td>1,50,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Microsoft</td>
+                                                <td>Computer</td>
+                                                <td>20</td>
+                                                <td>1,50,000₹</td>
+                                                <td>2,00,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Microsoft</td>
+                                                <td>Computer</td>
+                                                <td>20</td>
+                                                <td>1,50,000₹</td>
+                                                <td>2,00,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>L & T PVT LTD</td>
+                                                <td>Civil</td>
+                                                <td>15</td>
+                                                <td>1,00,000₹</td>
+                                                <td>1,50,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>L & T PVT LTD</td>
+                                                <td>Civil</td>
+                                                <td>15</td>
+                                                <td>1,00,000₹</td>
+                                                <td>1,50,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>L & T PVT LTD</td>
+                                                <td>Civil</td>
+                                                <td>15</td>
+                                                <td>1,00,000₹</td>
+                                                <td>1,50,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Microsoft</td>
+                                                <td>Computer</td>
+                                                <td>20</td>
+                                                <td>1,50,000₹</td>
+                                                <td>2,00,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Microsoft</td>
+                                                <td>Computer</td>
+                                                <td>20</td>
+                                                <td>1,50,000₹</td>
+                                                <td>2,00,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Microsoft</td>
+                                                <td>Computer</td>
+                                                <td>20</td>
+                                                <td>1,50,000₹</td>
+                                                <td>2,00,000₹</td>
+                                                <td>20/07/2020</td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementDetails","PlacementCell")" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("PlacementEdit","PlacementCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Company Name</th>
+                                                <th>Department</th>
+                                                <th>
+                                                    Students Taken
+                                                </th>
+                                                <th>
+                                                    Lowest Package
+                                                </th>
+                                                <th>
+                                                    Highest Package
+                                                </th>
+                                                <th>Date Of Campus</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

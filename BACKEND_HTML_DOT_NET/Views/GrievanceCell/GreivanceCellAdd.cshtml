@@ -1,0 +1,149 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "GreivanceCellAdd"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("GreivanceCellView","GrievanceCell")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row ">
+                        <div class="col-12">
+                            <!--ur contents here-->
+                            <!-- jquery validation -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add Greivance Cell Details</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form role="form" id="quickForm">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="col-4">
+                                                    <label for="enNo"> Enter Enrollment No.</label>
+                                                    <input type="text" class="form-control" id="enNo" placeholder=" Enter Enrollment No.">
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="Reason"> Enter Reason</label>
+                                                    <input type="text" class="form-control" id="Reason" placeholder="Enter Reason">
+                                                </div>
+
+
+                                                <div class="col-4">
+                                                    <label>Select Department to Complaint</label>
+                                                    <select class="form-control select2" style="width: 100%;">
+                                                        <option selected="selected">Computer Engineering</option>
+                                                        <option>Electronics & Communication Engineering</option>
+                                                        <option>Electrical Engineering</option>
+                                                        <option>Civil Engineering</option>
+                                                        <option>Mechanical Engineering</option>
+                                                        <option>Administrative Department</option>
+                                                        <option>Workshop</option>
+                                                        <option>library</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="col-4">
+                                                    <label for="name"> Enter Committee Name</label>
+                                                    <input type="text" class="form-control" id="name" placeholder=" Enter Faculty/Committee Name">
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label>Select Role of Committee</label>
+                                                    <select class="form-control select2" style="width: 100%;">
+                                                        <option selected="selected">Convener</option>
+                                                        <option>Supporting Committee of Women Cell</option>
+                                                        <option>Anti Ragging Committee Coordinator</option>
+                                                        <option>SSIP Coordinator</option>
+                                                        <option>Supporting Committee of Anti Ragging Cell</option>
+                                                        <option>Supporting Committee of SSIP</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label>Received By Committee</label>
+                                                    <select class="form-control select2" style="width: 100%;">
+                                                        <option selected="selected">Convener</option>
+                                                        <option>Supporting Committee of Women Cell</option>
+                                                        <option>Anti Ragging Committee Coordinator</option>
+                                                        <option>SSIP Coordinator</option>
+                                                        <option>Supporting Committee of Anti Ragging Cell</option>
+                                                        <option>Supporting Committee of SSIP</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label for="name">Status</label>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="radio1">
+                                                                <label class="form-check-label">Done</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="radio1" checked="">
+                                                                <label class="form-check-label">Pending</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="radio1" checked="">
+                                                                <label class="form-check-label">In Work</label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-9">
+                                                        <div class="form-group">
+                                                            <label for="Description">Enter Description for Greivance Cell </label>
+                                                            <textarea class="form-control" rows="8" placeholder="Enter Description"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                            <div class="col-sm-6"><button type="clear" class="btn btn-default col-md-2">Clear</button></div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>
+

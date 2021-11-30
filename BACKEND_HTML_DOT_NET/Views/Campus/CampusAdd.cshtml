@@ -1,0 +1,118 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CampusAdd"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("CampusView","Campus")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12"></div>
+            <div class="container-fluid">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <!--ur contents here-->
+                        <!-- jquery validation -->
+                        <div class="card card-primary">
+                            <!-- /.card-header -->
+                            <div class="card-header">
+                                <h3 class="card-title">Add Campus Details</h3>
+                            </div>
+                            <!-- form start -->
+                            <form role="form" id="quickForm">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="col-6">
+                                                <label for="Title"> Enter Name</label>
+                                                <input type="text" class="form-control" id="Title"
+                                                       placeholder="Enter Name">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Enter Category:</label>
+                                                <select class="form-control select2" style="width: 100%;">
+                                                    <option selected="selected">Canteen</option>
+                                                    <option>Seminar Hall</option>
+                                                    <option>Ground</option>
+                                                    <option>Administrative Department</option>
+                                                    <option>Workshop</option>
+                                                    <option>library</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="col-6">
+                                                <label>Enter Department:</label>
+                                                <select class="form-control select2" style="width: 100%;">
+                                                    <option selected="selected">Computer Engineering</option>
+                                                    <option>Electronics & Communication Engineering</option>
+                                                    <option>Electrical Engineering</option>
+                                                    <option>Civil Engineering</option>
+                                                    <option>Mechanical Engineering</option>
+                                                    <option>Administrative Department</option>
+                                                    <option>Workshop</option>
+                                                    <option>library</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label for="exampleInputFile">
+                                                    Upload Image File For
+                                                    Campus
+                                                </label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input"
+                                                               id="exampleInputFile">
+                                                        <label class="custom-file-label"
+                                                               for="exampleInputFile">
+                                                            Choose
+                                                            file
+                                                        </label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="">Upload</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6">
+                                                <button type="submit"
+                                                        class="btn btn-primary float-right col-md-2">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="clear"
+                                                        class="btn btn-default col-md-2">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

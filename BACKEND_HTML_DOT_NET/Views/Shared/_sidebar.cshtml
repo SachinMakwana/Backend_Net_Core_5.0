@@ -14,7 +14,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="../dashboard/dashboard.html" class="nav-link">
+                    <a href="@Url.Action("Index","Home")" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../about college/about_view.html" class="nav-link">
+                    <a href="@Url.Action("AboutCollegeView","AboutCollege")" class="nav-link">
                         <i class="nav-icon fas fa-university"></i>
                         <p>
                             About College
@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../campus/campus_view.html" class="nav-link">
+                    <a href="@Url.Action("CampusView","Campus")" class="nav-link">
                         <i class="nav-icon fas fa-graduation-cap"></i>
                         <p>
                             Campus
@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../faculty/faculty_view.html" class="nav-link">
+                    <a href="@Url.Action("FacultyView","FacultyDetails")" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
                             Faculty Details
@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../department/dept_view.html" class="nav-link">
+                    <a href="@Url.Action("DepartmentView","Department")" class="nav-link">
                         <i class="nav-icon fas fa-building"></i>
                         <p>
                             Department
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../subject/subject_view.html" class="nav-link">
+                    <a href="@Url.Action("SubjectView","SubjectsLists")" class="nav-link">
                         <i class="nav-icon fas fa-book-open"></i>
                         <p>
                             Subjects Lists
@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../labAndWorkshop/labAndWorkshop_view.html" class="nav-link">
+                    <a href="@Url.Action("LabWorkshopsView","LabWorkshops")" class="nav-link">
                         <i class="nav-icon fa fa-cogs"></i>
                         <p>
                             Lab and workshops
@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../attachments/attachments_view.html" class="nav-link">
+                    <a href="@Url.Action("AttachmentsView","Attachments")" class="nav-link">
                         <i class="nav-icon fa fa-folder-open"></i>
                         <p>
                             Attachments
@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../company/company_view.html" class="nav-link">
+                    <a href="@Url.Action("CompanyView","CompanyDetails")" class="nav-link">
                         <i class="nav-icon fas fa-industry"></i>
                         <p>
                             Company Details
@@ -86,7 +86,7 @@
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="../placement/placement_view.html" class="nav-link">
+                    <a href="@Url.Action("PlacementView","PlacementCell")" class="nav-link">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>
                             Placement cell
@@ -95,19 +95,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../placement/placement_view.html" class="nav-link">
+                            <a href="@Url.Action("PlacementView","PlacementCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Placement Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../placementMember/placementMember_view.html" class="nav-link">
+                            <a href="@Url.Action("PlacementMemberView","PlacementCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Members Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../placement/placementAttachments_view.html" class="nav-link">
+                            <a href="@Url.Action("PlacementAttachmentsView","PlacementCell")" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Files Attachments</p>
                             </a>
@@ -115,7 +115,7 @@
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="../womenCell/womenCell_view.html" class="nav-link">
+                    <a href="@Url.Action("WomenCellView","WomenCell")" class="nav-link">
                         <i class="nav-icon fa fa-female"></i>
                         <p>
                             Women cell
@@ -124,19 +124,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../womenCell/womenCell_view.html" class="nav-link">
+                            <a href="@Url.Action("WomenCellView","WomenCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Women Cell Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../womenCell/womenCellMembers_details.html" class="nav-link">
+                            <a href="@Url.Action("WomenCellMembersDetails","WomenCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Members Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../womenCell/womenCellAttachments_view.html" class="nav-link">
+                            <a href="@Url.Action("WomenCellAttachmentsView","WomenCell")" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Files Attachments</p>
                             </a>
@@ -144,7 +144,7 @@
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="../ssip/ssip_view.html" class="nav-link">
+                    <a href="@Url.Action("SSIPView","SSIPCell")" class="nav-link">
                         <i class="nav-icon fa fa-cube"></i>
                         <p>
                             SSIP cell
@@ -153,19 +153,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../ssip/ssip_view.html" class="nav-link">
+                            <a href="@Url.Action("SSIPView","SSIPCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>SSIP Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../ssip/ssipMembers_details.html" class="nav-link">
+                            <a href="@Url.Action("SSIPMemberDetails","SSIPCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Members Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../ssip/ssipAttachments_view.html" class="nav-link">
+                            <a href="@Url.Action("SSIPAttachmentsView","SSIPCell")" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Files Attachments</p>
                             </a>
@@ -173,7 +173,7 @@
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="../antiRagging/antiRagging_view.html" class="nav-link">
+                    <a href="@Url.Action("AntiRaggingView","AntiRaggingCell")" class="nav-link">
                         <i class="nav-icon fa fa-male"></i>
                         <p>
                             Anti Ragging cell
@@ -182,19 +182,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../antiRagging/antiRagging_view.html" class="nav-link">
+                            <a href="@Url.Action("AntiRaggingView","AntiRaggingCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Anti Ragging Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../antiRagging/antiRaggingMembers_details.html" class="nav-link">
+                            <a href="@Url.Action("AntiRaggingMembersDetails","AntiRaggingCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Members Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../antiRagging/antiRaggingAttachments_view.html" class="nav-link">
+                            <a href="@Url.Action("AntiRaggingAttachmentsView","AntiRaggingCell")" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Files Attachments</p>
                             </a>
@@ -202,7 +202,7 @@
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="../greivanceCell/greivanceCell_view.html" class="nav-link">
+                    <a href="@Url.Action("GreivanceCellView","GrievanceCell")" class="nav-link">
                         <i class="nav-icon fas fa-user-edit"></i>
                         <p>
                             Grievance cell
@@ -211,19 +211,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../greivanceCell/greivanceCell_view.html" class="nav-link">
+                            <a href="@Url.Action("GreivanceCellView","GrievanceCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Grievance Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../greivanceCell/grievanceCellMemebers_details.html" class="nav-link">
+                            <a href="@Url.Action("GrievanceCellMembersDetails","GrievanceCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Members Details</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../greivanceCell/grievanceAttachments_view.html" class="nav-link">
+                            <a href="@Url.Action("GrievanceAttachmentsView","GrievanceCell")" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Files Attachments</p>
                             </a>
@@ -231,7 +231,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="../news/news_view.html" class="nav-link">
+                    <a href="@Url.Action("NewsView","News")" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
                             News
@@ -239,7 +239,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../images/images_view.html" class="nav-link">
+                    <a href="@Url.Action("ImagesView","Images")" class="nav-link">
                         <i class="nav-icon fas fa-camera-retro"></i>
                         <p>
                             Images
@@ -247,7 +247,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../gallery/gallery_view.html" class="nav-link">
+                    <a href="@Url.Action("GalleryView","CollegeGallery")" class="nav-link">
                         <i class="nav-icon fas fa-images"></i>
                         <p>
                             College Gallery
@@ -255,7 +255,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../achievements/achievements_view.html" class="nav-link">
+                    <a href="@Url.Action("AchievementsView","Achievements")" class="nav-link">
                         <i class="nav-icon fa fa-trophy"></i>
                         <p>
                             Achievements
@@ -263,7 +263,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactInfo/contactInfo_view.html" class="nav-link">
+                    <a href="@Url.Action("ContactInfoView","ContactInfo")" class="nav-link">
                         <i class="nav-icon fas fa-phone"></i>
                         <p>
                             Contact info

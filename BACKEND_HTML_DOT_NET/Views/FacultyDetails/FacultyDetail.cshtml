@@ -1,0 +1,134 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "FacultyDetail"; }
+
+<div class="content-wrapper">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb float-sm-right">
+                    <li style="margin-left: 00px;">
+                        <a href="@Url.Action("FacultyView","FacultyDetails")">
+                            <i class="nav-icon fas fa-minus-circle"></i>
+                        </a>
+                    </li>
+                    <li style="margin-left: px;"><a href="@Url.Action("FacultyView","FacultyDetails")">Back to Details</a></li>
+                </ol>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Details Of Departments</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="preview col-md-3">
+                                <div class="tab-pane active" id="pic-1">
+                                    <img src="@Url.Content("~/img/avatar.png")"
+                                         class="rounded-circle border border-dark" alt="Cinque Terre">
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <table>
+                                    <tr>
+                                        <th><b>NAME OF FACULTY:</b></th>
+                                        <td> &nbsp Mr. Sanjay V Patel</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>GENDER</b></th>
+                                        <td>Male</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>DESIGNATION:</b></th>
+                                        <td>Assisant Professor</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>DEPARTMENT:</b></th>
+                                        <td>Computer</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>QUALIFICATION:</b></th>
+                                        <td>M.E in Computer Science</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>AREA OF INTREST:</b></th>
+                                        <td>AI and ML</td>
+                                    </tr>
+
+
+                                </table>
+                            </div>
+                            <div class="row"></div>
+                            <div class="col-md-5 mt-2">
+                                <table>
+                                    <tr>
+                                        <th><b>DATE OF JOINING:</b></th>
+                                        <td> 10 May 1999</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>TOTAL EXPIERENCE:</b></th>
+                                        <td>5 years</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>E-MAIL:</b></th>
+                                        <td>sanjaysir123@gmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>CONTACT NUMBER:</b></th>
+                                        <td>124455</td>
+                                    </tr>
+
+                                </table>
+
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="vl mt-4"></div>
+                            </div>
+                            <div class="col-md-6 mt-2">
+
+                                <table>
+                                    <tr>
+                                        <th><b>DATE OF BIRTH:</b></th>
+                                        <td> 10 May 1968</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>MARITAL STATUS:</b></th>
+                                        <td>Married</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>PHONE NO:</b></th>
+                                        <td>567890456</td>
+                                    </tr>
+                                    <tr>
+                                        <th><b>HOME ADDRESS:</b></th>
+                                        <td>202 A wing swastik app opp Girls College, JAMNAGAR</td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="col-md-6">
+                                <a href="faculty_add.html">
+                                    <button type="submit"
+                                            class="btn btn-primary float-right col-md-3">
+                                        Edit
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+        </div>
+    </section>
+</div>
+  

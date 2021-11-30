@@ -1,0 +1,124 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "SubjectView"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Subjects</h1>
+                </div>
+                <div class="col-sm-6" style="margin-top:10px;">
+                    <a href="@Url.Action("SubjectAdd","SubjectsLists")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
+                            <li>Add New Details</li>
+                        </ol>
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1 class="card-title" style="font-size: 25px;">Subject List</h1>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject Code</th>
+                                            <th>Branch Name</th>
+                                            <th>Semester</th>
+                                            <th>Subject Name</th>
+                                            <th>Acronym of Subject</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2170701</td>
+                                            <td>Computer</td>
+                                            <td>7</td>
+                                            <td>Compiler Design</td>
+                                            <td>CD</td>
+
+                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
+                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2170709</td>
+                                            <td>Computer</td>
+                                            <td>7</td>
+                                            <td>Information and Network Security</td>
+                                            <td>INS</td>
+
+                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
+                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2170710</td>
+                                            <td>Computer</td>
+                                            <td>7</td>
+                                            <td>Mobile Computing and Wireless Communication</td>
+                                            <td>MCWC</td>
+
+                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
+                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2170715</td>
+                                            <td>Computer</td>
+                                            <td>7</td>
+                                            <td>Data Mining and Business Intelligence</td>
+                                            <td>DMBI</td>
+
+                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
+                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>217001</td>
+                                            <td>Computer</td>
+                                            <td>7</td>
+                                            <td>Project</td>
+                                            <td>PROJECT</td>
+
+                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
+                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Subject Code</th>
+                                            <th>Branch Name</th>
+                                            <th>Semester</th>
+                                            <th>Subject Name</th>
+                                            <th>Acronym of Subject</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

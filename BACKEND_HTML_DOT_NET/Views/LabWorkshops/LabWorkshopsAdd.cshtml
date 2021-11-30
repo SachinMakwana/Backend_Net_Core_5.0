@@ -1,0 +1,110 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "LabWorkshopsAdd"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("LabWorkshopsView","LabWorkshops")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- your contents here -->
+                            <!-- form start -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add New Lab or Workshop Data</h3>
+                                </div>
+                                <form role="form">
+                                    <div class="card-body">
+                                        <div class="form-group">
+
+                                            <!-- Name Controls -->
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+
+                                                    <div class="col-md-6">
+                                                        <label for="fname">Name Of Lab Or Workshop</label>
+                                                        <input type="text" class="form-control" id="fname" placeholder="First Name">
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <label for="exampleInputFile">Upload New Image</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                            </div>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text" id="">Upload</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+                                                    <div class="col-md-6">
+                                                        <label for="ddlCategory">Category</label>
+                                                        <select class="form-control select2" style="width: 100%;" id="ddlCategory">
+                                                            <option selected="selected">Lab</option>
+                                                            <option>Workshop</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="ddlDepartment">Department</label>
+                                                        <select class="form-control select2" style="width: 100%;" id="ddlDepartment">
+                                                            <option>Computer</option>
+                                                            <option>Civil</option>
+                                                            <option>Mechanical</option>
+                                                            <option>Eletrical</option>
+                                                            <option>Electronics & Communications</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+                                                    <div class="card-body pad">
+                                                        <div class="mb-3">
+                                                            <label for="details">Add Lab/Workshop Details Below.</label>
+                                                            <textarea class="textarea" id="details" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                            <div class="col-sm-6"><button type="clear" class="btn btn-primary col-md-2">Clear</button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

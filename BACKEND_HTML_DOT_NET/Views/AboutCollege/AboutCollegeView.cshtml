@@ -1,0 +1,107 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AboutCollegeView"; }
+
+<div class="content-wrapper">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb float-sm-right">
+                    <li style="margin-left: 00px;">
+                        <a href="@Url.Action("DepartmentView","AboutCollege")">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                        </a>
+                    </li>
+                    <li style="margin-left: px;"><a href="@Url.Action("AboutCollegeAdd","AboutCollege")">Edit Details</a></li>
+                </ol>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">About College</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="raw">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="input-group justify-content-center">
+                                        <div class="col-8">
+                                            <img alt="college" width="100%" class="img-thumbnail"
+                                                 src="@Url.Content("~/img/GECPatan.jpg")" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="h4 text-danger">
+                                        ABOUT COLLEGE
+                                    </label>
+                                    <hr>
+                                </div>
+                                <div>
+                                    <span>
+                                        Government Engineering College, Patan was established in April 2004 with
+                                        three branches Computer Engineering, Electronics and Communication
+                                        Engineering and Mechanical Engineering each with intake of 60 totaling
+                                        to 180. The institute was initially functioning in the premises of the
+                                        K. D. Polytechnic, Patan temporarily. It was shifted to its own newly
+                                        built up green premise in August 2008 at Katpur village on Chanasma-
+                                        Patan road 8 kms before Patan. Two more branches of Electrical
+                                        Engineering and Civil Engineering each with intake of 60 were introduced
+                                        from June- 2009 and the intake of all three existing branches were
+                                        increased to 120. Currently, institute functions with total intake of
+                                        480 in five different branches.
+                                    </span>
+                                </div>
+                                <div class="mt-5">
+                                    <span>
+                                        <span class="font-weight-bold">Mandate : </span> To impart the technical
+                                        education as per the state and national
+                                        policy which satisfy the current needs of the society, to interact with
+                                        the industry and research organizations for the integrated growth, to
+                                        make the liaison with statutory and professional organizations and to
+                                        provide the training and research opportunities to the student and
+                                        faculties in best possible manner.
+                                    </span>
+                                </div>
+                                <div class="mt-3">
+                                    <span>
+                                        <span class="font-weight-bold">Vision : </span>To prepare Human Resource
+                                        with value based competency for technical advancements and growth of
+                                        society.
+                                    </span>
+                                </div>
+                                <div class="mt-3">
+                                    <span class="font-weight-bold">Mission:</span>
+                                    <div>
+                                        <ol type="1">
+                                            <li>
+                                                To deliver technical programs and services to cater the current
+                                                needs of society and industry.
+                                            </li>
+                                            <li>
+                                                Helping industries in solving challenges by means of providing
+                                                best technical human resources.
+                                            </li>
+                                            <li>To contribute in sustainable growth of society.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group col-md-12 mt-4">
+                                <div class="col-sm-6">
+                                    <a href="@Url.Action("AboutCollegeAdd","AboutCollege")" class="btn btn-primary float-right">Edit</a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+        </div>
+    </section>
+</div>

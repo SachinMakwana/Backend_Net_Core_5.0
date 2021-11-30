@@ -1,0 +1,144 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AntiRaggingMembersDetails"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Anti-Ragging Cell Members List</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6" style="margin-top:10px;">
+                    <a href="@Url.Action("AntiRaggingMembersAdd","AntiRaggingCell")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
+                            <li>Add New Details</li>
+                        </ol>
+                    </a>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Anti-Raggingell Members Details</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Member Name</th>
+                                                <th>Role</th>
+                                                <th>Designation</th>
+                                                <th>Department</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>S. V. Patel</td>
+                                                <td>Commettee Head</td>
+                                                <td>Professor</td>
+                                                <td>Computer</td>
+                                                <td>
+                                                    <a href="" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("AntiRaggingMembersAdd","AntiRaggingCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>S. V. Patel</td>
+                                                <td>Commettee Head</td>
+                                                <td>Professor</td>
+                                                <td>Computer</td>
+                                                <td>
+                                                    <a href="" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("AntiRaggingMembersAdd","AntiRaggingCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>S. V. Patel</td>
+                                                <td>Commettee Head</td>
+                                                <td>Professor</td>
+                                                <td>Computer</td>
+                                                <td>
+                                                    <a href="" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("AntiRaggingMembersAdd","AntiRaggingCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>S. V. Patel</td>
+                                                <td>Commettee Head</td>
+                                                <td>Professor</td>
+                                                <td>Computer</td>
+                                                <td>
+                                                    <a href="" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("AntiRaggingMembersAdd","AntiRaggingCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>S. V. Patel</td>
+                                                <td>Commettee Head</td>
+                                                <td>Professor</td>
+                                                <td>Computer</td>
+                                                <td>
+                                                    <a href="" class="nav-icon fas fa-eye"></a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("AntiRaggingMembersAdd","AntiRaggingCell")" class="nav-icon fas fa-edit"></a>
+                                                </td>
+                                                <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Member Name</th>
+                                                <th>Role</th>
+                                                <th>Designation</th>
+                                                <th>Department</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

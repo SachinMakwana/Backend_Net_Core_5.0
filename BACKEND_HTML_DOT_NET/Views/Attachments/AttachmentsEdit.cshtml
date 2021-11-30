@@ -1,0 +1,81 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AttachmentsEdit"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Edit Attachments</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <a href="@Url.Action("AttachmentsView","Attachments")" class="btn btn-primary">Back To Attachment</a>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!--ur contents here-->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="row justify-content-center">
+                                <div class="col-8">
+                                    <!--ur contents here-->
+                                    <!-- form start -->
+                                    <div class="card card-primary">
+                                        <form role="form">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="fileName">Name Of File</label>
+                                                    <input type="email" class="form-control" id="fileName" placeholder="Enter file name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">File Upload</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="">Edit</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+
+                                            <div class="card-footer">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button type="submit" class="btn btn-primary float-right">Update</button>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button type="submit" class="btn btn-primary float-left">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

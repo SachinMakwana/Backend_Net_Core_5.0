@@ -1,0 +1,289 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "LabWorkshopsView"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Lab And Workshops</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6" style="margin-top:10px;">
+                    <a href="@Url.Action("LabWorkshopsAdd","LabWorkshops")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
+                            <li>Add New Details</li>
+                        </ol>
+                    </a>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Lab And Workshop Lists</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Department</th>
+                                        <th>View Details</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Electronic Lab</td>
+                                        <td>Lab</td>
+                                        <td>Electrical</td>
+                                        <td>
+                                            <a href="@Url.Action("LabAllView","LabWorkshops")" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops")" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Department</th>
+                                        <th>View Details</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

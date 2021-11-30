@@ -1,0 +1,95 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AchievementsAdd"; 
+}
+
+<div class="content-wrapper">
+
+
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("AchievementsView","Achievements")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row ">
+                        <div class="col-12">
+                            <!--ur contents here-->
+                            <!-- jquery validation -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add Achievements </h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form role="form" id="quickForm">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="col-4">
+                                                    <label for="Title"> Enter Title</label>
+                                                    <input type="text" class="form-control" id="Title" placeholder="Enter Title">
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label>Enter Category:</label>
+                                                    <select class="form-control select2" style="width: 100%;">
+                                                        <option selected="selected">Computer Engineering</option>
+                                                        <option>Electronics & Communication Engineering</option>
+                                                        <option>Electrical Engineering</option>
+                                                        <option>Civil Engineering</option>
+                                                        <option>Mechanical Engineering</option>
+                                                        <option>Administrative Department</option>
+                                                        <option>Workshop</option>
+                                                        <option>library</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="exampleInputFile">Enter Image File </label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <label class="custom-file-label" for="exampleInputFile">
+                                                                Choose
+                                                                file
+                                                            </label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="">Upload</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-12">
+                                                <label for="details">Enter Details For Achievements</label>
+                                                <textarea class="textarea" id="details" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                                <div class="card-footer">
+                                    <div class="input-group col-12">
+                                        <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                        <div class="col-sm-6"><button type="clear" class="btn btn-default col-md-2">Clear</button></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+    </section>
+    <!-- /.content -->
+</div>

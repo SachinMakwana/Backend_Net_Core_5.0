@@ -1,0 +1,89 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CompanyAdd"; }
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Add New Company</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <a href="@Url.Action("CompanyView","CompanyDetails")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
+                            <li>Back To Details</li>
+                        </ol>
+                    </a>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- your contents here -->
+                    <!-- form start -->
+                    <div class="card card-primary">
+                        <form role="form">
+                            <div class="card-body">
+                                <div class="form-group row justify-content-center">
+                                    <div class="col-11">
+                                        <!---->
+                                        <div class="input-group">
+                                            <div class="col-md-6">
+                                                <label for="companyName">Company Name</label>
+                                                <input type="text" class="form-control" id="companyName" placeholder="Company Name">
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputFile">Upload Company Logo</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="">Upload</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="card-body pad">
+                                                <div class="mb-3">
+                                                    <label for="companyDetails">Add Company Details Below.</label>
+                                                    <textarea class="textarea" id="companyDetails" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <div class="input-group col-12">
+                                    <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                    <div class="col-sm-6"><button type="clear" class="btn btn-default col-md-2">Clear</button></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
