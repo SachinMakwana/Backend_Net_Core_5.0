@@ -23,7 +23,7 @@
 					</div>
 					<!-- /.card-header -->
 					<!-- form start -->
-					<form id="newsaddform" role="form">
+					<form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
 						<div class="card-body">
 							<div class="row">
 								<div class="col-sm-6">
@@ -59,7 +59,7 @@
 						</div>
 						<div class="card-footer">
 							<div class="input-group col-12">
-								<div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+								<div class="col-sm-6"><button type="submit" id="sub" class="btn btn-primary float-right col-md-2">Submit</button></div>
 								<div class="col-sm-6"><button type="reset" class="btn btn-default col-md-2">Clear</button></div>
 							</div>
 						</div>
@@ -72,7 +72,6 @@
 </div>
 
 @section script{
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
 
@@ -98,11 +97,11 @@
 
 		});
 
-		$('#newsaddform').submit(function(e) {
+		$('#sub').click(function(e) {
 
 		//prevent Default functionality
-		e.preventDefault();
-		console.log( "firee!" );
+		$('#newsaddform').preventDefault();
+		alert( "firee!" );
 
 		//get the action-url of the form
 		//var actionurl = e.currentTarget.action;
