@@ -72,14 +72,14 @@
 </div>
 
 @section script{
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
 
 
 	$(document).ready(function() {
 		//console.log( "ready!" );
-		
+
 		$('#newsaddform').validate({
 		  rules: {
 			"title": {
@@ -100,26 +100,27 @@
 
 		$('#newsaddform').submit(function(e) {
 
-        //prevent Default functionality
-        e.preventDefault();
+		//prevent Default functionality
+		e.preventDefault();
+		console.log( "firee!" );
 
-        //get the action-url of the form
-        var actionurl = e.currentTarget.action;
+		//get the action-url of the form
+		//var actionurl = e.currentTarget.action;
 
-        //do your own request an handle the results
-        $.ajax({
-                url: actionurl,
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
-                    ... do something with the data...
-                }
-        });
+		//do your own request an handle the results
+		$.ajax({
+				url: 'wewe',
+				type: 'post',
+				dataType: 'application/json',
+				data: $("#myform").serialize(),
+				success: function(data) {
 
-    });
-		
-	
+				}
+		});
+
+	});
+
+
 	});
 
 </script>
