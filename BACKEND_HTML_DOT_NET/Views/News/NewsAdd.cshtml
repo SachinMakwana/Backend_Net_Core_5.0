@@ -26,39 +26,19 @@
                     <form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
                         <div class="card-body">
                             <div class="row">
+
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER TITLE OF NEWS</label>
                                         <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="ENTER TITLE.. ">
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">ENTER LINK OF NEWS</label>
-                                        <input type="text" name="link" class="form-control" id="exampleInputEmail1" placeholder="ENTER LINK.. ">
-                                    </div>
-                                </div>
+                               <div class="col-md-6">
+                                   <label for="description">ENTER DESCRIPTION OF NEWS</label>
+                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                               </div>
 
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">CHOOSE IMAGE FOR NEWS</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-
-                                                <input type="file" class="custom-file-input" name="inputfile" id="inputfile">
-                                            </div>
-                                           @* <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
-                                            </div>*@
-
-                                            <div class="errorTxt">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -89,13 +69,8 @@
             "title": {
                  required: true                
              },
-            "inputfile": {    
-                required: true, 
-                accept: "image/jpg,image/jpeg,image/png"
-            },
-             "link": {
-                 required: true,
-                 url:true
+             "description": {
+                 required: true
              }
 
           },
@@ -103,13 +78,8 @@
             "title": {
                  required: "this field is required"
              },
-             "inputfile": {
-                 required: "this field is required",
-                 accept:"Upload Valid Formate image"
-             },
-             "link": {
-                 required: "this field is required",
-                 url:"required URL"
+             "description": {
+                 required: "this field is required"
              }
           }
          
