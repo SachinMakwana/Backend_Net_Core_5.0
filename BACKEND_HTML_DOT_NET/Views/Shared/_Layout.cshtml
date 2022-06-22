@@ -39,8 +39,9 @@
     </div>
 
     <!-- jQuery -->
-   @* <script src="@Url.Content("~/css/plugins/jquery/jquery.min.js")"></script>*@
+    @*<script src="@Url.Content("~/css/plugins/jquery/jquery.min.js")"></script>*@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js" integrity="sha512-FOhq9HThdn7ltbK8abmGn60A/EMtEzIzv1rvuh+DqzJtSGq8BRdEN0U+j0iKEIffiw/yEtVuladk6rsG4X6Uqg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="@Url.Content("~/css/plugins/jquery-ui/jquery-ui.min.js")"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -54,8 +55,8 @@
     <!-- Sparkline -->
     <script src="@Url.Content("~/css/plugins/sparklines/sparkline.js")"></script>
     <!-- JQVMap -->
-    <script src="@Url.Content("~/css/plugins/jqvmap/jquery.vmap.min.js")"></script>
-    <script src="@Url.Content("~/css/plugins/jqvmap/maps/jquery.vmap.usa.js")"></script>
+    @*<script src="@Url.Content("~/css/plugins/jqvmap/jquery.vmap.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jqvmap/maps/jquery.vmap.usa.js")"></script>*@
     <!-- jQuery Knob Chart -->
     <script src="@Url.Content("~/css/plugins/jquery-knob/jquery.knob.min.js")"></script>
     <!-- daterangepicker -->
@@ -73,7 +74,6 @@
     <script src="@Url.Content("~/js/pages/dashboard.js")"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="@Url.Content("~/js/demo.js")"></script>
-
     @RenderSection("script", required: false)
 
 </body>

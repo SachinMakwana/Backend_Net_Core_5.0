@@ -16,5 +16,11 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult NewsAdd(FromBodyAttribute fromBodyAttribute)
+        {
+
+            return View();
+        }
     }
 }

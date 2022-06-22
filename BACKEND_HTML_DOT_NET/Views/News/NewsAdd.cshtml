@@ -1,74 +1,79 @@
 ﻿@{
-	Layout = "~/Views/Shared/_Layout.cshtml";
-	ViewBag.Title = "NewsAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "NewsAdd";
 }
 
 <div class="content-wrapper">
-	<!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
-	<section class="content" style="margin-top:20px;">
-		<div class="row">
-			<div class="col-md-12">
-				<a href="@Url.Action("NewsView","News")">
-					<ol class="breadcrumb float-sm-right">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("NewsView","News")">
+                    <ol class="breadcrumb float-sm-right">
 
-						<li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
-						<li style="margin-left: px;">Back to Details</li>
-					</ol>
-				</a>
-			</div>
-			<div class="col-md-12">
-				<div class="card card-primary">
-					<div class="card-header">
-						<h3 class="card-title">Add New News</h3>
-					</div>
-					<!-- /.card-header -->
-					<!-- form start -->
-					<form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
-						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label for="exampleInputEmail1">ENTER TITLE OF NEWS</label>
-										<input type="email" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter name.. ">
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label for="exampleInputEmail1">ENTER LINK OF NEWS</label>
-										<input type="email" name="link" class="form-control" id="exampleInputEmail1" placeholder="Enter name.. ">
-									</div>
-								</div>
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add New News</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">ENTER TITLE OF NEWS</label>
+                                        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="ENTER TITLE.. ">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">ENTER LINK OF NEWS</label>
+                                        <input type="text" name="link" class="form-control" id="exampleInputEmail1" placeholder="ENTER LINK.. ">
+                                    </div>
+                                </div>
 
 
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label for="exampleInputFile">CHOOSE IMAGE FOR NEWS</label>
-										<div class="input-group">
-											<div class="custom-file">
-												<input type="file" class="custom-file-input" id="exampleInputFile">
-												<label class="custom-file-label" for="exampleInputFile">Choose file</label>
-											</div>
-											<div class="input-group-append">
-												<span class="input-group-text" id="">Upload</span>
-											</div>
-										</div>
-									</div>
-								</div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">CHOOSE IMAGE FOR NEWS</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
 
-							</div>
-						</div>
-						<div class="card-footer">
-							<div class="input-group col-12">
-								<div class="col-sm-6"><button type="submit" id="sub" class="btn btn-primary float-right col-md-2">Submit</button></div>
-								<div class="col-sm-6"><button type="reset" class="btn btn-default col-md-2">Clear</button></div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- /.card-body -->
-		</div>
-	</section>
+                                                <input type="file" class="custom-file-input" name="inputfile" id="inputfile">
+                                            </div>
+                                           @* <div class="input-group-append">
+                                                <span class="input-group-text" id="">Upload</span>
+                                            </div>*@
+
+                                            <div class="errorTxt">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="input-group col-12">
+                                <div class="col-sm-6"><button type="submit" id="sub" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                <div class="col-sm-6"><button type="reset" class="btn btn-default col-md-2">Clear</button></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </section>
 </div>
 
 @section script{
@@ -76,51 +81,67 @@
 <script type="text/javascript">
 
 
-	$(document).ready(function() {
-		//console.log( "ready!" );
+    $(document).ready(function() {
+        //console.log( "ready!" );
 
-		$('#newsaddform').validate({
-		  rules: {
-			"title": {
-				 required: true,
-				 minlength: 5,
-				 digits: true
-			 }
-		  },
-		  messages: {
-			"title": {
-				 required: "this field is required",
-				 minlength: "this field must contain at least {0} characters",
-				 digits: "this field can only contain numbers"
-			 }
-		  }
+        $('#newsaddform').validate({
+          rules: {
+            "title": {
+                 required: true                
+             },
+            "inputfile": {    
+                required: true, 
+                accept: "image/jpg,image/jpeg,image/png"
+            },
+             "link": {
+                 required: true,
+                 url:true
+             }
 
-		});
+          },
+          messages: {
+            "title": {
+                 required: "this field is required"
+             },
+             "inputfile": {
+                 required: "this field is required",
+                 accept:"Upload Valid Formate image"
+             },
+             "link": {
+                 required: "this field is required",
+                 url:"required URL"
+             }
+          }
+         
 
-		$('#sub').click(function(e) {
+        });
 
-		//prevent Default functionality
-		$('#newsaddform').preventDefault();
-		alert( "firee!" );
+        $('#newsaddform').submit(function(e) {
 
-		//get the action-url of the form
-		//var actionurl = e.currentTarget.action;
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
 
-		//do your own request an handle the results
-		$.ajax({
-				url: 'wewe',
-				type: 'post',
-				dataType: 'application/json',
-				data: $("#myform").serialize(),
-				success: function(data) {
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
 
-				}
-		});
+        //do your own request an handle the results
+        if($('#newsaddform').valid()){
+        $.ajax({
+                url: '@Url.Action("NewsAdd","News")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
 
-	});
+                }
+        });
+        }
+
+    });
 
 
-	});
+    });
 
 </script>
 
