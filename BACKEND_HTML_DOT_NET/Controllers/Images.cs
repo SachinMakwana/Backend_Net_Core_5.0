@@ -16,5 +16,12 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult ImagesAdd(FromBodyAttribute fromBodyAttribute)
+        {
+
+            return View();
+        }
     }
 }

@@ -11,9 +11,9 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
+                            <a href="@Url.Action("AttachmentsView","Attachments")">
                     <ol class="breadcrumb float-sm-right">
                         <li>
-                            <a href="@Url.Action("AttachmentsView","Attachments")">
                                 <i class="nav-icon fas fa-plus-circle">
                                     Back to Attachments Details
                                 </i>
@@ -38,10 +38,32 @@
                     <div class="card card-primary">
                         <form role="form">
                             <div class="card-body">
+
                                 <div class="form-group">
                                     <label for="fileName">Name Of File</label>
-                                    <input type="email" class="form-control" id="fileName" placeholder="Enter file name">
+                                    <input type="text" class="form-control" id="fileName" placeholder="Enter file name">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="fileName">Title</label>
+                                    <input type="text" class="form-control" id="titel" placeholder="Enter title name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fileName">Type Of File</label>
+                                    <input type="text" class="form-control" id="type" placeholder="Enter type">
+                                </div>
+
+                                <div class="col-md-6">
+                                   <label for="description">ENTER DESCRIPTION</label>
+                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                               </div>
+
+                               <div class="form-group">
+                                    <label for="fileName">Page id</label>
+                                    <input type="number" class="form-control" id="pageid" placeholder="Enter page id">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="exampleInputFile">File Upload</label>
                                     <div class="input-group">
