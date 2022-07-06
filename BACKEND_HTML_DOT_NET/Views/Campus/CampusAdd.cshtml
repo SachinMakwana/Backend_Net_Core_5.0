@@ -27,19 +27,19 @@
                                 <h3 class="card-title">Add Campus Details</h3>
                             </div>
                             <!-- form start -->
-                            <form role="form" id="quickForm">
+                            <form role="form" id="campusadd">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="col-6">
                                                 <label for="Title"> Enter Name</label>
-                                                <input type="text" class="form-control" id="Title"
+                                                <input type="text" name="name" class="form-control" id="Title"
                                                        placeholder="Enter Name">
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label>Enter Category:</label>
-                                                <select class="form-control select2" style="width: 100%;">
+                                                <select name="category" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">Canteen</option>
                                                     <option>Seminar Hall</option>
                                                     <option>Ground</option>
@@ -55,7 +55,7 @@
                                         <div class="input-group">
                                             <div class="col-6">
                                                 <label>Enter Department:</label>
-                                                <select class="form-control select2" style="width: 100%;">
+                                                <select name="dept" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">Computer Engineering</option>
                                                     <option>Electronics & Communication Engineering</option>
                                                     <option>Electrical Engineering</option>
@@ -116,3 +116,70 @@
     </section>
     <!-- /.content -->
 </div>
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#campusadd').validate({
+          rules: {
+            "name": {
+                 required: true                
+             }, 
+             "category": {
+                 required: true                
+             },
+             "dept": {
+                 required: true
+             }
+
+          },
+          messages: {
+            "name": {
+                 required: "this field is required"
+             },
+             "category": {
+                 required: "this field is required"
+             },
+             "dept": {
+                 required: "this field is required"
+             }
+          }
+         
+
+        });
+
+        $('#campusadd').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#campusadd').valid()){
+        $.ajax({
+                url: '@Url.Action("NewsAdd","News")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

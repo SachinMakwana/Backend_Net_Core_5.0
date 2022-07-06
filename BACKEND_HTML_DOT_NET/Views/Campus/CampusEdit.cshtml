@@ -29,15 +29,15 @@
                 <div class="col-8">
                     <!--ur contents here-->
                     <div class="card card-primary">
-                        <form role="form">
+                        <form role="form" id="campusedit">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="campusName">Name Of Campus</label>
-                                    <input type="text" class="form-control" id="campusName" placeholder="Enter Campus name">
+                                    <input type="text" name="name" class="form-control" id="campusName" placeholder="Enter Campus name">
                                 </div>
                                 <div class="form-group">
                                     <label for="category">Category Of Campus</label>
-                                    <input type="text" class="form-control" id="campusCategory" placeholder="Enter Campus Category">
+                                    <input type="text" name="category" class="form-control" id="campusCategory" placeholder="Enter Campus Category">
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -45,7 +45,7 @@
                                             <div class="input-group">
                                                 <div class="form-group">
                                                     <label>Dapartment</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select name="dept" class="form-control select2" style="width: 100%;">
                                                         <option selected="selected">Computer Engineering</option>
                                                         <option>Electronics & Communication Engineering</option>
                                                         <option>Electrical Engineering</option>
@@ -99,3 +99,70 @@
 <!-- /.container-fluid -->
     </section>
 </div>
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#campusedit').validate({
+          rules: {
+            "name": {
+                 required: true                
+             }, 
+             "category": {
+                 required: true                
+             },
+             "dept": {
+                 required: true
+             }
+
+          },
+          messages: {
+            "name": {
+                 required: "this field is required"
+             },
+             "category": {
+                 required: "this field is required"
+             },
+             "dept": {
+                 required: "this field is required"
+             }
+          }
+         
+
+        });
+
+        $('#campusedit').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#campusedit').valid()){
+        $.ajax({
+                url: '@Url.Action("NewsAdd","News")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}
