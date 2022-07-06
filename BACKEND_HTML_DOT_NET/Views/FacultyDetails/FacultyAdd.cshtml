@@ -25,7 +25,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Add New Faculty</h3>
                                 </div>
-                                <form role="form">
+                                <form name="facultyadd" role="form">
                                     <div class="card-body">
                                         <div class="form-group">
 
@@ -35,7 +35,7 @@
 
                                                     <div class="col-md-3">
                                                         <label for="name">Name</label>
-                                                        <input type="text" class="form-control" id="name"
+                                                        <input name="name" type="text" class="form-control" id="name"
                                                                placeholder="Name">
                                                     </div>
                                                 </div>
@@ -45,7 +45,7 @@
                                                 <div class="input-group col-12">
                                                     <div class="col-md-2">
                                                         <label for="ddldesgn">Designation ID</label>
-                                                        <input type="number" class="form-control" id="designation"
+                                                        <input name="destid" type="number" class="form-control" id="designation"
                                                                placeholder="Designation ID">
                                                     </div>
                                                 </div>
@@ -56,7 +56,7 @@
                                                     
                                                     <div class="col-md-3">
                                                         <label for="department">Department ID</label>
-                                                        <input type="number" class="form-control" id="department"
+                                                        <input name="deptid" type="number" class="form-control" id="department"
                                                                placeholder="Department ID">
                                                     </div>
                                                     
@@ -97,3 +97,71 @@
     </section>
 <!-- /.content -->
 </div>
+
+
+@section script{
+
+    <script>
+
+
+$(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#facultyadd').validate({
+          rules: {
+            "name": {
+                 required: true                
+             }, 
+             "destid": {
+                 required: true                
+             },
+             "deptid": {
+                 required: true
+             }
+
+          },
+          messages: {
+            "name": {
+                 required: "this field is required"
+             },
+             "category": {
+                 required: "this field is required"
+             },
+             "dept": {
+                 required: "this field is required"
+             }
+          }
+         
+
+        });
+
+        $('#facultyadd').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#facultyadd').valid()){
+        $.ajax({
+                url: '@Url.Action("NewsAdd","News")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+    </script>
+
+}
