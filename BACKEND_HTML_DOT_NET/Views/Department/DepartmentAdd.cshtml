@@ -20,7 +20,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
+                    <form role="form" id="department">
                         <div class="card-body">
                             <div class="row">
                                
@@ -51,7 +51,7 @@
 
                                <div class="col-md-6">
                                    <label for="slogan">ENTER SLOGAN OF DEPARTMENT</label>
-                                   <textarea type="text" name="slogan" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="slogan" class="form-control" id="slogan" rows="4" placeholder="Write content"></textarea>
                                </div>
 
                                 <div class="col-sm-5">
@@ -60,7 +60,7 @@
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input"
-                                                       id="exampleInputFile">
+                                                       id="InputFile">
                                                 <label class="custom-file-label" for="exampleInputFile">
                                                     Choose
                                                     file
@@ -89,3 +89,85 @@
         </div>
     </section>
 </div>
+
+                                
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#department').validate({
+          rules: {
+            "department": {
+                 required: true                
+             },
+             "description": {
+                 required: true
+             },
+             "message":{
+                 required: true;
+                 number: true;
+             },
+                "slogan": {
+                    required: true
+                },
+                "InputFile"{
+                    required: true;
+                }
+
+          },
+          messages: {
+          "department": {
+                 required: "this field is required"
+             },
+             "description": {
+                 required: "this field is required"
+             },
+             "message":{
+                  required: "this field is required"
+             },
+                "slogan": {
+                   required: "this field is required"
+                },
+                "InputFile"{
+                     required: "this field is required"
+                }
+
+          }
+         
+
+        });
+
+        $('#department').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#department').valid()){
+        $.ajax({
+                url: '@Url.Action("DepartmentAdd","Department")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

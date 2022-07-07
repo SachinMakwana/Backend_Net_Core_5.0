@@ -36,7 +36,7 @@
 
                                                 <div class="col-4">
                                                     <label for="Title"> Enter Title</label>
-                                                    <input type="text" class="form-control" id="Title" placeholder="Enter Title">
+                                                    <input type="text" class="form-control" id="title" placeholder="Enter Title">
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -92,3 +92,75 @@
     </section>
     <!-- /.content -->
 </div>
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#quickForm').validate({
+          rules: {
+                "title": {
+                 required: true                
+                },
+                "description": {
+                    required: true
+                },
+                "tag": {
+                    required: true
+                },
+                "date": {
+                    required: true
+                }
+          },
+          messages: {
+            "title": {
+                 required: "this field is required"
+             },
+             "description": {
+                 required: "this field is required"
+             },
+             "tag": {
+                 required: "this field is required"
+             },
+                "date": {
+                    required: "Enter valid date"
+                }
+          }
+         
+
+        });
+
+        $('#quickForm').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#quickForm').valid()){
+        $.ajax({
+                url: '@Url.Action("AchievementsAdd","Achievements")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

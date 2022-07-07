@@ -36,7 +36,7 @@
                     <!--ur contents here-->
                     <!-- form start -->
                     <div class="card card-primary">
-                        <form role="form">
+                        <form role="form" id="Attachments">
                             <div class="card-body">
 
                                 <div class="form-group">
@@ -68,7 +68,7 @@
                                     <label for="exampleInputFile">File Upload</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <input type="file" class="custom-file-input" id="InputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
@@ -95,3 +95,84 @@
     </section>
     <!-- /.content -->
 </div>
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#Attachments').validate({
+          rules: {
+            "fileName": {
+                 required: true                
+             },
+             "titel": {
+                 required: true
+             },
+             "description":{
+                 required: true;
+                 number: true;
+             },
+                "pageid": {
+                    required: true
+                },
+                "InputFile"{
+                    required: true
+                }
+
+          },
+          messages: {
+            "fileName": {
+                 required: "this field is required"             
+             },
+             "titel": {
+                 required: "this field is required"
+             },
+             "description":{
+                  required: "this field is required"
+             },
+                "pageid": {
+                   required: "this field is required"
+                },
+                "InputFile"{
+                     required: "this field is required"
+                }
+
+          }
+         
+
+        });
+
+        $('#Attachments').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#Attachments').valid()){
+        $.ajax({
+                url: '@Url.Action("AttachmentsAdd","Attachments")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}
