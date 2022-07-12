@@ -41,17 +41,17 @@
 
                                 <div class="form-group">
                                     <label for="fileName">Name Of File</label>
-                                    <input type="text" class="form-control" id="fileName" placeholder="Enter file name">
+                                    <input type="text" class="form-control" id="fileName" name="fileName" placeholder="Enter file name">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Title</label>
-                                    <input type="text" class="form-control" id="titel" placeholder="Enter title name">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title name">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Type Of File</label>
-                                    <input type="text" class="form-control" id="type" placeholder="Enter type">
+                                    <input type="text" class="form-control" id="type" name="type" placeholder="Enter type">
                                 </div>
 
                                 <div class="col-md-6">
@@ -61,14 +61,14 @@
 
                                <div class="form-group">
                                     <label for="fileName">Page id</label>
-                                    <input type="number" class="form-control" id="pageid" placeholder="Enter page id">
+                                    <input type="number" class="form-control" id="pageid" name="pageid" placeholder="Enter page id">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputFile">File Upload</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="InputFile">
+                                            <input type="file" class="custom-file-input" id="InputFile" name="InputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
@@ -81,8 +81,8 @@
 
                             <div class="card-footer">
                                 <div class="input-group col-12">
-                                    <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right">Submit</button></div>
-                                    <div class="col-sm-6"><button type="clear" class="btn btn-default">Clear</button></div>
+                                    <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right">Submit</button></div>
+                                    <div class="col-sm-6"><button type="button" class="btn btn-default">Clear</button></div>
                                 </div>
                             </div>
                         </form>
@@ -109,17 +109,20 @@
             "fileName": {
                  required: true                
              },
-             "titel": {
+             "title": {
                  required: true
              },
+                "type": {
+                    required: true
+                },
              "description":{
-                 required: true;
-                 number: true;
+                 required: true,
+                 number: true
              },
                 "pageid": {
                     required: true
                 },
-                "InputFile"{
+                "InputFile":{
                     required: true
                 }
 
@@ -131,13 +134,16 @@
              "titel": {
                  required: "this field is required"
              },
+              "type": {
+                 required: "this field is required"
+              },
              "description":{
                   required: "this field is required"
              },
                 "pageid": {
                    required: "this field is required"
                 },
-                "InputFile"{
+                "InputFile":{
                      required: "this field is required"
                 }
 
@@ -146,16 +152,11 @@
 
         });
 
-        $('#Attachments').submit(function(e) {
+        $('#btnSubmit').click(function(e) {
 
         //prevent Default functionality
         e.preventDefault();
-        alert( "firee!" );
 
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
-
-        //do your own request an handle the results
         if($('#Attachments').valid()){
         $.ajax({
                 url: '@Url.Action("AttachmentsAdd","Attachments")',
