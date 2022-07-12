@@ -35,12 +35,12 @@
 
                                                     <div class="col-md-6">
                                                         <label for="fname">Name Of Lab Or Workshop</label>
-                                                        <input type="text" class="form-control" id="labname" placeholder="First Name">
+                                                        <input type="text" class="form-control" id="labname" name="labname" placeholder="First Name">
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <label for="labId">Department ID Of Lab Or Workshop</label>
-                                                        <input type="text" class="form-control" id="labId" placeholder="LabId">
+                                                        <input type="text" class="form-control" id="labId" name="labId" placeholder="LabId">
                                                     </div>
 
                                                     <div class="col-md-6">
@@ -52,7 +52,7 @@
                                                         <label for="exampleInputFile">Upload New Image</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="InputFile">
+                                                                <input type="file" class="custom-file-input" name="InputFile" id="InputFile">
                                                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                             </div>
                                                             <div class="input-group-append">
@@ -72,8 +72,8 @@
 
                                     <div class="card-footer">
                                         <div class="input-group col-12">
-                                            <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
-                                            <div class="col-sm-6"><button type="clear" class="btn btn-primary col-md-2">Clear</button></div>
+                                            <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2">Clear</button></div>
                                         </div>
                                     </div>
                                 </form>
@@ -108,7 +108,7 @@
                  required: true
              },
              "description":{
-                 required: true;
+                 required: true
              },
                 "InputFile": {
                     required: true
@@ -134,16 +134,11 @@
 
         });
 
-        $('#LabWorkshop').submit(function(e) {
+        $('#btnSubmit').click(function(e) {
 
         //prevent Default functionality
         e.preventDefault();
-        alert( "firee!" );
 
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
-
-        //do your own request an handle the results
         if($('#LabWorkshop').valid()){
         $.ajax({
                 url: '@Url.Action("LabWorkshopsAdd","LabWorkshops")',
