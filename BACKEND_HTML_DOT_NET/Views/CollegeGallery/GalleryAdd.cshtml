@@ -20,22 +20,22 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" id="">
+                    <form role="form" id="gallery">
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group">
                                     <label for="fileName">Gallery Tag Id</label>
-                                    <input type="number" class="form-control" id="tagid" placeholder="Enter id">
+                                    <input type="number" class="form-control" id="tagid" name="tagid" placeholder="Enter id">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter name">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Extention</label>
-                                    <input type="text" class="form-control" id="extention" placeholder="Enter extention">
+                                    <input type="text" class="form-control" id="extention" name="extention" placeholder="Enter extention">
                                 </div>
 
                                 <div class="col-md-6">
@@ -62,7 +62,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <div class="input-group col-12">
-                                <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-2">Submit</button></div>
                                 <div class="col-sm-6">
                                     <button type="clear" class="btn btn-default col-md-2">Clear</button>
                                 </div>
@@ -115,7 +115,7 @@
 
         });
 
-        $('#gallery').submit(function(e) {
+        $('#btnGallery').click(function(e) {
 
         //prevent Default functionality
         e.preventDefault();
