@@ -25,7 +25,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Add New Lab or Workshop Data</h3>
                                 </div>
-                                <form role="form">
+                                <form role="form" id="LabWorkshop">
                                     <div class="card-body">
                                         <div class="form-group">
 
@@ -35,7 +35,7 @@
 
                                                     <div class="col-md-6">
                                                         <label for="fname">Name Of Lab Or Workshop</label>
-                                                        <input type="text" class="form-control" id="fname" placeholder="First Name">
+                                                        <input type="text" class="form-control" id="labname" placeholder="First Name">
                                                     </div>
 
                                                     <div class="col-md-6">
@@ -52,7 +52,7 @@
                                                         <label for="exampleInputFile">Upload New Image</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                                <input type="file" class="custom-file-input" id="InputFile">
                                                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                             </div>
                                                             <div class="input-group-append">
@@ -89,3 +89,78 @@
     </section>
     <!-- /.content -->
 </div>
+
+                                            
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#LabWorkshop').validate({
+          rules: {
+            "labname": {
+                 required: true                
+             },
+             "labId": {
+                 required: true
+             },
+             "description":{
+                 required: true;
+             },
+                "InputFile": {
+                    required: true
+                }
+
+          },
+          messages: {
+            "labname": {
+                 required: "this field is required"
+             },
+             "labId": {
+               required: "this field is required"
+             },
+             "description":{
+               required: "this field is required"
+             },
+                "InputFile": {
+                 required: "this field is required"
+                }
+
+          }
+         
+
+        });
+
+        $('#LabWorkshop').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#LabWorkshop').valid()){
+        $.ajax({
+                url: '@Url.Action("LabWorkshopsAdd","LabWorkshops")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

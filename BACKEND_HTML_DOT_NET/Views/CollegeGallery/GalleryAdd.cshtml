@@ -20,23 +20,22 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
+                    <form role="form" id="">
                         <div class="card-body">
                             <div class="row">
-                                
                                 <div class="form-group">
                                     <label for="fileName">Gallery Tag Id</label>
-                                    <input type="number" class="form-control" id="type" placeholder="Enter id">
+                                    <input type="number" class="form-control" id="tagid" placeholder="Enter id">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Name</label>
-                                    <input type="text" class="form-control" id="type" placeholder="Enter name">
+                                    <input type="text" class="form-control" id="name" placeholder="Enter name">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Extention</label>
-                                    <input type="text" class="form-control" id="type" placeholder="Enter extention">
+                                    <input type="text" class="form-control" id="extention" placeholder="Enter extention">
                                 </div>
 
                                 <div class="col-md-6">
@@ -45,7 +44,7 @@
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input"
-                                                       id="exampleInputFile">
+                                                       id="InputFile">
                                                 <label class="custom-file-label" for="exampleInputFile">
                                                     Choose
                                                     file
@@ -74,3 +73,73 @@
             </div>
     </section>
 </div>
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#gallery').validate({
+          rules: {
+                "tagid": {
+                    required: true
+                },
+                "name": {
+                    required: true
+                },
+                "extention": {
+                    required: true
+                },
+                "InputFile": {
+                    required: true
+                }
+          },
+          messages: {
+                "tagid": {
+                    required: "this felid is required"
+                },
+                "name": {
+                    required: "this felid is required"
+                },
+                "extention": {
+                    required: "this felid is required"
+                },
+              "InputFile": {
+                  required: "this felid is required"
+              }
+          }
+         
+
+        });
+
+        $('#gallery').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#gallery').valid()){
+        $.ajax({
+                url: '@Url.Action("NewsAdd","News")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+</script>
+}
