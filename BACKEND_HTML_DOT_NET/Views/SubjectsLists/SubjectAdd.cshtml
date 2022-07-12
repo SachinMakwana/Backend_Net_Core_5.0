@@ -20,13 +20,13 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
+                    <form id="subjectadd" name="subjectadd" role="form">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER SUBJECT CODE</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                        <input type="email" class="form-control" name="SUBJECTCODE" id="exampleInputEmail1"
                                                placeholder="Enter code.. ">
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>SELECT DEPARTMENT</label>
-                                        <select class="form-control">
+                                        <select name="department" class="form-control">
                                             <option> ELECTRONIC AND COMMUNICATION</option>
                                             <option> COMPUTER</option>
                                             <option> ELECTRICAL</option>
@@ -47,7 +47,7 @@
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>SELECT SEMESTER</label>
-                                        <select class="form-control">
+                                        <select name="sem" class="form-control">
                                             <option> 1</option>
                                             <option> 2</option>
                                             <option> 3</option>
@@ -66,7 +66,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER NAME OF THE SUBJECT</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                        <input type="email" name="subject" class="form-control" id="exampleInputEmail1"
                                                placeholder="Enter name.. ">
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER ACRONYM FOR THE SUBJECT</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                        <input name="ACRONYM" type="email" class="form-control" id="exampleInputEmail1"
                                                placeholder="Enter name.. ">
                                     </div>
                                 </div>
@@ -84,13 +84,13 @@
                         <div class="card-footer">
                             <div class="input-group col-12">
                                 <div class="col-sm-6">
-                                    <button type="submit"
+                                    <button  type="submit"
                                             class="btn btn-primary float-right col-md-2">
                                         Submit
                                     </button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="clear"
+                                    <button type="reset"
                                             class="btn btn-default col-md-2">
                                         Clear
                                     </button>
@@ -103,3 +103,92 @@
         </div>
     </section>
 </div>
+
+                                                               
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#subjectadd').validate({
+          rules: {
+            "SUBJECTCODE": {
+                 required: true                
+             },
+             "department": {
+                 required: true
+             },
+             "sem":{
+                 required: true,
+                 digit: true
+             },
+             "head": {
+                    required: true
+                },
+               
+                "subject": {
+                    required: true
+                },
+                "ACRONYM":{
+                    required: true
+                }
+
+          },
+          messages: {
+          "SUBJECTCODE": {
+                 required: "this field is required"
+             },
+             "department": {
+                 required: "this field is required"
+             },
+             "sem":{
+                  required: "this field is required"
+             },
+             "head":{
+                  required: "this field is required"
+             },
+                "subject": {
+                   required: "this field is required"
+                },
+                "ACRONYM":{
+                     required: "this field is required"
+                }
+
+          }
+         
+
+        });
+
+        $('#subjectadd').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#subjectadd').valid()){
+        $.ajax({
+                url: '@Url.Action("DepartmentAdd","Department")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

@@ -29,7 +29,7 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="department">ENTER NAME OF DEPARTMENT</label>
-                                        <input type="text" class="form-control" id="department"
+                                        <input type="text" class="form-control" name="department" id="department"
                                                placeholder="Enter name of Department.. " />
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
 
                                <div class="col-md-6">
                                    <label for="head">ENTER HEAD</label>
-                                   <input type="number" class="form-control" id="head" />
+                                   <input type="number" class="form-control" name="head" id="head" />
                                </div>
 
                                <div class="col-md-6">
@@ -59,7 +59,7 @@
                                         <label for="exampleInputFile">CHOOSE IMAGE FOR DEPARTMENT</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input"
+                                                <input type="file" name="InputFile" class="custom-file-input"
                                                        id="InputFile">
                                                 <label class="custom-file-label" for="exampleInputFile">
                                                     Choose
@@ -108,14 +108,17 @@
                  required: true
              },
              "message":{
-                 required: true;
-                 number: true;
+                 required: true,
+                 digit: true
              },
                 "slogan": {
                     required: true
                 },
-                "InputFile"{
-                    required: true;
+                "head": {
+                    required: true
+                },
+                "InputFile":{
+                    required: true
                 }
 
           },
@@ -129,10 +132,13 @@
              "message":{
                   required: "this field is required"
              },
+             "head":{
+                  required: "this field is required"
+             },
                 "slogan": {
                    required: "this field is required"
                 },
-                "InputFile"{
+                "InputFile":{
                      required: "this field is required"
                 }
 
@@ -145,7 +151,7 @@
 
         //prevent Default functionality
         e.preventDefault();
-        alert( "firee!" );
+        //alert( "firee!" );
 
         //get the action-url of the form
         //var actionurl = e.currentTarget.action;
