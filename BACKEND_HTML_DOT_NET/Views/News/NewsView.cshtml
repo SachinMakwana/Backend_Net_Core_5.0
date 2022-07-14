@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BACKEND_HTML_DOT_NET.Models.NewsVM>
+﻿@model List<BACKEND_HTML_DOT_NET.Models.NewsVM>
 @{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "NewsView"; }
 
@@ -56,33 +56,33 @@
                                 <thead>
                                         <tr>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Id)
+                                                Id
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Title)
+                                                Title
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Description)
+                                                Description
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Date)
+                                                Date
                                             </th>
                                         </tr>
                                 </thead>
                                 <tbody>
-                                    foreach(var item in Model){
+                                    @foreach(NewsVM item in Model){
                                     <tr>
                                         <td>
-                                            @Html.DisplayNameFor(m => m.Id)
+                                            @item.Id
                                         </td>
                                         <td>
-                                            @Html.DisplayNameFor(m => m.Title)
+                                            @item.Date
                                         </td>
                                         <td>
-                                            @Html.DisplayNameFor(m => m.Description)
+                                            @item.Description
                                         </td>
                                         <td>
-                                            @Html.DisplayNameFor(m => m.Date)
+                                            @item.Title
                                         </td>
                                         
                                     </tr>
