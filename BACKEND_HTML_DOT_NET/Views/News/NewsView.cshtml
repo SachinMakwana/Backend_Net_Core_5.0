@@ -1,4 +1,5 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model IEnumerable<BACKEND_HTML_DOT_NET.Models.NewsVM>
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "NewsView"; }
 
 <div class="content-wrapper">
@@ -50,44 +51,44 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>News Link</th>
-                                        <th>Image</th>
-                                        <th>Edit Details</th>
-                                        <th>Delete Details</th>
 
-                                    </tr>
+
+                                <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Id)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Title)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Description)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Date)
+                                            </th>
+                                        </tr>
                                 </thead>
                                 <tbody>
+                                    foreach(var item in Model){
                                     <tr>
-                                        <td>COVID NEWS</td>
-                                        <td>news link</td>
-                                        <td>news Image</td>
-                                        <td><a href="@Url.Action("NewsAdd","News")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-
+                                        <td>
+                                            @Html.DisplayNameFor(m => m.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayNameFor(m => m.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayNameFor(m => m.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayNameFor(m => m.Date)
+                                        </td>
+                                        
                                     </tr>
-                                    <tr>
-                                        <td>Holiday news</td>
-                                        <td>news link</td>
-                                        <td>news Image</td>
-                                        <td><a href="@Url.Action("NewsAdd","News")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-
-                                    </tr>
+                                  }  
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>News Link</th>
-                                        <th>Image</th>
-                                        <th>Edit Details</th>
-                                        <th>Delete Details</th>
-
-                                    </tr>
-                                </tfoot>
+                               
                             </table>
                         </div>
                         <!-- /.card-body -->
