@@ -15,8 +15,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     {
         private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
-
-        public IActionResult NewsView()
+        private List<NewsVM> newsVMList = new List<NewsVM>();
+        public IActionResult NewsList()
         {
             var restClient = new RestClient(apiBaseUrl);
             var restRequest = new RestRequest("/GetAllNewsDetails", Method.Get);
@@ -27,15 +27,21 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
             var content = response.Content;
 
-            var user = JsonConvert.DeserializeObject<NewsVM>(content);
-
-            return View(user);
+            var user = JsonConvert.DeserializeObject<ServiceResponse<List<NewsVM>>>(content);
+            newsVMList = user.data;
+            return View(newsVMList);
 
         }
-        public IActionResult NewsAdd()
+        
+        public IActionResult NewsView(int id=0)
         {
-            return View();
+            NewsVM newsVM = new NewsVM();
+            newsVM = newsVMList.Where(m => m.Id == id).FirstOrDefault();
+
+            return View(newsVM);
         }
+
+
         [HttpPost]
         public IActionResult NewsAdd(FromBodyAttribute fromBodyAttribute)
         {

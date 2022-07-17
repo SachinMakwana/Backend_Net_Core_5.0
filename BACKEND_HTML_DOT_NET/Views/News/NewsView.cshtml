@@ -70,6 +70,9 @@
                                             <th>
                                                 Date
                                             </th>
+                                             <th>View</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                         </tr>
                                 </thead>
                                 <tbody>
@@ -79,15 +82,23 @@
                                             @item.Id
                                         </td>
                                         <td>
-                                            @item.Date
+                                            @item.Title
                                         </td>
                                         <td>
                                             @item.Description
                                         </td>
                                         <td>
-                                            @item.Title
+                                            @item.Date
                                         </td>
-                                        
+                                         <td>
+                                            <a href="@Url.Action("NewsView","News",new {@id=item.Id})" class="nav-icon fas fa-eye"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("NewsAdd","News",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("NewsAdd","News",new {@id=item.Id})"><i class="nav-icon fas fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                   }  
                                 </tbody>
