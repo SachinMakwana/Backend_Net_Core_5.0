@@ -7,40 +7,30 @@ using System.Threading.Tasks;
 using BACKEND_HTML_DOT_NET.Models;
 using Newtonsoft.Json;
 using System.Text;
+using RestSharp;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
     public class News : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api/";
+        private string apiBaseUrl = "https://localhost:44374/api";
+        HttpClient hc = new HttpClient();
 
         public IActionResult NewsView()
         {
-            
+            var restClient = new RestClient(apiBaseUrl);
+            var restRequest = new RestRequest("/GetAllNewsDetails", Method.Get);
+            restRequest.AddHeader("Accept", "application/json");
+            restRequest.RequestFormat = DataFormat.Json;
 
-            IList<NewsVM> news = new List<NewsVM>();
+            RestResponse response = restClient.Execute(restRequest);
 
-             using (HttpClient client = new HttpClient())
-            {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(news), Encoding.UTF8, "application/json");
-                string endpoint = apiBaseUrl + "GetAllNewsDetails";
-                using (var Response = await client.GetAsync(endpoint))
-                {
-                    if (Response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        TempData["Profile"] = JsonConvert.SerializeObject(news);
-                        return RedirectToAction("Profile");
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Username or Password is Incorrect");
-                        return View();
-                    }
-                }
-            }
+            var content = response.Content;
 
-            return View(news);
+            var user = JsonConvert.DeserializeObject<NewsVM>(content);
+
+            return View(user);
+
         }
         public IActionResult NewsAdd()
         {
