@@ -18,6 +18,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
         public IActionResult AchievementsListView()
         {
+
+
             return View();
         }
         public IActionResult AchievementsView()
