@@ -8,6 +8,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 {
     public class Achievements : Controller
     {
+
+
         public IActionResult AchievementsAdd()
         {
             return View();
@@ -18,8 +20,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
         public IActionResult AchievementsListView()
         {
-
-
+            
             return View();
         }
         public IActionResult AchievementsView()

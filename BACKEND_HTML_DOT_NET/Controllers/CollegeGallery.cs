@@ -17,13 +17,26 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         HttpClient hc = new HttpClient();
         private List<GalleryVM> galleryVMList = new List<GalleryVM>();
 
+        public IActionResult GalleryList()
+        {
+            var restClient = new RestClient(apiBaseUrl);
+            var restRequest = new RestRequest("/GetAllGalleryDetails", Method.Get);
+            restRequest.AddHeader("Accept", "application/json");
+            restRequest.RequestFormat = DataFormat.Json;
+
+            RestResponse response = restClient.Execute(restRequest);
+
+            var content = response.Content;
+
+            var user = JsonConvert.DeserializeObject<ServiceResponse<List<GalleryVM>>>(content);
+            galleryVMList = user.data;
+            return View(galleryVMList);
+
+        }
         public IActionResult GalleryView(int id=0)
         {
+            return View();
 
-            GalleryVM galleryVM = new GalleryVM();
-            galleryVM = galleryVMList.Where(m => m.Id == id).FirstOrDefault();
-
-            return View(galleryVM);
         }
         public IActionResult GalleryAdd()
         {

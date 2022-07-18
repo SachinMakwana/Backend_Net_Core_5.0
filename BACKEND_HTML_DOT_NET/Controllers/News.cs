@@ -41,12 +41,9 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             return View(newsVM);
         }
 
-
-        [HttpPost]
-        public IActionResult NewsAdd(FromBodyAttribute fromBodyAttribute)
+        public IActionResult NewsAdd()
         {
-
-            return View();
+           return View();
         }
     }
 }
