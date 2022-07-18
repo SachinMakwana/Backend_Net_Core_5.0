@@ -2,7 +2,7 @@
 
 @{ 
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "NewsView"; 
+    ViewBag.Title = "NewsList"; 
 }
 
 <div class="content-wrapper">
@@ -91,7 +91,7 @@
                                             @item.Date
                                         </td>
                                          <td>
-                                            <a href="@Url.Action("NewsView","News",new {@id=item.Id})" class="nav-icon fas fa-eye"></a>
+                                            <a href="@Url.Action("NewsView","News",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                         </td>
                                         <td>
                                             <a href="@Url.Action("NewsAdd","News",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
