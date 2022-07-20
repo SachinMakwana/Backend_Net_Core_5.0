@@ -20,40 +20,47 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
+                    <form role="form" id="department">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-2">
-                                    <!-- select -->
-                                    <div class="form-group">
-                                        <label>SELECT BRANCH CODE</label>
-                                        <select class="form-control">
-                                            <option> 1</option>
-                                            <option> 2</option>
-                                            <option> 3</option>
-                                            <option> 4</option>
-                                            <option> 5</option>
-                                        </select>
-                                    </div>
-                                </div>
+                               
 
 
                                 <div class="col-sm-5">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">ENTER NAME OF DEPARTMENT</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
-                                               placeholder="Enter name.. ">
+                                        <label for="department">ENTER NAME OF DEPARTMENT</label>
+                                        <input type="text" class="form-control" name="department" id="department"
+                                               placeholder="Enter name of Department.. " />
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                   <label for="description">ENTER DESCRIPTION OF DEPARTMENT</label>
+                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                               </div>
+
+                               <div class="col-md-6">
+                                   <label for="message">ENTER MESSAGE OF DEPARTMENT</label>
+                                   <textarea type="text" name="message" class="form-control" id="message" rows="4" placeholder="Write content"></textarea>
+                               </div>
+
+                               <div class="col-md-6">
+                                   <label for="head">ENTER HEAD</label>
+                                   <input type="number" class="form-control" name="head" id="head" />
+                               </div>
+
+                               <div class="col-md-6">
+                                   <label for="slogan">ENTER SLOGAN OF DEPARTMENT</label>
+                                   <textarea type="text" name="slogan" class="form-control" id="slogan" rows="4" placeholder="Write content"></textarea>
+                               </div>
 
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="exampleInputFile">CHOOSE IMAGE FOR DEPARTMENT</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input"
-                                                       id="exampleInputFile">
+                                                <input type="file" name="InputFile" class="custom-file-input"
+                                                       id="InputFile">
                                                 <label class="custom-file-label" for="exampleInputFile">
                                                     Choose
                                                     file
@@ -65,43 +72,7 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="col-md-12" style="margin-top:20px;">
-                                <div class="card card-outline card-info">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <b>ENTER DESCRIPTION ABOUT DEPARTMENT:</b>
-                                            <!-- <small>Simple and fast</small> -->
-                                        </h3>
-                                        <!-- tools box -->
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool btn-sm"
-                                                    data-card-widget="collapse" data-toggle="tooltip"
-                                                    title="Collapse">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-tool btn-sm"
-                                                    data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                        <!-- /. tools -->
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body pad">
-                                        <div class="mb-3">
-                                            <textarea class="textarea" placeholder="Place some text here"
-                                                      style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                        </div>
-                                        <!-- <p class="text-sm mb-0">
-                                  Editor <a href="https://github.com/summernote/summernote">Documentation and license
-                                  information.</a>
-                                </p> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end of editor-->
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -118,3 +89,91 @@
         </div>
     </section>
 </div>
+
+                                
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#department').validate({
+          rules: {
+            "department": {
+                 required: true                
+             },
+             "description": {
+                 required: true
+             },
+             "message":{
+                 required: true,
+                 digit: true
+             },
+                "slogan": {
+                    required: true
+                },
+                "head": {
+                    required: true
+                },
+                "InputFile":{
+                    required: true
+                }
+
+          },
+          messages: {
+          "department": {
+                 required: "this field is required"
+             },
+             "description": {
+                 required: "this field is required"
+             },
+             "message":{
+                  required: "this field is required"
+             },
+             "head":{
+                  required: "this field is required"
+             },
+                "slogan": {
+                   required: "this field is required"
+                },
+                "InputFile":{
+                     required: "this field is required"
+                }
+
+          }
+         
+
+        });
+
+        $('#department').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#department').valid()){
+        $.ajax({
+                url: '@Url.Action("DepartmentAdd","Department")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

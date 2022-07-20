@@ -19,30 +19,40 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
+                    <form id="IamgeAdd" asp-action="ImagesAdd" asp-controller="Images" method="post" role="form">
                         <div class="card-body">
                             <div class="row">
+
+
                                 <div class="col-sm-6">
-                                    <!-- select -->
                                     <div class="form-group">
-                                        <label>SELECT CATEGORY</label>
-                                        <select class="form-control">
-                                            <option>Department</option>
-                                            <option>Classes</option>
-                                            <option>Faculty</option>
-                                            <option>Women Cell</option>
-                                            <option>Anti Ragging</option>
-                                            <option>Students</option>
-                                        </select>
+                                        <label for="exampleInputText1">ENTER TITLE OF IMAGE</label>
+                                        <input type="text" name="Title" class="form-control" id="IamgeTitle" placeholder="ENTER TITLE.. ">
                                     </div>
                                 </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputText1">ENTER TITLE OF EXTENSION</label>
+                                        <input type="text" name="Extension" class="form-control" id="IamgeExtension" placeholder="ENTER EXTENSION.. ">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputText1">ENTER TAG ID</label>
+                                        <input type="text" name="TagId" class="form-control" id="IamgeTagId" placeholder="ENTER TAG ID... ">
+                                    </div>
+                                </div>
+
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputFile">CHOOSE IMAGE</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input"
-                                                       id="exampleInputFile">
+                                                       id="InputFile">
                                                 <label class="custom-file-label" for="exampleInputFile">
                                                     Choose
                                                     file
@@ -54,8 +64,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+
+
                             <div class="card-footer">
                                 <div class="input-group col-12">
                                     <div class="col-sm-6">
@@ -81,5 +92,78 @@
         </div>
     </section>
 </div>
-        
-    
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#IamgeAdd').validate({
+          rules: {
+            "Title": {
+                 required: true                
+             },
+             "Extension": {
+                 required: true
+             },
+             "TagId":{
+                 required: true,
+                 number: true
+             },
+                "InputFile": {
+                    required: true
+                }
+
+          },
+          messages: {
+            "Title": {
+                 required: "this field is required"
+             },
+             "Extension": {
+                 required: "this field is required"
+             },
+             "TagId" :{
+                 required: "Enter a valid Id"
+             },
+              "InputFile": {
+                  required: true
+              }
+
+          }
+         
+
+        });
+
+        $('#IamgeAdd').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#ImageAdd').valid()){
+        $.ajax({
+                url: '@Url.Action("ImagesAdd","Images")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

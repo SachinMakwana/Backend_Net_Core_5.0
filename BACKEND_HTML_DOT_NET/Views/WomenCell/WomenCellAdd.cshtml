@@ -28,30 +28,60 @@
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form role="form" id="quickForm">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <div class="input-group col-12">
-                                                <div class="card-body pad">
-                                                    <div class="mb-3">
-                                                        <textarea class="textarea" id="details"
-                                                                  placeholder="Place some text here"
-                                                                  style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                                    </div>
-                                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputText">ENTER NAME</label>
+                                        <input type="text" name="name" class="form-control" id="name" placeholder="ENTER TITLE.. ">
+                                    </div>
+                                </div>
+
+
+                               <div class="col-md-6">
+                                   <label for="description">ENTER DESCRIPTION </label>
+                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                               </div>
+
+                               <div class="col-md-6">
+                                   <label for="description">ENTER Slogan</label>
+                                   <textarea type="text" name="slogan" class="form-control" id="slogan" rows="4" placeholder="Write content"></textarea>
+                               </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">CHOOSE IMAGE</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input"
+                                                       id="InputFile" name="InputFile">
+                                                <label class="custom-file-label" for="exampleInputFile">
+                                                    Choose
+                                                    file
+                                                </label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="">Upload</span>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+
+
+
+
+
                                     <!-- /.card-body -->
                                     <div class="card-footer">
                                         <div class="input-group col-12">
                                             <div class="col-sm-6">
-                                                <button type="submit"
+                                                <button type="submit" id="btnSubmit"
                                                         class="btn btn-primary float-right col-md-2">
                                                     Submit
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="clear"
+                                                <button type="button"
                                                         class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
@@ -70,3 +100,72 @@
     </section>
     <!-- /.content -->
 </div>
+
+                                                    
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#quickForm').validate({
+          rules: {
+            "name": {
+                 required: true                
+             },
+             "description": {
+                 required: true
+             },
+                "slogan": {
+                    required: true
+                },
+                "InputFile": {
+                    required: true
+                }
+
+          },
+          messages: {
+            "title": {
+                 required: "this field is required"
+             },
+             "description": {
+                 required: "this field is required"
+             },
+              "slogan": {
+                   required: "this field is required"
+              },
+              "InputFile": {
+                   required: "this field is required"
+              }
+          }
+         
+
+        });
+
+        $('#btnSubmit').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        
+        if($('#quickForm').valid()){
+        $.ajax({
+                url: '@Url.Action("WomenCellAdd","WomenCell")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

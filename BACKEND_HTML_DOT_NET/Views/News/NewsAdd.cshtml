@@ -1,5 +1,7 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "NewsAdd"; }
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "NewsAdd";
+}
 
 <div class="content-wrapper">
     <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
@@ -21,46 +23,33 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
+                    <form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
+                       @using(Html.BeginForm("NewsAdd","News",FormMethod.Post)){
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">ENTER TITLE OF NEWS</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter name.. ">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">ENTER LINK OF NEWS</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter name.. ">
-                                    </div>
-                                </div>
 
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="exampleInputFile">CHOOSE IMAGE FOR NEWS</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
-                                            </div>
-                                        </div>
+                                        <label for="exampleInputText">ENTER TITLE OF NEWS</label>
+                                        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="ENTER TITLE.. ">
                                     </div>
                                 </div>
+                               <div class="col-md-6">
+                                   <label for="description">ENTER DESCRIPTION OF NEWS</label>
+                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                               </div>
+
 
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="input-group col-12">
-                                <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
-                                <div class="col-sm-6"><button type="clear" class="btn btn-default col-md-2">Clear</button></div>
+                                <div class="col-sm-6"><button type="submit" id="sub" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                <div class="col-sm-6"><button type="reset" class="btn btn-default col-md-2">Clear</button></div>
                             </div>
                         </div>
+                        }
                     </form>
                 </div>
             </div>
@@ -68,3 +57,64 @@
         </div>
     </section>
 </div>
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#newsaddform').validate({
+          rules: {
+            "title": {
+                 required: true                
+             },
+             "description": {
+                 required: true
+             }
+
+          },
+          messages: {
+            "title": {
+                 required: "this field is required"
+             },
+             "description": {
+                 required: "this field is required"
+             }
+          }
+         
+
+        });
+
+        $('#newsaddform').submit(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        //alert( "firee!" );
+
+        //get the action-url of the form
+        //var actionurl = e.currentTarget.action;
+
+        //do your own request an handle the results
+        if($('#newsaddform').valid()){
+        $.ajax({
+                url: '@Url.Action("NewsAdd","News")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

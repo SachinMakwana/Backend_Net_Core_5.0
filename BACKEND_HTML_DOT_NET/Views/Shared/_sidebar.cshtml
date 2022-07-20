@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="@Url.Action("FacultyView","FacultyDetails")" class="nav-link">
+                    <a href="@Url.Action("FacultyList","FacultyDetails")" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
                             Faculty Details
@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="@Url.Action("DepartmentView","Department")" class="nav-link">
+                    <a href="@Url.Action("DepartmentList","Department")" class="nav-link">
                         <i class="nav-icon fas fa-building"></i>
                         <p>
                             Department
@@ -135,12 +135,7 @@
                                 <p>Members Details</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("WomenCellAttachmentsView","WomenCell")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Files Attachments</p>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
@@ -164,12 +159,6 @@
                                 <p>Members Details</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("SSIPAttachmentsView","SSIPCell")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Files Attachments</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
@@ -191,12 +180,6 @@
                             <a href="@Url.Action("AntiRaggingMembersDetails","AntiRaggingCell")" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Members Details</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("AntiRaggingAttachmentsView","AntiRaggingCell")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Files Attachments</p>
                             </a>
                         </li>
                     </ul>
@@ -231,7 +214,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="@Url.Action("NewsView","News")" class="nav-link">
+                    <a href="@Url.Action("NewsList","News")" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
                             News
@@ -247,7 +230,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="@Url.Action("GalleryView","CollegeGallery")" class="nav-link">
+                    <a href="@Url.Action("GalleryList","CollegeGallery")" class="nav-link">
                         <i class="nav-icon fas fa-images"></i>
                         <p>
                             College Gallery

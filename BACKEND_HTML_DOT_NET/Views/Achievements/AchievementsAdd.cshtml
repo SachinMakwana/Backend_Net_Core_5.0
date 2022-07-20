@@ -33,29 +33,34 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <div class="input-group">
+
                                                 <div class="col-4">
                                                     <label for="Title"> Enter Title</label>
-                                                    <input type="text" class="form-control" id="Title" placeholder="Enter Title">
+                                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
+                                                </div>
+
+                                                
+
+                                                <div class="col-4">
+                                                    <label for="Title"> Enter tag</label>
+                                                    <input type="text" class="form-control" id="tag" name="tag" placeholder="Enter tag">
                                                 </div>
 
                                                 <div class="col-4">
-                                                    <label>Enter Category:</label>
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Computer Engineering</option>
-                                                        <option>Electronics & Communication Engineering</option>
-                                                        <option>Electrical Engineering</option>
-                                                        <option>Civil Engineering</option>
-                                                        <option>Mechanical Engineering</option>
-                                                        <option>Administrative Department</option>
-                                                        <option>Workshop</option>
-                                                        <option>library</option>
-                                                    </select>
+                                                    <label for="Title"> Enter Achievement date</label>
+                                                    <input type="datetime" class="form-control" id="date" name="date" placeholder="Enter Achievement Date">
                                                 </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="description">ENTER DESCRIPTION</label>
+                                                    <textarea type="text" name="description" class="form-control" id="description" name="description" rows="4" placeholder="Write content"></textarea>
+                                                </div>
+                                                
                                                 <div class="col-4">
                                                     <label for="exampleInputFile">Enter Image File </label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" name="InputFile" id="InputFile">
                                                             <label class="custom-file-label" for="exampleInputFile">
                                                                 Choose
                                                                 file
@@ -69,20 +74,15 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="col-12">
-                                                <label for="details">Enter Details For Achievements</label>
-                                                <textarea class="textarea" id="details" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                 </form>
 
                                 <div class="card-footer">
                                     <div class="input-group col-12">
-                                        <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
-                                        <div class="col-sm-6"><button type="clear" class="btn btn-default col-md-2">Clear</button></div>
+                                        <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                        <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2">Clear</button></div>
                                     </div>
                                 </div>
 
@@ -93,3 +93,76 @@
     </section>
     <!-- /.content -->
 </div>
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#quickForm').validate({
+          rules: {
+                "title": {
+                 required: true                
+                },
+                "description": {
+                    required: true
+                },
+                "tag": {
+                    required: true
+                },
+                "date": {
+                    required: true
+                },
+                "InputFile":{
+                    required: true
+                }
+          },
+          messages: {
+            "title": {
+                 required: "this field is required"
+             },
+             "description": {
+                 required: "this field is required"
+             },
+             "tag": {
+                 required: "this field is required"
+             },
+                "date": {
+                    required: "this field is required"
+                },
+                "InputFile":{
+                    required: "this field is required"
+                }
+          }
+         
+
+        });
+
+    $('#btnSubmit').click(function(e) {
+
+        e.preventDefault();
+        
+        if($('#quickForm').valid()){
+        $.ajax({
+                url: '@Url.Action("NewsAdd","News")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+    
+
+</script>
+
+}

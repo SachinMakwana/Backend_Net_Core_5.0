@@ -11,9 +11,9 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
+                            <a href="@Url.Action("AttachmentsView","Attachments")">
                     <ol class="breadcrumb float-sm-right">
                         <li>
-                            <a href="@Url.Action("AttachmentsView","Attachments")">
                                 <i class="nav-icon fas fa-plus-circle">
                                     Back to Attachments Details
                                 </i>
@@ -36,17 +36,39 @@
                     <!--ur contents here-->
                     <!-- form start -->
                     <div class="card card-primary">
-                        <form role="form">
+                        <form role="form" id="Attachments">
                             <div class="card-body">
+
                                 <div class="form-group">
                                     <label for="fileName">Name Of File</label>
-                                    <input type="email" class="form-control" id="fileName" placeholder="Enter file name">
+                                    <input type="text" class="form-control" id="fileName" name="fileName" placeholder="Enter file name">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="fileName">Title</label>
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fileName">Type Of File</label>
+                                    <input type="text" class="form-control" id="type" name="type" placeholder="Enter type">
+                                </div>
+
+                                <div class="col-md-6">
+                                   <label for="description">ENTER DESCRIPTION</label>
+                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                               </div>
+
+                               <div class="form-group">
+                                    <label for="fileName">Page id</label>
+                                    <input type="number" class="form-control" id="pageid" name="pageid" placeholder="Enter page id">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="exampleInputFile">File Upload</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <input type="file" class="custom-file-input" id="InputFile" name="InputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
@@ -59,8 +81,8 @@
 
                             <div class="card-footer">
                                 <div class="input-group col-12">
-                                    <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right">Submit</button></div>
-                                    <div class="col-sm-6"><button type="clear" class="btn btn-default">Clear</button></div>
+                                    <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right">Submit</button></div>
+                                    <div class="col-sm-6"><button type="button" class="btn btn-default">Clear</button></div>
                                 </div>
                             </div>
                         </form>
@@ -73,3 +95,85 @@
     </section>
     <!-- /.content -->
 </div>
+
+@section script{
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+        $('#Attachments').validate({
+          rules: {
+            "fileName": {
+                 required: true                
+             },
+             "title": {
+                 required: true
+             },
+                "type": {
+                    required: true
+                },
+             "description":{
+                 required: true,
+                 number: true
+             },
+                "pageid": {
+                    required: true
+                },
+                "InputFile":{
+                    required: true
+                }
+
+          },
+          messages: {
+            "fileName": {
+                 required: "this field is required"             
+             },
+             "titel": {
+                 required: "this field is required"
+             },
+              "type": {
+                 required: "this field is required"
+              },
+             "description":{
+                  required: "this field is required"
+             },
+                "pageid": {
+                   required: "this field is required"
+                },
+                "InputFile":{
+                     required: "this field is required"
+                }
+
+          }
+         
+
+        });
+
+        $('#btnSubmit').click(function(e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+
+        if($('#Attachments').valid()){
+        $.ajax({
+                url: '@Url.Action("AttachmentsAdd","Attachments")',
+                type: 'post',
+                dataType: 'application/json',
+                data: $("#myform").serialize(),
+                success: function(data) {
+
+                }
+        });
+        }
+
+    });
+
+
+    });
+
+</script>
+
+}

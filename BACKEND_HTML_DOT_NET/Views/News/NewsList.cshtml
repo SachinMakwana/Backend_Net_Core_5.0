@@ -1,5 +1,9 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "NewsView"; }
+﻿@model List<BACKEND_HTML_DOT_NET.Models.NewsVM>
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "NewsList"; 
+}
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -50,44 +54,55 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>News Link</th>
-                                        <th>Image</th>
-                                        <th>Edit Details</th>
-                                        <th>Delete Details</th>
 
-                                    </tr>
+
+                                <thead>
+                                        <tr>
+                                            <th>
+                                                Id
+                                            </th>
+                                            <th>
+                                                Title
+                                            </th>
+                                            <th>
+                                                Description
+                                            </th>
+                                            <th>
+                                                Date
+                                            </th>
+                                             <th>View</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                        </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach(var item in Model){
                                     <tr>
-                                        <td>COVID NEWS</td>
-                                        <td>news link</td>
-                                        <td>news Image</td>
-                                        <td><a href="@Url.Action("NewsAdd","News")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-
+                                        <td>
+                                            @item.Id
+                                        </td>
+                                        <td>
+                                            @item.Title
+                                        </td>
+                                        <td>
+                                            @item.Description
+                                        </td>
+                                        <td>
+                                            @item.Date
+                                        </td>
+                                         <td>
+                                            <a href="@Url.Action("NewsView","News",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("NewsAdd","News",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("NewsAdd","News",new {@id=item.Id})"><i class="nav-icon fas fa-trash"></i></a>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>Holiday news</td>
-                                        <td>news link</td>
-                                        <td>news Image</td>
-                                        <td><a href="@Url.Action("NewsAdd","News")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-
-                                    </tr>
+                                  }  
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>News Link</th>
-                                        <th>Image</th>
-                                        <th>Edit Details</th>
-                                        <th>Delete Details</th>
-
-                                    </tr>
-                                </tfoot>
+                               
                             </table>
                         </div>
                         <!-- /.card-body -->
