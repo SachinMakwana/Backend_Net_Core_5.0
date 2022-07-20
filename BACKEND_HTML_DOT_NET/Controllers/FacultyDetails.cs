@@ -15,11 +15,10 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     {
         private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
-        private List<FacultyDetailsVM> facultyDetailsVM = new List<FacultyDetailsVM>();
+        private List<FacultyDetailsVM> facultyDetailsList = new List<FacultyDetailsVM>();
 
-        public IActionResult FacultyAdd()
+        public IActionResult FacultyList()
         {
-
             var restClient = new RestClient(apiBaseUrl);
             var restRequest = new RestRequest("/GetAllFacultyDetails", Method.Get);
             restRequest.AddHeader("Accept", "application/json");
@@ -30,15 +29,21 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             var content = response.Content;
 
             var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
-            return View(user.data);
+            facultyDetailsList = user.data;
+            return View(facultyDetailsList);
         }
         public IActionResult FacultyView(int id = 0)
         {
 
             FacultyDetailsVM newsVM = new FacultyDetailsVM();
-            newsVM = facultyDetailsVM.Where(m => m.Id == id).FirstOrDefault();
+            newsVM = facultyDetailsList.Where(m => m.Id == id).FirstOrDefault();
             return View(newsVM);
         }
+        public IActionResult FacultyAdd()
+        {
+            return View();
+        }
+
         public IActionResult FacultyEdit()
         {
             return View();

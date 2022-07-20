@@ -1,9 +1,5 @@
-﻿@model List<BACKEND_HTML_DOT_NET.Models.NewsVM>
-
-@{ 
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "NewsView"; 
-}
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "DepartmentView"; }
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -11,10 +7,10 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>News Details</h1>
+                    <h1>Department Details</h1>
                 </div>
                 <div class="col-sm-6" style="margin-top:10px;">
-                    <a href="@Url.Action("NewsAdd","News")">
+                    <a href="@Url.Action("DepartmentAdd","Department")">
                         <ol class="breadcrumb float-sm-right">
                             <li><i class="nav-icon fas fa-plus-circle"></i></li>
                             <li>Add New Details</li>
@@ -38,8 +34,8 @@
             </div> -->
                 </div>
             </div>
-            <!-- /.container-fluid -->
         </div>
+            <!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
@@ -49,31 +45,25 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h1 class="card-title" style="font-size: 25px;">List Of News Details</h1>
+                            <h1 class="card-title" style="font-size: 25px;">List Of Departments</h1>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
-
-
                                 <thead>
-                                        <tr>
-                                            <th>
-                                                Id
-                                            </th>
-                                            <th>
-                                                Title
-                                            </th>
-                                            <th>
-                                                Description
-                                            </th>
-                                            <th>
-                                                Date
-                                            </th>
-                                             <th>View</th>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Head</th>
+                                        <th>Message</th>
+                                        <th>Image</th>
+                                        <th>Slogan</th>
+                                        <th>View</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
-                                        </tr>
+
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @foreach(var item in Model){
@@ -82,27 +72,50 @@
                                             @item.Id
                                         </td>
                                         <td>
-                                            @item.Title
+                                            @item.Name
                                         </td>
                                         <td>
                                             @item.Description
                                         </td>
                                         <td>
-                                            @item.Date
-                                        </td>
-                                         <td>
-                                            <a href="@Url.Action("NewsView","News",new {@id=item.Id})" class="nav-icon fas fa-eye"></a>
+                                            @item.Head
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("NewsAdd","News",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                            @item.Message
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("NewsAdd","News",new {@id=item.Id})"><i class="nav-icon fas fa-trash"></i></a>
+                                            @item.Image
+                                        </td>
+                                        <td>
+                                            @item.Slogan
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("DepartmentList","Department",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("DepartmentList","Department",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("DepartmentList","Department",new {@id=item.Id})"><i class="nav-icon fas fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                  }  
+                                    }
                                 </tbody>
-                               
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Head</th>
+                                        <th>Message</th>
+                                        <th>Image</th>
+                                        <th>Slogan</th>
+                                        <th>View</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -118,6 +131,4 @@
     </section>
 </div>
 <!-- /.container-fluid -->
-            
 <!-- /.content -->
-        

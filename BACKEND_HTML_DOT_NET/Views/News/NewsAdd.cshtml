@@ -24,6 +24,7 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
+                       @using(Html.BeginForm("NewsAdd","News",FormMethod.Post)){
                         <div class="card-body">
                             <div class="row">
 
@@ -48,6 +49,7 @@
                                 <div class="col-sm-6"><button type="reset" class="btn btn-default col-md-2">Clear</button></div>
                             </div>
                         </div>
+                        }
                     </form>
                 </div>
             </div>
