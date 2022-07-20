@@ -97,13 +97,20 @@
 
         //do your own request an handle the results
         if($('#newsaddform').valid()){
-        $.ajax({
-                url: '@Url.Action("NewsAdd","News")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
 
+        var dataForm = new FormData($('#newsaddform')[0]);
+        
+
+        $.ajax({
+                url: 'https://localhost:44374/api/AddFacultyDetail',
+                type: 'post',
+                enctype: 'multipart/form-data',
+                dataType: 'application/json',
+                processData: false,
+                contentType: false,
+                data: dataForm,
+                success: function(data) {
+                    console.log(data);
                 }
         });
         }
