@@ -116,7 +116,7 @@
                 dataType: 'application/json',
                 processData: false,
                 contentType: false,
-                data: data,
+                data: JSON.stringify(data),
                 success: function(data) {
                     console.log(data);
                 }
