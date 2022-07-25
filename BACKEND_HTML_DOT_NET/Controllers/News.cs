@@ -43,6 +43,13 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             return View(newsVM);
         }
 
+        public PartialViewResult add([FromBody] NewsVM nm)
+        {
+
+
+            return PartialView("NewsVM", nm);
+        }
+
         public IActionResult NewsAdd(NewsVM data)
         {
             /*String title = form["Title"];*/
