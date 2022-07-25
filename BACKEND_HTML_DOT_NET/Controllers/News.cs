@@ -45,7 +45,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         public IActionResult NewsAdd(IFormCollection form)
         {
-
+            String title = form["Title"];
            return View();
         }
     }
