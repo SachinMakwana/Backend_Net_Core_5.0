@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<BACKEND_HTML_DOT_NET.Models.NewsVM>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "NewsAdd";
 }
@@ -8,11 +9,11 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("NewsView","News")">
+                <a href="@Url.Action("NewsList","News")">
                     <ol class="breadcrumb float-sm-right">
 
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
-                        <li style="margin-left: px;">Back to Details</li>
+                        <li style="margin-left: 00px;">Back to Details</li>
                     </ol>
                 </a>
             </div>
@@ -24,23 +25,21 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
-                       @using(Html.BeginForm("NewsAdd","News",FormMethod.Post)){
+                        @using(Html.BeginForm()){
+
                         <div class="card-body">
                             <div class="row">
-
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="exampleInputText">ENTER TITLE OF NEWS</label>
-                                        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="ENTER TITLE.. ">
+                                        <input type="text" name="title" class="form-control" id="title" placeholder="ENTER TITLE.. ">
                                     </div>
                                 </div>
                                <div class="col-md-6">
                                    <label for="description">ENTER DESCRIPTION OF NEWS</label>
                                    <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
                                </div>
-
-
                             </div>
                         </div>
                         <div class="card-footer">
@@ -92,25 +91,24 @@
 
         //prevent Default functionality
         e.preventDefault();
-        //alert( "firee!" );
 
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
 
-        //do your own request an handle the results
         if($('#newsaddform').valid()){
 
         var dataForm = new FormData($('#newsaddform')[0]);
         
+            var data = new FormData();
+            data.append("Aditya", "patel");
 
         $.ajax({
-                url: 'https://localhost:44374/api/AddFacultyDetail',
+                url: '@Url.Action("NewsAdd","News")',
                 type: 'post',
+                crossDomain: true,
                 enctype: 'multipart/form-data',
                 dataType: 'application/json',
                 processData: false,
                 contentType: false,
-                data: dataForm,
+                data: data,
                 success: function(data) {
                     console.log(data);
                 }

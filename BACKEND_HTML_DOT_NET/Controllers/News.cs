@@ -8,6 +8,7 @@ using BACKEND_HTML_DOT_NET.Models;
 using Newtonsoft.Json;
 using System.Text;
 using RestSharp;
+using Microsoft.AspNetCore.Http;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
@@ -16,6 +17,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
         private List<NewsVM> newsVMList = new List<NewsVM>();
+
         public IActionResult NewsList()
         {
             var restClient = new RestClient(apiBaseUrl);
@@ -41,8 +43,9 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             return View(newsVM);
         }
 
-        public IActionResult NewsAdd()
+        public IActionResult NewsAdd(IFormCollection form)
         {
+
            return View();
         }
     }
