@@ -99,6 +99,8 @@
         
             var data = new FormData();
             data.append("Aditya", "patel");
+            
+            data.appednd("Title", $(#title).text());
 
         $.ajax({
                 url: '@Url.Action("NewsAdd","News")',
