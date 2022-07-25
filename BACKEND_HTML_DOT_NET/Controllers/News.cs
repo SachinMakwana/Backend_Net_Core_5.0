@@ -43,7 +43,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             return View(newsVM);
         }
 
-        public IActionResult NewsAdd(FormCollection data)
+        public IActionResult NewsAdd(NewsVM data)
         {
             /*String title = form["Title"];*/
            return View();

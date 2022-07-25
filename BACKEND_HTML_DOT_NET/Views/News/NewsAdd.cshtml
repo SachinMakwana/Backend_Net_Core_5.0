@@ -98,11 +98,11 @@
 
         var dataForm = new FormData($('#newsaddform')[0]);
         
-            var data = new FormData();
-            data.append("Aditya", "patel");
+            var data = $('newsaddform').serialize();
+            //data.append("Aditya", "patel");
             
-            data.append("Title", $('#title').val());
-
+            //data.append("Title", $('#title').val());
+            
         $.ajax({
                 url: '@Url.Action("NewsAdd","News")',
                 type: 'post',
