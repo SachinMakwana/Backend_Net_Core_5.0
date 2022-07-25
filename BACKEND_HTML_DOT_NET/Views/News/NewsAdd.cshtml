@@ -26,6 +26,7 @@
                     <!-- form start -->
                     <form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
                         @using(Html.BeginForm()){
+                                @Html.EditorForModel("NewsVM")  
 
                         <div class="card-body">
                             <div class="row">

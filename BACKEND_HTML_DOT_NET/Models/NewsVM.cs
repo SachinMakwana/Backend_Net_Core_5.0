@@ -6,7 +6,7 @@ namespace BACKEND_HTML_DOT_NET.Models
     public class NewsVM
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string title { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public bool? IsDeleted { get; set; }
