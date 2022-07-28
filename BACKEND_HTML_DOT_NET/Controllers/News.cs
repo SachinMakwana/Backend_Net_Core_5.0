@@ -50,10 +50,17 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             return PartialView("NewsVM", nm);
         }
 
+        public IActionResult NewsAdd()
+        {
+            /*String title = form["Title"];*/
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult NewsAdd(NewsVM data)
         {
             /*String title = form["Title"];*/
-           return View();
+           return Json(true);
         }
     }
 }

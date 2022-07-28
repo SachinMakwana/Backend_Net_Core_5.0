@@ -96,27 +96,14 @@
 
         if($('#newsaddform').valid()){
 
-        var dataForm = new FormData($('#newsaddform')[0]);
+       
         
-            var data = {
-                Title : "Aapanv",
-                Description : "davnpnvd"
-            };
-            
-            
-            //data.append("Aditya", "patel");
-            
-            //data.append("Title", $('#title').val());
             
         $.ajax({
                 url: '@Url.Action("NewsAdd","News")',
                 type: 'post',
-                crossDomain: true,
-                enctype: 'multipart/form-data',
                 dataType: 'application/json',
-                processData: false,
-                contentType: false,
-                data: JSON.stringify(data),
+            data: $("#newsaddform").serialize(),
                 success: function(data) {
                     console.log(data);
                 }
