@@ -33,13 +33,13 @@
                                         <div class="input-group">
                                             <div class="col-6">
                                                 <label for="Title"> Enter Name</label>
-                                                <input type="text" name="name" class="form-control" id="Title"
+                                                <input type="text" Name="Name" class="form-control" id="Title"
                                                        placeholder="Enter Name">
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label>Enter Category:</label>
-                                                <select name="category" class="form-control select2" style="width: 100%;">
+                                                <select Name="Category" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">Canteen</option>
                                                     <option>Seminar Hall</option>
                                                     <option>Ground</option>
@@ -55,7 +55,7 @@
                                         <div class="input-group">
                                             <div class="col-6">
                                                 <label>Enter Department:</label>
-                                                <select name="dept" class="form-control select2" style="width: 100%;">
+                                                <select Name="Department" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">Computer Engineering</option>
                                                     <option>Electronics & Communication Engineering</option>
                                                     <option>Electrical Engineering</option>
@@ -74,7 +74,7 @@
                                                 </label>
                                                 <div class="input-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input"
+                                                        <input type="file" name="file" class="custom-file-input"
                                                                id="exampleInputFile">
                                                         <label class="custom-file-label"
                                                                for="exampleInputFile">
@@ -83,7 +83,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text" id="">Upload</span>
+                                                        <span class="input-group-text" >Upload</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -127,25 +127,25 @@
 
         $('#campusadd').validate({
           rules: {
-            "name": {
+            "Name": {
                  required: true                
              }, 
-             "category": {
+             "Category": {
                  required: true                
              },
-             "dept": {
+             "Department": {
                  required: true
              }
 
           },
           messages: {
-            "name": {
+            "Name": {
                  required: "this field is required"
              },
-             "category": {
+             "Category": {
                  required: "this field is required"
              },
-             "dept": {
+             "Department": {
                  required: "this field is required"
              }
           }
@@ -164,14 +164,26 @@
 
         //do your own request an handle the results
         if($('#campusadd').valid()){
-        $.ajax({
-                url: '@Url.Action("NewsAdd","News")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
+             
+            var data = new FormData(this);
+           // data.append('imageFile', document.querySelector('#exampleInputFile').files[0]);
 
+        $.ajax({
+                url: '@Url.Action("CampusAdd","Campus")',
+                type: 'post',
+                //dataType: 'application/json',
+                //    contentType: 'multipart/form-data',
+                processData: false,
+contentType: false
+,
+cache:false,
+
+            data: data,
+                success: function(data) {
+                    console.log(data);
+                    alert(data);
                 }
+                
         });
         }
 

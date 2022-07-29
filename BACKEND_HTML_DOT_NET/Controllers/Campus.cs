@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BACKEND_HTML_DOT_NET.Models;
+using GECP_DOT_NET_API.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +14,18 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         public IActionResult CampusAdd()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult CampusAdd(IFormCollection collection)
+        {
+            /*String title = form["Title"];*/
+            CampusVM campusVM = new CampusVM();
+            TryUpdateModelAsync<CampusVM>(campusVM);
+
+
+            return Json("FHRERHR");
         }
         public IActionResult CampusView()
         {
