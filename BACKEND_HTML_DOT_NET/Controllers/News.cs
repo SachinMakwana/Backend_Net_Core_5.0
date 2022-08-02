@@ -53,8 +53,26 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         [HttpPost]
         public IActionResult NewsAdd(NewsVM data)
         {
-            /*String title = form["Title"];*/
-           return Json(true);
+            //NewsVM newsVM = new NewsVM();
+            TryUpdateModelAsync<NewsVM>(data);
+            data.Date = DateTime.Now;
+            data.CreatedDate = DateTime.Now;
+            data.UpdatedDate = DateTime.Now;
+
+            using (var client = new HttpClient())
+            {
+                var uri = new Uri(apiBaseUrl + "/AddNewsDetail");
+                string result = JsonConvert.SerializeObject(data);
+                var postTask = client.PostAsJsonAsync(uri, data);
+                postTask.Wait();
+                var results = postTask.Result;
+                if (results.IsSuccessStatusCode)
+                {
+                    return Json("Submited 👌");
+                }
+            }
+
+            return Json("Error 😒");
         }
     }
 }

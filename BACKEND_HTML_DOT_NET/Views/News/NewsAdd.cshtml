@@ -96,16 +96,18 @@
 
         if($('#newsaddform').valid()){
 
-       
-        
+            var data = new FormData(this);
             
         $.ajax({
                 url: '@Url.Action("NewsAdd","News")',
                 type: 'post',
-                dataType: 'application/json',
-            data: $("#newsaddform").serialize(),
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: data,
                 success: function(data) {
                     console.log(data);
+                    alert(data);
                 }
         });
         }
