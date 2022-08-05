@@ -46,15 +46,12 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         public IActionResult NewsAdd()
         {
-            //String title = form["Title"];
             return View();
         }
 
         [HttpPost]
         public IActionResult NewsAdd(NewsVM data)
         {
-            //NewsVM newsVM = new NewsVM();
-            TryUpdateModelAsync<NewsVM>(data);
             data.Date = DateTime.Now;
             data.CreatedDate = DateTime.Now;
             data.UpdatedDate = DateTime.Now;
@@ -62,17 +59,50 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             using (var client = new HttpClient())
             {
                 var uri = new Uri(apiBaseUrl + "/AddNewsDetail");
-                string result = JsonConvert.SerializeObject(data);
-                var postTask = client.PostAsJsonAsync(uri, data);
-                postTask.Wait();
-                var results = postTask.Result;
-                if (results.IsSuccessStatusCode)
+                StringContent content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+                using(var response = client.PostAsync(uri, content))
                 {
-                    return Json("Submited 👌");
+                    response.Wait();
+                    var results = response.Result;
+                    if (results.IsSuccessStatusCode)
+                    {
+                        return Json("Submited 👌");
+                    }
                 }
             }
 
             return Json("Error 😒");
         }
+
+        public IActionResult NewsUpdate()
+        {
+            return View();
+        }
+
+        [HttpPut]
+        public IActionResult NewsUpdate(NewsVM data)
+        {
+            data.Date = DateTime.Now;
+            data.CreatedDate = DateTime.Now;
+            data.UpdatedDate = DateTime.Now;
+
+            using (var client = new HttpClient())
+            {
+                var uri = new Uri(apiBaseUrl + "/UpdateNewsDetail");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+                using (var response = client.PutAsync(uri, content))
+                {
+                    response.Wait();
+                    var results = response.Result;
+                    if (results.IsSuccessStatusCode)
+                    {
+                        return Json("Submited 👌");
+                    }
+                }
+            }
+
+            return Json("Error 😒");
+        }
+
     }
 }
