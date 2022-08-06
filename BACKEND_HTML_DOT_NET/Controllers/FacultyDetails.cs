@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
@@ -39,10 +40,36 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             newsVM = facultyDetailsList.Where(m => m.Id == id).FirstOrDefault();
             return View(newsVM);
         }
+
         public IActionResult FacultyAdd()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult FacultyAdd(FacultyDetailsVM faculty)
+        {
+            faculty.CreatedDate = DateTime.Now;
+            faculty.UpdatedDate = DateTime.Now;
+
+            using (var client = new HttpClient())
+            {
+                var uri = new Uri(apiBaseUrl + "/AddFacultyDetail");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(faculty), Encoding.UTF8, "application/json");
+                using (var response = client.PostAsync(uri, content))
+                {
+                    response.Wait();
+                    var results = response.Result;
+                    if (results.IsSuccessStatusCode)
+                    {
+                        return Json("Submited 👌");
+                    }
+                }
+            }
+
+            return Json("Error 😒");
+        }
+
 
         public IActionResult FacultyEdit()
         {

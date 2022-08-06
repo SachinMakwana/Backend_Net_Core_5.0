@@ -1,4 +1,6 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model List<BACKEND_HTML_DOT_NET.Models.FacultyDetailsVM>
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "FacultyAdd"; }
 
 <div class="content-wrapper">
@@ -25,7 +27,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Add New Faculty</h3>
                                 </div>
-                                <form id="facultyadd" name="facultyadd" role="form">
+                                <form id="facultyadd" name="facultyadd" asp-action="FacultyAdd" asp-controller="FacultyDetails" method="post" role="form">
                                     <div class="card-body">
                                         <div class="form-group">
 
@@ -77,7 +79,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="clear"
+                                                <button type="button"
                                                         class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
@@ -97,14 +99,13 @@
     </section>
 <!-- /.content -->
 </div>
-
-
+                 
 @section script{
 
-    <script>
+<script type="text/javascript">
 
 
-$(document).ready(function() {
+    $(document).ready(function() {
         //console.log( "ready!" );
 
         $('#facultyadd').validate({
@@ -124,10 +125,10 @@ $(document).ready(function() {
             "name": {
                  required: "this field is required"
              },
-             "category": {
+             "destid": {
                  required: "this field is required"
              },
-             "dept": {
+             "deptid": {
                  required: "this field is required"
              }
           }
@@ -135,26 +136,29 @@ $(document).ready(function() {
 
         });
 
-        $('#facultyadd').submit(function(e) {
+         $('#facultyadd').submit(function(e) {
 
-        //prevent Default functionality
-        e.preventDefault();
-        //alert( "firee!" );
+        
 
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
 
-        //do your own request an handle the results
-        if($('#facultyadd').valid()){
-        $.ajax({
-                url: '@Url.Action("NewsAdd","News")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
+        if ($('#facultyadd').valid()) {
+                var data = new FormData(this);
 
-                }
-        });
+            
+             if ($('#facultyadd').valid()) {
+                    $.ajax({
+                        url: '@Url.Action("FacultyAdd","FacultyDetails")',
+                        type: 'post',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        data: data,
+                        success: function(data) {
+                            console.log(data);
+                            alert(data);
+                        }
+                    });
+             }
         }
 
     });
@@ -162,6 +166,6 @@ $(document).ready(function() {
 
     });
 
-    </script>
+</script>
 
 }
