@@ -56,53 +56,44 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             data.CreatedDate = DateTime.Now;
             data.UpdatedDate = DateTime.Now;
 
-            using (var client = new HttpClient())
+            if (data.Id == 0)
             {
-                var uri = new Uri(apiBaseUrl + "/AddNewsDetail");
-                StringContent content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
-                using(var response = client.PostAsync(uri, content))
+                using (var client = new HttpClient())
                 {
-                    response.Wait();
-                    var results = response.Result;
-                    if (results.IsSuccessStatusCode)
+                    var uri = new Uri(apiBaseUrl + "/AddNewsDetail");
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+                    using (var response = client.PostAsync(uri, content))
                     {
-                        return Json("Submited 👌");
+                        response.Wait();
+                        var results = response.Result;
+                        if (results.IsSuccessStatusCode)
+                        {
+                            return Json("Submited 👌");
+                        }
                     }
                 }
             }
-
-            return Json("Error 😒");
-        }
-
-        public IActionResult NewsUpdate()
-        {
-            return View();
-        }
-
-        [HttpPut]
-        public IActionResult NewsUpdate(NewsVM data)
-        {
-            data.Date = DateTime.Now;
-            data.CreatedDate = DateTime.Now;
-            data.UpdatedDate = DateTime.Now;
-
-            using (var client = new HttpClient())
+            else
             {
-                var uri = new Uri(apiBaseUrl + "/UpdateNewsDetail");
-                StringContent content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
-                using (var response = client.PutAsync(uri, content))
+                using (var client = new HttpClient())
                 {
-                    response.Wait();
-                    var results = response.Result;
-                    if (results.IsSuccessStatusCode)
+                    var uri = new Uri(apiBaseUrl + "/UpdateNewsDetail");
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+                    using (var response = client.PutAsync(uri, content))
                     {
-                        return Json("Submited 👌");
+                        response.Wait();
+                        var results = response.Result;
+                        if (results.IsSuccessStatusCode)
+                        {
+                            return Json("Submited 👌");
+                        }
                     }
                 }
             }
-
             return Json("Error 😒");
         }
+
+      
 
     }
 }

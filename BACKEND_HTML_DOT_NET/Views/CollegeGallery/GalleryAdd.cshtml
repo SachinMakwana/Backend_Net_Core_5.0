@@ -1,5 +1,8 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "GalleryAdd"; }
+﻿@model List<BACKEND_HTML_DOT_NET.Models.GalleryVM>
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "GalleryAdd"; 
+}
 
 <div class="content-wrapper">
     <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
@@ -20,7 +23,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" id="gallery">
+                    <form role="form" id="gallery" asp-action="GalleryAdd" asp-controller="CollegeGallery" method="post" >
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group">
@@ -64,7 +67,7 @@
                             <div class="input-group col-12">
                                 <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-2">Submit</button></div>
                                 <div class="col-sm-6">
-                                    <button type="clear" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -115,27 +118,31 @@
 
         });
 
-        $('#btnGallery').click(function(e) {
+        $('#gallery').submit(function(e) {
 
         //prevent Default functionality
         e.preventDefault();
-        //alert( "firee!" );
 
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
 
-        //do your own request an handle the results
         if($('#gallery').valid()){
-        $.ajax({
-                url: '@Url.Action("NewsAdd","News")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
 
-                }
-        });
+            var data = new FormData(this);
+            
+             $.ajax({
+                    url: '@Url.Action("GalleryAdd","CollegeGallery")',
+                    type: 'post',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: data,
+                    success: function(data) {
+                        console.log(data);
+                        alert(data);
+                    }
+            });
         }
+
+        
 
     });
 
