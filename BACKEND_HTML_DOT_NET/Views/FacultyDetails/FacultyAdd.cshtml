@@ -10,10 +10,10 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("FacultyView","FacultyDetails")">
+                <a href="@Url.Action("FacultyList","FacultyDetails")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i> </li>
-                        <li style="margin-left: px;">Back to Details</li>
+                        <li style="margin-left: 00px;">Back to Details</li>
                     </ol>
                 </a>
             </div>
@@ -27,7 +27,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Add New Faculty</h3>
                                 </div>
-                                <form id="facultyadd" name="facultyadd" asp-action="FacultyAdd" asp-controller="FacultyDetails" method="post" role="form">
+                                <form id="facultyadd" name="facultyadd" role="form">
                                     <div class="card-body">
                                         <div class="form-group">
 
@@ -47,7 +47,7 @@
                                                 <div class="input-group col-12">
                                                     <div class="col-md-2">
                                                         <label for="ddldesgn">Designation ID</label>
-                                                        <input name="destid" type="number" class="form-control" id="designation"
+                                                        <input name="DesignationId" type="number" class="form-control" id="DesignationId"
                                                                placeholder="Designation ID">
                                                     </div>
                                                 </div>
@@ -73,8 +73,8 @@
                                     <div class="card-footer">
                                         <div class="input-group col-12">
                                             <div class="col-sm-6">
-                                                <button type="submit"
-                                                        class="btn btn-primary float-right col-md-2">
+                                                <button type="button"
+                                                        class="btn btn-primary float-right col-md-2" id="btnSubmit">
                                                     Submit
                                                 </button>
                                             </div>
@@ -113,7 +113,7 @@
             "name": {
                  required: true                
              }, 
-             "destid": {
+             "DesignationId": {
                  required: true                
              },
              "deptid": {
@@ -125,7 +125,7 @@
             "name": {
                  required: "this field is required"
              },
-             "destid": {
+             "DesignationId": {
                  required: "this field is required"
              },
              "deptid": {
@@ -136,29 +136,27 @@
 
         });
 
-         $('#facultyadd').submit(function(e) {
+        $('#btnSubmit').click(function(e) {
 
         
 
 
         if ($('#facultyadd').valid()) {
-                var data = new FormData(this);
+            var data = $('#facultyadd').serialize();
 
             
-             if ($('#facultyadd').valid()) {
+             
                     $.ajax({
                         url: '@Url.Action("FacultyAdd","FacultyDetails")',
                         type: 'post',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
                         data: data,
                         success: function(data) {
                             console.log(data);
-                            alert(data);
+                            alert(data.message);
+                            $('#facultyadd')[0].reset();
                         }
                     });
-             }
+             
         }
 
     });

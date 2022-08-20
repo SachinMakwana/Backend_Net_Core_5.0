@@ -16,7 +16,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     {
         private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
-        private List<FacultyDetailsVM> facultyDetailsList = new List<FacultyDetailsVM>();
+        private static List<FacultyDetailsVM> facultyDetailsList = new List<FacultyDetailsVM>();
 
         public IActionResult FacultyList()
         {
@@ -47,33 +47,79 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
 
         [HttpPost]
-        public IActionResult FacultyAdd(FacultyDetailsVM faculty)
+        public async Task<IActionResult> FacultyAdd(FacultyDetailsVM faculty)
         {
             faculty.CreatedDate = DateTime.Now;
             faculty.UpdatedDate = DateTime.Now;
-
-            using (var client = new HttpClient())
+            try
             {
-                var uri = new Uri(apiBaseUrl + "/AddFacultyDetail");
-                StringContent content = new StringContent(JsonConvert.SerializeObject(faculty), Encoding.UTF8, "application/json");
-                using (var response = client.PostAsync(uri, content))
+                using (var client = new HttpClient())
                 {
-                    response.Wait();
-                    var results = response.Result;
-                    if (results.IsSuccessStatusCode)
+                    var uri = new Uri(apiBaseUrl + "/AddFacultyDetail");
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(faculty), Encoding.UTF8, "application/json");
+
+                    using (var response = client.PostAsync(uri, content))
                     {
-                        return Json("Submited 👌");
+                        response.Wait();
+                        var results = response.Result;
+                        var jsonString = await results.Content.ReadAsStringAsync();
+
+                        var res = JsonConvert.DeserializeObject<ServiceResponse<bool>>(jsonString);
+                        if (results.IsSuccessStatusCode)
+                        {
+                            return Json(res);
+                        }
                     }
                 }
             }
-
-            return Json("Error 😒");
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message.ToString() });
+            }
+            return Json(new { message = "something went wrong." });
         }
 
 
-        public IActionResult FacultyEdit()
+        public IActionResult FacultyEdit(int id)
         {
-            return View();
+            var item = facultyDetailsList.Where(m => m.Id == id).FirstOrDefault();
+            return View(item);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FacultyUpdate(FacultyDetailsVM faculty)
+        {
+            var updateItem = facultyDetailsList.Where(m => m.Id == faculty.Id).FirstOrDefault();
+            updateItem.Name = faculty.Name;
+            updateItem.DeptId = faculty.DeptId;
+            updateItem.DesignationId = faculty.DesignationId;
+            updateItem.UpdatedDate = DateTime.Now;
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(apiBaseUrl + "/UpdateFacultyDetail");
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(updateItem), Encoding.UTF8, "application/json");
+
+                    using (var response = client.PutAsync(uri, content))
+                    {
+                        response.Wait();
+                        var results = response.Result;
+                        var jsonString = await results.Content.ReadAsStringAsync();
+
+                        var res = JsonConvert.DeserializeObject<ServiceResponse<bool>>(jsonString);
+                        if (results.IsSuccessStatusCode)
+                        {
+                            return Json(res);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message.ToString() });
+            }
+            return Json(new { message = "something went wrong." });
         }
         public IActionResult FacultyDetail()
         {
