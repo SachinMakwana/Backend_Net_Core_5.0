@@ -102,22 +102,70 @@
     <!-- /.content -->
 </div>
 @section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
     <script type="text/javascript">
-    function DeleteFaculty(id) {
-        if (id!=null) {
-            $.ajax({
-                url: '@Url.Action("FacultyDelete","FacultyDetails")',
-                type: 'post',
-                data: { id: id },
-                        success: function (data) {
-                            if (data.success_code == "200") {
-                                alert(data.message);
-                                window.location.reload();
-                            }
+        function DeleteFaculty(id) {
+            //Swal.fire({
+            //    title: 'Are you sure you want to delete this faculty?',
+            //    showDenyButton: true,
+            //    showCancelButton: true,
+            //    confirmButtonText: 'Yes',
+            //    denyButtonText: `No`,
+            //}).then(function (isConfirmed) {
+            //    /* Read more about isConfirmed, isDenied below */
 
-                        }
-                    });
-        }
+
+
+
+            //}).then(function (isDenied) {
+            //    Swal.fire('Changes are not saved', '', 'info')
+            //});
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then(function (isConfirm) {
+
+                if (!isConfirm) return;
+                if (id != null) {
+                        $.ajax({
+                            url: '@Url.Action("FacultyDelete","FacultyDetails")',
+                            type: 'post',
+                            data: { id: id },
+                            success: function (data) {
+                                if (data.status_code == "200") {
+                                    Swal.fire(data.message, '', 'success')
+                                    window.setTimeout(window.location.reload(), 5000);
+
+                                }
+
+                            }
+                        });
+                    }
+                //$.ajax({
+                //    url: "scriptDelete.php",
+                //    type: "POST",
+                //    data: {
+                //        id: 5
+                //    },
+                //    dataType: "html",
+                //    success: function () {
+                //        swal("Done!", "It was succesfully deleted!", "success");
+                //    },
+                //    error: function (xhr, ajaxOptions, thrownError) {
+                //        swal("Error deleting!", "Please try again", "error");
+                //    }
+                //});
+            });
+
     }
     </script>
+}
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }
