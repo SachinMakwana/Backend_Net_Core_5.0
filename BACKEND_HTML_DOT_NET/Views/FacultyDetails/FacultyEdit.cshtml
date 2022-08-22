@@ -102,6 +102,7 @@
 </div>
 
 @section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
 
     <script type="text/javascript">
 
@@ -147,13 +148,24 @@
                         url: '@Url.Action("FacultyUpdate","FacultyDetails")',
                         type: 'post',
                         data: data,
-                        success: function(data) {
-                            console.log(data);
-                            alert(data.message);
-                            $('#facultyedit')[0].reset();
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Updated!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    type: "success"
+                                }).then(function () {
+                                    $('#facultyedit')[0].reset();
+                                    window.location.href='@Url.Action("FacultyList","FacultyDetails")';
+                                });
+                            }
+                            //console.log(data);
+                            //alert(data.message);
+                            //$('#facultyedit')[0].reset();
                         }
                     });
-             
+
         }
 
     });
@@ -163,4 +175,7 @@
 
     </script>
 
+}
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }

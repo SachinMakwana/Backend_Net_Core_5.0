@@ -55,17 +55,17 @@
 
                                             <div class="form-group">
                                                 <div class="input-group col-12">
-                                                    
+
                                                     <div class="col-md-3">
                                                         <label for="department">Department ID</label>
                                                         <input name="deptid" type="number" class="form-control" id="department"
                                                                placeholder="Department ID">
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
 
-                                           
+
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -97,12 +97,12 @@
             </div>
         </div>
     </section>
-<!-- /.content -->
+    <!-- /.content -->
 </div>
-                 
-@section script{
 
-<script type="text/javascript">
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script type="text/javascript">
 
 
     $(document).ready(function() {
@@ -111,10 +111,10 @@
         $('#facultyadd').validate({
           rules: {
             "name": {
-                 required: true                
-             }, 
+                 required: true
+             },
              "DesignationId": {
-                 required: true                
+                 required: true
              },
              "deptid": {
                  required: true
@@ -132,38 +132,45 @@
                  required: "this field is required"
              }
           }
-         
+
 
         });
 
         $('#btnSubmit').click(function(e) {
 
-        
+            if ($('#facultyadd').valid()) {
+                var data = $('#facultyadd').serialize();
 
 
-        if ($('#facultyadd').valid()) {
-            var data = $('#facultyadd').serialize();
 
-            
-             
-                    $.ajax({
-                        url: '@Url.Action("FacultyAdd","FacultyDetails")',
-                        type: 'post',
-                        data: data,
-                        success: function(data) {
-                            console.log(data);
-                            alert(data.message);
-                            $('#facultyadd')[0].reset();
-                        }
-                    });
-             
-        }
+                        $.ajax({
+                            url: '@Url.Action("FacultyAdd","FacultyDetails")',
+                            type: 'post',
+                            data: data,
+                            success: function(data) {
+                               if (data.status_code == "200") {
+                                    Swal.fire({
+                                        title: "Added!",
+                                        text: data.message,
+                                        timer: 6000,
+                                        type: "success"
+                                    }).then(function () {
+                                        $('#facultyadd')[0].reset();
+                                        window.location.href='@Url.Action("FacultyList","FacultyDetails")';
+                                    });
+                                }
+                            }
+                        });
+
+            }
+        });
+
 
     });
 
+    </script>
 
-    });
-
-</script>
-
+}
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }

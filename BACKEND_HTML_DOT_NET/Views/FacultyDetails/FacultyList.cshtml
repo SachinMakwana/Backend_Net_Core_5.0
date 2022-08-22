@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-hover">
+                            <table id="facultyTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -103,7 +103,28 @@
 </div>
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
     <script type="text/javascript">
+        $(function () {
+            $("#facultyTable").DataTable();
+
+            //$("#facultyTable").DataTable({
+            //    "responsive": true, "lengthChange": false, "autoWidth": false,
+            //    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            //}).buttons().container().appendTo('#facultyTable_wrapper .col-md-6:eq(0)');
+
+        });
         function DeleteFaculty(id) {
 
             Swal.fire({
@@ -127,16 +148,17 @@
                                     Swal.fire({
                                         title: "Deleted!",
                                         text: data.message,
+                                        timer:6000,
                                         type: "success"
                                     }).then(function () {
-                                        window.setTimeout(window.location.reload(),6000);
+                                        window.location.reload();
                                     });
                                 }
 
                             }
                         });
                     }
-                
+
             });
 
     }
