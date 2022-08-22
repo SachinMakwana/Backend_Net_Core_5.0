@@ -51,30 +51,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(var item in Model){
-                                    <tr>
-                                        <td>
-                                            @item.Id
-                                        </td>
-                                        <td>
-                                            @item.Name
-                                        </td>
-                                        <td>
-                                            @item.DeptId
-                                        </td>
-                                        <td>
-                                            @item.DesignationId
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("FacultyDetail","FacultyDetails",new {@id=item.Id})" class="nav-icon fas fa-eye"></a>
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("FacultyEdit","FacultyDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                        </td>
-                                        <td>
-                                           <a href="@Url.Action("FacultyAdd","FacultyDetails",new {@id=item.Id})"><i class="nav-icon fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Id
+                                            </td>
+                                            <td>
+                                                @item.Name
+                                            </td>
+                                            <td>
+                                                @item.DeptId
+                                            </td>
+                                            <td>
+                                                @item.DesignationId
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("FacultyDetail","FacultyDetails",new {@id=item.Id})" class="nav-icon fas fa-eye"></a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("FacultyEdit","FacultyDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="DeleteFaculty(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                                 <tfoot>
@@ -100,3 +101,23 @@
     </section>
     <!-- /.content -->
 </div>
+@section script{
+    <script type="text/javascript">
+    function DeleteFaculty(id) {
+        if (id!=null) {
+            $.ajax({
+                url: '@Url.Action("FacultyDelete","FacultyDetails")',
+                type: 'post',
+                data: { id: id },
+                        success: function (data) {
+                            if (data.success_code == "200") {
+                                alert(data.message);
+                                window.location.reload();
+                            }
+
+                        }
+                    });
+        }
+    }
+    </script>
+}
