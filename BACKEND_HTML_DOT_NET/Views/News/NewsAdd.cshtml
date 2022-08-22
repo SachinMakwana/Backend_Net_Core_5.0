@@ -24,10 +24,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="newsaddform" asp-action="NewsAdd" asp-controller="News" method="post" role="form">
-                        @using(Html.BeginForm()){
-                                @Html.EditorForModel("NewsVM")  
-
+                    <form id="newsaddform" method="post" role="form">
                         <div class="card-body">
                             <div class="row">
 
@@ -52,11 +49,10 @@
                         </div>
                         <div class="card-footer">
                             <div class="input-group col-12">
-                                <div class="col-sm-6"><button type="submit" id="sub" class="btn btn-primary float-right col-md-2">Submit</button></div>
-                                <div class="col-sm-6"><button type="reset" class="btn btn-default col-md-2">Clear</button></div>
+                                <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2">Clear</button></div>
                             </div>
                         </div>
-                        }
                     </form>
                 </div>
             </div>
@@ -95,29 +91,23 @@
 
         });
 
-        $('#newsaddform').submit(function(e) {
+            $('#btnSubmit').click(function (e) {
 
-        //prevent Default functionality
-        e.preventDefault();
+                if($('#newsaddform').valid()){
 
-
-        if($('#newsaddform').valid()){
-
-            var data = new FormData(this);
+                        var data = $('#newsaddform').serialize();
             
-             $.ajax({
-                    url: '@Url.Action("NewsAdd","News")',
-                    type: 'post',
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    data: data,
-                    success: function(data) {
-                        console.log(data);
-                        alert(data);
-                    }
-            });
-        }
+                        $.ajax({
+                            url: '@Url.Action("NewsAdd","News")',
+                            type: 'post',
+                            data: data,
+                            success: function(data) {
+                                console.log(data);
+                                alert(data.massage);
+                                $('#newsaddform')[0].reset();
+                            }
+                        });
+            }
 
     });
 

@@ -1,0 +1,115 @@
+﻿@model BACKEND_HTML_DOT_NET.Models.NewsVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "NewsAdd";
+}
+
+
+<div class="content-wrapper">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("NewsList","News")">
+                    <ol class="breadcrumb float-sm-right">
+
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit News</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id="newsaddform" name="newsedit" role="form">
+                        <div class="card-body">
+                            <div class="row">
+                                <input type="hidden" name="id" class="form-control" id="id" value="@Model.Id">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputText">ENTER TITLE OF NEWS</label>
+                                        <input type="text" name="Title" class="form-control" id="title" value="@Model.Title">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="description">ENTER DESCRIPTION OF NEWS</label>
+                                    <input type="text" name="description" class="form-control" id="description" value="@Model.Description" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="input-group col-12">
+                                <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2">Clear</button></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </section>
+</div>
+
+
+@section script{
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#newsaddform').validate({
+                rules: {
+                    "title": {
+                        required: true
+                    },
+                    "description": {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    "title": {
+                        required: "this field is required"
+                    },
+                    "description": {
+                        required: "this field is required"
+                    }
+                }
+
+
+            });
+
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#newsaddform').valid()) {
+
+                    var data = $('#newsaddform').serialize();
+
+                    $.ajax({
+                        url: '@Url.Action("NewsUpdate","News")',
+                        type: 'post',
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                            alert(data.massage);
+                            $('#newsaddform')[0].reset();
+                        }
+                    });
+                }
+
+            });
+
+
+        });
+
+    </script>
+
+}
