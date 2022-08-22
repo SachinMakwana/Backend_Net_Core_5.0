@@ -62,6 +62,7 @@
 </div>
 
 @section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
 
 <script type="text/javascript">
 
@@ -102,9 +103,17 @@
                             type: 'post',
                             data: data,
                             success: function(data) {
-                                console.log(data);
-                                alert(data.massage);
-                                $('#newsaddform')[0].reset();
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    type: "success"
+                                }).then(function () {
+                                    $('#newsaddform')[0].reset();
+                                    window.location.href = '@Url.Action("NewsList","News")';
+                                });
+                            }
                             }
                         });
             }
@@ -116,4 +125,8 @@
 
 </script>
 
+}
+
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }
