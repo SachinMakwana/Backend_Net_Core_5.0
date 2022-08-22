@@ -109,22 +109,41 @@
 <!-- /.content -->
 
 @section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
     <script type="text/javascript">
-        function DeleteNews(id) {
-            if (id != null) {
-                $.ajax({
-                    url: '@Url.Action("NewsDelete","News")',
+    function DeleteNews(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then(function (isConfirm) {
+
+                if (!isConfirm) return;
+                if (id != null) {
+                    $.ajax({
+                        url: '@Url.Action("NewsDelete","News")',
                     type: 'post',
                     data: { id: id },
                     success: function (data) {
-                        if (data.success_code == "200") {
-                            alert(data.message);
-                            window.location.reload();
+                        if (data.status_code == "200") {
+                            Swal.fire(data.message, '', 'success')
+                            window.setTimeout(window.location.reload(), 5000);
+
                         }
 
                     }
                 });
             }
+            });
+
         }
     </script>
+}
+
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }
