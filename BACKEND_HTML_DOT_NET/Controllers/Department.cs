@@ -1,5 +1,6 @@
 ﻿using BACKEND_HTML_DOT_NET.Models;
 using GECP_DOT_NET_API.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestSharp;
@@ -36,6 +37,15 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult DepartmentAdd(IFormCollection data)
+        {
+            var departmentVM = new DepartmentVM();
+            TryUpdateModelAsync<DepartmentVM>(departmentVM);
+            return Json(departmentVM);
+        }
+
         public IActionResult DepartmentView()
         {
             return View();

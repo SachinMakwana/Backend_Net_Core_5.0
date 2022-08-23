@@ -1,4 +1,6 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model List<BACKEND_HTML_DOT_NET.Models.DepartmentVM>
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "DepartmentAdd"; }
 
 <div class="content-wrapper">
@@ -9,7 +11,7 @@
                 <a href="@Url.Action("DepartmentView","Department")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
-                        <li style="margin-left: px;">Back to Details</li>
+                        <li style="margin-left: 00px;">Back to Details</li>
                     </ol>
                 </a>
             </div>
@@ -29,7 +31,7 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="department">ENTER NAME OF DEPARTMENT</label>
-                                        <input type="text" class="form-control" name="department" id="department"
+                                        <input type="text" class="form-control" name="department" id="departmentName"
                                                placeholder="Enter name of Department.. " />
                                     </div>
                                 </div>
@@ -59,8 +61,7 @@
                                         <label for="exampleInputFile">CHOOSE IMAGE FOR DEPARTMENT</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" name="InputFile" class="custom-file-input"
-                                                       id="InputFile">
+                                                <input type="file" name="Image" class="custom-file-input" id="imageUpload">
                                                 <label class="custom-file-label" for="exampleInputFile">
                                                     Choose
                                                     file
@@ -77,9 +78,13 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <div class="input-group col-12">
-                                <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
                                 <div class="col-sm-6">
-                                    <button type="clear" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">
+                                        Submit
+                                    </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -92,88 +97,87 @@
 
                                 
 @section script{
+        <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")" ></script>
 
 <script type="text/javascript">
 
-
-    $(document).ready(function() {
-        //console.log( "ready!" );
-
-        $('#department').validate({
-          rules: {
-            "department": {
-                 required: true                
-             },
-             "description": {
-                 required: true
-             },
-             "message":{
-                 required: true,
-                 digit: true
-             },
-                "slogan": {
-                    required: true
+        $(document).ready(function () {
+            $('#department').validate({
+                rules: {
+                    "departmentName": { required: true },
+                    "description": { required: true },
+                    "message": { required: true },
+                    "slogan": { required: true },
+                    "head": { required: true },
+                    "InputFile": { required: true }
                 },
-                "head": {
-                    required: true
-                },
-                "InputFile":{
-                    required: true
+                messages: {
+                    "departmentName": { required: "this field is required" },
+                    "description": { required: "this field is required" },
+                    "message": { required: "this field is required" },
+                    "head": { required: "this field is required" },
+                    "slogan": { required: "this field is required" },
+                    "InputFile": { required: "this field is required" }
                 }
+            });
 
-          },
-          messages: {
-          "department": {
-                 required: "this field is required"
-             },
-             "description": {
-                 required: "this field is required"
-             },
-             "message":{
-                  required: "this field is required"
-             },
-             "head":{
-                  required: "this field is required"
-             },
-                "slogan": {
-                   required: "this field is required"
-                },
-                "InputFile":{
-                     required: "this field is required"
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#department').valid()) {
+
+                    var departmentName = document.getElementById("departmentName").value;
+                    var description = document.getElementById("description").value;
+                    var message = document.getElementById("message").value;
+                    var head = document.getElementById("head").value;
+                    var slogan = document.getElementById("slogan").value;
+                    
+
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("imageUpload").files.length;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("imageUpload").files[i];
+                        data.append("image", file);
+                    }
+
+                    data.append("name", departmentName);
+                    data.append("description", description);
+                    data.append("head", head);
+                    data.append("message", message);
+                    data.append("slogan", slogan);
+
+
+
+                    console.log(data);
+
+                        $.ajax({
+                            url: '@Url.Action("DepartmentAdd","Department")',
+                            type: 'post',
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: function (data) {
+                                if (data.status_code == "200") {
+                                    Swal.fire({
+                                        title: "Added!",
+                                        text: data.message,
+                                        timer: 6000,
+                                        type: "success"
+                                    }).then(function () {
+                                        $('#department')[0].reset();
+                                        window.location.href = '@Url.Action("DepartmentList","Department")';
+                                    });
+                                }
+                            }
+                        });
+                    
                 }
-
-          }
-         
-
+            });
         });
-
-        $('#department').submit(function(e) {
-
-        //prevent Default functionality
-        e.preventDefault();
-        //alert( "firee!" );
-
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
-
-        //do your own request an handle the results
-        if($('#department').valid()){
-        $.ajax({
-                url: '@Url.Action("DepartmentAdd","Department")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
-
-                }
-        });
-        }
-
-    });
-
-
-    });
-
 </script>
 
+}
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }

@@ -20,11 +20,6 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         [HttpPost]
         public IActionResult CampusAdd(IFormCollection collection)
         {
-            /*String title = form["Title"];*/
-            CampusVM campusVM = new CampusVM();
-            TryUpdateModelAsync<CampusVM>(campusVM);
-
-
             return Json("FHRERHR");
         }
         public IActionResult CampusView()
