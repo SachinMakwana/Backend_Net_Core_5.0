@@ -6,8 +6,10 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
@@ -17,15 +19,21 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
         private List<DepartmentVM> deptVMList = new List<DepartmentVM>();
+        RestClient client;
+
+        public Department()
+        {
+            client = new RestClient(apiBaseUrl);
+        }
 
         public IActionResult DepartmentList()
         {
-            var restClient = new RestClient(apiBaseUrl);
+          
             var restRequest = new RestRequest("/GetAllDepartmentDetails", Method.Get);
             restRequest.AddHeader("Accept", "application/json");
             restRequest.RequestFormat = DataFormat.Json;
 
-            RestResponse response = restClient.Execute(restRequest);
+            RestResponse response = client.Execute(restRequest);
 
             var content = response.Content;
 
@@ -39,11 +47,41 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
 
         [HttpPost]
-        public IActionResult DepartmentAdd(IFormCollection data)
+        public async Task<IActionResult> DepartmentAdd(IFormCollection collection)
         {
-            var departmentVM = new DepartmentVM();
-            TryUpdateModelAsync<DepartmentVM>(departmentVM);
-            return Json(departmentVM);
+            try
+            {
+                AchievementVM achievementVM = new AchievementVM();
+                await TryUpdateModelAsync<AchievementVM>(achievementVM);
+
+                var request = new RestRequest("/AddDepartmentDetail", Method.Post);
+                //add files to request
+                foreach (var file in collection.Files)
+                {
+                    var memorystream = new MemoryStream();
+                    file.CopyTo(memorystream);
+                    var bytes = memorystream.ToArray();
+                    request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                }
+
+                //iterate and add model to request as parameter
+                PropertyInfo[] properties = typeof(AchievementVM).GetProperties();
+                foreach (PropertyInfo property in properties)
+                {
+                    var value = property.GetValue(achievementVM);
+                    request.AddParameter(property.Name.ToString(), value==null?"":value.ToString());
+                }
+            
+                var response = client.Execute(request);
+                //use response.content --> this will directly give the parsed result.
+                return Json(true);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+            return Json(true);
         }
 
         public IActionResult DepartmentView()
