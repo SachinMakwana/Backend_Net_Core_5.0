@@ -1,0 +1,186 @@
+﻿@model BACKEND_HTML_DOT_NET.Models.DepartmentVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "DepartmentEdit";
+}
+
+
+<div class="content-wrapper">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("DepartmentView","Department")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add new departments</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" id="frmdepartment">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label for="department">ENTER NAME OF DEPARTMENT</label>
+                                        <input type="text" class="form-control" name="Name" id="Name"
+                                               value="@Model.Name"  />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="description">ENTER DESCRIPTION OF DEPARTMENT</label>
+                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" >@Model.Description</textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="message">ENTER MESSAGE OF DEPARTMENT</label>
+                                    <textarea type="text" name="Message" class="form-control" id="Message" rows="4">@Model.Message</textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="head">ENTER HEAD</label>
+                                    <input type="number" class="form-control" name="Head" id="Head" value="@Model.Head" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="slogan">ENTER SLOGAN OF DEPARTMENT</label>
+                                    <textarea type="text" name="Slogan" class="form-control" id="Slogan" rows="4">@Model.Slogan</textarea>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label for="Image">CHOOSE IMAGE FOR DEPARTMENT</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="Image" class="custom-file-input" id="Image">
+                                                <label class="custom-file-label" for="Image">
+                                                    Choose
+                                                    file
+                                                </label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="input-group col-12">
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">
+                                        Submit
+                                    </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section script{
+
+ <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")" ></script>
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#frmdepartment').validate({
+                rules: {
+                    "Name": { required: true },
+                    "Description": { required: true },
+                    "Message": { required: true },
+                    "Slogan": { required: true },
+                    "Head": { required: true },
+                    "Image": { required: true }
+                },
+                messages: {
+                    "Name": { required: "this field is required" },
+                    "Description": { required: "this field is required" },
+                    "Message": { required: "this field is required" },
+                    "Head": { required: "this field is required" },
+                    "Slogan": { required: "this field is required" },
+                    "Image": { required: "this field is required" }
+                }
+            });
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#frmdepartment').valid()) {
+
+                    var departmentName = document.getElementById("Name").value;
+                    var description = document.getElementById("Description").value;
+                    var message = document.getElementById("Message").value;
+                    var head = document.getElementById("Head").value;
+                    var slogan = document.getElementById("Slogan").value;
+                    var id = document.getElementById("Id").value;
+
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("Image").files.length;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("Image").files[i];
+                        data.append("image", file);
+                    }
+
+                    data.append("Name", departmentName);
+                    data.append("Description", description);
+                    data.append("Head", head);
+                    data.append("Message", message);
+                    data.append("Slogan", slogan);
+                    data.append("Id",id);
+
+
+
+                    console.log(data);
+
+                    $.ajax({
+                        url: '@Url.Action("DepartmentUpdate","Department")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Updated!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    type: "success"
+                                }).then(function () {
+                                    $('#frmdepartment')[0].reset();
+                                    window.location.href = '@Url.Action("DepartmentList","Department")';
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+    </script>
+
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}

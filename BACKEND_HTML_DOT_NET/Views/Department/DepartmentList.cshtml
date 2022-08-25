@@ -74,7 +74,7 @@
                                             @item.Slogan
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("DepartmentList","Department",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                            <a href="@Url.Action("DepartmentView","Department",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                         </td>
                                         <td>
                                             <a href="@Url.Action("DepartmentEdit","Department",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
@@ -136,7 +136,7 @@
 
 
         });
-        function DeleteFaculty(id) {
+        function DeleteDepartment(id) {
 
             Swal.fire({
                 title: "Are you sure?",
