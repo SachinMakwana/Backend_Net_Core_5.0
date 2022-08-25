@@ -28,7 +28,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         public IActionResult DepartmentList()
         {
-          
+
             var restRequest = new RestRequest("/GetAllDepartmentDetails", Method.Get);
             restRequest.AddHeader("Accept", "application/json");
             restRequest.RequestFormat = DataFormat.Json;
@@ -36,9 +36,15 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             RestResponse response = client.Execute(restRequest);
 
             var content = response.Content;
-
-            var user = JsonConvert.DeserializeObject<ServiceResponse<List<DepartmentVM>>>(content);
-            deptVMList = user.data;
+            if (content != null)
+            {
+                var user = JsonConvert.DeserializeObject<ServiceResponse<List<DepartmentVM>>>(content);
+                deptVMList = user.data;
+                foreach(var data in deptVMList)
+                {
+                    data.Image = "https://localhost:44374/" + data.Image;
+                }
+            }
             return View(deptVMList);
         }
         public IActionResult DepartmentAdd()
@@ -51,9 +57,10 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         {
             try
             {
-                AchievementVM achievementVM = new AchievementVM();
-                await TryUpdateModelAsync<AchievementVM>(achievementVM);
-
+                DepartmentVM departmentVM = new DepartmentVM();
+                await TryUpdateModelAsync<DepartmentVM>(departmentVM);
+                departmentVM.CreatedDate = DateTime.Now;
+                departmentVM.UpdatedDate = DateTime.Now;
                 var request = new RestRequest("/AddDepartmentDetail", Method.Post);
                 //add files to request
                 foreach (var file in collection.Files)
@@ -65,23 +72,24 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 }
 
                 //iterate and add model to request as parameter
-                PropertyInfo[] properties = typeof(AchievementVM).GetProperties();
+                PropertyInfo[] properties = typeof(DepartmentVM).GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
-                    var value = property.GetValue(achievementVM);
-                    request.AddParameter(property.Name.ToString(), value==null?"":value.ToString());
+                    var value = property.GetValue(departmentVM);
+                    request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
                 }
-            
+
                 var response = client.Execute(request);
                 //use response.content --> this will directly give the parsed result.
-                return Json(true);
+                ServiceResponse<bool> serviceResponse = JsonConvert.DeserializeObject<ServiceResponse<bool>>(response.Content);
+                return Json(serviceResponse);
 
             }
             catch (Exception ex)
             {
-                return Json(false);
+                return Json(new { status_code = "000", message=ex.Message.ToString()});
             }
-            return Json(true);
+
         }
 
         public IActionResult DepartmentView()

@@ -22,7 +22,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" id="department">
+                    <form role="form" id="frmdepartment">
                         <div class="card-body">
                             <div class="row">
                                
@@ -31,38 +31,38 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="department">ENTER NAME OF DEPARTMENT</label>
-                                        <input type="text" class="form-control" name="department" id="departmentName"
+                                        <input type="text" class="form-control" name="Name" id="Name"
                                                placeholder="Enter name of Department.. " />
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                    <label for="description">ENTER DESCRIPTION OF DEPARTMENT</label>
-                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
                                </div>
 
                                <div class="col-md-6">
                                    <label for="message">ENTER MESSAGE OF DEPARTMENT</label>
-                                   <textarea type="text" name="message" class="form-control" id="message" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="Message" class="form-control" id="Message" rows="4" placeholder="Write content"></textarea>
                                </div>
 
                                <div class="col-md-6">
                                    <label for="head">ENTER HEAD</label>
-                                   <input type="number" class="form-control" name="head" id="head" />
+                                   <input type="number" class="form-control" name="Head" id="Head" />
                                </div>
 
                                <div class="col-md-6">
                                    <label for="slogan">ENTER SLOGAN OF DEPARTMENT</label>
-                                   <textarea type="text" name="slogan" class="form-control" id="slogan" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="Slogan" class="form-control" id="Slogan" rows="4" placeholder="Write content"></textarea>
                                </div>
 
                                 <div class="col-sm-5">
                                     <div class="form-group">
-                                        <label for="exampleInputFile">CHOOSE IMAGE FOR DEPARTMENT</label>
+                                        <label for="Image">CHOOSE IMAGE FOR DEPARTMENT</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" name="Image" class="custom-file-input" id="imageUpload">
-                                                <label class="custom-file-label" for="exampleInputFile">
+                                                <input type="file" name="Image" class="custom-file-input" id="Image">
+                                                <label class="custom-file-label" for="Image">
                                                     Choose
                                                     file
                                                 </label>
@@ -102,49 +102,49 @@
 <script type="text/javascript">
 
         $(document).ready(function () {
-            $('#department').validate({
+            $('#frmdepartment').validate({
                 rules: {
-                    "departmentName": { required: true },
-                    "description": { required: true },
-                    "message": { required: true },
-                    "slogan": { required: true },
-                    "head": { required: true },
-                    "InputFile": { required: true }
+                    "Name": { required: true },
+                    "Description": { required: true },
+                    "Message": { required: true },
+                    "Slogan": { required: true },
+                    "Head": { required: true },
+                    "Image": { required: true }
                 },
                 messages: {
-                    "departmentName": { required: "this field is required" },
-                    "description": { required: "this field is required" },
-                    "message": { required: "this field is required" },
-                    "head": { required: "this field is required" },
-                    "slogan": { required: "this field is required" },
-                    "InputFile": { required: "this field is required" }
+                    "Name": { required: "this field is required" },
+                    "Description": { required: "this field is required" },
+                    "Message": { required: "this field is required" },
+                    "Head": { required: "this field is required" },
+                    "Slogan": { required: "this field is required" },
+                    "Image": { required: "this field is required" }
                 }
             });
 
             $('#btnSubmit').click(function (e) {
 
-                if ($('#department').valid()) {
+                if ($('#frmdepartment').valid()) {
 
-                    var departmentName = document.getElementById("departmentName").value;
-                    var description = document.getElementById("description").value;
-                    var message = document.getElementById("message").value;
-                    var head = document.getElementById("head").value;
-                    var slogan = document.getElementById("slogan").value;
+                    var departmentName = document.getElementById("Name").value;
+                    var description = document.getElementById("Description").value;
+                    var message = document.getElementById("Message").value;
+                    var head = document.getElementById("Head").value;
+                    var slogan = document.getElementById("Slogan").value;
                     
 
                     //var data = $('#department').serialize();
                     var data = new FormData();
-                    var totalFiles = document.getElementById("imageUpload").files.length;
+                    var totalFiles = document.getElementById("Image").files.length;
                     for (var i = 0; i < totalFiles; i++) {
-                        var file = document.getElementById("imageUpload").files[i];
+                        var file = document.getElementById("Image").files[i];
                         data.append("image", file);
                     }
 
-                    data.append("name", departmentName);
-                    data.append("description", description);
-                    data.append("head", head);
-                    data.append("message", message);
-                    data.append("slogan", slogan);
+                    data.append("Name", departmentName);
+                    data.append("Description", description);
+                    data.append("Head", head);
+                    data.append("Message", message);
+                    data.append("Slogan", slogan);
 
 
 
@@ -165,7 +165,7 @@
                                         timer: 6000,
                                         type: "success"
                                     }).then(function () {
-                                        $('#department')[0].reset();
+                                        $('#frmdepartment')[0].reset();
                                         window.location.href = '@Url.Action("DepartmentList","Department")';
                                     });
                                 }
