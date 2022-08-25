@@ -11,7 +11,7 @@
                 <a href="@Url.Action("LabWorkshopsView","LabWorkshops")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
-                        <li style="margin-left: px;">Back to Details</li>
+                        <li style="margin-left: 00px;">Back to Details</li>
                     </ol>
                 </a>
             </div>
@@ -25,7 +25,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Add New Lab or Workshop Data</h3>
                                 </div>
-                                <form role="form" id="LabWorkshop">
+                                <form role="form" id="LabWorkshopForm">
                                     <div class="card-body">
                                         <div class="form-group">
 
@@ -40,7 +40,7 @@
 
                                                     <div class="col-md-6">
                                                         <label for="labId">Department ID Of Lab Or Workshop</label>
-                                                        <input type="text" class="form-control" id="labId" placeholder="LabId">
+                                                        <input type="text" class="form-control" id="deptlabId" placeholder="LabId">
                                                     </div>
 
                                                     <div class="col-md-6">
@@ -52,7 +52,7 @@
                                                         <label for="exampleInputFile">Upload New Image</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="InputFile" name="InputFile">
+                                                                <input type="file" class="custom-file-input" id="Image" name="Image">
                                                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                             </div>
                                                             <div class="input-group-append">
@@ -72,8 +72,8 @@
 
                                     <div class="card-footer">
                                         <div class="input-group col-12">
-                                            <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
-                                            <div class="col-sm-6"><button type="clear" class="btn btn-primary col-md-2">Clear</button></div>
+                                            <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2" id="btnSubmit">Submit</button></div>
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2">Clear</button></div>
                                         </div>
                                     </div>
                                 </form>
@@ -108,9 +108,9 @@
                  required: true
              },
              "description":{
-                 required: true;
+                 required: true
              },
-                "InputFile": {
+                "Image": {
                     required: true
                 }
 
@@ -125,7 +125,7 @@
              "description":{
                required: "this field is required"
              },
-                "InputFile": {
+                "Image": {
                  required: "this field is required"
                 }
 
@@ -134,26 +134,51 @@
 
         });
 
-        $('#LabWorkshop').submit(function(e) {
+            $('#btnSubmit').click(function (e) {
+                if ($('#LabWorkshopForm').valid()) {
 
-        //prevent Default functionality
-        e.preventDefault();
-        alert( "firee!" );
+                    var labname = document.getElementById("labname").value;
+                    var deptlabId = document.getElementById("deptlabId").value;
+                    var description = document.getElementById("description").value;
+                    
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("Image").files.length;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("Image").files[i];
+                        data.append("Image", file);
+                    }
 
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
+                    data.append("Name", labname);
+                    data.append("DeptId",deptlabId);
+                    data.append("Description",description);
+                   
 
-        //do your own request an handle the results
-        if($('#LabWorkshop').valid()){
-        $.ajax({
-                url: '@Url.Action("LabWorkshopsAdd","LabWorkshops")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
 
-                }
-        });
+
+                    console.log(data);
+
+                    $.ajax({
+                        url: '@Url.Action("LabWorkshopsAdd","LabWorkshops")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    type: "success"
+                                }).then(function () {
+                                    $('#frmdepartment')[0].reset();
+                                    window.location.href = '@Url.Action("DepartmentList","Department")';
+                                });
+                            }
+                        }
+                    });
         }
 
     });
