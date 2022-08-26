@@ -28,17 +28,17 @@
                             <div class="row">
                                 <div class="form-group">
                                     <label for="fileName">Gallery Tag Id</label>
-                                    <input type="number" class="form-control" id="tagid" name="tagid" placeholder="Enter id">
+                                    <input type="number" class="form-control" id="tagid" name="GalleryTagId" placeholder="Enter id">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
+                                    <input type="text" class="form-control" id="name" name="Name" placeholder="Enter name">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Extention</label>
-                                    <input type="text" class="form-control" id="extention" name="extention" placeholder="Enter extention">
+                                    <input type="text" class="form-control" id="extention" name="Extension" placeholder="Enter extention">
                                 </div>
 
                                 <div class="col-md-6">
@@ -46,7 +46,7 @@
                                         <label for="exampleInputFile">CHOOSE IMAGE</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input"
+                                                <input type="file" name="file" class="custom-file-input"
                                                        id="InputFile">
                                                 <label class="custom-file-label" for="exampleInputFile">
                                                     Choose
@@ -54,7 +54,7 @@
                                                 </label>
                                             </div>
                                             <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
+                                                <span class="input-group-text" >Upload</span>
                                             </div>
                                         </div>
                                     </div>
@@ -87,13 +87,13 @@
 
         $('#gallery').validate({
           rules: {
-                "tagid": {
+                    "GalleryTagId": {
                     required: true
                 },
-                "name": {
+                    "Name": {
                     required: true
                 },
-                "extention": {
+                    "Extension": {
                     required: true
                 },
                 "InputFile": {
@@ -101,13 +101,13 @@
                 }
           },
           messages: {
-                "tagid": {
+                    "GalleryTagId": {
                     required: "this felid is required"
                 },
-                "name": {
+                    "Name": {
                     required: "this felid is required"
                 },
-                "extention": {
+                    "Extension": {
                     required: "this felid is required"
                 },
               "InputFile": {
@@ -118,15 +118,15 @@
 
         });
 
-        $('#gallery').submit(function(e) {
-
+            $('#btnGallery').click(function (e) {
+                alert("enterted");
         //prevent Default functionality
         e.preventDefault();
 
 
         if($('#gallery').valid()){
 
-            var data = new FormData(this);
+                    var data = new FormData($('#gallery')[0]);
             
              $.ajax({
                     url: '@Url.Action("GalleryAdd","CollegeGallery")',
