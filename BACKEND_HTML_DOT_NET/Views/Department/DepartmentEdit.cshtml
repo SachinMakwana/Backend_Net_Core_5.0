@@ -1,8 +1,8 @@
 ﻿@model BACKEND_HTML_DOT_NET.Models.DepartmentVM
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "DepartmentEdit";
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Title = "Update Department";
 }
 
 
@@ -11,7 +11,7 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("DepartmentView","Department")">
+                <a href="@Url.Action("DepartmentList","Department")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
                         <li style="margin-left: 00px;">Back to Details</li>
@@ -21,7 +21,7 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Add new departments</h3>
+                        <h3 class="card-title">Update Department</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -31,37 +31,48 @@
 
                                 <input type="hidden" name="Id" id="Id" value="@Model.Id" />
 
-                                <div class="col-sm-5">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="department">ENTER NAME OF DEPARTMENT</label>
-                                        <input type="text" class="form-control" name="Name" id="Name"
-                                               value="@Model.Name" />
+                                        <label for="department">Department Name</label>
+                                        <input type="text" class="form-control" name="Name" id="Name" value="@Model.Name"
+                                               placeholder="Enter name of Department.. " />
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="description">ENTER DESCRIPTION OF DEPARTMENT</label>
-                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" >@Model.Description</textarea>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="message">ENTER MESSAGE OF DEPARTMENT</label>
-                                    <textarea type="text" name="Message" class="form-control" id="Message" rows="4">@Model.Message</textarea>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="head">ENTER HEAD</label>
-                                    <input type="number" class="form-control" name="Head" id="Head" value="@Model.Head" />
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="slogan">ENTER SLOGAN OF DEPARTMENT</label>
-                                    <textarea type="text" name="Slogan" class="form-control" id="Slogan" rows="4">@Model.Slogan</textarea>
-                                </div>
-
-                                <div class="col-sm-5">
                                     <div class="form-group">
-                                        <label for="Image">CHOOSE IMAGE FOR DEPARTMENT</label>
+                                        <label>Head of Department</label>
+                                        <select name="Head" id="Head" class="form-control">
+                                            <option>Select Head</option>
+                                            @foreach (var item in Model.FacultySelectList)
+                                            {
+                                                bool selected = item.Value == Model.Head.ToString() ? true : false;
+                                                <option value="@item.Value" selected="@selected">@item.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="description">Description</label>
+                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content">@Model.Description</textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="message">Message from HOD</label>
+                                    <textarea type="text" name="Message" class="form-control" id="Message" rows="4" placeholder="Write content">@Model.Message</textarea>
+                                </div>
+
+
+
+                                <div class="col-md-6">
+                                    <label for="slogan">Department's Slogan</label>
+                                    <input type="text" name="Slogan" class="form-control" id="Slogan" placeholder="Write content" value="@Model.Slogan" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Image">Banner</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" name="Image" class="custom-file-input" id="Image">
@@ -70,9 +81,7 @@
                                                     file
                                                 </label>
                                             </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -98,11 +107,11 @@
     </section>
 </div>
 
+
 @section script{
-
- <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")" ></script>
-
-<script type="text/javascript">
+    @*<script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>*@
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")"></script>
+    <script type="text/javascript">
 
         $(document).ready(function () {
             $('#frmdepartment').validate({
@@ -112,7 +121,7 @@
                     "Message": { required: true },
                     "Slogan": { required: true },
                     "Head": { required: true },
-                    "Image": { required: true }
+
                 },
                 messages: {
                     "Name": { required: "this field is required" },
@@ -120,9 +129,10 @@
                     "Message": { required: "this field is required" },
                     "Head": { required: "this field is required" },
                     "Slogan": { required: "this field is required" },
-                    "Image": { required: "this field is required" }
+
                 }
             });
+
             $('#btnSubmit').click(function (e) {
 
                 if ($('#frmdepartment').valid()) {
@@ -132,7 +142,8 @@
                     var message = document.getElementById("Message").value;
                     var head = document.getElementById("Head").value;
                     var slogan = document.getElementById("Slogan").value;
-                    var id = document.getElementById("Id").value;
+                    var id = $("#Id").val();
+
 
                     //var data = $('#department').serialize();
                     var data = new FormData();
@@ -147,33 +158,42 @@
                     data.append("Head", head);
                     data.append("Message", message);
                     data.append("Slogan", slogan);
-                    data.append("Id",id);
-
+                    data.append("Id", id);
 
 
                     console.log(data);
 
-                    $.ajax({
-                        url: '@Url.Action("DepartmentUpdate","Department")',
-                        type: 'post',
-                        data: data,
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        success: function (data) {
-                            if (data.status_code == "200") {
-                                Swal.fire({
-                                    title: "Updated!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    type: "success"
-                                }).then(function () {
-                                    $('#frmdepartment')[0].reset();
-                                    window.location.href = '@Url.Action("DepartmentList","Department")';
-                                });
+                        $.ajax({
+                            url: '@Url.Action("DepartmentEdit", "Department")',
+                            type: 'post',
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: function (data) {
+                                if (data.status_code == "200") {
+                                    Swal.fire({
+                                        title: "Updated!",
+                                        text: data.message,
+                                        type: "success",
+                                        timer: 6000,
+                                        icon: "success"
+                                    }).then(function () {
+                                        $('#frmdepartment')[0].reset();
+                                        window.location.href = '@Url.Action("DepartmentList","Department")';
+                                    });
+                                }
+                                else {
+                                    Swal.fire({
+                                        title: "Failed!",
+                                        text: data.message,
+                                        type: "success",
+                                        timer: 6000,
+                                        icon: "error"
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
 
                 }
             });
@@ -181,6 +201,7 @@
     </script>
 
 }
-    @section styles{
-    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+@section styles{
+    @*<link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">*@
+    <link href="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.css")" rel="stylesheet" />
 }

@@ -1,14 +1,17 @@
-﻿@model List<BACKEND_HTML_DOT_NET.Models.DepartmentVM>
+﻿@model BACKEND_HTML_DOT_NET.Models.DepartmentVM
 
 @{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "DepartmentAdd"; }
+
+    ViewBag.Title = "Add Department";
+
+}
 
 <div class="content-wrapper">
     <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("DepartmentView","Department")">
+                <a href="@Url.Action("DepartmentList","Department")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
                         <li style="margin-left: 00px;">Back to Details</li>
@@ -18,47 +21,57 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Add new departments</h3>
+                       
+                            <h3 class="card-title">Add Department</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form role="form" id="frmdepartment">
                         <div class="card-body">
                             <div class="row">
-                               
+                                <input type="hidden" name="Id" id="Id" value="@Model.Id" />
 
-
-                                <div class="col-sm-5">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="department">ENTER NAME OF DEPARTMENT</label>
-                                        <input type="text" class="form-control" name="Name" id="Name"
+                                        <label for="department">Department Name</label>
+                                        <input type="text" class="form-control" name="Name" id="Name" value="@Model.Name"
                                                placeholder="Enter name of Department.. " />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Head of Department</label>
+                                        <select name="Head" id="Head" class="form-control">
+                                            <option>Select Head</option>
+                                            @foreach (var item in Model.FacultySelectList)
+                                            {
+                                                
+                                                <option value="@item.Value"> @item.Text</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                   <label for="description">ENTER DESCRIPTION OF DEPARTMENT</label>
-                                   <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
-                               </div>
+                                    <label for="description">Description</label>
+                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content">@Model.Description</textarea>
+                                </div>
 
-                               <div class="col-md-6">
-                                   <label for="message">ENTER MESSAGE OF DEPARTMENT</label>
-                                   <textarea type="text" name="Message" class="form-control" id="Message" rows="4" placeholder="Write content"></textarea>
-                               </div>
+                                <div class="col-md-6">
+                                    <label for="message">Message from HOD</label>
+                                    <textarea type="text" name="Message" class="form-control" id="Message" rows="4" placeholder="Write content">@Model.Message</textarea>
+                                </div>
 
-                               <div class="col-md-6">
-                                   <label for="head">ENTER HEAD</label>
-                                   <input type="number" class="form-control" name="Head" id="Head" />
-                               </div>
 
-                               <div class="col-md-6">
-                                   <label for="slogan">ENTER SLOGAN OF DEPARTMENT</label>
-                                   <textarea type="text" name="Slogan" class="form-control" id="Slogan" rows="4" placeholder="Write content"></textarea>
-                               </div>
 
-                                <div class="col-sm-5">
+                                <div class="col-md-6">
+                                    <label for="slogan">Department's Slogan</label>
+                                    <input type="text" name="Slogan" class="form-control" id="Slogan" placeholder="Write content" value="@Model.Slogan" />
+                                </div>
+
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Image">CHOOSE IMAGE FOR DEPARTMENT</label>
+                                        <label for="Image">Banner</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" name="Image" class="custom-file-input" id="Image">
@@ -67,9 +80,7 @@
                                                     file
                                                 </label>
                                             </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -95,11 +106,11 @@
     </section>
 </div>
 
-                                
-@section script{
-        <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")" ></script>
 
-<script type="text/javascript">
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script type="text/javascript">
 
         $(document).ready(function () {
             $('#frmdepartment').validate({
@@ -108,14 +119,12 @@
                     "Description": { required: true },
                     "Message": { required: true },
                     "Slogan": { required: true },
-                    "Head": { required: true },
                     "Image": { required: true }
                 },
                 messages: {
                     "Name": { required: "this field is required" },
                     "Description": { required: "this field is required" },
                     "Message": { required: "this field is required" },
-                    "Head": { required: "this field is required" },
                     "Slogan": { required: "this field is required" },
                     "Image": { required: "this field is required" }
                 }
@@ -130,7 +139,8 @@
                     var message = document.getElementById("Message").value;
                     var head = document.getElementById("Head").value;
                     var slogan = document.getElementById("Slogan").value;
-                    
+                    var id = $("#Id").val();
+
 
                     //var data = $('#department').serialize();
                     var data = new FormData();
@@ -145,13 +155,13 @@
                     data.append("Head", head);
                     data.append("Message", message);
                     data.append("Slogan", slogan);
-
+                    data.append("Id", id);
 
 
                     console.log(data);
 
                         $.ajax({
-                            url: '@Url.Action("DepartmentAdd","Department")',
+                            url: '@Url.Action("DepartmentAdd", "Department")',
                             type: 'post',
                             data: data,
                             processData: false,
@@ -163,19 +173,27 @@
                                         title: "Added!",
                                         text: data.message,
                                         timer: 6000,
-                                        type: "success"
+                                        icon: "success"
                                     }).then(function () {
                                         $('#frmdepartment')[0].reset();
                                         window.location.href = '@Url.Action("DepartmentList","Department")';
                                     });
                                 }
+                                else {
+                                    Swal.fire({
+                                        title: "Failed!",
+                                        text: data.message,
+                                        timer: 6000,
+                                        icon: "error"
+                                    });
+                                }
                             }
                         });
-                    
+
                 }
             });
         });
-</script>
+    </script>
 
 }
 @section styles{
