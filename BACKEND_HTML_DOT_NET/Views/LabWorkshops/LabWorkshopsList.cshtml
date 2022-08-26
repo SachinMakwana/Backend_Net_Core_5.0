@@ -46,6 +46,9 @@
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Image</th>
+                                        <th>View</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,10 +60,10 @@
                                             <td>@item.Description</td>
                                             <td>@item.Image</td>
                                             <td>
-                                                <a href="@Url.Action("LabWorkshopView","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                                <a href="@Url.Action("LabWorkshopsView","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("LabWorkshopEdit","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                                <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
                                             <td>
                                                 <a href="javascript:void(0)" onclick="DeleteLabWorkshop(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
@@ -75,6 +78,9 @@
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Image</th>
+                                        <th>View</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -1,116 +1,196 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model BACKEND_HTML_DOT_NET.Models.LabWorkshopVM
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "LabWorkshopsEdit"; }
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Edit Lab or Workshop Data</h1>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-6">
-                    <a href="@Url.Action("LabWorkshopsView","LabWorkshops")">
-                        <ol class="breadcrumb float-sm-right">
-                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
-                            <li>Back To Details</li>
-                        </ol>
-                    </a>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-    </div>
     <!-- /.content-header -->
     <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <!-- your contents here -->
-                    <!-- form start -->
-                    <div class="card card-primary">
-                        <form role="form">
-                            <div class="card-body">
-                                <div class="form-group">
-
-                                    <!-- Name Controls -->
-                                    <div class="form-group">
-                                        <div class="input-group col-12">
-
-                                            <div class="col-md-6">
-                                                <label for="fname">Name Of Lab Or Workshop</label>
-                                                <input type="text" class="form-control" id="fname" placeholder="First Name">
-                                            </div>
-
-                                            <div class="form-group col-md-6">
-                                                <label for="exampleInputFile">Upload Company Logo</label>
-                                                <div class="input-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text" id="">Upload</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="input-group col-12">
-                                            <div class="col-md-6">
-                                                <label for="ddlCategory">Category</label>
-                                                <select class="form-control select2" style="width: 100%;" id="ddlCategory">
-                                                    <option selected="selected">Lab</option>
-                                                    <option>Workshop</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="ddlDepartment">Department</label>
-                                                <select class="form-control select2" style="width: 100%;" id="ddlDepartment">
-                                                    <option>Computer</option>
-                                                    <option>Civil</option>
-                                                    <option>Mechanical</option>
-                                                    <option>Eletrical</option>
-                                                    <option>Electronics & Communications</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="input-group col-12">
-                                            <div class="card-body pad">
-                                                <div class="mb-3">
-                                                    <label for="details">Edit Lab/Workshop Details Below.</label>
-                                                    <textarea class="textarea" id="details" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-
-                            <div class="card-footer">
-                                <div class="input-group col-12">
-                                    <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Update</button></div>
-                                    <div class="col-sm-6"><button type="clear" class="btn btn-primary col-md-2">Delete</button></div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("LabWorkshopsView","LabWorkshops")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
             </div>
-            <!-- /.card -->
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- your contents here -->
+                            <!-- form start -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add New Lab or Workshop Data</h3>
+                                </div>
+                                <form role="form" id="LabWorkshopForm">
+                                    <div class="card-body">
+                                        <div class="form-group">
 
+                                            <!-- Name Controls -->
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+
+                                                    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+
+                                                    <div class="col-md-6">
+                                                        <label for="fname">Name Of Lab Or Workshop</label>
+                                                        <input type="text" name="labname" class="form-control" id="labname" value="@Model.Name">
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="labId">Department ID Of Lab Or Workshop</label>
+                                                        <input type="text" class="form-control" id="deptlabId" value="@Model.DeptId" />
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="description">ENTER DESCRIPTION OF Lab & WorkShop</label>
+                                                        <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content" >@Model.Description</textarea>
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <label for="exampleInputFile">Upload New Image</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" id="Image" name="Image">
+                                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                            </div>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text" id="">Upload</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2" id="btnSubmit">Submit</button></div>
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2">Clear</button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
         </div>
-        <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>
+
+
+@section script{
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#LabWorkshop').validate({
+                rules: {
+                    "labname": {
+                        required: true
+                    },
+                    "labId": {
+                        required: true
+                    },
+                    "description": {
+                        required: true
+                    },
+                    "Image": {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    "labname": {
+                        required: "this field is required"
+                    },
+                    "labId": {
+                        required: "this field is required"
+                    },
+                    "description": {
+                        required: "this field is required"
+                    },
+                    "Image": {
+                        required: "this field is required"
+                    }
+
+                }
+
+
+            });
+
+            $('#btnSubmit').click(function (e) {
+                if ($('#LabWorkshopForm').valid()) {
+
+                    var labname = document.getElementById("labname").value;
+                    var deptlabId = document.getElementById("deptlabId").value;
+                    var description = document.getElementById("description").value;
+                    var id = document.getElementById("Id").value;
+
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("Image").files.length;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("Image").files[i];
+                        data.append("Image", file);
+                    }
+
+                    data.append("Name", labname);
+                    data.append("DeptId", deptlabId);
+                    data.append("Description", description);
+                    data.append("Id",id)
+
+
+
+                    console.log(data);
+
+                    $.ajax({
+                        url: '@Url.Action("LabWorkshopsUpdate","LabWorkshops")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Updated!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    type: "success"
+                                }).then(function () {
+                                    $('#LabWorkshopForm')[0].reset();
+                                    window.location.href = '@Url.Action("LabWorkshopsList","LabWorkshops")';
+                                });
+                            }
+                        }
+                    });
+                }
+
+            });
+
+
+        });
+
+    </script>
+
+}
