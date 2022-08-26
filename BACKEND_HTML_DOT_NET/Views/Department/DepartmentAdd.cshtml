@@ -42,11 +42,11 @@
                                     <div class="form-group">
                                         <label>Head of Department</label>
                                         <select name="Head" id="Head" class="form-control">
-                                            <option value="">Select Head</option>
+                                            <option>Select Head</option>
                                             @foreach (var item in Model.FacultySelectList)
                                             {
-                                                bool selected = item.Value == Model.Head.ToString() ? true : false;
-                                                <option value="@item.Value" selected="@selected">@item.Text</option>
+                                                
+                                                <option value="@item.Value"> @item.Text</option>
                                             }
                                         </select>
                                     </div>
@@ -173,10 +173,18 @@
                                         title: "Added!",
                                         text: data.message,
                                         timer: 6000,
-                                        type: "success"
+                                        icon: "success"
                                     }).then(function () {
                                         $('#frmdepartment')[0].reset();
                                         window.location.href = '@Url.Action("DepartmentList","Department")';
+                                    });
+                                }
+                                else {
+                                    Swal.fire({
+                                        title: "Failed!",
+                                        text: data.message,
+                                        timer: 6000,
+                                        icon: "error"
                                     });
                                 }
                             }

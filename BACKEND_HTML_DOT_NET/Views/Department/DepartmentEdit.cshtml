@@ -21,7 +21,7 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                            <h3 class="card-title">Update Department</h3>
+                        <h3 class="card-title">Update Department</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -109,8 +109,8 @@
 
 
 @section script{
-    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
-
+    @*<script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>*@
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -121,7 +121,7 @@
                     "Message": { required: true },
                     "Slogan": { required: true },
                     "Head": { required: true },
-                   
+
                 },
                 messages: {
                     "Name": { required: "this field is required" },
@@ -129,7 +129,7 @@
                     "Message": { required: "this field is required" },
                     "Head": { required: "this field is required" },
                     "Slogan": { required: "this field is required" },
-                   
+
                 }
             });
 
@@ -175,11 +175,21 @@
                                     Swal.fire({
                                         title: "Updated!",
                                         text: data.message,
+                                        type: "success",
                                         timer: 6000,
-                                        type: "success"
+                                        icon: "success"
                                     }).then(function () {
                                         $('#frmdepartment')[0].reset();
                                         window.location.href = '@Url.Action("DepartmentList","Department")';
+                                    });
+                                }
+                                else {
+                                    Swal.fire({
+                                        title: "Failed!",
+                                        text: data.message,
+                                        type: "success",
+                                        timer: 6000,
+                                        icon: "error"
                                     });
                                 }
                             }
@@ -192,5 +202,6 @@
 
 }
 @section styles{
-    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+    @*<link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">*@
+    <link href="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.css")" rel="stylesheet" />
 }
