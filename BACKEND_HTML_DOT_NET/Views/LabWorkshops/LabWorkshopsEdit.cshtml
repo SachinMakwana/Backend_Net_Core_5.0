@@ -10,7 +10,7 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("LabWorkshopsView","LabWorkshops")">
+                <a href="@Url.Action(" LabWorkshopsView","LabWorkshops")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
                         <li style="margin-left: 00px;">Back to Details</li>
@@ -29,55 +29,71 @@
                                 </div>
                                 <form role="form" id="LabWorkshopForm">
                                     <div class="card-body">
-                                        <div class="form-group">
-
-                                            <!-- Name Controls -->
+                                        <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                                        <!-- Name Controls -->
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <div class="input-group col-12">
+                                                <label for="fname">Name Of Lab Or Workshop</label>
+                                                <input type="text" name="labname" class="form-control" id="labname"
+                                                       value="@Model.Name">
+                                            </div>
 
-                                                    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
-
-                                                    <div class="col-md-6">
-                                                        <label for="fname">Name Of Lab Or Workshop</label>
-                                                        <input type="text" name="labname" class="form-control" id="labname" value="@Model.Name">
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <label for="labId">Department ID Of Lab Or Workshop</label>
-                                                        <input type="text" class="form-control" id="deptlabId" value="@Model.DeptId" />
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <label for="description">ENTER DESCRIPTION OF Lab & WorkShop</label>
-                                                        <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content" >@Model.Description</textarea>
-                                                    </div>
-
-                                                    <div class="form-group col-md-6">
-                                                        <label for="exampleInputFile">Upload New Image</label>
-                                                        <div class="input-group">
-                                                            <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="Image" name="Image">
-                                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                            </div>
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text" id="">Upload</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="labId">Department ID Of Lab Or Workshop</label>
+                                                    <select name="Dept" id="Department" class="form-control">
+                                                        <option>Select Department</option>
+                                                        @foreach (var item in Model.DepartmentList)
+                                                        {
+                                                            bool selected = item.Value == Model.DeptId.ToString() ? true :
+                                                            false;
+                                                            <option value="@item.Value" selected="@selected">
+                                                                @item.Text
+                                                            </option>
+                                                        }
+                                                    </select>
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <label for="description">ENTER DESCRIPTION OF Lab & WorkShop</label>
+                                                <textarea type="text" name="description" class="form-control"
+                                                          id="description" rows="4"
+                                                          placeholder="Write content">@Model.Description</textarea>
+                                            </div>
 
-
-
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputFile">Upload New Image</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="Image"
+                                                               name="Image">
+                                                        <label class="custom-file-label" for="Image">Choose file</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="">Upload</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
                                         <div class="input-group col-12">
-                                            <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2" id="btnSubmit">Submit</button></div>
-                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2">Clear</button></div>
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-primary float-right col-md-2"
+                                                        id="btnSubmit">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-primary col-md-2">
+                                                    Clear
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -85,7 +101,6 @@
                         </div>
                     </div>
                     <!-- /.card -->
-
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -94,15 +109,12 @@
     <!-- /.content -->
 </div>
 
-
 @section script{
-
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")"></script>
     <script type="text/javascript">
 
 
         $(document).ready(function () {
-            //console.log( "ready!" );
-
             $('#LabWorkshop').validate({
                 rules: {
                     "labname": {
@@ -142,7 +154,7 @@
                 if ($('#LabWorkshopForm').valid()) {
 
                     var labname = document.getElementById("labname").value;
-                    var deptlabId = document.getElementById("deptlabId").value;
+                    var deptlabId = document.getElementById("Department").value;
                     var description = document.getElementById("description").value;
                     var id = document.getElementById("Id").value;
 
@@ -164,7 +176,7 @@
                     console.log(data);
 
                     $.ajax({
-                        url: '@Url.Action("LabWorkshopsUpdate","LabWorkshops")',
+                        url: '@Url.Action("LabWorkshopsEdit","LabWorkshops")',
                         type: 'post',
                         data: data,
                         processData: false,
@@ -175,11 +187,21 @@
                                 Swal.fire({
                                     title: "Updated!",
                                     text: data.message,
+                                    type: "success",
                                     timer: 6000,
-                                    type: "success"
+                                    icon: "success"
                                 }).then(function () {
                                     $('#LabWorkshopForm')[0].reset();
                                     window.location.href = '@Url.Action("LabWorkshopsList","LabWorkshops")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    type: "success",
+                                    timer: 6000,
+                                    icon: "error"
                                 });
                             }
                         }
@@ -193,4 +215,8 @@
 
     </script>
 
+}
+    @section styles{
+    @*<link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">*@
+    <link href="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.css")" rel="stylesheet" />
 }
