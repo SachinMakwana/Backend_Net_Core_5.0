@@ -1,7 +1,6 @@
 ﻿using BACKEND_HTML_DOT_NET.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -10,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,67 +47,36 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             return View(labworkshopList);
         }
         
-        public IActionResult LabWorkshopsAdd(long id = 0)
+        public IActionResult LabWorkshopsAdd()
         {
-            LabWorkshopVM labworkshopVM = new LabWorkshopVM();
-            try
-            {
-                if (id > 0)
-                {
-                    labworkshopVM = labworkshopList.Where(m => m.Id == id).FirstOrDefault();
-                }
-                var restRequest = new RestRequest("/GetAllFacultyDetails", Method.Get);
-                restRequest.AddHeader("Accept", "application/json");
-                restRequest.RequestFormat = DataFormat.Json;
-                RestResponse response = client.Execute(restRequest);
-
-                var content = response.Content;
-                if (content != null)
-                {
-                    var dept = JsonConvert.DeserializeObject<ServiceResponse<List<DepartmentVM>>>(content);
-                    labworkshopVM.DepartmentList = dept.data.Select(m => new SelectListItem()
-                    {
-                        Text = m.Name,
-                        Value = m.Id.ToString()
-                    }).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return View(labworkshopVM);
+            return View();
         }
 
         [HttpPost]
-        public IActionResult LabWorkshopsAdd([FromForm] LabWorkshopVM labworkshopVM, [Optional]IFormCollection collection)
+        public async Task<IActionResult> LabWorkshopsAdd(IFormCollection collection)
         {
             try
             {
-                var request = new RestRequest("/AddLabWorkshopDetail", Method.Post);
+                LabWorkshopVM labworkshopVM = new LabWorkshopVM();
+                await TryUpdateModelAsync<LabWorkshopVM>(labworkshopVM);
                 labworkshopVM.CreatedDate = DateTime.Now;
                 labworkshopVM.UpdatedDate = DateTime.Now;
-                if(collection.Files.Count() > 0)
+                var request = new RestRequest("/AddLabWorkshopDetail", Method.Post);
+                //add files to request
+                foreach (var file in collection.Files)
                 {
-                    //add files to request
-                    foreach (var file in collection.Files)
-                    {
-                        var memorystream = new MemoryStream();
-                        file.CopyTo(memorystream);
-                        var bytes = memorystream.ToArray();
-                        request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
-                    }
+                    var memorystream = new MemoryStream();
+                    file.CopyTo(memorystream);
+                    var bytes = memorystream.ToArray();
+                    request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
                 }
 
                 //iterate and add model to request as parameter
                 PropertyInfo[] properties = typeof(LabWorkshopVM).GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
-                    if (property.Name.ToString() != "DepartmentList")
-                    {
-                        var value = property.GetValue(labworkshopVM);
-                        request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
-                    }
+                    var value = property.GetValue(labworkshopVM);
+                    request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
                 }
 
                 var response = client.Execute(request);
@@ -126,71 +93,41 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
 
 
-        public IActionResult LabWorkshopsEdit(long id = 0)
+        public IActionResult LabWorkshopsEdit(int id)
         {
-            LabWorkshopVM labworkshopVM = new LabWorkshopVM();
-            try
-            {
-
-                labworkshopVM = labworkshopList.Where(m => m.Id == id).FirstOrDefault();
-
-                var restRequest = new RestRequest("/GetAllDepartmentDetails", Method.Get);
-                restRequest.AddHeader("Accept", "application/json");
-                restRequest.RequestFormat = DataFormat.Json;
-                RestResponse response = client.Execute(restRequest);
-
-                var content = response.Content;
-                if (content != null)
-                {
-                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
-                    labworkshopVM.DepartmentList = user.data.Select(m => new SelectListItem()
-                    {
-                        Text = m.Name,
-                        Value = m.Id.ToString()
-                    }).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return View(labworkshopVM);
+            var item = labworkshopList.Where(m => m.Id == id).FirstOrDefault();
+            return View(item);
         }
 
         [HttpPost]
-        public IActionResult LabWorkshopsEdit([FromForm] LabWorkshopVM labworkshopVM, [Optional] IFormCollection collection)
+        public async Task<IActionResult> LabWorkshopsUpdate(IFormCollection collection)
         {
             try
             {
-                labworkshopVM.UpdatedDate = DateTime.Now;
-                RestRequest request = new RestRequest("/UpdateLabWorkshopDetail", Method.Put);
-
-                if (collection.Files.Count() > 0)
+                LabWorkshopVM labworkshopVM = new LabWorkshopVM();
+                LabWorkshopVM updatedVM = new LabWorkshopVM();
+                await TryUpdateModelAsync<LabWorkshopVM>(labworkshopVM);
+                updatedVM.Id = labworkshopVM.Id;
+                updatedVM.Name = labworkshopVM.Name;
+                updatedVM.DeptId = labworkshopVM.DeptId;
+                updatedVM.Description = labworkshopVM.Description;
+                updatedVM.UpdatedDate = DateTime.Now;
+                var request = new RestRequest("/UpdateLabWorkshopDetail", Method.Put);
+                //add files to request
+                foreach (var file in collection.Files)
                 {
-                    //add files to request
-                    foreach (var file in collection.Files)
-                    {
-                        var memorystream = new MemoryStream();
-                        file.CopyTo(memorystream);
-                        var bytes = memorystream.ToArray();
-                        request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
-                    }
-                }
-                else
-                {
-                    byte[] data = new byte[0];
-                    request.AddFile("image", data, "noimage");
+                    var memorystream = new MemoryStream();
+                    file.CopyTo(memorystream);
+                    var bytes = memorystream.ToArray();
+                    request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
                 }
 
                 //iterate and add model to request as parameter
-                PropertyInfo[] properties = typeof(DepartmentVM).GetProperties();
+                PropertyInfo[] properties = typeof(LabWorkshopVM).GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
-                    if (property.Name.ToString() != "DepartmentList")
-                    {
-                        var value = property.GetValue(labworkshopVM);
-                        request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
-                    }
+                    var value = property.GetValue(updatedVM);
+                    request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
                 }
 
                 var response = client.Execute(request);
