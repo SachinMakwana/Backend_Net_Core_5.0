@@ -2,6 +2,7 @@
 using GECP_DOT_NET_API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -10,19 +11,20 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
-    public class Department : Controller
+    public class DepartmentController : Controller
     {
         private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
-        private static List<DepartmentVM> deptList = new List<DepartmentVM>();
+        private static List<DepartmentVM> departmentVMList = new List<DepartmentVM>();
         RestClient client;
 
-        public Department()
+        public DepartmentController()
         {
             client = new RestClient(apiBaseUrl);
         }
@@ -40,97 +42,156 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             if (content != null)
             {
                 var user = JsonConvert.DeserializeObject<ServiceResponse<List<DepartmentVM>>>(content);
-                deptList = user.data;
-                foreach(var data in deptList)
+                departmentVMList = user.data;
+                foreach (var data in departmentVMList)
                 {
                     data.Image = "https://localhost:44374/" + data.Image;
                 }
             }
-            return View(deptList);
+            return View(departmentVMList);
         }
-        public IActionResult DepartmentAdd()
+        public IActionResult DepartmentAdd(long id = 0)
         {
-            return View();
+            DepartmentVM departmentVM = new DepartmentVM();
+            try
+            {
+                if (id > 0)
+                {
+                    departmentVM = departmentVMList.Where(m => m.Id == id).FirstOrDefault();
+                }
+                var restRequest = new RestRequest("/GetAllFacultyDetails", Method.Get);
+                restRequest.AddHeader("Accept", "application/json");
+                restRequest.RequestFormat = DataFormat.Json;
+                RestResponse response = client.Execute(restRequest);
+
+                var content = response.Content;
+                if (content != null)
+                {
+                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
+                    departmentVM.FacultySelectList = user.data.Select(m => new SelectListItem()
+                    {
+                        Text = m.Name,
+                        Value = m.Id.ToString()
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(departmentVM);
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> DepartmentAdd(IFormCollection collection)
+        public IActionResult DepartmentAdd([FromForm] DepartmentVM departmentVM, [Optional] IFormCollection collection)
         {
             try
             {
-                DepartmentVM departmentVM = new DepartmentVM();
-                await TryUpdateModelAsync<DepartmentVM>(departmentVM);
+                RestRequest request = new RestRequest("/AddDepartmentDetail", Method.Post);
                 departmentVM.CreatedDate = DateTime.Now;
                 departmentVM.UpdatedDate = DateTime.Now;
-                var request = new RestRequest("/AddDepartmentDetail", Method.Post);
-                //add files to request
-                foreach (var file in collection.Files)
+
+                if (collection.Files.Count() > 0)
                 {
-                    var memorystream = new MemoryStream();
-                    file.CopyTo(memorystream);
-                    var bytes = memorystream.ToArray();
-                    request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                    //add files to request
+                    foreach (var file in collection.Files)
+                    {
+                        var memorystream = new MemoryStream();
+                        file.CopyTo(memorystream);
+                        var bytes = memorystream.ToArray();
+                        request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                    }
                 }
 
                 //iterate and add model to request as parameter
                 PropertyInfo[] properties = typeof(DepartmentVM).GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
-                    var value = property.GetValue(departmentVM);
-                    request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
+                    if (property.Name.ToString() != "FacultySelectList")
+                    {
+                        var value = property.GetValue(departmentVM);
+                        request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
+                    }
                 }
 
                 var response = client.Execute(request);
-                //use response.content --> this will directly give the parsed result.
                 ServiceResponse<bool> serviceResponse = JsonConvert.DeserializeObject<ServiceResponse<bool>>(response.Content);
                 return Json(serviceResponse);
 
             }
             catch (Exception ex)
             {
-                return Json(new { status_code = "000", message=ex.Message.ToString()});
+                return Json(new { status_code = "000", message = ex.Message.ToString() });
             }
 
         }
 
-        public IActionResult DepartmentEdit(int id)
+        public IActionResult DepartmentEdit(long id = 0)
         {
-            var item = deptList.Where(m => m.Id == id).FirstOrDefault();
-            return View(item);
-        }
-
-        public async Task<IActionResult> DepartmentUpdate(IFormCollection collection)
-        {
-
+            DepartmentVM departmentVM = new DepartmentVM();
             try
             {
-                DepartmentVM departmentVM = new DepartmentVM();
-                DepartmentVM updatedVM = new DepartmentVM();
-                await TryUpdateModelAsync<DepartmentVM>(departmentVM);
-                updatedVM.Id = departmentVM.Id;
-                updatedVM.Name = departmentVM.Name;
-                updatedVM.Message = departmentVM.Message;
-                updatedVM.Description = departmentVM.Description;
-                updatedVM.Head = departmentVM.Head;
-                updatedVM.Slogan = departmentVM.Slogan;
-                updatedVM.UpdatedDate = DateTime.Now;
-                
-                var request = new RestRequest("/UpdateDepartmentDetail", Method.Put);
-                //add files to request
-                foreach (var file in collection.Files)
+
+                departmentVM = departmentVMList.Where(m => m.Id == id).FirstOrDefault();
+
+                var restRequest = new RestRequest("/GetAllFacultyDetails", Method.Get);
+                restRequest.AddHeader("Accept", "application/json");
+                restRequest.RequestFormat = DataFormat.Json;
+                RestResponse response = client.Execute(restRequest);
+
+                var content = response.Content;
+                if (content != null)
                 {
-                    var memorystream = new MemoryStream();
-                    file.CopyTo(memorystream);
-                    var bytes = memorystream.ToArray();
-                    request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
+                    departmentVM.FacultySelectList = user.data.Select(m => new SelectListItem()
+                    {
+                        Text = m.Name,
+                        Value = m.Id.ToString()
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(departmentVM);
+        }
+
+        [HttpPost]
+        public IActionResult DepartmentEdit([FromForm] DepartmentVM departmentVM, [Optional] IFormCollection collection)
+        {
+            try
+            {
+                departmentVM.UpdatedDate = DateTime.Now;
+                RestRequest request = new RestRequest("/UpdateDepartmentDetail", Method.Put);
+
+                if (collection.Files.Count() > 0)
+                {
+                    //add files to request
+                    foreach (var file in collection.Files)
+                    {
+                        var memorystream = new MemoryStream();
+                        file.CopyTo(memorystream);
+                        var bytes = memorystream.ToArray();
+                        request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                    }
+                }
+                else
+                {
+                    byte[] data = new byte[0];
+                    request.AddFile("image", data, "noimage");
                 }
 
                 //iterate and add model to request as parameter
                 PropertyInfo[] properties = typeof(DepartmentVM).GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
-                    var value = property.GetValue(updatedVM);
-                    request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
+                    if (property.Name.ToString() != "FacultySelectList")
+                    {
+                        var value = property.GetValue(departmentVM);
+                        request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
+                    }
                 }
 
                 var response = client.Execute(request);
@@ -143,18 +204,21 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             {
                 return Json(new { status_code = "000", message = ex.Message.ToString() });
             }
+
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> DepartmentDelete(int id)
+        public async Task<IActionResult> DepartmentDelete(long id)
         {
+
             try
             {
                 if (string.IsNullOrWhiteSpace(id.ToString()))
                 {
                     return Json(new { message = "Invalid Record." });
                 }
-                var updateItem = deptList.Where(m => m.Id == id).FirstOrDefault();
+                var updateItem = departmentVMList.Where(m => m.Id == id).FirstOrDefault();
                 updateItem.IsDeleted = true;
                 updateItem.UpdatedDate = DateTime.Now;
                 using (var client = new HttpClient())
@@ -181,6 +245,10 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 return Json(new { message = ex.Message.ToString() });
             }
             return Json(new { message = "something went wrong." });
+        }
+        public IActionResult DepartmentView()
+        {
+            return View();
         }
 
         public IActionResult DepartmentAllView()
