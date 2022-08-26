@@ -29,22 +29,28 @@
                                 </div>
                                 <form role="form" id="LabWorkshopForm">
                                     <div class="card-body">
-                                        <div class="form-group">
-
+                                        
+                                            <input type="hidden" name="Id" id="Id" value="@Model.Id" />
                                             <!-- Name Controls -->
-                                            <div class="form-group">
-                                                <div class="input-group col-12">
 
-                                                    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
-
-                                                    <div class="col-md-6">
+                                            <div class="col-md-6">
+                                                    <div class="form-group">
                                                         <label for="fname">Name Of Lab Or Workshop</label>
                                                         <input type="text" name="labname" class="form-control" id="labname" value="@Model.Name">
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label for="labId">Department ID Of Lab Or Workshop</label>
-                                                        <input type="text" class="form-control" id="deptlabId" value="@Model.DeptId" />
+                                                        <div class="form-group">
+                                                            <label for="labId">Department ID Of Lab Or Workshop</label>
+                                                    <select name="Dept" id="Department" class="form-control">
+                                                        <option>Select Department</option>
+                                                        @foreach (var item in Model.DepartmentList)
+                                                        {
+                                                            bool selected = item.Value == Model.DeptId.ToString() ? true : false;
+                                                            <option value="@item.Value" selected="@selected"> @item.Text</option>
+                                                        }
+                                                    </select>
+                                                        </div>
                                                     </div>
 
                                                     <div class="col-md-6">
@@ -57,20 +63,20 @@
                                                         <div class="input-group">
                                                             <div class="custom-file">
                                                                 <input type="file" class="custom-file-input" id="Image" name="Image">
-                                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                                <label class="custom-file-label" for="Image">Choose file</label>
                                                             </div>
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text" id="">Upload</span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                               
                                             </div>
 
 
 
 
-                                        </div>
+                                       
                                     </div>
                                     <!-- /.card-body -->
 
@@ -101,7 +107,14 @@
 
 
         $(document).ready(function () {
-            //console.log( "ready!" );
+
+
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
 
             $('#LabWorkshop').validate({
                 rules: {
@@ -164,23 +177,29 @@
                     console.log(data);
 
                     $.ajax({
-                        url: '@Url.Action("LabWorkshopsUpdate","LabWorkshops")',
+                        url: '@Url.Action("LabWorkshopsEdit","LabWorkshops")',
                         type: 'post',
                         data: data,
                         processData: false,
                         contentType: false,
                         cache: false,
                         success: function (data) {
+                            setTimeout(loaderStop(), 2000);
                             if (data.status_code == "200") {
-                                Swal.fire({
-                                    title: "Updated!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    type: "success"
+
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.message
                                 }).then(function () {
                                     $('#LabWorkshopForm')[0].reset();
-                                    window.location.href = '@Url.Action("LabWorkshopsList","LabWorkshops")';
+                                    window.location.href = '@Url.Action("DepartmentList","Department")';
                                 });
+                            }
+                            else {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
                             }
                         }
                     });
@@ -193,4 +212,9 @@
 
     </script>
 
+}
+
+    @section styles{
+    @*<link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">*@
+    <link href="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.css")" rel="stylesheet" />
 }

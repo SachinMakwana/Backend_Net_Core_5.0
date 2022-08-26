@@ -58,7 +58,7 @@
                                             <td>@item.DeptId</td>
                                             <td>@item.Name</td>
                                             <td>@item.Description</td>
-                                            <td>@item.Image</td>
+                                            <td><img src="@item.Image" class="rimg" style="width:50px;" /></td>
                                             <td>
                                                 <a href="@Url.Action("LabWorkshopsView","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
