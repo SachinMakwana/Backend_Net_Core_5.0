@@ -19,7 +19,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     {
         private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
-        private List<GalleryVM> galleryVMList = new List<GalleryVM>();
+        private static List<GalleryVM> galleryVMList = new List<GalleryVM>();
         RestClient client;
 
 
@@ -96,5 +96,55 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GalleryDelete(long id)
+        {
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(id.ToString()))
+                {
+                    return Json(new { message = "Invalid Record." });
+                }
+                var updateItem = galleryVMList.Where(m => m.Id == id).FirstOrDefault();
+                updateItem.IsDeleted = true;
+                updateItem.UpdatedDate = DateTime.Now;
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(apiBaseUrl + "/DeleteGalleryDetail");
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(updateItem), Encoding.UTF8, "application/json");
+
+                    using (var response = client.PutAsync(uri, content))
+                    {
+                        response.Wait();
+                        var results = response.Result;
+                        var jsonString = await results.Content.ReadAsStringAsync();
+
+                        var res = JsonConvert.DeserializeObject<ServiceResponse<bool>>(jsonString);
+                        if (results.IsSuccessStatusCode)
+                        {
+                            return Json(res);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message.ToString() });
+            }
+            return Json(new { message = "something went wrong." });
+        }
+        public IActionResult DepartmentView()
+        {
+            return View();
+        }
+
+        public IActionResult DepartmentAllView()
+        {
+            return View();
+        }
     }
+
 }
+

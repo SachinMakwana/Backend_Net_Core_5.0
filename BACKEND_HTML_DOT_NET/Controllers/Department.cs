@@ -183,6 +183,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                     request.AddFile("image", data, "noimage");
                 }
 
+
                 //iterate and add model to request as parameter
                 PropertyInfo[] properties = typeof(DepartmentVM).GetProperties();
                 foreach (PropertyInfo property in properties)
