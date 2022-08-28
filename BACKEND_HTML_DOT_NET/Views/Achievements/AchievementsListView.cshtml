@@ -34,124 +34,56 @@
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>Title</th>
-                                        <th>Category</th>
+                                        @*<th>Category</th>*@
                                         <th>Description</th>
+                                        <th>Image</th>
+                                        <th>View</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
-                                        <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
 
-                                        <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
+                                    @foreach(var item in Model){
                                     <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
-
                                         <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
+                                            @item.Id
                                         </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
-
                                         <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
+                                                @item.Title
                                         </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
-
                                         <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
+                                            @item.Description
                                         </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
-
                                         <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
+                                                <img src="@item.Image" class="rimg" style="width:50px;" />
                                         </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
-
                                         <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
+                                            <a href="@Url.Action("DepartmentView","Department",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                         </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
-
                                         <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
+                                            <a href="@Url.Action("DepartmentEdit","Department",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                         </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Computer lab no. 313.</td>
-                                        <td>lab</td>
-                                        <td>This is the Description of Computer Department Lab no. 313</td>
-
                                         <td>
-                                            <a href="@Url.Action("AchievementsView","Achievements")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
+                                            <a href="javascript:void(0)" onclick="DeleteDepartment(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
                                         </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
                                     </tr>
+                                    }
                                 </tbody>
-
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        @*<th>Category</th>*@
+                                        <th>Description</th>
+                                        <th>Image</th>
+                                        <th>View</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->

@@ -34,40 +34,40 @@
                                         <div class="form-group">
                                             <div class="input-group">
 
+                                                <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+
                                                 <div class="col-4">
                                                     <label for="Title"> Enter Title</label>
-                                                    <input type="text" class="form-control" id="title" name="Title" placeholder="Enter Title">
+                                                    <input type="text" class="form-control" value="@Model.Title" id="title" name="title" placeholder="Enter Title">
                                                 </div>
-
-                                                
 
                                                 <div class="col-4">
                                                     <label for="Title"> Enter tag</label>
-                                                    <input type="text" class="form-control" id="tag" name="Tag" placeholder="Enter tag">
+                                                    <input type="text" class="form-control" id="tag" value="@Model.Tag" name="tag" placeholder="Enter tag">
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="Title"> Enter Achievement date</label>
-                                                    <input type="datetime" class="form-control" id="date" name="Date" placeholder="Enter Achievement Date">
+                                                    <input type="datetime" class="form-control" id="date" name="date" value="@Model.Date" placeholder="Enter Achievement Date">
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <label for="description">ENTER DESCRIPTION</label>
-                                                    <textarea type="text" name="description" class="form-control" id="Description" name="description" rows="4" placeholder="Write content"></textarea>
+                                                    <textarea type="text" name="description" class="form-control" id="description" value="@Model.Description" name="description" rows="4" placeholder="Write content"></textarea>
                                                 </div>
                                                 
                                                 <div class="col-4">
                                                     <label for="exampleInputFile">Enter Image File </label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" name="InputFile" id="InputFile">
+                                                            <input type="file" class="custom-file-input" src="@Model.Image" name="InputFile" id="InputFile">
                                                             <label class="custom-file-label" for="exampleInputFile">
                                                                 Choose
                                                                 file
                                                             </label>
                                                         </div>
                                                         <div class="input-group-append">
-                                                            <span class="input-group-text" >Upload</span>
+                                                            <span class="input-group-text" id="">Upload</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -156,25 +156,23 @@
     $('#btnSubmit').click(function(e) {
 
         //e.preventDefault();
-
-        if ($('#quickForm').valid()) {
+        
+        if($('#quickForm').valid()){
                     var data = new FormData($('#quickForm')[0]);
-        console.log("clicked Valid");
-
-
-                    $.ajax({
-                        url: '@Url.Action("AchievementsAdd","Achievements")',
+           $.ajax({
+                        url: '@Url.Action("AchievementsEdit", "Achievements")',
                         type: 'post',
+                        data: data,
                         processData: false,
                         contentType: false,
                         cache: false,
-                        data: data,
                         success: function (data) {
                             if (data.status_code == "200") {
-                            console.log("Success")
+                                console.log("Success " +data)
                                 Swal.fire({
-                                    title: "Added!",
+                                    title: "Updated!",
                                     text: data.message,
+                                    type: "success",
                                     timer: 6000,
                                     icon: "success"
                                 }).then(function () {
@@ -183,9 +181,12 @@
                                 });
                             }
                             else {
+                                console.log("Error" +data)
+
                                 Swal.fire({
                                     title: "Failed!",
                                     text: data.message,
+                                    type: "success",
                                     timer: 6000,
                                     icon: "error"
                                 });
@@ -193,7 +194,6 @@
                         }
                     });
 
-        
         }
 
     });
@@ -204,7 +204,4 @@
 
 </script>
 
-}
-    @section styles{
-    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }
