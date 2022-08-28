@@ -77,78 +77,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         }
 
-        /*public IActionResult AchievementsAdd(long id = 0)
-        {
-            AchievementVM achievementVM = new AchievementVM();
-            try
-            {
-                if (id > 0)
-                {
-                    achievementVM = AchievementVMList.Where(m => m.Id == id).FirstOrDefault();
-                }
-                var restRequest = new RestRequest("/GetAllAchievementDetails", Method.Get);
-                restRequest.AddHeader("Accept", "application/json");
-                restRequest.RequestFormat = DataFormat.Json;
-                RestResponse response = client.Execute(restRequest);
-
-                var content = response.Content;
-                if (content != null)
-                {
-                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<AchievementVM>>>(content);
-                   
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return View(achievementVM);
-        }
-*/
-
-        /*[HttpPost]
-        public IActionResult AchievementsAdd([FromForm] AchievementVM achievementVM, [Optional] IFormCollection collection)
-        {
-            try
-            {
-                RestRequest request = new RestRequest("/AddAchievementDetail", Method.Post);
-                achievementVM.CreatedDate = DateTime.Now;
-                achievementVM.UpdatedDate = DateTime.Now;
-
-                if (collection.Files.Count() > 0)
-                {
-                    //add files to request
-                    foreach (var file in collection.Files)
-                    {
-                        var memorystream = new MemoryStream();
-                        file.CopyTo(memorystream);
-                        var bytes = memorystream.ToArray();
-                        request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
-                    }
-                }
-
-                //iterate and add model to request as parameter
-                PropertyInfo[] properties = typeof(AchievementVM).GetProperties();
-                foreach (PropertyInfo property in properties)
-                {
-                    if (property.Name.ToString() != "FacultySelectList")
-                    {
-                        var value = property.GetValue(achievementVM);
-                        request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
-                    }
-                }
-
-                var response = client.Execute(request);
-                ServiceResponse<bool> serviceResponse = JsonConvert.DeserializeObject<ServiceResponse<bool>>(response.Content);
-                return Json(serviceResponse);
-
-            }
-            catch (Exception ex)
-            {
-                return Json(new { status_code = "000", message = ex.Message.ToString() });
-            }
-
-        }*/
+        
 
         public IActionResult AchievementsDetails()
         {

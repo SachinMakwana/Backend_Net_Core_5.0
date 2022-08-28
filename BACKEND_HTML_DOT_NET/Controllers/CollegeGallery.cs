@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -138,6 +139,86 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         public IActionResult DepartmentView()
         {
             return View();
+        }
+
+        public IActionResult GalleryEdit(long id = 0)
+        {
+
+            GalleryVM galleryVM = new GalleryVM();
+            try
+            {
+
+                galleryVM = galleryVMList.Where(m => m.Id == id).FirstOrDefault();
+
+                var restRequest = new RestRequest("/GetAllFacultyDetails", Method.Get);
+                restRequest.AddHeader("Accept", "application/json");
+                restRequest.RequestFormat = DataFormat.Json;
+                RestResponse response = client.Execute(restRequest);
+
+                var content = response.Content;
+                if (content != null)
+                {
+                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<AchievementVM>>>(content);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(galleryVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GalleryEdit(IFormCollection collection)
+        {
+            try
+            {
+                GalleryVM galleryVM = new GalleryVM();
+                await TryUpdateModelAsync<GalleryVM>(galleryVM);
+                galleryVM.UpdatedDate = DateTime.Now;
+                RestRequest request = new RestRequest("/UpdateGalleryDetail", Method.Put);
+
+                if (collection.Files.Count() > 0)
+                {
+                    //add files to request
+                    foreach (var file in collection.Files)
+                    {
+                        var memorystream = new MemoryStream();
+                        file.CopyTo(memorystream);
+                        var bytes = memorystream.ToArray();
+                        request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                    }
+                }
+                else
+                {
+                    byte[] data = new byte[0];
+                    request.AddFile("image", data, "noimage");
+                }
+
+
+                //iterate and add model to request as parameter
+                PropertyInfo[] properties = typeof(GalleryVM).GetProperties();
+                foreach (PropertyInfo property in properties)
+                {
+                    if (property.Name.ToString() != "FacultySelectList")
+                    {
+                        var value = property.GetValue(galleryVM);
+                        request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
+                    }
+                }
+
+                var response = client.Execute(request);
+                //use response.content --> this will directly give the parsed result.
+                ServiceResponse<bool> serviceResponse = JsonConvert.DeserializeObject<ServiceResponse<bool>>(response.Content);
+                return Json(serviceResponse);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { status_code = "000", message = ex.Message.ToString() });
+            }
+
         }
 
         public IActionResult DepartmentAllView()
