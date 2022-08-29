@@ -41,27 +41,27 @@
 
                                 <div class="form-group">
                                     <label for="fileName">Name Of File</label>
-                                    <input type="text" class="form-control" id="fileName" name="fileName" placeholder="Enter file name">
+                                    <input type="text" class="form-control" id="fileName" name="Name" placeholder="Enter file name">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title name">
+                                    <input type="text" class="form-control" id="title" name="Title" placeholder="Enter title name">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Type Of File</label>
-                                    <input type="text" class="form-control" id="type" name="type" placeholder="Enter type">
+                                    <input type="text" class="form-control" id="type" name="Type" placeholder="Enter type">
                                 </div>
 
                                 <div class="col-md-6">
                                    <label for="description">ENTER DESCRIPTION</label>
-                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
                                </div>
 
                                <div class="form-group">
                                     <label for="fileName">Page id</label>
-                                    <input type="number" class="form-control" id="pageid" name="pageid" placeholder="Enter page id">
+                                    <input type="number" class="form-control" id="pageid" name="PageId" placeholder="Enter page id">
                                 </div>
 
                                 <div class="form-group">
@@ -72,7 +72,7 @@
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
-                                            <span class="input-group-text" id="">Upload</span>
+                                            <span class="input-group-text">Upload</span>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +97,19 @@
 </div>
 
 @section script{
-
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
 <script type="text/javascript">
 
 
@@ -106,21 +118,22 @@
 
         $('#Attachments').validate({
           rules: {
-            "fileName": {
+            "Name": {
                  required: true                
              },
-             "title": {
+             "Title": {
                  required: true
              },
-                "type": {
+                "Type": {
                     required: true
                 },
-             "description":{
-                 required: true,
-                 number: true
+             "Description":{
+                 required: true
+                 
              },
-                "pageid": {
-                    required: true
+                "PageId": {
+                    required: true,
+                        number: true
                 },
                 "InputFile":{
                     required: true
@@ -128,19 +141,19 @@
 
           },
           messages: {
-            "fileName": {
+            "Name": {
                  required: "this field is required"             
              },
-             "titel": {
+             "Titel": {
                  required: "this field is required"
              },
-              "type": {
+              "Type": {
                  required: "this field is required"
               },
-             "description":{
+             "Description":{
                   required: "this field is required"
              },
-                "pageid": {
+                "PageId": {
                    required: "this field is required"
                 },
                 "InputFile":{
@@ -158,15 +171,40 @@
         e.preventDefault();
 
         if($('#Attachments').valid()){
-        $.ajax({
-                url: '@Url.Action("AttachmentsAdd","Attachments")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
 
-                }
-        });
+                    var data = new FormData($('#Attachments')[0]);
+
+                    $.ajax({
+                        url: '@Url.Action("AttachmentsAdd","Attachments")',
+                        type: 'post',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        data: data,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                console.log("Success")
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#Attachments')[0].reset();
+                                    window.location.href = '@Url.Action("AttachmentsView","Attachments")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+
         }
 
     });
@@ -176,4 +214,7 @@
 
 </script>
 
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }

@@ -40,121 +40,51 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
+                                        <th>Title</th>
                                         <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Image</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Rani ki Wav Before Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav After Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav Before Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav After Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav Before Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav After Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav Before Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav After Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav Before Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav After Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav Before Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rani ki Wav After Cleaning </td>
-                                        <td>
-                                            <a href="@Url.Action("AttachmentsAdd","Attachments")">
-                                                <i class="nav-icon fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                    </tr>
+                                     @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Id
+                                            </td>
+                                            <td>
+                                                @item.Title
+                                            </td>  
+                                            <td>
+                                                @item.Name
+                                            </td>
+                                            <td>
+                                                @item.Type
+                                            </td>
+                                            <td>
+                                                <img src="@item.Attachment1" class="rimg" style="width:50px;" />
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("AttachmentsEdit","Attachments",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="DeleteAttachment(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </tfoot>
                             </table>
 
                         </div>
@@ -166,3 +96,67 @@
     </section>
 
 </div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#example1").DataTable();
+
+
+        });
+        function DeleteAttachment(id) {
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then(function (isConfirm) {
+
+                if (!isConfirm) return;
+                if (id != null) {
+                    $.ajax({
+                        url: '@Url.Action("AttachmentsDelete","Attachments")',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.reload();
+                                });
+                            }
+
+                        }
+                    });
+                }
+
+            });
+
+        }
+    </script>
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
