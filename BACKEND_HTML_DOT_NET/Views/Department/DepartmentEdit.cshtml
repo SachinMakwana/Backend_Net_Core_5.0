@@ -112,7 +112,12 @@
     @*<script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>*@
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")"></script>
     <script type="text/javascript">
-
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
         $(document).ready(function () {
             $('#frmdepartment').validate({
                 rules: {
@@ -161,8 +166,8 @@
                     data.append("Id", id);
 
 
-                    console.log(data);
-
+                    //console.log(data);
+                    loaderStart();
                         $.ajax({
                             url: '@Url.Action("DepartmentEdit", "Department")',
                             type: 'post',
@@ -171,26 +176,21 @@
                             contentType: false,
                             cache: false,
                             success: function (data) {
+                                setTimeout(loaderStop(), 2000);
                                 if (data.status_code == "200") {
-                                    Swal.fire({
-                                        title: "Updated!",
-                                        text: data.message,
-                                        type: "success",
-                                        timer: 6000,
-                                        icon: "success"
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: data.message
                                     }).then(function () {
                                         $('#frmdepartment')[0].reset();
                                         window.location.href = '@Url.Action("DepartmentList","Department")';
                                     });
                                 }
                                 else {
-                                    Swal.fire({
-                                        title: "Failed!",
-                                        text: data.message,
-                                        type: "success",
-                                        timer: 6000,
-                                        icon: "error"
-                                    });
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: data.message
+                                    })
                                 }
                             }
                         });

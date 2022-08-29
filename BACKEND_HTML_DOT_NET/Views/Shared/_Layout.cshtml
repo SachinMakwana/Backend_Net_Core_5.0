@@ -23,9 +23,10 @@
     <link rel="stylesheet" href="@Url.Content("~/css/plugins/daterangepicker/daterangepicker.css")">
     <!-- summernote -->
     <link rel="stylesheet" href="@Url.Content("~/css/plugins/summernote/summernote-bs4.css")">
+    <link href="@Url.Content("~/css/custom.css")" rel="stylesheet" />
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    @RenderSection("styles",required:false)
+    @RenderSection("styles", required: false)
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -33,6 +34,12 @@
         @{Html.RenderPartial("_header");}
 
         @{Html.RenderPartial("_sidebar");}
+        <div class="loader" style="display:none;">
+            <div class="overlay__inner">
+                <div class="overlay__content"><div class="spinner"></div><div class="loadertext">GEC PATAN</div><div class="text-center text-white">Loading</div></div>
+            </div>
+        </div>
+
 
         @RenderBody()
 
