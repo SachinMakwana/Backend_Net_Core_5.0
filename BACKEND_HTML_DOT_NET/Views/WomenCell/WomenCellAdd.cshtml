@@ -1,5 +1,5 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "WomenCellAdd"; }
+    ViewBag.Title = "WomenCellEdit"; }
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -11,7 +11,7 @@
                 <a href="@Url.Action("WomenCellView","WomenCell")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
-                        <li style="margin-left: px;">Back to Details</li>
+                        <li style="margin-left: 00px;">Back to Details</li>
                     </ol>
                 </a>
             </div>
@@ -27,24 +27,28 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" id="quickForm">
+                                <form role="form" id="CellForm">
+
+                                    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+
+                                    <input type="hidden" name="CommitteeId" value="@Model.CommitteeId" />
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="exampleInputText">ENTER NAME</label>
-                                        <input type="text" name="name" class="form-control" id="name" placeholder="ENTER TITLE.. ">
+                                        <input type="text" name="name" class="form-control" id="Name" placeholder="ENTER TITLE.. ">
                                     </div>
                                 </div>
 
 
                                <div class="col-md-6">
                                    <label for="description">ENTER DESCRIPTION </label>
-                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
                                </div>
 
                                <div class="col-md-6">
                                    <label for="description">ENTER Slogan</label>
-                                   <textarea type="text" name="slogan" class="form-control" id="slogan" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="slogan" class="form-control" id="Slogan" rows="4" placeholder="Write content"></textarea>
                                </div>
 
                                 <div class="col-md-6">
@@ -53,7 +57,7 @@
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input"
-                                                       id="InputFile" name="InputFile">
+                                                       id="Image" name="InputFile">
                                                 <label class="custom-file-label" for="exampleInputFile">
                                                     Choose
                                                     file
@@ -75,7 +79,7 @@
                                     <div class="card-footer">
                                         <div class="input-group col-12">
                                             <div class="col-sm-6">
-                                                <button type="submit" id="btnSubmit"
+                                                <button type="button" id="btnSubmit"
                                                         class="btn btn-primary float-right col-md-2">
                                                     Submit
                                                 </button>
@@ -106,11 +110,19 @@
 
 <script type="text/javascript">
 
+        <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")" ></script>
+    <script type="text/javascript">
+                var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
     $(document).ready(function() {
         //console.log( "ready!" );
 
-        $('#quickForm').validate({
+            $('#CellForm').validate({
           rules: {
             "name": {
                  required: true                
@@ -144,18 +156,56 @@
 
         });
 
-        $('#btnSubmit').submit(function(e) {
+        $('#btnSubmit').click(function(e) {
 
         //prevent Default functionality
         e.preventDefault();
-        
-        if($('#quickForm').valid()){
-        $.ajax({
-                url: '@Url.Action("WomenCellAdd","WomenCell")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
+
+                if ($('#CellForm').valid()) {
+
+                    var name = document.getElementById("Name").value;
+                    var description = document.getElementById("Description").value;
+                    var slogan = document.getElementById("Slogan").value;
+                    var id = $("Id").val();
+
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("Image").files.length;
+                    for(var i = 0; i < totalFiles; i++){
+                        var file = document.getElementById("Image").files[i];
+                        data.append("image", file);
+                    }
+
+                    data.append("Name", name);
+                    data.append("Description", description);
+                    data.append("Slogan",slogan);
+                    data.append("Id", id);
+
+
+                loaderStart();
+                $.ajax({
+                        url: '@Url.Action("WomenCellEdit", "WomenCell")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            setTimeout(loaderStop(), 2000);
+                            if (data.status_code == "200") {
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.message
+                                }).then(function () {
+                                    $('#CellForm')[0].reset();
+                                    window.location.href = '@Url.Action("WomenCellView","WomenCell")';
+                                });
+                            }
+                            else {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
+                            }
 
                 }
         });

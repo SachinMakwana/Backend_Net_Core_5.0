@@ -1,4 +1,6 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model BACKEND_HTML_DOT_NET.Models.CommitteeVM
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "WomenCellView"; }
 
 <div class="content-wrapper">
@@ -34,87 +36,29 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <h3>Women Cell Details</h3>
+                                <h2>@Model.Name</h2><br />
+                                <h4>Committee ID : @Model.CommitteeId</h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
+                                    <h4>Slogan</h4>
                                     <span>
-                                        The Prime Role of Women Development Cell (WDC) is to provide and
-                                        maintain
-                                        a dignified and safe working environment for women employees (including
-                                        teaching, non-teaching and contractual workers) and students, where they
-                                        can
-                                        work, study and explore their potential to the fullest. It includes
-                                        women
-                                        Harassment complaint committee and women empowerment program
-                                        co-ordination
-                                        committee.
+                                      @Model.Slogan
                                     </span>
                                 </div>
 
 
                                 <div class="form-group">
                                     <div class="sub-obj">
-                                        <h4>Sub-Objectives</h4>
-                                        <li>
-                                            To create awareness of women’s rights and their roles in the
-                                            society.
-                                        </li>
-                                        <li>
-                                            To create social awareness about the problems of women and in
-                                            particular regarding gender discrimination.
-                                        </li>
-                                        <li>
-                                            To provide a forum for women on the campus to share information and
-                                            resources and exchange of ideas.
-                                        </li>
-                                        <li>
-                                            To give information about safety and security measures for female
-                                            employees and girl students by conducting seminar on safety.</ul>
-                                        </li>
+                                        <img src="@Model.Image" class="rimg" style="width:auto;" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="committe">
-                                        <h4>Women's Development Committee (2018-19)</h4>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="input-group">
-                                                        <div class="col-1.5">
-                                                            <h6><strong>Convener:</strong></h6>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <text>Prof. Sita Agarwal</text>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="input-group">
-                                                    <div class="col-1.5">
-                                                        <h6><strong>Supporting Members : </strong></h6>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <text> Prof. Avani Vithalani</text></br>
-                                                                <text> Prof. Swapna Pawar</text></br>
-                                                                <text> Prof. Roshni Chaudhari</text></br>
-                                                                <text> Smt. Reena Prajapati</text></br>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                    <!--ur contents here-->
+                                    <h4>Description</h4>
+                                    <span>
+                                        @Model.Description
+                                    </span>
                                 </div>
                             </div>
                         </div>
