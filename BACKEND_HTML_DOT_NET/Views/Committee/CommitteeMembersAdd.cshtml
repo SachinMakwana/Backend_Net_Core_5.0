@@ -1,0 +1,178 @@
+﻿@model BACKEND_HTML_DOT_NET.Models.CommitteeMembersVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CommitteeAdd";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("CommitteeMembersList","Committee")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i> </li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row ">
+                        <div class="col-12">
+                            <!--ur contents here-->
+                            <!-- jquery validation -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Committee Members Add</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form role="form" id="CommitteeMemberForm">
+
+                                    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                                    
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="input-group">
+
+                                                <div class="col-6">
+                                                    <label for="Name">FacultyId</label>
+                                                    
+                                                    <select name="FacultyId" id="FacultyId" class="form-control">
+
+                                                        <option>Select Member</option>
+                                                        @foreach (var item in Model.FacultyList)
+                                                        {
+                                                            <option value="@item.Value">@item.Text</option>
+                                                        }
+
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label for="Name">Committee ID</label>
+                                                    <select name="Committee" id="CommitteeId" class="form-control">
+                                                    
+                                                        <option>Select Committee</option>
+                                                        @foreach(var item in Model.CommitteeList){
+                                                            <option value="@item.Value">@item.Text</option>
+                                                        }
+
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label for="Name">Role</label>
+                                                    <input type="text" class="form-control" id="Role" name="CommitteeId" placeholder="Enter Role" />
+                                                </div>
+
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6">
+                                                <button type="button" id="btnSubmit"
+                                                        class="btn btn-primary float-right col-md-2">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-default col-md-2">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#CommitteeMemberForm').validate({
+                rules: {
+                    "FacultyId": { required: true },
+                    "Role": { required: true },
+                    "CommitteeId": { required: true }
+                },
+                messages: {
+                    "FacultyId": { required: "this field is required" },
+                    "Role": { required: "this field is required" },
+                    "CommitteeId": { required: "this field is required" }
+                }
+            });
+
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#CommitteeMemberForm').valid()) {
+
+                    //var data = $('#CommitteeMemberForm').serialize();
+                    var FacultyId = document.getElementById("FacultyId").value;
+                    var CommitteeId = document.getElementById("CommitteeId").value;
+                    var Role = document.getElementById("Role").value;
+
+                    var data = new FormData();
+                    data.append("FacultyId", FacultyId);
+                    data.append("CommitteeId", CommitteeId);
+                    data.append("Role", Role);
+
+                    $.ajax({
+                        url: '@Url.Action("CommitteeMembersAdd", "Committee")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#frmdepartment')[0].reset();
+                                    window.location.href = '@Url.Action("CommitteeMembersList","Committee")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+    </script>
+
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}

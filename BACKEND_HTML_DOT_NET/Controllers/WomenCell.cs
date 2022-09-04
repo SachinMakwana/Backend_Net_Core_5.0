@@ -72,7 +72,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 PropertyInfo[] properties = typeof(CommitteeVM).GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
-                    if (property.Name.ToString() != "FacultySelectList")
+                    if (property.Name.ToString() != "null")
                     {
                         var value = property.GetValue(womencellVM);
                         request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());

@@ -1,0 +1,169 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CommitteeList";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Committee List</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6" style="margin-top:10px;">
+                    <a href="@Url.Action("CommitteeAdd","Committee")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
+                            <li>Add New Details</li>
+                        </ol>
+                    </a>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"> Committee List</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div class="card-body">
+                                    <table id="CommitteeList" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Slogan</th>
+                                                <th>CommitteeID</th>
+                                                <th>Image</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.Id</td>
+                                                    <td>@item.Name</td>
+                                                    <td>@item.Description</td>
+                                                    <td>@item.Slogan</td>
+                                                    <td>@item.CommitteeId</td>
+                                                    <td>
+                                                        <img src="@item.Image" class="rimg" style="width:50px;" />
+                                                    </td>
+                                                    <td><a href="@Url.Action("CommitteeView","Committee",new {@id=item.Id})" class="nav-icon fas fa-edit"></a></td>
+                                                    <td>
+                                                        <a href="@Url.Action("CommitteeEdit","Committee",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" onclick="DeleteCommittee(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Slogan</th>
+                                                <th>CommitteeID</th>
+                                                <th>Image</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#CommitteeList").DataTable();
+
+
+        });
+        function DeleteCommittee(id) {
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then(function (isConfirm) {
+
+                if (!isConfirm) return;
+                if (id != null) {
+                    $.ajax({
+                        url: '@Url.Action("CommitteeDelete","Committee")',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.reload();
+                                });
+                            }
+
+                        }
+                    });
+                }
+
+            });
+
+        }
+    </script>
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}

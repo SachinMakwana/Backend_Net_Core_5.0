@@ -115,6 +115,33 @@
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
+                    <a href="@Url.Action("CommitteeList","Committee")" class="nav-link">
+                        <i class="nav-icon fa fa-sitemap"></i>
+                        <p>
+                            Committee
+                            <i class="nav-icon right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("CommitteeList","Committee")" class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p>Committee list</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("CommitteeMembersList","Committee")" class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p>Members Details</p>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                @*
+                /*
+                <li class="nav-item has-treeview">
                     <a href="@Url.Action("WomenCellView","WomenCell")" class="nav-link">
                         <i class="nav-icon fa fa-female"></i>
                         <p>
@@ -213,6 +240,9 @@
                         </li>
                     </ul>
                 </li>
+                */
+
+                *@
                 <li class="nav-item">
                     <a href="@Url.Action("NewsList","News")" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>

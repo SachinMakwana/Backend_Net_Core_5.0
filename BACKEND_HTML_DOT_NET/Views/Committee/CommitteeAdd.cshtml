@@ -1,0 +1,198 @@
+﻿@model BACKEND_HTML_DOT_NET.Models.CommitteeVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CommitteeAdd";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("CommitteeList","Committee")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i> </li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row ">
+                        <div class="col-12">
+                            <!--ur contents here-->
+                            <!-- jquery validation -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Committee Add</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form role="form" id="CommitteeForm">
+
+                                    
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="input-group">
+
+                                                <div class="col-6">
+                                                    <label for="Name">Committee Name</label>
+                                                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter Name" />
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label for="Name">Committee ID</label>
+                                                    <input type="text" class="form-control" id="CommitteeId" name="CommitteeId" placeholder="Enter ID" />
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label for="Name">Committee Description</label>
+                                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label for="Name">Committee Slogan</label>
+                                                    <textarea type="text" name="Slogan" class="form-control" id="Slogan" rows="4" placeholder="Write content"></textarea>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="Image">Committee Banner</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="Image" class="custom-file-input" id="Image">
+                                                                <label class="custom-file-label" for="Image">
+                                                                    Choose
+                                                                    file
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6">
+                                                <button type="button" id="btnSubmit"
+                                                        class="btn btn-primary float-right col-md-2">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-default col-md-2">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#CommitteeForm').validate({
+                rules: {
+                    "Name": { required: true },
+                    "Description": { required: true },
+                    "Slogan": { required: true },
+                    "Image": { required: true },
+                    "CommitteeId": { required: true }
+                },
+                messages: {
+                    "Name": { required: "this field is required" },
+                    "Description": { required: "this field is required" },
+                    "Slogan": { required: "this field is required" },
+                    "Image": { required: "this field is required" },
+                    "CommitteeId": { required: "this field is required" }
+                }
+            });
+
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#CommitteeForm').valid()) {
+
+                    var name = document.getElementById("Name").value;
+                    var description = document.getElementById("Description").value;
+                    var slogan = document.getElementById("Slogan").value;
+                    var CommitteeId = $("#CommitteeId").val();
+
+
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("Image").files.length;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("Image").files[i];
+                        data.append("image", file);
+                    }
+
+                    data.append("Name", name);
+                    data.append("Description", description);
+                    data.append("Slogan", slogan);
+                    data.append("CommitteeId", CommitteeId);
+
+
+                    console.log(data);
+
+                    $.ajax({
+                        url: '@Url.Action("CommitteeAdd", "Committee")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#frmdepartment')[0].reset();
+                                    window.location.href = '@Url.Action("DepartmentList","Department")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+    </script>
+
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
