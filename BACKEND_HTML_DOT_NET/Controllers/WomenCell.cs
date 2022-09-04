@@ -128,7 +128,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
         public IActionResult WomenCellMembersDetails()
         {
-            CommitteeMembersVM committeeMembersVM = new CommitteeMembersVM();
+            
             
             var restRequest = new RestRequest("/GetAllCommitteeMembersDetails", Method.Get);
             restRequest.AddHeader("Accept", "application/json");
@@ -142,17 +142,11 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
             committeeMembersList = user.data;
 
-            foreach(var data in committeeMembersList)
-            {
-                if(data.CommitteeId == 1)
-                {
-                    womencellMembersList = user.data;
-                }
-                else
-                {
-                    continue;
-                }
-            }
+
+            var committee = committeeMembersList.Where(m => m.CommitteeId == 1).ToList();
+
+            womencellMembersList = committee;
+            
 
             return View(womencellMembersList);
         }
