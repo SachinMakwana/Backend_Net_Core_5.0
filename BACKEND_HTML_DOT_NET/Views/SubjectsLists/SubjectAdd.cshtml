@@ -26,7 +26,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER SUBJECT CODE</label>
-                                        <input type="email" class="form-control" name="SUBJECTCODE" id="exampleInputEmail1"
+                                        <input type="text" class="form-control" name="Code" id="exampleInputEmail1"
                                                placeholder="Enter code.. ">
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>SELECT DEPARTMENT</label>
-                                        <select name="department" class="form-control">
+                                        <select name="Department" class="form-control">
                                             <option> ELECTRONIC AND COMMUNICATION</option>
                                             <option> COMPUTER</option>
                                             <option> ELECTRICAL</option>
@@ -47,7 +47,7 @@
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>SELECT SEMESTER</label>
-                                        <select name="sem" class="form-control">
+                                        <select name="Semester" class="form-control">
                                             <option> 1</option>
                                             <option> 2</option>
                                             <option> 3</option>
@@ -66,7 +66,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER NAME OF THE SUBJECT</label>
-                                        <input type="email" name="subject" class="form-control" id="exampleInputEmail1"
+                                        <input type="text" name="Subject1" class="form-control" id="exampleInputEmail1"
                                                placeholder="Enter name.. ">
                                     </div>
                                 </div>
@@ -74,30 +74,22 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER ACRONYM FOR THE SUBJECT</label>
-                                        <input name="ACRONYM" type="email" class="form-control" id="exampleInputEmail1"
+                                        <input name="Acronym" type="text" class="form-control" id="exampleInputEmail1"
                                                placeholder="Enter name.. ">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
-                        <div class="card-footer">
-                            <div class="input-group col-12">
-                                <div class="col-sm-6">
-                                    <button  type="submit"
-                                            class="btn btn-primary float-right col-md-2">
-                                        Submit
-                                    </button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <button type="reset"
-                                            class="btn btn-default col-md-2">
-                                        Clear
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </form>
+
+                    <div class="card-footer">
+                                    <div class="input-group col-12">
+                                        <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                        <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2">Clear</button></div>
+                                    </div>
+                                </div>
                 </div>
             </div>
         </div>
@@ -107,6 +99,20 @@
                                                                
 @section script{
 
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
+
 <script type="text/javascript">
 
 
@@ -115,45 +121,44 @@
 
         $('#subjectadd').validate({
           rules: {
-            "SUBJECTCODE": {
+            "Code": {
                  required: true                
              },
-             "department": {
+             "Department": {
                  required: true
              },
-             "sem":{
+             "Semester":{
                  required: true,
-                 digit: true
              },
              "head": {
                     required: true
                 },
                
-                "subject": {
+                "Subject1": {
                     required: true
                 },
-                "ACRONYM":{
+                "Acronym":{
                     required: true
                 }
 
           },
           messages: {
-          "SUBJECTCODE": {
+                    "Code": {
                  required: "this field is required"
              },
-             "department": {
+                    "Department": {
                  required: "this field is required"
              },
-             "sem":{
+                    "Semester": {
                   required: "this field is required"
              },
              "head":{
                   required: "this field is required"
              },
-                "subject": {
+                    "Subject1": {
                    required: "this field is required"
                 },
-                "ACRONYM":{
+                    "Acronym": {
                      required: "this field is required"
                 }
 
@@ -162,7 +167,7 @@
 
         });
 
-        $('#subjectadd').submit(function(e) {
+            $('#btnSubmit').click(function (e) {
 
         //prevent Default functionality
         e.preventDefault();
@@ -173,15 +178,42 @@
 
         //do your own request an handle the results
         if($('#subjectadd').valid()){
-        $.ajax({
-                url: '@Url.Action("DepartmentAdd","Department")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
+                    var data = new FormData($('#subjectadd')[0]);
 
-                }
-        });
+
+                    $.ajax({
+                        url: '@Url.Action("SubjectAdd","SubjectsLists")',
+                        type: 'post',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        data: data,
+                        success: function (data) {
+                                console.log(data);
+
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#subjectadd')[0].reset();
+                                    window.location.href = '@Url.Action("SubjectAdd","SubjectsLists")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+
+
         }
 
     });

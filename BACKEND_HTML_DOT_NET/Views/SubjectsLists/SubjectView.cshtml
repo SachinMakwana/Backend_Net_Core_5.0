@@ -1,124 +1,175 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "SubjectView"; }
 
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <!-- Main content -->
-    <section class="content">
+    <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Subjects</h1>
+                    <h1 class="m-0 text-dark">View Attachments Details</h1>
                 </div>
-                <div class="col-sm-6" style="margin-top:10px;">
-                    <a href="@Url.Action("SubjectAdd","SubjectsLists")">
-                        <ol class="breadcrumb float-sm-right">
-                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
-                            <li>Add New Details</li>
-                        </ol>
-                    </a>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h1 class="card-title" style="font-size: 25px;">Subject List</h1>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Subject Code</th>
-                                            <th>Branch Name</th>
-                                            <th>Semester</th>
-                                            <th>Subject Name</th>
-                                            <th>Acronym of Subject</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2170701</td>
-                                            <td>Computer</td>
-                                            <td>7</td>
-                                            <td>Compiler Design</td>
-                                            <td>CD</td>
-
-                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>2170709</td>
-                                            <td>Computer</td>
-                                            <td>7</td>
-                                            <td>Information and Network Security</td>
-                                            <td>INS</td>
-
-                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>2170710</td>
-                                            <td>Computer</td>
-                                            <td>7</td>
-                                            <td>Mobile Computing and Wireless Communication</td>
-                                            <td>MCWC</td>
-
-                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2170715</td>
-                                            <td>Computer</td>
-                                            <td>7</td>
-                                            <td>Data Mining and Business Intelligence</td>
-                                            <td>DMBI</td>
-
-                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>217001</td>
-                                            <td>Computer</td>
-                                            <td>7</td>
-                                            <td>Project</td>
-                                            <td>PROJECT</td>
-
-                                            <td><a href="@Url.Action("SubjectAdd","SubjectsLists")"><i class="nav-icon fas fa-edit"></i></a></td>
-                                            <td><a href=""><i class="nav-icon fas fa-trash"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Subject Code</th>
-                                            <th>Branch Name</th>
-                                            <th>Semester</th>
-                                            <th>Subject Name</th>
-                                            <th>Acronym of Subject</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li>
+                            <a href="@Url.Action("SubjectAdd","SubjectsLists")">
+                                <i class="nav-icon fas fa-plus-circle">
+                                    Click to
+                                    add Subjects
+                                </i>
+                            </a>
+                        </li>
+                    </ol>
                 </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="card">
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Subject Code</th>
+                                        <th>Branch Name</th>
+                                        <th>Semester</th>
+                                        <th>Subject Name</th>
+                                        <th>Acronym of Subject</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td>
+                                                    @item.Id
+                                            </td>
+                                            <td>
+                                                    @item.Code
+                                            </td>
+                                            <td>
+                                                    @item.Department
+                                            </td>
+                                            <td>
+                                                    @item.Semester
+                                            </td>
+                                            <td>
+                                                    @item.Subject1
+                                            </td>
+                                            <td>
+                                                    @item.Acronym
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("SubjectEdit","SubjectsLists",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="DeleteSubject(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        }
+
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Subject Code</th>
+                                        <th>Branch Name</th>
+                                        <th>Semester</th>
+                                        <th>Subject Name</th>
+                                        <th>Acronym of Subject</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!--ur contents here-->
+                </div>
+            </div>
+        </div>
     </section>
-    <!-- /.content -->
+
 </div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#example2").DataTable();
+
+
+        });
+        function DeleteSubject(id) {
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then(function (isConfirm) {
+
+                if (!isConfirm) return;
+                if (id != null) {
+                    $.ajax({
+                        url: '@Url.Action("SubjectDelete","SubjectsLists")',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.reload();
+                                });
+                            }
+
+                        }
+                    });
+                }
+
+            });
+
+        }
+    </script>
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
