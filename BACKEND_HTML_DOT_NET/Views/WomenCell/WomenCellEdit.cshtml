@@ -108,12 +108,19 @@
                                                     
 @section script{
 
-<script type="text/javascript">
 
-        <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")" ></script>
+
+   <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")" ></script>
     
    <script type="text/javascript">
 
+
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
         $(document).ready(function () {
 
@@ -154,33 +161,32 @@
                     data.append("Id", id);
 
 
-                   
-                    $.ajax({
-                        url: '@Url.Action("WomenCellEdit", "WomenCell")',
-                        type: 'post',
-                        data: data,
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        success: function (data) {
-                            setTimeout(loaderStop(), 2000);
-                            if (data.status_code == "200") {
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: data.message
-                                }).then(function () {
-                                    $('#CellForm')[0].reset();
-                                    window.location.href = '@Url.Action("WomenCellView","WomenCell")';
-                                });
+                        $.ajax({
+                            url: '@Url.Action("WomenCellEdit", "WomenCell")',
+                            type: 'post',
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: function (data) {
+                                setTimeout(loaderStop(), 2000);
+                                if (data.status_code == "200") {
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: data.message
+                                    }).then(function () {
+                                        $('#CellForm')[0].reset();
+                                        window.location.href = '@Url.Action("WomenCellView","WomenCell")';
+                                    });
+                                }
+                                else {
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: data.message
+                                    })
+                                }
                             }
-                            else {
-                                Toast.fire({
-                                    icon: 'error',
-                                    title: data.message
-                                })
-                            }
-                        }
-                    });
+                        });
                 }
 
             });
