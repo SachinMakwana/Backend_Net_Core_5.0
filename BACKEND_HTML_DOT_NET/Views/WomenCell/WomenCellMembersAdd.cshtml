@@ -11,7 +11,7 @@
                 <a href="@Url.Action("WomenCellMembersDetails","WomenCell")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i> </li>
-                        <li style="margin-left: px;">Back to Details</li>
+                        <li style="margin-left: 00px;">Back to Details</li>
                     </ol>
                 </a>
             </div>
@@ -27,30 +27,30 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" id="quickForm">
+                                <form role="form" id="CellMemeberForm">
+
+                                    <input type="hidden" name="Id" id="CommitteeId" value="1" />
                                     <div class="card-body">
                                         <div class="form-group">
                                             <div class="input-group">
 
                                                 <div class="col-6">
                                                     <label for="Name">Women Cell Member Faculty Id</label>
-                                                    <input type="text" class="form-control" id="facultyId" name="facultyId"
-                                                           placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="facultyId" name="facultyId" placeholder="Enter Name" />
                                                 </div>
 
                                                  <div class="col-6">
                                                     <label for="Name">Women Cell Member Faculty Role</label>
-                                                    <input type="text" class="form-control" id="facultyRole" name="facultyRole"
-                                                           placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="facultyRole" name="facultyRole" placeholder="Enter Name" />
                                                 </div>
-                                                
+                                                </div>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
                                         <div class="input-group col-12">
                                             <div class="col-sm-6">
-                                                <button type="submit" id="btnSubmit"
+                                                <button type="button" id="btnSubmit"
                                                         class="btn btn-primary float-right col-md-2">
                                                     Submit
                                                 </button>
@@ -78,14 +78,14 @@
 
 
 @section script{
-
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
 <script type="text/javascript">
 
 
     $(document).ready(function() {
         //console.log( "ready!" );
 
-        $('#quickForm').validate({
+            $('#CellMemeberForm').validate({
           rules: {
             "facultyId": {
                  required: true                
@@ -107,21 +107,29 @@
 
         });
 
-        $('#btnSubmit').submit(function(e) {
+        $('#btnSubmit').click(function(e) {
 
-        //prevent Default functionality
-        e.preventDefault();
+                if ($('#CellMemeberForm').valid()) {
+                    var data = $('#CellMemeberForm').serialize();
 
-        if($('#quickForm').valid()){
-        $.ajax({
-                url: '@Url.Action("WomentCellMembersAdd","WomenCell")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
-
-                }
-        });
+                    $.ajax({
+                        url: '@Url.Action("WomentCellMembersAdd","WomenCell")',
+                        type: 'post',
+                        data: data,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    type: "success"
+                                }).then(function () {
+                                    $('#facultyadd')[0].reset();
+                                    window.location.href = '@Url.Action("FacultyList","FacultyDetails")';
+                                });
+                            }
+                        }
+                    });
         }
 
     });
@@ -131,4 +139,8 @@
 
 </script>
 
+}
+
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }

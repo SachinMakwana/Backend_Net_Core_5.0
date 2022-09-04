@@ -126,6 +126,39 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> WomenCellMembersAdd(CommitteeMembersVM committeeMembers)
+        {
+            committeeMembers.CreatedDate = DateTime.Now;
+            committeeMembers.UpdatedDate = DateTime.Now;
+            try
+            {
+                using(var client = new HttpClient())
+                {
+                    var uri = new Uri(apiBaseUrl + "/AddCommitteeMemberDetail");
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(committeeMembers),Encoding.UTF8,"application/json");
+
+                    using (var response = client.PostAsync(uri, content))
+                    {
+                        response.Wait();
+                        var results = response.Result;
+                        var jsonString = await results.Content.ReadAsStringAsync();
+                        var res = JsonConvert.DeserializeObject<ServiceResponse<bool>>(jsonString);
+                        if (results.IsSuccessStatusCode)
+                        {
+                            return Json(res);
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return Json(new { message = ex.Message.ToString() });
+            }
+            return Json(new { message = "something went wrong." });
+        }
+
         public IActionResult WomenCellMembersDetails()
         {
             
