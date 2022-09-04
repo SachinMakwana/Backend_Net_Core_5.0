@@ -36,19 +36,19 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="exampleInputText">ENTER NAME</label>
-                                        <input type="text" name="name" class="form-control" id="Name" placeholder="ENTER TITLE.. ">
+                                        <input type="text" name="name" class="form-control" id="Name" value="@Model.Name" />
                                     </div>
                                 </div>
 
 
                                <div class="col-md-6">
                                    <label for="description">ENTER DESCRIPTION </label>
-                                   <textarea type="text" name="description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="description" class="form-control" id="Description" rows="4" >@Model.Description</textarea>
                                </div>
 
                                <div class="col-md-6">
                                    <label for="description">ENTER Slogan</label>
-                                   <textarea type="text" name="slogan" class="form-control" id="Slogan" rows="4" placeholder="Write content"></textarea>
+                                   <textarea type="text" name="slogan" class="form-control" id="Slogan" rows="4" >@Model.Slogan</textarea>
                                </div>
 
                                 <div class="col-md-6">
@@ -111,55 +111,28 @@
 <script type="text/javascript">
 
         <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")" ></script>
-    <script type="text/javascript">
-                var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
+    
+   <script type="text/javascript">
 
-    $(document).ready(function() {
-        //console.log( "ready!" );
+
+        $(document).ready(function () {
 
             $('#CellForm').validate({
-          rules: {
-            "name": {
-                 required: true                
-             },
-             "description": {
-                 required: true
-             },
-                "slogan": {
-                    required: true
+                rules: {
+                    "name": { required: true },
+                    "description": { required: true },
+                    "slogan": { required: true },
+                    "InputFile": { required: true }
                 },
-                "InputFile": {
-                    required: true
+                messages: {
+                    "title": { required: "this field is required" },
+                    "description": { required: "this field is required" },
+                    "slogan": { required: "this field is required" },
+                    "InputFile": { required: "this field is required" }
                 }
+            });
 
-          },
-          messages: {
-            "title": {
-                 required: "this field is required"
-             },
-             "description": {
-                 required: "this field is required"
-             },
-              "slogan": {
-                   required: "this field is required"
-              },
-              "InputFile": {
-                   required: "this field is required"
-              }
-          }
-         
-
-        });
-
-        $('#btnSubmit').click(function(e) {
-
-        //prevent Default functionality
-        e.preventDefault();
+            $('#btnSubmit').click(function (e) {
 
                 if ($('#CellForm').valid()) {
 
@@ -170,19 +143,19 @@
 
                     var data = new FormData();
                     var totalFiles = document.getElementById("Image").files.length;
-                    for(var i = 0; i < totalFiles; i++){
+                    for (var i = 0; i < totalFiles; i++) {
                         var file = document.getElementById("Image").files[i];
                         data.append("image", file);
                     }
 
                     data.append("Name", name);
                     data.append("Description", description);
-                    data.append("Slogan",slogan);
+                    data.append("Slogan", slogan);
                     data.append("Id", id);
 
 
-                loaderStart();
-                $.ajax({
+                   
+                    $.ajax({
                         url: '@Url.Action("WomenCellEdit", "WomenCell")',
                         type: 'post',
                         data: data,
@@ -206,16 +179,19 @@
                                     title: data.message
                                 })
                             }
-
+                        }
+                    });
                 }
+
+            });
+
+
         });
-        }
-
-    });
-
-
-    });
 
 </script>
 
+}
+    @section styles{
+    @*<link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">*@
+    <link href="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.css")" rel="stylesheet" />
 }

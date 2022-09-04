@@ -47,6 +47,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             try
             {
                 womencellVM.UpdatedDate = DateTime.Now;
+                womencellVM.CommitteeId = 1;
+                womencellVM.CreatedDate = DateTime.Now;
                 RestRequest request = new RestRequest("UpdateCommitteeDetail", Method.Put);
 
                 if(collection.Files.Count() > 0)
@@ -104,7 +106,13 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             var content = response.Content;
 
             var user = JsonConvert.DeserializeObject<ServiceResponse<List<CommitteeVM>>>(content);
+            
             committeList = user.data;
+
+            foreach (var data in committeList)
+            {
+                data.Image = "https://localhost:44374/" + data.Image;
+            }
 
             var committee = committeList.Where(m => m.CommitteeId == 1).FirstOrDefault();
 

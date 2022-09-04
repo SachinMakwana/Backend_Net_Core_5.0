@@ -13,7 +13,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6" style="margin-top:10px;">
-                    <a href="@Url.Action("WomenCellAdd","WomenCell")">
+                    <a href="@Url.Action("WomenCellEdit","WomenCell")">
                         <ol class="breadcrumb float-sm-right">
                             <li><i class="nav-icon fas fa-plus-circle"></i></li>
                             <li>Click to Edit Details</li>
@@ -36,7 +36,8 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <h2>@Model.Name</h2><br />
+                                <h2>@Model.Name</h2>
+                                <br>
                                 <h4>Committee ID : @Model.CommitteeId</h4>
                             </div>
                             <div class="card-body">
@@ -50,7 +51,7 @@
 
                                 <div class="form-group">
                                     <div class="sub-obj">
-                                        <img src="@Model.Image" class="rimg" style="width:auto;" />
+                                        <img src="@Model.Image" class="rimg" style="width:500px; hight:400px" />
                                     </div>
                                 </div>
 
