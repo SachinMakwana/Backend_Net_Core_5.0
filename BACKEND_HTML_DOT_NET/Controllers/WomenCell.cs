@@ -1,6 +1,7 @@
 ﻿using BACKEND_HTML_DOT_NET.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -20,6 +21,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
         private static List<CommitteeVM> committeList = new List<CommitteeVM>();
+        private static List<CommitteeMembersVM> committeeMembersList = new List<CommitteeMembersVM>();
+        private static List<CommitteeMembersVM> womencellMembersList = new List<CommitteeMembersVM>();
         RestClient client;
 
         public WomenCell()
@@ -32,7 +35,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             CommitteeVM committeeVM = new CommitteeVM();
             try
             {
-                committeeVM = committeList.Where(m => m.Id == 1).FirstOrDefault();
+                committeeVM = committeList.Where(m => m.CommitteeId == 1).FirstOrDefault();
 
             }catch(Exception ex)
             {
@@ -125,7 +128,33 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
         public IActionResult WomenCellMembersDetails()
         {
-            return View();
+            CommitteeMembersVM committeeMembersVM = new CommitteeMembersVM();
+            
+            var restRequest = new RestRequest("/GetAllCommitteeMembersDetails", Method.Get);
+            restRequest.AddHeader("Accept", "application/json");
+            restRequest.RequestFormat = DataFormat.Json;
+
+            RestResponse response = client.Execute(restRequest);
+
+            var content = response.Content;
+
+            var user = JsonConvert.DeserializeObject<ServiceResponse<List<CommitteeMembersVM>>>(content);
+
+            committeeMembersList = user.data;
+
+            foreach(var data in committeeMembersList)
+            {
+                if(data.CommitteeId == 1)
+                {
+                    womencellMembersList = user.data;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            return View(womencellMembersList);
         }
     }
 }
