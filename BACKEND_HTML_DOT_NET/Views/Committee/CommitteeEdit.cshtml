@@ -153,8 +153,8 @@
                     data.append("Id", id);
 
 
-                    console.log(data);
-
+                    
+                    loaderStart();
                     $.ajax({
                         url: '@Url.Action("CommitteeEdit", "Committee")',
                         type: 'post',
@@ -163,24 +163,21 @@
                         contentType: false,
                         cache: false,
                         success: function (data) {
+                            setTimeout(loaderStop(), 2000);
                             if (data.status_code == "200") {
-                                Swal.fire({
-                                    title: "Added!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    icon: "success"
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.message
                                 }).then(function () {
-                                    $('#frmdepartment')[0].reset();
+                                    $('#CommitteeForm')[0].reset();
                                     window.location.href = '@Url.Action("CommitteeList","Committee")';
                                 });
                             }
                             else {
-                                Swal.fire({
-                                    title: "Failed!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    icon: "error"
-                                });
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
                             }
                         }
                     });

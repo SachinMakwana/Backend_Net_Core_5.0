@@ -1,0 +1,177 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CompanyList";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Companies</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <a href="@Url.Action("CompanyAdd","CompanyDetails")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-plus-circle"></i></li>
+                            <li>Add New Company</li>
+                        </ol>
+                    </a>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Company Details</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="row justify-content-center">
+                            <div class="col-10">
+                                <div class="card-body">
+                                    <table id="companyList" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Description</th>
+                                                <th>ReleventDepartment</th>
+                                                <th>Image</th>
+                                                <th>Logo</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.Title
+                                                    </td>
+                                                    <td>
+                                                        @item.Description
+                                                    </td>
+                                                    <td>
+                                                        @item.RelevantDepartments
+                                                    </td>
+                                                    <td>
+                                                        <img src="@item.Image" class="rimg" style="width:50px;" />
+                                                    </td>
+                                                    <td>
+                                                        <img src="@item.Logo" class="rimg" style="width:50px;" />
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("CompanyView","CompanyDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("CompanyEdit","CompanyDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" onclick="DeleteCompany(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Description</th>
+                                                <th>ReleventDepartment</th>
+                                                <th>Image</th>
+                                                <th>Logo</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#companyList").DataTable();
+
+
+        });
+        function DeleteCompany(id) {
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then(function (isConfirm) {
+
+                if (!isConfirm) return;
+                if (id != null) {
+                    $.ajax({
+                        url: '@Url.Action("CompanyDelete","CompanyDetails")',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.reload();
+                                });
+                            }
+
+                        }
+                    });
+                }
+
+            });
+
+        }
+    </script>
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}

@@ -140,6 +140,7 @@
                     data.append("CommitteeId", CommitteeId);
                     data.append("Role", Role);
 
+                    loaderStart();
                     $.ajax({
                         url: '@Url.Action("CommitteeMembersEdit", "Committee")',
                         type: 'post',
@@ -148,24 +149,21 @@
                         contentType: false,
                         cache: false,
                         success: function (data) {
-                            if (data.status_code == "200") {
-                                Swal.fire({
-                                    title: "Added!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    icon: "success"
-                                }).then(function () {
-                                    $('#frmdepartment')[0].reset();
+                            setTimeout(loaderStop(), 2000);
+                                if (data.status_code == "200") {
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: data.message
+                                    }).then(function () {
+                                    $('#CommitteeMemberForm')[0].reset();
                                     window.location.href = '@Url.Action("CommitteeMembersList","Committee")';
                                 });
                             }
                             else {
-                                Swal.fire({
-                                    title: "Failed!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    icon: "error"
-                                });
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
                             }
                         }
                     });

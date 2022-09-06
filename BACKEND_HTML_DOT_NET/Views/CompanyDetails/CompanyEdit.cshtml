@@ -1,5 +1,7 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "CompanyEdit"; }
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CompanyAdd";
+}
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -7,11 +9,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Edit Company Details</h1>
+                    <h1 class="m-0 text-dark">Add New Company</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
-                    <a href="@Url.Action("CompanyView","CompanyDetails")">
+                    <a href="@Url.Action("CompanyList","CompanyDetails")">
                         <ol class="breadcrumb float-sm-right">
                             <li><i class="nav-icon fas fa-plus-circle"></i></li>
                             <li>Back To Details</li>
@@ -33,22 +35,54 @@
                     <!-- your contents here -->
                     <!-- form start -->
                     <div class="card card-primary">
-                        <form role="form">
+                        <form role="form" id="companyDetail">
                             <div class="card-body">
                                 <div class="form-group row justify-content-center">
                                     <div class="col-11">
                                         <!---->
                                         <div class="input-group">
+
+                                            <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+
                                             <div class="col-md-6">
-                                                <label for="companyName">Company Name</label>
-                                                <input type="text" class="form-control" id="companyName" placeholder="Company Name">
+                                                <label for="companyName">Company Title</label>
+                                                <input type="text" class="form-control" id="companyTitle" value="@Model.Title">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="companyName">Company Relevent Department</label>
+                                                <select name="Department" id="rDepartment" class="form-control">
+                                                    <option>Select Department</option>
+                                                    @foreach (var item in Model.DepartmentList)
+                                                    {
+                                                        bool selected = item.Value == Model.RelevantDepartments.ToString() ? true : false;
+                                                        <option value="@item.Value" selected="@selected"> @item.Text</option>
+                                                    }
+                                                </select>
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <label for="description">Description</label>
+                                                <textarea type="text" name="Description" class="form-control" id="Description" rows="4">@Model.Description</textarea>
+                                            </div>
+
+
+
                                             <div class="form-group col-md-6">
+                                                <label for="exampleInputFile">Upload Company Image</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="Image">
+                                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="">Upload</span>
+                                                    </div>
+                                                </div>
+
                                                 <label for="exampleInputFile">Upload Company Logo</label>
                                                 <div class="input-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                        <input type="file" class="custom-file-input" id="logo">
                                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                     </div>
                                                     <div class="input-group-append">
@@ -56,15 +90,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
-                                        <div class="input-group">
-                                            <div class="card-body pad">
-                                                <div class="mb-3">
-                                                    <label for="companyDetails">Add Company Details Below.</label>
-                                                    <textarea class="textarea" id="companyDetails" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +100,8 @@
 
                             <div class="card-footer">
                                 <div class="input-group col-12">
-                                    <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Update</button></div>
-                                    <div class="col-sm-6"><button type="clear" class="btn btn-primary col-md-2">Delete</button></div>
+                                    <div class="col-sm-6"><button id="btnSubmit" type="button" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                    <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2">Clear</button></div>
                                 </div>
                             </div>
                         </form>
@@ -87,3 +115,99 @@
     </section>
     <!-- /.content -->
 </div>
+
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#companyDetail').validate({
+                rules: {
+                    "companyTitle": { required: true },
+                    "Description": { required: true },
+                    "rDepartment": { required: true },
+                    "Image": { required: true },
+                    "logo": { required: true }
+                },
+                messages: {
+                    "companyTitle": { required: "this field is required" },
+                    "Description": { required: "this field is required" },
+                    "rDepartment": { required: "this field is required" },
+                    "Image": { required: "this field is required" },
+                    "logo": { required: "this is field is required" }
+                }
+            });
+
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#companyDetail').valid()) {
+
+                    var companyTitle = document.getElementById("companyTitle").value;
+                    var description = document.getElementById("Description").value;
+                    var rDepartment = document.getElementById("rDepartment").value;
+                    var id = $("#Id").val();
+
+
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+
+                    var image = document.getElementById("Image").files.length;
+                    for (var i = 0; i < image; i++) {
+                        var file = document.getElementById("Image").files[i];
+                        data.append("Image", file);
+                    }
+                    var logo = document.getElementById("logo").files.length;
+                    for (var i = 0; i < logo; i++) {
+                        var file = document.getElementById("logo").files[i];
+                        data.append("Logo", file);
+                    }
+
+                    data.append("Title", companyTitle);
+                    data.append("Description", description);
+                    data.append("RelevantDepartments", rDepartment)
+                    data.append("Id", id);
+
+
+                    console.log(data);
+
+                    $.ajax({
+                        url: '@Url.Action("CompanyEdit", "CompanyDetails")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#companyDetail')[0].reset();
+                                    window.location.href = '@Url.Action("CompanyList","CompanyDetails")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+    </script>
+
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
