@@ -1,0 +1,148 @@
+﻿@model BACKEND_HTML_DOT_NET.Models.MissionVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Title = "MissionEdit";
+
+}
+
+<div class="content-wrapper">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("MissionList","Mission")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+
+                        <h3 class="card-title">Edit Mission Detail</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" id="MissionData">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <input type="hidden" name="id" class="form-control" id="id" value="@Model.Id">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Department</label>
+                                        <select name="Department" id="Department" class="form-control">
+                                            <option>Select Department</option>
+                                            @foreach (var item in Model.DepartmentList)
+                                            {
+                                                bool selected = item.Value == Model.DeptId.ToString() ? true : false;
+                                                <option value="@item.Value" selected="@selected"> @item.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="description">Description</label>
+                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content">@Model.Description</textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="input-group col-12">
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">
+                                        Submit
+                                    </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#MissionData').validate({
+                rules: {
+                    "Department": { required: true },
+                    "Description": { required: true }
+                },
+                messages: {
+                    "Department": { required: "this field is required" },
+                    "Description": { required: "this field is required" }
+                }
+            });
+
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#MissionData').valid()) {
+
+                    var departmentName = document.getElementById("Department").value;
+                    var description = document.getElementById("Description").value;
+
+
+                    //var data = $('#visionData').serialize();
+                    var data = new FormData();
+
+
+                    data.append("DeptId", departmentName);
+                    data.append("Description", description);
+
+
+                    console.log(data);
+                    loaderStart();
+                    $.ajax({
+                        url: '@Url.Action("MissionEdit", "Mission")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            setTimeout(loaderStop(), 2000);
+                            if (data.status_code == "200") {
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.message
+                                }).then(function () {
+                                    $('#MissionData')[0].reset();
+                                    window.location.href = '@Url.Action("MissionList","Mission")';
+                                });
+                            }
+                            else {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+    </script>
+
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
