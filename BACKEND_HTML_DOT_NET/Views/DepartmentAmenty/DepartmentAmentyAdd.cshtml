@@ -1,0 +1,246 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "DepartmentAmentyAdd";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("DepartmentAmentyList","DepartmentAmenty")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- your contents here -->
+                            <!-- form start -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add Department Amenty Data</h3>
+                                </div>
+                                <form role="form" id="departmentAmentyForm">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <!-- Name Controls -->
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="fname">Intake</label>
+                                                            <input type="number" name="Intake" class="form-control" id="Intake" placeholder="Intake">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="labId">Department ID Of Department Amenty</label>
+                                                            <select name="Dept" id="Department" class="form-control">
+                                                                <option>Select Department</option>
+                                                                @foreach (var item in Model.DepartmentList)
+                                                                {
+
+                                                                    <option value="@item.Value"> @item.Text</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="fname">Subjects</label>
+                                                            <input type="number" name="Subjects" class="form-control" id="Subjects" placeholder="Subjects">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="fname">Labs</label>
+                                                            <input type="number" name="Labs" class="form-control" id="Labs" placeholder="Labs">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="fname">Workshop</label>
+                                                            <input type="number" name="Workshop" class="form-control" id="Workshop" placeholder="Workshop">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="fname">Classroom</label>
+                                                            <input type="number" name="Classroom" class="form-control" id="Classroom" placeholder="Classroom">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="fname">Seminar</label>
+                                                            <input type="number" name="Seminar" class="form-control" id="Seminar" placeholder="Seminar">
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">Submit</button></div>
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2">Clear</button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+@section script{
+
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#departmentAmentyForm').validate({
+                rules: {
+                    "Intake": {
+                        required: true
+                    },
+                    "Subjects": {
+                        required: true
+                    },
+                    "Labs": {
+                        required: true
+                    },
+                    "Workshop": {
+                        required: true
+                    },
+                    "Classroom": {
+                        required: true
+
+                    }, 
+                    "Seminar": {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    "Intake": {
+                        required: "this field is required"
+                    },
+                    "Subjects": {
+                        required: "this field is required"
+                    },
+                    "Labs": {
+                        required: "this field is required"
+                    },
+                    "Workshop": {
+                        required: "this field is required"
+                    },
+                    "Classroom": {
+                        required: "this field is required"
+
+                    },
+                    "Seminar": {
+                        required: "this field is required"
+                    }
+
+                }
+
+
+            });
+
+            $('#btnSubmit').click(function (e) {
+                if ($('#departmentAmentyForm').valid()) {
+
+                    var Intake = document.getElementById("Intake").value;
+                    var Subjects = document.getElementById("Subjects").value;
+                    var Labs = document.getElementById("Labs").value;
+                    var Workshop = document.getElementById("Workshop").value;
+                    var Classroom = document.getElementById("Classroom").value;
+                    var Seminar = document.getElementById("Seminar").value;
+                    var Department = document.getElementById("Department").value;
+
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+                    
+
+                    data.append("Intake", Intake);
+                    data.append("Subjects", Subjects);
+                    data.append("Labs", Labs);
+                    data.append("Workshop", Workshop);
+                    data.append("Classroom", Classroom);
+                    data.append("Seminar", Seminar);
+                    data.append("DeptId", Department);
+
+
+                    console.log(data);
+
+                    $.ajax({
+                        url: '@Url.Action("DepartmentAmentyAdd","DepartmentAmenty")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#departmentAmentyForm')[0].reset();
+                                    window.location.href = '@Url.Action("DepartmentAmentyList","DepartmentAmenty")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+                }
+
+            });
+
+
+        });
+
+    </script>
+
+}
+
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
