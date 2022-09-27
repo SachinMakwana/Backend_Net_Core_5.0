@@ -39,9 +39,15 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             RestResponse response = restClient.Execute(restRequest);
 
             var content = response.Content;
-
-            var user = JsonConvert.DeserializeObject<ServiceResponse<List<GalleryVM>>>(content);
-            galleryVMList = user.data;
+            if (content != null)
+            {
+                var user = JsonConvert.DeserializeObject<ServiceResponse<List<GalleryVM>>>(content);
+                galleryVMList = user.data;
+                foreach (var data in galleryVMList)
+                {
+                    data.Image = "https://localhost:44374/" + data.Image;
+                }
+            }
             return View(galleryVMList);
 
         }

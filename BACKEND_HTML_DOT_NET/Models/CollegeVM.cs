@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GECP_DOT_NET_API.Models
+namespace BACKEND_HTML_DOT_NET.Models
 {
     public class CollegeVM
     {
