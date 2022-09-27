@@ -37,7 +37,7 @@
 
                                                     <div class="col-md-3">
                                                         <label for="name">Name</label>
-                                                        <input name="name" type="text" class="form-control" id="name"
+                                                        <input name="name" type="text" class="form-control" id="Name"
                                                                placeholder="Name">
                                                     </div>
                                                 </div>
@@ -46,8 +46,8 @@
                                             <div class="form-group">
                                                 <div class="input-group col-12">
                                                     <div class="col-md-2">
-                                                        <label for="ddldesgn">Designation ID</label>
-                                                        <input name="DesignationId" type="number" class="form-control" id="DesignationId"
+                                                        <label for="ddldesgn">Designation </label>
+                                                        <input name="Designation" type="text" class="form-control" id="Designation"
                                                                placeholder="Designation ID">
                                                     </div>
                                                 </div>
@@ -62,6 +62,22 @@
                                                                placeholder="Department ID">
                                                     </div>
 
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Image">Banner</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" name="Image" class="custom-file-input" id="Image">
+                                                            <label class="custom-file-label" for="Image">
+                                                                Choose
+                                                                file
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -113,24 +129,26 @@
             "name": {
                  required: true
              },
-             "DesignationId": {
+             "Designation": {
                  required: true
              },
              "deptid": {
                  required: true
-             }
+             },
+             "Image":{ required: true}
 
           },
           messages: {
             "name": {
                  required: "this field is required"
              },
-             "DesignationId": {
+             "Designation": {
                  required: "this field is required"
              },
              "deptid": {
                  required: "this field is required"
-             }
+             },
+                    "Image": { required: "this field is required" }
           }
 
 
@@ -139,27 +157,47 @@
         $('#btnSubmit').click(function(e) {
 
             if ($('#facultyadd').valid()) {
-                var data = $('#facultyadd').serialize();
+                    
+                    var Name = document.getElementById("Name").value;
+                    var Designation = document.getElementById("Designation").value;
+                    var deptId = document.getElementById("department").value;
 
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("Image").files.length;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("Image").files[i];
+                        data.append("image", file);
+                    }
 
+                    data.append("Name", Name);
+                    data.append("Designation", Designation);
+                    data.append("DeptId", deptId);
 
                         $.ajax({
                             url: '@Url.Action("FacultyAdd","FacultyDetails")',
                             type: 'post',
                             data: data,
-                            success: function(data) {
-                               if (data.status_code == "200") {
-                                    Swal.fire({
-                                        title: "Added!",
-                                        text: data.message,
-                                        timer: 6000,
-                                        type: "success"
-                                    }).then(function () {
-                                        $('#facultyadd')[0].reset();
-                                        window.location.href='@Url.Action("FacultyList","FacultyDetails")';
-                                    });
-                                }
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#facultyadd')[0].reset();
+                                    window.location.href = '@Url.Action("FacultyList","FacultyDetails")';
+                                });
                             }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
                         });
 
             }
