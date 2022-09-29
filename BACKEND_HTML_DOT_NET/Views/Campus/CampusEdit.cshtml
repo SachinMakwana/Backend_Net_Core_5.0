@@ -1,168 +1,231 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "CampusEdit"; }
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CampusEdit";
+}
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Edit Campus Details</h1>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <a href="@Url.Action("CampusView","Campus")" class="btn btn-primary">Back To Campus</a>
-                    </ol>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-    </div>
     <!-- /.content-header -->
     <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-8">
-                    <!--ur contents here-->
-                    <div class="card card-primary">
-                        <form role="form" id="campusedit">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="campusName">Name Of Campus</label>
-                                    <input type="text" name="name" class="form-control" id="campusName" placeholder="Enter Campus name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="category">Category Of Campus</label>
-                                    <input type="text" name="category" class="form-control" id="campusCategory" placeholder="Enter Campus Category">
-                                </div>
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("CampusView","Campus")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12"></div>
+            <div class="container-fluid">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <!--ur contents here-->
+                        <!-- jquery validation -->
+                        <div class="card card-primary">
+                            <!-- /.card-header -->
+                            <div class="card-header">
+                                <h3 class="card-title">Edit Details</h3>
+                            </div>
+                            <!-- form start -->
+                            <form role="form" id="campusadd">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <div class="form-group">
-                                                    <label>Dapartment</label>
-                                                    <select name="dept" class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Computer Engineering</option>
-                                                        <option>Electronics & Communication Engineering</option>
-                                                        <option>Electrical Engineering</option>
-                                                        <option>Civil Engineering</option>
-                                                        <option>Mechanical Engineering</option>
-                                                        <option>Administrative Department</option>
-                                                        <option>Workshop</option>
-                                                        <option>library</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Upload Image File For Campus</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                            <label class="custom-file-label" for="exampleInputFile">
-                                                                Choose
-                                                                file
-                                                            </label>
-                                                        </div>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text" id="">Upload</span>
-                                                        </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="col-6">
+                                                <label for="Title"> Enter Name</label>
+                                                <input type="text" value="@Model.Name" Name="Name" class="form-control" id="Title"
+                                                       placeholder="Enter Name">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Enter Category:</label>
+                                                <select Name="Category" class="form-control select2" style="width: 100%;">
+                                                    <option selected="selected">@Model.Category</option>
+                                                    <option>Seminar Hall</option>
+                                                    <option>Ground</option>
+                                                    <option>Administrative Department</option>
+                                                    <option>Workshop</option>
+                                                    <option>library</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="col-6">
+                                                <label>Enter Department:</label>
+                                                <select Name="Department" class="form-control select2" style="width: 100%;">
+                                                    <option selected="selected">@Model.Department</option>
+                                                    <option>Electronics & Communication Engineering</option>
+                                                    <option>Electrical Engineering</option>
+                                                    <option>Civil Engineering</option>
+                                                    <option>Mechanical Engineering</option>
+                                                    <option>Administrative Department</option>
+                                                    <option>Workshop</option>
+                                                    <option>library</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label for="exampleInputFile">
+                                                    Upload Image File For
+                                                    Campus
+                                                </label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="file" class="custom-file-input"
+                                                               id="imageUpload">
+                                                        <label class="custom-file-label"
+                                                               for="exampleInputFile">
+                                                            Choose
+                                                            file
+                                                        </label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Upload</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6">
+                                                <button id="btnSubmit" type="submit"
+                                                        class="btn btn-primary float-right col-md-2">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-default col-md-2">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- /.card-body -->
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary float-right">Update</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary float-left">Delete</button>
-                            </div>
+                            </form>
                         </div>
+
                     </div>
                 </div>
-                <!-- /.card-header -->
-                
             </div>
-
         </div>
-
-<!-- /.container-fluid -->
     </section>
+    <!-- /.content -->
 </div>
 
 @section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
+    <script type="text/javascript">
 
-<script type="text/javascript">
+
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#campusadd').validate({
+                rules: {
+                    "Name": {
+                        required: true
+                    },
+                    "Category": {
+                        required: true
+                    },
+                    "Department": {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    "Name": {
+                        required: "this field is required"
+                    },
+                    "Category": {
+                        required: "this field is required"
+                    },
+                    "Department": {
+                        required: "this field is required"
+                    }
+                }
 
 
-    $(document).ready(function() {
-        //console.log( "ready!" );
+            });
 
-        $('#campusedit').validate({
-          rules: {
-            "name": {
-                 required: true                
-             }, 
-             "category": {
-                 required: true                
-             },
-             "dept": {
-                 required: true
-             }
+            $('#btnSubmit').click(function (e) {
 
-          },
-          messages: {
-            "name": {
-                 required: "this field is required"
-             },
-             "category": {
-                 required: "this field is required"
-             },
-             "dept": {
-                 required: "this field is required"
-             }
-          }
-         
+                //prevent Default functionality
+                e.preventDefault();
+                //alert( "firee!" );
 
-        });
+                //get the action-url of the form
+                //var actionurl = e.currentTarget.action;
 
-        $('#campusedit').submit(function(e) {
+                //do your own request an handle the results
+                if ($('#campusadd').valid()) {
 
-        //prevent Default functionality
-        e.preventDefault();
-        //alert( "firee!" );
+                    var data = new FormData($('#campusadd')[0]);
+                    // data.append('imageFile', document.querySelector('#exampleInputFile').files[0]);
+                    console.log(data);
 
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
 
-        //do your own request an handle the results
-        if($('#campusedit').valid()){
-        $.ajax({
-                url: '@Url.Action("NewsAdd","News")',
-                type: 'post',
-                dataType: 'application/json',
-                data: $("#myform").serialize(),
-                success: function(data) {
+                    $.ajax({
+                        url: '@Url.Action("CampusEdit","Campus")',
+                        type: 'post',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        data: data,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                console.log("Success")
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#campusadd')[0].reset();
+                                    window.location.href = '@Url.Action("CampusView","Campus")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
 
                 }
+
+            });
+
+
         });
+
+    </script>
+
+}
         }
-
-    });
-
-
-    });
-
-</script>
-
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }
