@@ -2,7 +2,6 @@
     ViewBag.Title = "AboutCollegeAdd"; }
 
 <div class="content-wrapper">
-    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
@@ -179,7 +178,7 @@
                     console.log(data);
 
                     $.ajax({
-                        url: '@Url.Action("DepartmentAdd", "Department")',
+                        url: '@Url.Action("AboutCollegeAdd", "AboutCollege")',
                         type: 'post',
                         data: data,
                         processData: false,
@@ -194,7 +193,7 @@
                                     icon: "success"
                                 }).then(function () {
                                     $('#aboutCollege')[0].reset();
-                                    window.location.href = '@Url.Action("DepartmentList","Department")';
+                                    window.location.href = '@Url.Action("AboutCollegeView", "AboutCollege")';
                                 });
                             }
                             else {
