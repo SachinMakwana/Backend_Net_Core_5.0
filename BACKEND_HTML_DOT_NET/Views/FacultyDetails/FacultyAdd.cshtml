@@ -1,4 +1,4 @@
-﻿@model List<BACKEND_HTML_DOT_NET.Models.FacultyDetailsVM>
+﻿@model BACKEND_HTML_DOT_NET.Models.FacultyDetailsVM
 
 @{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "FacultyAdd"; }
@@ -57,9 +57,15 @@
                                                 <div class="input-group col-12">
 
                                                     <div class="col-md-3">
-                                                        <label for="department">Department ID</label>
-                                                        <input name="deptid" type="number" class="form-control" id="department"
-                                                               placeholder="Department ID">
+                                                        <label for="department">Department </label>
+                                                        <select name="Department" id="department" class="form-control">
+                                                            <option>Select Department</option>
+                                                            @foreach (var item in Model.DepartmentSelectList)
+                                                            {
+
+                                                                <option value="@item.Value"> @item.Text</option>
+                                                            }
+                                                        </select>
                                                     </div>
 
                                                 </div>
@@ -173,10 +179,13 @@
                     data.append("Designation", Designation);
                     data.append("DeptId", deptId);
 
-                        $.ajax({
-                            url: '@Url.Action("FacultyAdd","FacultyDetails")',
-                            type: 'post',
-                            data: data,
+                    $.ajax({
+                        url: '@Url.Action("FacultyAdd", "FacultyDetails")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
                         success: function (data) {
                             if (data.status_code == "200") {
                                 Swal.fire({
@@ -185,7 +194,7 @@
                                     timer: 6000,
                                     icon: "success"
                                 }).then(function () {
-                                    $('#facultyadd')[0].reset();
+                                    $('#frmdepartment')[0].reset();
                                     window.location.href = '@Url.Action("FacultyList","FacultyDetails")';
                                 });
                             }
@@ -198,7 +207,7 @@
                                 });
                             }
                         }
-                        });
+                    });
 
             }
         });

@@ -3,6 +3,7 @@ using GECP_DOT_NET_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -20,7 +21,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class FacultyDetails : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
+        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<FacultyDetailsVM> facultyDetailsList = new List<FacultyDetailsVM>();
         RestClient client;
@@ -39,9 +40,15 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             RestResponse response = restClient.Execute(restRequest);
 
             var content = response.Content;
-
-            var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
-            facultyDetailsList = user.data;
+            if (content != null)
+            {
+                var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
+                facultyDetailsList = user.data;
+                foreach (var data in facultyDetailsList)
+                {
+                    data.Image = "https://api.gecpatan.ac.in/" + data.Image;
+                }
+            }
 
             return View(facultyDetailsList);
         }
@@ -53,9 +60,36 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             return View(newsVM);
         }
 
-        public IActionResult FacultyAdd()
+        public IActionResult FacultyAdd(long id = 0)
         {
-            return View();
+            FacultyDetailsVM facultyVM = new FacultyDetailsVM();
+            try
+            {
+                if (id > 0)
+                {
+                    facultyVM = facultyDetailsList.Where(m => m.Id == id).FirstOrDefault();
+                }
+                var restRequest = new RestRequest("/GetAllDepartmentDetails", Method.Get);
+                restRequest.AddHeader("Accept", "application/json");
+                restRequest.RequestFormat = DataFormat.Json;
+                RestResponse response = client.Execute(restRequest);
+
+                var content = response.Content;
+                if (content != null)
+                {
+                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
+                    facultyVM.DepartmentSelectList = user.data.Select(m => new SelectListItem()
+                    {
+                        Text = m.Name,
+                        Value = m.Id.ToString()
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(facultyVM);
         }
 
         [HttpPost]
@@ -104,10 +138,36 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
 
 
-        public IActionResult FacultyEdit(int id)
+        public IActionResult FacultyEdit(long id = 0)
         {
-            var item = facultyDetailsList.Where(m => m.Id == id).FirstOrDefault();
-            return View(item);
+            FacultyDetailsVM facultyVM = new FacultyDetailsVM();
+            try
+            {
+                if (id > 0)
+                {
+                    facultyVM = facultyDetailsList.Where(m => m.Id == id).FirstOrDefault();
+                }
+                var restRequest = new RestRequest("/GetAllDepartmentDetails", Method.Get);
+                restRequest.AddHeader("Accept", "application/json");
+                restRequest.RequestFormat = DataFormat.Json;
+                RestResponse response = client.Execute(restRequest);
+
+                var content = response.Content;
+                if (content != null)
+                {
+                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
+                    facultyVM.DepartmentSelectList = user.data.Select(m => new SelectListItem()
+                    {
+                        Text = m.Name,
+                        Value = m.Id.ToString()
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(facultyVM);
         }
 
         [HttpPost]

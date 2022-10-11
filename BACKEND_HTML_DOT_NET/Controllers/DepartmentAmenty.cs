@@ -17,7 +17,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class DepartmentAmenty : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
+        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<DepartmentAmentyVM> departmentAmentyList = new List<DepartmentAmentyVM>();
         RestClient client;

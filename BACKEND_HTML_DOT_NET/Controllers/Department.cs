@@ -21,7 +21,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class DepartmentController : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
+        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<DepartmentVM> departmentVMList = new List<DepartmentVM>();
         RestClient client;
@@ -47,7 +47,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 departmentVMList = user.data;
                 foreach (var data in departmentVMList)
                 {
-                    data.Image = "https://localhost:44374/" + data.Image;
+                    data.Image = "https://api.gecpatan.ac.in/" + data.Image;
                 }
             }
             return View(departmentVMList);

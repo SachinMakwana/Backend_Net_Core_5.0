@@ -20,7 +20,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class Committee : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
+        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<CommitteeVM> committeList = new List<CommitteeVM>();
         private static List<CommitteeMembersVM> committeeMembersList = new List<CommitteeMembersVM>();
@@ -46,7 +46,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 committeList = user.data;
                 foreach (var data in committeList)
                 {
-                    data.Image = "https://localhost:44374/" + data.Image;
+                    data.Image = "https://api.gecpatan.ac.in/" + data.Image;
                 }
             }
             return View(committeList);

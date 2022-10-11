@@ -20,7 +20,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class Achievements : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
+        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<AchievementVM> AchievementVMList = new List<AchievementVM>();
         RestClient client;
@@ -100,7 +100,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 AchievementVMList = user.data;
                 foreach (var data in AchievementVMList = user.data)
                 {
-                    data.Image = "https://localhost:44374/" + data.Image;
+                    data.Image = "https://api.gecpatan.ac.in/" + data.Image;
                 }
             }
             return View(AchievementVMList);
@@ -112,20 +112,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             AchievementVM achievementVM = new AchievementVM();
             try
             {
-
                 achievementVM = AchievementVMList.Where(m => m.Id == id).FirstOrDefault();
-
-                var restRequest = new RestRequest("/GetAllFacultyDetails", Method.Get);
-                restRequest.AddHeader("Accept", "application/json");
-                restRequest.RequestFormat = DataFormat.Json;
-                RestResponse response = client.Execute(restRequest);
-
-                var content = response.Content;
-                if (content != null)
-                {
-                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<AchievementVM>>>(content);
-                   
-                }
             }
             catch (Exception ex)
             {

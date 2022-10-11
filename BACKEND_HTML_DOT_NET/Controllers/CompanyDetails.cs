@@ -20,7 +20,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class CompanyDetails : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
+        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<CompanyVM> companyList = new List<CompanyVM>();
         RestClient client;
@@ -44,8 +44,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 companyList = user.data;
                 foreach (var data in companyList)
                 {
-                    data.Logo = "https://localhost:44374/" + data.Logo;
-                    data.Image = "https://localhost:44374/" + data.Image;
+                    data.Logo = "https://api.gecpatan.ac.in/" + data.Logo;
+                    data.Image = "https://api.gecpatan.ac.in/" + data.Image;
                 }
             }
             return View(companyList);
