@@ -1,5 +1,6 @@
 ﻿using BACKEND_HTML_DOT_NET.Models;
 using GECP_DOT_NET_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
+    [Authorize]
     public class Attachments : Controller
     {
         private string apiBaseUrl = "https://localhost:44374/api";

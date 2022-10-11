@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
+    [Authorize]
     public class Mission : Controller
     {
         private string apiBaseUrl = "https://localhost:44374/api";

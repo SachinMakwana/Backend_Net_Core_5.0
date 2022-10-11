@@ -1,4 +1,5 @@
 ﻿using BACKEND_HTML_DOT_NET.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
+    [Authorize]
     public class Committee : Controller
     {
         private string apiBaseUrl = "https://localhost:44374/api";

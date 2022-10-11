@@ -9,9 +9,11 @@ using Newtonsoft.Json;
 using System.Text;
 using RestSharp;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
+    [Authorize]
     public class News : Controller
     {
         private string apiBaseUrl = "https://localhost:44374/api";
