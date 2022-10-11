@@ -20,7 +20,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     public class AboutCollege : Controller
     {
 
-        private string apiBaseUrl = "https://localhost:44374/api";
+        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<CollegeVM> collegeVM = new List<CollegeVM>();
         RestClient client;
@@ -45,7 +45,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 collegeVM = user.data;
                 foreach (var data in collegeVM)
                 {
-                    data.Image = "https://localhost:44374/" + data.Image;
+                    data.Image = "https://api.gecpatan.ac.in/api" + data.Image;
                 }
                 
             }

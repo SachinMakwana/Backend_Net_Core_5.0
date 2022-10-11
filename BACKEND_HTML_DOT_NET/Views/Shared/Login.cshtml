@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link href=@Url.Content("~/css/plugins/fontawesome-free/css/all.min.css") rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link href=@Url.Content("~/css/plugins/icheck-bootstrap/icheck-bootstrap.min.css") rel="stylesheet" />
+    <!-- Theme style -->
+
+    <link href=@Url.Content("~/css/adminlte.min.css") rel="stylesheet" />
+
+    <link rel="stylesheet" href="@Url.Content("~/css/adminlte.css")">
+
+    <!-- custom style -->
+    <link href=@Url.Content("~/css/custom.css") rel="stylesheet" />
+
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition login-page">
+    
+    @RenderBody();
+
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src=@Url.Content("~/lib/jquery/dist/jquery.min.js")></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src=@Url.Content("~/lib/bootstrap/dist/js/bootstrap.bundle.min.js")></script>
+    <!-- AdminLTE App -->
+    <script src=@Url.Content("~/js/adminlte.min.js")></script>
+
+</body>
+
+</html>

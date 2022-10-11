@@ -36,7 +36,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
 
         [HttpGet("login")]
-        public IActionResult Login(string returnUrl)
+        public IActionResult LoginPage(string returnUrl)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
