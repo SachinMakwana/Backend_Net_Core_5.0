@@ -1,19 +1,25 @@
 ﻿
-@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "AboutCollegeView"; }
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AboutCollegeView";
+    var college = Model;
+}
 
 <div class="content-wrapper">
     <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
     <section class="content" style="margin-top:20px;">
+        @foreach(var item in Model){
         <div class="row">
             <div class="col-md-12">
                 <ol class="breadcrumb float-sm-right">
+                    @if(item.Id != 1){
                     <li style="margin-left: 00px;">
                         <a href="@Url.Action("AboutCollegeAdd","AboutCollege")">
                             <i class="nav-icon fas fa-plus-circle"></i>
                         </a>
                     </li>
-                    <li style="margin-left: px;"><a href="@Url.Action("AboutCollegeAdd","AboutCollege")">Edit Details</a></li>
+                    <li style="margin-left: px;"><a href="@Url.Action("AboutCollegeAdd","AboutCollege")">Add Details</a></li>
+                    }
                 </ol>
             </div>
             <div class="col-md-12">
@@ -21,7 +27,8 @@
                     <div class="card-header">
                         <h3 class="card-title">About College</h3>
                     </div>
-                    @foreach(var item in Model){
+                    
+
                     <div class="card-body">
                         <div class="raw">
                             <div class="col-12">
@@ -75,22 +82,21 @@
                                     </span>
                                 </div>
                             </div>
-                            }
                             <div class="input-group col-md-12 mt-4">
                                 <div class="col-sm-6">
-                                    <a href="@Url.Action("AboutCollegeAdd","AboutCollege")" class="btn btn-primary float-right">Edit</a>
-
+                                    <a href="@Url.Action("AboutCollegeEdit","AboutCollege", new { @id = item.Id})" class="btn btn-primary float-right">Edit</a>
                                 </div>
 
                             </div>
+                            
 
                         </div>
                     </div>
-                    }
                 </div>
                 <!-- /.card-body -->
 
             </div>
         </div>
+                    }
     </section>
 </div>

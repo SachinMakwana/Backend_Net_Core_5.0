@@ -99,5 +99,68 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 return Json(new { status_code = "000", message = ex.Message.ToString() });
             }
         }
+
+
+        public IActionResult AboutCollegeEdit(long id = 0)
+        {
+            CollegeVM aboutCollege = new CollegeVM();
+            try
+            {
+                aboutCollege = collegeVM.Where(m => m.Id == id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+            return View(aboutCollege);
+        }
+
+        [HttpPost]
+        public IActionResult AboutCollegeEdit([FromForm] CollegeVM collegeVM, [Optional] IFormCollection collection)
+        {
+            try
+            {
+                collegeVM.UpdatedDate = DateTime.Now;
+                RestRequest request = new RestRequest("/UpdateCollegeDetail", Method.Put);
+          
+
+                if (collection.Files.Count() > 0)
+                {
+                    //add files to request
+                    foreach (var file in collection.Files)
+                    {
+                        var memorystream = new MemoryStream();
+                        file.CopyTo(memorystream);
+                        var bytes = memorystream.ToArray();
+                        request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                    }
+                }
+                else
+                {
+                    byte[] data = new byte[0];
+                    request.AddFile("image", data, "noimage");
+                }
+
+                //iterate and add model to request as parameter
+                PropertyInfo[] properties = typeof(CollegeVM).GetProperties();
+                foreach (PropertyInfo property in properties)
+                {
+                    if (property.Name.ToString() != "SelectList")
+                    {
+                        var value = property.GetValue(collegeVM);
+                        request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
+                    }
+                }
+
+                var response = client.Execute(request);
+                ServiceResponse<bool> serviceResponse = JsonConvert.DeserializeObject<ServiceResponse<bool>>(response.Content);
+                return Json(serviceResponse);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { status_code = "000", message = ex.Message.ToString() });
+            }
+        }
     }
 }

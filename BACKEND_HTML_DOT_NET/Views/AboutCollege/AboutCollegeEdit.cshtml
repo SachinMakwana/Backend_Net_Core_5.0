@@ -1,0 +1,219 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AboutCollegeAdd";
+}
+
+<div class="content-wrapper">
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("AboutCollegeView","AboutCollege")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit details</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" id="aboutCollege">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+
+                                <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="department">College Name</label>
+                                        <input type="text" class="form-control" name="Name" id="Name" value="@Model.Name"  />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="department">Principal Name</label>
+                                        <input type="text" class="form-control" name="Principal" id="Principal" value="@Model.Principal" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="description">Description</label>
+                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" >@Model.Description</textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="message">Message from Principal</label>
+                                    <textarea type="text" name="PrincipalMessage" class="form-control" id="PrincipalMessage" rows="4">@Model.PrincipalMessage</textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="message">Address</label>
+                                    <textarea type="text" name="Address" class="form-control" id="Address" rows="4">@Model.Address</textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="message">Phone</label>
+                                    <input type="text" name="Phone" class="form-control" id="Phone" rows="4" value="@Model.Phone" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="message">Email</label>
+                                    <input type="text" name="Email" class="form-control" id="Email" rows="4" value="@Model.Email" />
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">CHOOSE IMAGE OF COLLEGE</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input"
+                                                       id="Image" name="Image">
+                                                <label class="custom-file-label" for="exampleInputFile">
+                                                    Choose
+                                                    file
+                                                </label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="input-group col-12">
+                                <div class="col-sm-6">
+                                    <button type="button" id="btnSubmit"
+                                            class="btn btn-primary float-right col-md-2">
+                                        Submit
+                                    </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button"
+                                            class="btn btn-default col-md-2">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#aboutCollege').validate({
+                rules: {
+                    "Name": { required: true },
+                    "Description": { required: true },
+                    "PrincipalMessage": { required: true },
+                    "Principal": { required: true },
+
+                    "Address": { required: true },
+                    "Phone": { required: true },
+                    "Email": { required: true }
+                },
+                messages: {
+                    "Name": { required: "this field is required" },
+                    "Description": { required: "this field is required" },
+                    "PrincipalMessage": { required: "this field is required" },
+                    "Principal": { required: "this field is required" },
+
+                    "Address": { required: "this field is required" },
+                    "Phone": { required: "This field is req" },
+                    "Email": { required: "This field is req" },
+                    "Image": { required: "this field is required" }
+                }
+            });
+
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#aboutCollege').valid()) {
+
+                    var Id = document.getElementById("Id").value;
+                    var Name = document.getElementById("Name").value;
+                    var description = document.getElementById("Description").value;
+                    var PrincipalMessage = document.getElementById("PrincipalMessage").value;
+                    var Address = document.getElementById("Address").value;
+                    var Phone = document.getElementById("Phone").value;
+                    var Email = document.getElementById("Email").value;
+                    var Principal = document.getElementById("Principal").value;
+                    var id = $("#Id").val();
+
+
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("Image").files.length;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("Image").files[i];
+                        data.append("image", file);
+                    }
+                    data.append("Id",Id);
+                    data.append("Name", Name);
+                    data.append("Description", description);
+                    data.append("Principal", Principal);
+                    data.append("PrincipalMessage", PrincipalMessage);
+                    data.append("Address", Address);
+                    data.append("Phone", Phone);
+                    data.append("Email", Email);
+                    data.append("Id", id);
+
+
+                    console.log(data);
+
+                    $.ajax({
+                        url: '@Url.Action("AboutCollegeEdit", "AboutCollege")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#aboutCollege')[0].reset();
+                                    window.location.href = '@Url.Action("AboutCollegeView", "AboutCollege")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+    </script>
+
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
