@@ -1,10 +1,6 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "LoginPage";
     Layout = "~/Views/Shared/Login.cshtml";
-}
-@{
-    ViewData["Title"] = "Login";
     var returnUrl = ViewData["ReturnUrl"] as string;
     var error = TempData["Error"] as string;
 }
@@ -19,6 +15,15 @@
             <p class="login-box-msg">Login in to start your session</p>
 
             <form action="/login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
+
+                @if (!string.IsNullOrEmpty(error))
+                {
+                    <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+                        <i class="bi-exclamation-octagon-fill"></i>
+                        <strong class="mx-2">Error!</strong> Username or Password invalid.
+                    </div>
+                }
+
                 <div class="input-group mb-3">
                     <input type="text" name="username" class="form-control" placeholder="Username">
                     <div class="input-group-append">

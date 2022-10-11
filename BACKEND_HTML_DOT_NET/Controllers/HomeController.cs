@@ -69,13 +69,13 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                         await HttpContext.SignInAsync(claimsPrincipal);
-                        return Redirect(returnUrl);
+                        return Redirect("/");
                     }
                 }
             }
 
             TempData["Error"] = "Error : Username or Password Wrong";
-            return View("login");
+            return Redirect("/login");
         }
 
         [Authorize]
