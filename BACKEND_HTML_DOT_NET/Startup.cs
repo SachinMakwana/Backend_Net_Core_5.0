@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Providers.Entities;
 
 namespace BACKEND_HTML_DOT_NET
 {
@@ -29,6 +31,7 @@ namespace BACKEND_HTML_DOT_NET
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
             {
                 option.LoginPath = "/login";
+                option.ExpireTimeSpan = TimeSpan.FromSeconds(1000);
                 option.Events = new CookieAuthenticationEvents()
                 {
                     OnSigningIn = async context =>

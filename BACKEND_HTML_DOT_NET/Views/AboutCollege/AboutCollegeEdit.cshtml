@@ -40,15 +40,17 @@
                                         <input type="text" class="form-control" name="Principal" id="Principal" value="@Model.Principal" />
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <label for="description">Description</label>
-                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" >@Model.Description</textarea>
+                                <div id="summernote"><p>Hello Summernote</p></div>
+                                    
                                 </div>
+
+
 
                                 <div class="col-md-6">
                                     <label for="message">Message from Principal</label>
-                                    <textarea type="text" name="PrincipalMessage" class="form-control" id="PrincipalMessage" rows="4">@Model.PrincipalMessage</textarea>
+                                    <div id="summernote2"><p>Hello Summernot</p></div>
                                 </div>
 
                                 <div class="col-md-6">
@@ -116,6 +118,15 @@
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
 
+   
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+            $('#summernote2').summernote();
+        });
+        
+    </script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -145,12 +156,16 @@
 
             $('#btnSubmit').click(function (e) {
 
+
                 if ($('#aboutCollege').valid()) {
+
+                    var description = $("#summernote").summernote('code');
+                    var PrincipalMessage = $("#summernote2").summernote('code');
 
                     var Id = document.getElementById("Id").value;
                     var Name = document.getElementById("Name").value;
-                    var description = document.getElementById("Description").value;
-                    var PrincipalMessage = document.getElementById("PrincipalMessage").value;
+                    
+    
                     var Address = document.getElementById("Address").value;
                     var Phone = document.getElementById("Phone").value;
                     var Email = document.getElementById("Email").value;
