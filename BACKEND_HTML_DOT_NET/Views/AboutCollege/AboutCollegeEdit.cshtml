@@ -40,6 +40,11 @@
                                         <input type="text" class="form-control" name="Principal" id="Principal" value="@Model.Principal" />
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="description">Description</label>
+                                <div id="summernote"><p>Hello Summernote</p></div>
+                                    
+                                </div>
 
                                 <div class="col-md-6">
                                     <label for="description">Description</label>
@@ -115,6 +120,13 @@
 
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+   
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+    </script>
 
     <script type="text/javascript">
 
