@@ -1,0 +1,164 @@
+﻿
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "DesignationEdit";
+}
+
+<div class="content-wrapper">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("DesignationList","DesignationCon")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Designation</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" id="gallery" asp-action="GalleryAdd" asp-controller="CollegeGallery" method="post" >
+                        <div class="card-body">
+                            <div class="row">
+                                <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+
+                               
+
+                                <div class="form-group">
+                                    <label for="fileName">Title</label>
+                                    <input type="number" class="form-control" id="Title" value="@Model.Title" name="Title" placeholder="Enter id">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fileName">Class</label>
+                                    <input type="text" class="form-control" id="Class" name="Class" value="@Model.Class" placeholder="Enter name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fileName">Payband</label>
+                                    <input type="text" class="form-control" id="Payband" name="Payband" value="@Model.Payband" placeholder="Enter name">
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="input-group col-12">
+                                <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </section>
+</div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/jszip/jszip.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/pdfmake/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        //console.log( "ready!" );
+
+            $('#gallery').validate({
+                rules: {
+
+                    "Title": {
+                        required: true
+                    },
+                    "Class": {
+                        required: true
+                    },
+                    "Payband": {
+                        required: true
+                    }
+                },
+                messages: {
+                    "Title": {
+                        required: "this felid is required"
+                    },
+                    "Class": {
+                        required: "this felid is required"
+                    },
+                    "Payband": {
+                        required: "this felid is required"
+                    }
+                }
+
+
+            });
+
+            $('#btnGallery').click(function (e) {
+               // alert("enterted");
+        //prevent Default functionality
+        e.preventDefault();
+
+
+        if($('#gallery').valid()){
+
+                    var data = new FormData($('#gallery')[0]);
+            
+             $.ajax({
+                        url: '@Url.Action("DesignationEdit","DesignationCon")',
+                    type: 'post',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: data,
+                    success: function(data) {
+                            if (data.status_code == "200") {
+                                console.log("Success")
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#gallery')[0].reset();
+                                    window.location.href = '@Url.Action("DesignationList","DesignationCon")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                    }
+            });
+        }
+
+        
+
+    });
+
+
+    });
+</script>
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
