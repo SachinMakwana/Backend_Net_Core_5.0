@@ -20,7 +20,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     public class AboutCollege : Controller
     {
 
-        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
+        private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
         private static List<CollegeVM> collegeVM = new List<CollegeVM>();
         RestClient client;
@@ -45,7 +45,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 collegeVM = user.data;
                 foreach (var data in collegeVM)
                 {
-                    data.Image = "https://api.gecpatan.ac.in/api" + data.Image;
+                    data.Image = "https://localhost:44374/api" + data.Image;
                 }
                 
             }
@@ -121,7 +121,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             try
             {
                 collegeVM.UpdatedDate = DateTime.Now;
-                RestRequest request = new RestRequest("/UpdateCollegeDetail", Method.Put);
+                RestRequest request = new RestRequest("/UpdateCollegeDetail", Method.Post);
           
 
                 if (collection.Files.Count() > 0)

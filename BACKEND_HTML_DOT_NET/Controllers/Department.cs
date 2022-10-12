@@ -21,7 +21,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class DepartmentController : Controller
     {
-        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
+        private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
         private static List<DepartmentVM> departmentVMList = new List<DepartmentVM>();
         RestClient client;
@@ -166,7 +166,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             try
             {
                 departmentVM.UpdatedDate = DateTime.Now;
-                RestRequest request = new RestRequest("/UpdateDepartmentDetail", Method.Put);
+                RestRequest request = new RestRequest("/UpdateDepartmentDetail", Method.Post);
 
                 if (collection.Files.Count() > 0)
                 {

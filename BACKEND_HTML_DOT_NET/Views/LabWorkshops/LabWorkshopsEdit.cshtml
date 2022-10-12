@@ -57,9 +57,7 @@
 
                                             <div class="col-md-6">
                                                 <label for="description">ENTER DESCRIPTION OF Lab & WorkShop</label>
-                                                <textarea type="text" name="description" class="form-control"
-                                                          id="description" rows="4"
-                                                          placeholder="Write content">@Model.Description</textarea>
+                                              <div id="summernote"><p>Hello</p></div>
                                             </div>
 
                                             <div class="form-group col-md-6">
@@ -111,6 +109,11 @@
 
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
     <script type="text/javascript">
 
 
@@ -153,9 +156,11 @@
             $('#btnSubmit').click(function (e) {
                 if ($('#LabWorkshopForm').valid()) {
 
+                        var description = $("#summernote").summernote('code');
+
                     var labname = document.getElementById("labname").value;
                     var deptlabId = document.getElementById("Department").value;
-                    var description = document.getElementById("description").value;
+                   
                     var id = document.getElementById("Id").value;
 
                     //var data = $('#department').serialize();
