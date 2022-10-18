@@ -54,7 +54,7 @@
 
                                                     <div class="col-md-6">
                                                         <label for="description">ENTER DESCRIPTION OF Lab & WorkShop</label>
-                                                        <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
+                                                        <div id="summernote">@Html.Raw(Model.Description)</div>
                                                     </div>
 
                                                     <div class="col-md-6">
@@ -97,6 +97,12 @@
 @section script{
 
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+
+    </script>
 
 <script type="text/javascript">
 
@@ -144,7 +150,7 @@
 
                     var labname = document.getElementById("labname").value;
                     var deptlabId = document.getElementById("Department").value;
-                    var description = document.getElementById("description").value;
+                    var description = $("#summernote").summernote('code');
                     
                     //var data = $('#department').serialize();
                     var data = new FormData();
