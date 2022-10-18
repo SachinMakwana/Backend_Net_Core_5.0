@@ -56,7 +56,7 @@
 
                                 <div class="col-md-6">
                                    <label for="description">ENTER DESCRIPTION</label>
-                                   <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
+                                    <div id="summernote"></div>
                                </div>
 
                                <div class="form-group">
@@ -97,6 +97,11 @@
 </div>
 
 @section script{
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+    </script>
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
@@ -144,7 +149,7 @@
             "Name": {
                  required: "this field is required"             
              },
-             "Titel": {
+             "Title": {
                  required: "this field is required"
              },
               "Type": {
@@ -171,8 +176,30 @@
         e.preventDefault();
 
         if($('#Attachments').valid()){
+                    var title = document.getElementById("title").value;
+                    var name = document.getElementById("fileName").value;
+                    var pageId = document.getElementById("pageid").value;
+                    var type = document.getElementById("type").value;
 
-                    var data = new FormData($('#Attachments')[0]);
+                    var description = $("#summernote").summernote('code');
+
+                    var data = new FormData();
+                    var totalFiles = document.getElementById("InputFile").files.length;
+                    for (var i = 0; i < totalFiles; i++) {
+                        var file = document.getElementById("InputFile").files[i];
+                        data.append("InputFile", file);
+                    }
+
+                    data.append("Title", title);
+                    data.append("Name", fileName);
+                    data.append("Type", type);
+                    data.append("PageId", pageId);
+                    data.append("Description", description);
+
+
+
+                    console.log(data);
+
 
                     $.ajax({
                         url: '@Url.Action("AttachmentsAdd","Attachments")',

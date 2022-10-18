@@ -54,12 +54,12 @@
 
                                 <div class="col-md-6">
                                     <label for="description">Description</label>
-                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content">@Model.Description</textarea>
+                                    <div id="summernote"></div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="message">Message from HOD</label>
-                                    <textarea type="text" name="Message" class="form-control" id="Message" rows="4" placeholder="Write content">@Model.Message</textarea>
+                                    <div id="summernote2"></div>
                                 </div>
 
 
@@ -109,6 +109,14 @@
 
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+            $('#summernote2').summernote();
+
+        });
+
+    </script>
 
     <script type="text/javascript">
 
@@ -135,7 +143,7 @@
                 if ($('#frmdepartment').valid()) {
 
                     var departmentName = document.getElementById("Name").value;
-                    var description = document.getElementById("Description").value;
+                    var description = $("#summernote").summernote('code');
                     var message = document.getElementById("Message").value;
                     var head = document.getElementById("Head").value;
                     var slogan = document.getElementById("Slogan").value;

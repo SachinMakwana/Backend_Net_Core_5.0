@@ -39,6 +39,7 @@
                                 <div class="col-md-6">
                                     <label for="description">ENTER DESCRIPTION OF NEWS</label>
                                     <div id="summernote">@Html.Raw(Model.Description)</div>
+
                                 </div>
                             </div>
                         </div>
@@ -59,6 +60,12 @@
 
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+
+    </script>
 
     <script>
         $(document).ready(function () {
