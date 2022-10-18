@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Web
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "AboutCollegeView";
@@ -48,7 +48,7 @@
                                 </div>
                                 <div>
                                     <span>
-                                            @item.Description
+                                            @Html.Raw(HttpUtility.HtmlDecode(item.Description))
                                     </span>
                                 </div>
                                 <div class="mt-5">
@@ -60,7 +60,7 @@
                                 <div class="mt-3">
                                     <span>
                                         <span class="font-weight-bold">PrincipalMessage : </span>
-                                            @item.PrincipalMessage
+                                            @Html.Raw(HttpUtility.HtmlDecode(item.PrincipalMessage))
                                     </span>
                                 </div>
                                 <div class="mt-3">

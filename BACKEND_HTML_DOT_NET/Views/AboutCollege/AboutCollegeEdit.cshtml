@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Web
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "AboutCollegeAdd";
 }
@@ -42,7 +43,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="description">Description</label>
-                                <div id="summernote"><p>Hello Summernote</p></div>
+                                    <div id="summernote">@Html.Raw(Model.Description)</div>
                                     
                                 </div>
 
@@ -50,7 +51,7 @@
 
                                 <div class="col-md-6">
                                     <label for="message">Message from Principal</label>
-                                    <div id="summernote2"><p>Hello Summernot</p></div>
+                                    <div id="summernote2">@Html.Raw(Model.PrincipalMessage)</div>
                                 </div>
 
                                 <div class="col-md-6">
