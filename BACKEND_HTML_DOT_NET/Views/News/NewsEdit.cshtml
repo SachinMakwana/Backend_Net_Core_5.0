@@ -28,7 +28,7 @@
                     <form id="newsaddform" name="newsedit" role="form">
                         <div class="card-body">
                             <div class="row">
-                                <input type="hidden" name="id" class="form-control" id="id" value="@Model.Id">
+                                <input type="hidden" name="id" class="form-control" id="Id" value="@Model.Id">
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="description">ENTER DESCRIPTION OF NEWS</label>
-                                    <input type="text" name="description" class="form-control" id="description" value="@Model.Description" />
+                                    <div id="summernote">@Html.Raw(Model.Description)</div>
                                 </div>
                             </div>
                         </div>
@@ -59,6 +59,14 @@
 
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+
+        });
+
+    </script>
 
     <script type="text/javascript">
 
@@ -92,23 +100,41 @@
 
                 if ($('#newsaddform').valid()) {
 
-                    var data = $('#newsaddform').serialize();
+                    var description = $("#summernote").summernote('code');
+                    var title = document.getElementById("title").value;
+                    var id = document.getElementById("Id").value;
 
+                    var data = new FormData();
+
+                    data.append("Description", description);
+                    data.append("Title", title);
+                    data.append("Id", id);
+                    console.log(data)
+
+                    loaderStart();
                     $.ajax({
-                        url: '@Url.Action("NewsUpdate","News")',
+                        url: '@Url.Action("NewsUpdate", "News")',
                         type: 'post',
                         data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
                         success: function (data) {
+                            setTimeout(loaderStop(), 2000);
                             if (data.status_code == "200") {
-                                Swal.fire({
-                                    title: "Updated!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    type: "success"
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.message
                                 }).then(function () {
-                                    $('#newsaddform')[0].reset();
+                                    $('#frmdepartment')[0].reset();
                                     window.location.href = '@Url.Action("NewsList","News")';
                                 });
+                            }
+                            else {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
                             }
                         }
                     });

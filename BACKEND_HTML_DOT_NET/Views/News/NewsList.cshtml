@@ -1,4 +1,5 @@
-﻿@model List<BACKEND_HTML_DOT_NET.Models.NewsVM>
+﻿@using System.Web
+@model List<BACKEND_HTML_DOT_NET.Models.NewsVM>
 
 @{ 
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -69,7 +70,7 @@
                                             @item.Title
                                         </td>
                                         <td>
-                                            @item.Description
+                                                @Html.Raw(HttpUtility.HtmlDecode(item.Description))
                                         </td>
                                         <td>
                                             @item.Date

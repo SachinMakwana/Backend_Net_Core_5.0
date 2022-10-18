@@ -28,7 +28,7 @@
                         <div class="card-body">
                             <div class="row">
 
-                               
+
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -36,10 +36,10 @@
                                         <input type="text" name="Title" class="form-control" id="title" placeholder="ENTER TITLE.. ">
                                     </div>
                                 </div>
-                               <div class="col-md-6">
-                                   <label for="description">ENTER DESCRIPTION OF NEWS</label>
-                                   <textarea type="text" name="description" class="form-control" id="description" rows="4" placeholder="Write content"></textarea>
-                               </div>
+                                <div class="col-md-6">
+                                    <label for="description">ENTER DESCRIPTION OF NEWS</label>
+                                    <div id="summernote"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -58,67 +58,92 @@
 
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
-
-<script type="text/javascript">
-
-
-    $(document).ready(function() {
-        //console.log( "ready!" );
-
-        $('#newsaddform').validate({
-          rules: {
-            "title": {
-                 required: true                
-             },
-             "description": {
-                 required: true
-             }
-
-          },
-          messages: {
-            "title": {
-                 required: "this field is required"
-             },
-             "description": {
-                 required: "this field is required"
-             }
-          }
-         
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
 
         });
 
+    </script>
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#newsaddform').validate({
+                rules: {
+                    "title": {
+                        required: true
+                    },
+                    "description": {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    "title": {
+                        required: "this field is required"
+                    },
+                    "description": {
+                        required: "this field is required"
+                    }
+                }
+
+
+            });
+
             $('#btnSubmit').click(function (e) {
 
-                if($('#newsaddform').valid()){
+                if ($('#newsaddform').valid()) {
 
-                        var data = $('#newsaddform').serialize();
-            
-                        $.ajax({
-                            url: '@Url.Action("NewsAdd","News")',
-                            type: 'post',
-                            data: data,
-                            success: function(data) {
+                    var description = $("#summernote").summernote('code');
+                    var title = document.getElementById("title").value;
+
+                    var data = new FormData();
+
+                    data.append("Description", description);
+                    data.append("Title", title);
+                    console.log(data)
+
+                    $.ajax({
+                        url: '@Url.Action("NewsAdd", "News")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
                             if (data.status_code == "200") {
                                 Swal.fire({
                                     title: "Added!",
                                     text: data.message,
                                     timer: 6000,
-                                    type: "success"
+                                    icon: "success"
                                 }).then(function () {
-                                    $('#newsaddform')[0].reset();
+                                    $('#frmdepartment')[0].reset();
                                     window.location.href = '@Url.Action("NewsList","News")';
                                 });
                             }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
                             }
-                        });
-            }
+                        }
+                    });
+                }
 
-    });
+            });
 
 
-    });
+        });
 
-</script>
+    </script>
 
 }
 
