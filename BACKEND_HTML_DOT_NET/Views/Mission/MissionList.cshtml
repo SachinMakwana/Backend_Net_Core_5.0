@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Web
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "MissionList";
 }
@@ -55,7 +56,7 @@
                                         <tr>
                                             <td>@item.Id</td>
                                             <td>@item.DeptId</td>
-                                            <td>@item.Description</td>
+                                            <td> @Html.Raw(HttpUtility.HtmlDecode(item.Description))</td>
                                             <td>
                                                 <a href="@Url.Action("MissionView","Mission",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>

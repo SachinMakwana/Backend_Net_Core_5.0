@@ -57,7 +57,7 @@
 *@
                                 <div class="col-md-6">
                                     <label for="message">Message from Principal</label>
-                                    <textarea type="text" name="PrincipalMessage" class="form-control" id="PrincipalMessage" rows="4" placeholder="Write content"></textarea>
+                                    <div id="summernote2"><p>Hello Summernot</p></div>
                                 </div>
 
                                 <div class="col-md-6">
@@ -125,6 +125,14 @@
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
 
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+            $('#summernote2').summernote();
+        });
+
+    </script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -157,9 +165,11 @@
 
                 if ($('#aboutCollege').valid()) {
 
+                    var PrincipalMessage = $("#summernote2").summernote('code');
+
                     var Name = document.getElementById("Name").value;
                     var description = document.getElementById("Description").value;
-                    var PrincipalMessage = document.getElementById("PrincipalMessage").value;
+                   
                     var head = document.getElementById("Head").value;
                     var Address = document.getElementById("Address").value;
                     var Phone = document.getElementById("Phone").value;

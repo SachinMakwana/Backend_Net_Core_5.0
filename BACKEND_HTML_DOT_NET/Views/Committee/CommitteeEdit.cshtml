@@ -48,7 +48,7 @@
 
                                                 <div class="col-6">
                                                     <label for="Name">Committee Description</label>
-                                                    <textarea type="text" name="Description" class="form-control" id="Description" rows="4" >@Model.Description</textarea>
+                                                    <div id="summernote">@Html.Raw(Model.Description)</div>
                                                 </div>
 
                                                 <div class="col-6">
@@ -109,6 +109,14 @@
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
 
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+
+        });
+
+    </script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -130,7 +138,7 @@
                 if ($('#CommitteeForm').valid()) {
 
                     var name = document.getElementById("Name").value;
-                    var description = document.getElementById("Description").value;
+                    var description = $("#summernote").summernote('code');
                     var slogan = document.getElementById("Slogan").value;
                     var CommitteeID = document.getElementById("CommitteeID").value;
                     var id = $("#Id").val();

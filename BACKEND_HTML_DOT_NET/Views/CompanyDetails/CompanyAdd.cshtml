@@ -58,7 +58,7 @@
 
                                             <div class="col-md-6">
                                                 <label for="description">Description</label>
-                                                <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
+                                                <div id="summernote">@Model.Description</div>
                                             </div>
 
 
@@ -115,6 +115,13 @@
 
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+
+        });
+
+    </script>
 
     <script type="text/javascript">
 
@@ -141,7 +148,7 @@
                 if ($('#companyDetail').valid()) {
 
                     var companyTitle = document.getElementById("companyTitle").value;
-                    var description = document.getElementById("Description").value;
+                    var description = $("#summernote").summernote('code');
                     var rDepartment = document.getElementById("rDepartment").value;
                     var id = $("#Id").val();
 
