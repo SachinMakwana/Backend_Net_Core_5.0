@@ -62,7 +62,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         public IActionResult CommitteeAdd()
         {
-            return View();
+            CommitteeVM committeeVM = new CommitteeVM();
+            return View(committeeVM);
         }
         [HttpPost]
         public IActionResult CommitteeAdd([FromForm] CommitteeVM committteeVM, [Optional] IFormCollection collection)
