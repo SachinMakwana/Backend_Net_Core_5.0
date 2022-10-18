@@ -10,19 +10,27 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
     [Authorize]
     public class Mission : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
-        HttpClient hc = new HttpClient();
+       HttpClient hc = new HttpClient();
         private static List<MissionVM> missionVMList = new List<MissionVM>();
         RestClient client;
 
-        public Mission()
+        private readonly AppIdentitySettings _config;
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+        public Mission(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
+
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
             client = new RestClient(apiBaseUrl);
         }
 

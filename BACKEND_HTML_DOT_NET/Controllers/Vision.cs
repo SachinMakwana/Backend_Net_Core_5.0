@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -16,13 +17,20 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class Vision : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
         private static List<VisionVM> visionVMList = new List<VisionVM>();
         RestClient client;
 
-        public Vision()
+        private readonly AppIdentitySettings _config;
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+        public Vision(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
+
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
             client = new RestClient(apiBaseUrl);
         }
 

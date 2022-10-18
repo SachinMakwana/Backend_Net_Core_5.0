@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -20,13 +21,20 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class CompanyDetails : Controller
     {
-        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<CompanyVM> companyList = new List<CompanyVM>();
         RestClient client;
 
-        public CompanyDetails()
+        private readonly AppIdentitySettings _config;
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+        public CompanyDetails(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
+
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
             client = new RestClient(apiBaseUrl);
         }
         public IActionResult CompanyList()
@@ -44,8 +52,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 companyList = user.data;
                 foreach (var data in companyList)
                 {
-                    data.Logo = "https://api.gecpatan.ac.in/" + data.Logo;
-                    data.Image = "https://api.gecpatan.ac.in/" + data.Image;
+                    data.Logo = imageBaseUrl + data.Logo;
+                    data.Image = imageBaseUrl + data.Image;
                 }
             }
             return View(companyList);

@@ -52,6 +52,10 @@ namespace BACKEND_HTML_DOT_NET
             {
                 option.IdleTimeout = TimeSpan.FromSeconds(30);
             });
+
+            var identitySettingsSection =
+                Configuration.GetSection("AppIdentitySettings");
+            services.Configure<AppIdentitySettings>(identitySettingsSection);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,5 +85,11 @@ namespace BACKEND_HTML_DOT_NET
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+    }
+
+    public class AppIdentitySettings
+    {
+        public string apiBaseUrl { get; set; }
+        public string imageBaseUrl { get; set; }
     }
 }

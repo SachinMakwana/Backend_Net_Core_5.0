@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -20,15 +21,22 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class WomenCell : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
         private static List<CommitteeVM> committeList = new List<CommitteeVM>();
         private static List<CommitteeMembersVM> committeeMembersList = new List<CommitteeMembersVM>();
         private static List<CommitteeMembersVM> womencellMembersList = new List<CommitteeMembersVM>();
         RestClient client;
 
-        public WomenCell()
+        private readonly AppIdentitySettings _config;
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+        public WomenCell(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
+
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
             client = new RestClient(apiBaseUrl);
         }
 
@@ -116,7 +124,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
             foreach (var data in committeList)
             {
-                data.Image = "https://localhost:44374/" + data.Image;
+                data.Image = imageBaseUrl + data.Image;
             }
 
             var committee = committeList.Where(m => m.CommitteeId == 1).FirstOrDefault();

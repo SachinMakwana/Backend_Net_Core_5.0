@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -20,13 +21,20 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class Achievements : Controller
     {
-        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<AchievementVM> AchievementVMList = new List<AchievementVM>();
         RestClient client;
 
-        public Achievements()
+        private readonly AppIdentitySettings _config;
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+        public Achievements(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
+
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
             client = new RestClient(apiBaseUrl);
         }
 
@@ -100,7 +108,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 AchievementVMList = user.data;
                 foreach (var data in AchievementVMList = user.data)
                 {
-                    data.Image = "https://api.gecpatan.ac.in/" + data.Image;
+                    data.Image = imageBaseUrl + data.Image;
                 }
             }
             return View(AchievementVMList);

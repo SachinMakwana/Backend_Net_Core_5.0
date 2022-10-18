@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -17,13 +18,20 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class DepartmentAmenty : Controller
     {
-        private string apiBaseUrl = "https://api.gecpatan.ac.in/api";
         HttpClient hc = new HttpClient();
         private static List<DepartmentAmentyVM> departmentAmentyList = new List<DepartmentAmentyVM>();
         RestClient client;
 
-        public DepartmentAmenty()
+        private readonly AppIdentitySettings _config;
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+        public DepartmentAmenty(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
+
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
             client = new RestClient(apiBaseUrl);
         }
 
@@ -141,18 +149,19 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         [HttpPost]
         public async Task<IActionResult> DepartmentAmentyEditAsync(DepartmentAmentyVM departmentAmentyVM)
         {
-            var departmentAmenty = departmentAmentyList.Where(m => m.Id == departmentAmentyVM.Id).FirstOrDefault();
-            departmentAmenty.UpdatedDate = DateTime.Now;
-            departmentAmenty.Subjects = departmentAmentyVM.Subjects;
-            departmentAmenty.DeptId = departmentAmentyVM.DeptId;
-            departmentAmenty.Classroom = departmentAmentyVM.Classroom;
-            departmentAmenty.Intake = departmentAmentyVM.Intake;
-            departmentAmenty.Labs = departmentAmentyVM.Labs;
-            departmentAmenty.Workshop = departmentAmentyVM.Workshop;
-            departmentAmenty.Seminar = departmentAmentyVM.Seminar;
 
             try
             {
+                var departmentAmenty = departmentAmentyList.Where(m => m.Id == departmentAmentyVM.Id).FirstOrDefault();
+                departmentAmenty.UpdatedDate = DateTime.Now;
+                departmentAmenty.Subjects = departmentAmentyVM.Subjects;
+                departmentAmenty.DeptId = departmentAmentyVM.DeptId;
+                departmentAmenty.Classroom = departmentAmentyVM.Classroom;
+                departmentAmenty.Intake = departmentAmentyVM.Intake;
+                departmentAmenty.Labs = departmentAmentyVM.Labs;
+                departmentAmenty.Workshop = departmentAmentyVM.Workshop;
+                departmentAmenty.Seminar = departmentAmentyVM.Seminar;
+
                 using (var client = new HttpClient())
                 {
                     var uri = new Uri(apiBaseUrl + "/UpdateDepartmentAmentyDetail");

@@ -10,19 +10,32 @@ using System.Text;
 using RestSharp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
     [Authorize]
     public class News : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
-        HttpClient hc = new HttpClient();
+         HttpClient hc = new HttpClient();
         private static List<NewsVM> newsVMList = new List<NewsVM>();
+
+        private readonly AppIdentitySettings _config;
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+        RestClient restClient;
+        public News(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
+        {
+
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
+            restClient = new RestClient(apiBaseUrl);
+        }
 
         public IActionResult NewsList()
         {
-            var restClient = new RestClient(apiBaseUrl);
             var restRequest = new RestRequest("/GetAllNewsDetails", Method.Get);
             restRequest.AddHeader("Accept", "application/json");
             restRequest.RequestFormat = DataFormat.Json;

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -18,15 +19,22 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        private string apiBaseUrl = "https://localhost:44374/api";
-        HttpClient hc = new HttpClient();
+       HttpClient hc = new HttpClient();
         private static List<UserDetailVM> usersList = new List<UserDetailVM>();
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly AppIdentitySettings _config; 
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+
+        RestClient client;
+        public HomeController(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
-            _logger = logger;
+
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
+            client = new RestClient(apiBaseUrl);
         }
 
         [Authorize]

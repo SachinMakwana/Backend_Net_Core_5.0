@@ -3,6 +3,7 @@ using GECP_DOT_NET_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -19,15 +20,21 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     [Authorize]
     public class SubjectsLists : Controller
     {
-        private string apiBaseUrl = "https://localhost:44374/api";
         HttpClient hc = new HttpClient();
         private static List<SubjectVM> attachmentVMList = new List<SubjectVM>();
         RestClient client;
 
-        public SubjectsLists()
+        private readonly AppIdentitySettings _config;
+        private string apiBaseUrl = string.Empty;
+        private string imageBaseUrl = string.Empty;
+        public SubjectsLists(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
-            client = new RestClient(apiBaseUrl);
 
+            _config = appIdentitySettingsAccessor.Value;
+
+            apiBaseUrl = _config.apiBaseUrl;
+            imageBaseUrl = _config.imageBaseUrl;
+            client = new RestClient(apiBaseUrl);
         }
 
         public IActionResult SubjectAdd()
