@@ -54,12 +54,12 @@
 
                                 <div class="col-md-6">
                                     <label for="description">Description</label>
-                                    <div id="summernote">@Html.Raw(Model.Description)</div>
+                                    <div id="summernote"></div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="message">Message from HOD</label>
-                                    <div id="summernote2">@Html.Raw(Model.Message)</div>
+                                    <div id="summernote2"></div>
                                 </div>
 
 
@@ -112,6 +112,8 @@
     <script>
         $(document).ready(function () {
             $('#summernote').summernote();
+            $('#summernote2').summernote();
+
         });
 
     </script>
