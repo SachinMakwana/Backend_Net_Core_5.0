@@ -62,7 +62,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         public IActionResult CommitteeAdd()
         {
-            return View();
+            CommitteeVM committeeVM = new CommitteeVM();
+            return View(committeeVM);
         }
         [HttpPost]
         public IActionResult CommitteeAdd([FromForm] CommitteeVM committteeVM, [Optional] IFormCollection collection)
@@ -130,7 +131,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             try
             {
                 committteeVM.UpdatedDate = DateTime.Now;
-                RestRequest request = new RestRequest("/UpdateCommitteeDetail", Method.Put);
+                RestRequest request = new RestRequest("/UpdateCommitteeDetail", Method.Post);
 
                 if (collection.Files.Count() > 0)
                 {
@@ -190,7 +191,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                     var uri = new Uri(apiBaseUrl + "/DeleteCommitteeDetail");
                     StringContent content = new StringContent(JsonConvert.SerializeObject(updateItem), Encoding.UTF8, "application/json");
 
-                    using (var response = client.PutAsync(uri, content))
+                    using (var response = client.PostAsync(uri, content))
                     {
                         response.Wait();
                         var results = response.Result;
@@ -380,7 +381,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                     var uri = new Uri(apiBaseUrl + "/UpdateCommitteeMemberDetail");
                     StringContent content = new StringContent(JsonConvert.SerializeObject(member), Encoding.UTF8, "application/json");
 
-                    using (var response = client.PutAsync(uri, content))
+                    using (var response = client.PostAsync(uri, content))
                     {
                         response.Wait();
                         var results = response.Result;
@@ -419,7 +420,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                     var uri = new Uri(apiBaseUrl + "/DeleteCommitteeMemberDetail");
                     StringContent content = new StringContent(JsonConvert.SerializeObject(updateItem), Encoding.UTF8, "application/json");
 
-                    using (var response = client.PutAsync(uri, content))
+                    using (var response = client.PostAsync(uri, content))
                     {
                         response.Wait();
                         var results = response.Result;

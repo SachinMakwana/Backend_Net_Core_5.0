@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Web
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "AboutCollegeAdd";
 }
@@ -42,15 +43,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="description">Description</label>
-                                <div id="summernote">@Model.Description</div>
-                                    
+                                    <div id="summernote">@Html.Raw(Model.Description)</div>
+
                                 </div>
 
 
 
                                 <div class="col-md-6">
                                     <label for="message">Message from Principal</label>
-                                    <div id="summernote2"><p>Hello Summernot</p></div>
+                                    <div id="summernote2">@Html.Raw(Model.PrincipalMessage)</div>
                                 </div>
 
                                 <div class="col-md-6">
@@ -118,13 +119,13 @@
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
 
-   
+
     <script>
         $(document).ready(function () {
             $('#summernote').summernote();
             $('#summernote2').summernote();
         });
-        
+
     </script>
 
     <script type="text/javascript">
@@ -164,8 +165,8 @@
 
                     var Id = document.getElementById("Id").value;
                     var Name = document.getElementById("Name").value;
-                    
-    
+
+
                     var Address = document.getElementById("Address").value;
                     var Phone = document.getElementById("Phone").value;
                     var Email = document.getElementById("Email").value;

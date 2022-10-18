@@ -142,7 +142,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 CampusVM campusVM = new CampusVM();
                 await TryUpdateModelAsync<CampusVM>(campusVM);
                 campusVM.UpdatedDate = DateTime.Now;
-                RestRequest request = new RestRequest("/UpdateCampusDetail", Method.Put);
+                RestRequest request = new RestRequest("/UpdateCampusDetail", Method.Post);
 
                 if (collection.Files.Count() > 0)
                 {
@@ -204,7 +204,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                     var uri = new Uri(apiBaseUrl + "/DeleteCampusDetail");
                     StringContent content = new StringContent(JsonConvert.SerializeObject(updateItem), Encoding.UTF8, "application/json");
 
-                    using (var response = client.PutAsync(uri, content))
+                    using (var response = client.PostAsync(uri, content))
                     {
                         response.Wait();
                         var results = response.Result;

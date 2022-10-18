@@ -48,10 +48,16 @@
                                                     <input type="text" class="form-control" id="CommitteeId" name="CommitteeId" placeholder="Enter ID" />
                                                 </div>
 
-                                                <div class="col-6">
+                                                @*<div class="col-6">
                                                     <label for="Name">Committee Description</label>
                                                     <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
-                                                </div>
+                                                </div>*@
+
+                                                 <div class="col-md-6">
+                                    <label for="description">Description</label>
+                                    <div id="summernote"></div>
+                                    
+                                </div>
 
                                                 <div class="col-6">
                                                     <label for="Name">Committee Slogan</label>
@@ -110,7 +116,12 @@
 
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
-
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+        
+    </script>
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -135,8 +146,9 @@
 
                 if ($('#CommitteeForm').valid()) {
 
+                    var description = $("#summernote").summernote('code');
                     var name = document.getElementById("Name").value;
-                    var description = document.getElementById("Description").value;
+                    
                     var slogan = document.getElementById("Slogan").value;
                     var CommitteeId = $("#CommitteeId").val();
 
@@ -173,7 +185,7 @@
                                     icon: "success"
                                 }).then(function () {
                                     $('#CommitteeForm')[0].reset();
-                                    window.location.href = '@Url.Action("DepartmentList","Department")';
+                                    window.location.href = '@Url.Action("CommitteeList","Committee")';
                                 });
                             }
                             else {

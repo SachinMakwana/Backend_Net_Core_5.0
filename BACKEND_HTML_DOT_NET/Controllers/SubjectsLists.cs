@@ -132,7 +132,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 SubjectVM subjectVM = new SubjectVM();
                 await TryUpdateModelAsync<SubjectVM>(subjectVM);
                 subjectVM.UpdatedDate = DateTime.Now;
-                RestRequest request = new RestRequest("/UpdateSubjectDetails", Method.Put);
+                RestRequest request = new RestRequest("/UpdateSubjectDetails", Method.Post);
 
                 if (collection.Files.Count() > 0)
                 {
@@ -194,7 +194,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                     var uri = new Uri(apiBaseUrl + "/DeleteSubjectDetails");
                     StringContent content = new StringContent(JsonConvert.SerializeObject(updateItem), Encoding.UTF8, "application/json");
 
-                    using (var response = client.PutAsync(uri, content))
+                    using (var response = client.PostAsync(uri, content))
                     {
                         response.Wait();
                         var results = response.Result;
