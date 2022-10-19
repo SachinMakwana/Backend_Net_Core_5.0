@@ -130,7 +130,7 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
     <script type="text/javascript">
         $(function () {
-            $("#companyList").DataTable();
+            $("#companyList").DataTable({ "responsive": true, "lengthChange": false, "autoWidth": false});
 
 
         });

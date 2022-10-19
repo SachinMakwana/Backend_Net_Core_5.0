@@ -38,7 +38,7 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="attachmenttable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -127,7 +127,7 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
     <script type="text/javascript">
         $(function () {
-            $("#example1").DataTable();
+            $("#attachmenttable").DataTable({ "responsive": true, "lengthChange": false, "autoWidth": false});
 
 
         });
