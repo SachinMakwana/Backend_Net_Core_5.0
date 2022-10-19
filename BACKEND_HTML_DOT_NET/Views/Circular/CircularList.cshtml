@@ -1,4 +1,4 @@
-﻿@model List<BACKEND_HTML_DOT_NET.Models.DesignationVM>
+﻿@model List<BACKEND_HTML_DOT_NET.Models.CircularVM>
 
 @{ 
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -56,11 +56,9 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>GalleryTagId</th>
-                                        <th>Name</th>
-                                        <th>Extension</th>
-                                        <th>Image</th>
-                                        <th>View</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -74,15 +72,14 @@
                                         <td>
                                             @item.Title
                                         </td>
+                                            <td>
+                                                @item.Description
+                                            </td>
                                         <td>
-                                            @item.Class
+                                            @item.Date
                                         </td>
-                                        <td>
-                                            @item.Payband
-                                        </td>
-                                         <td>
-                                                <a href="@Url.Action("CircularView","Circular",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                        </td>
+                                       
+                                         
                                         <td>
                                                 <a href="@Url.Action("CircularEdit","Circular",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                         </td>
@@ -96,11 +93,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>Id</th>
-                                        <th>GalleryTagId</th>
-                                        <th>Name</th>
-                                        <th>Extension</th>
-                                        <th>Image</th>
-                                        <th>View</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
