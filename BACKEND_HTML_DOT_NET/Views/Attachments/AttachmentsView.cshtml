@@ -1,4 +1,5 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using System.Web
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "AttachmentsView"; }
 
 <div class="content-wrapper">
@@ -40,11 +41,13 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Id</th>
                                         <th>Title</th>
                                         <th>Name</th>
                                         <th>Type</th>
-                                        <th>Image</th>
+                                        <th>Description</th>
+                                        <th>Attachment1</th>
+                                        <th>PageId</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -66,7 +69,13 @@
                                                 @item.Type
                                             </td>
                                             <td>
-                                                <img src="@item.Attachment1" class="rimg" style="width:50px;" />
+                                                @Html.Raw(HttpUtility.HtmlDecode(item.Description))
+                                            </td>
+                                            <td>
+                                                @item.Attachment1
+                                            </td>
+                                            <td>
+                                                @item.PageId
                                             </td>
                                             <td>
                                                 <a href="@Url.Action("AttachmentsEdit","Attachments",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
@@ -79,8 +88,13 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                        <th>Id</th>
+                                        <th>Title</th>
                                         <th>Name</th>
-                                        <th>Image</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Attachment1</th>
+                                        <th>PageId</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>

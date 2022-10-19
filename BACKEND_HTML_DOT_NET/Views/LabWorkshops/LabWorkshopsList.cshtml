@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Web
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "LabWorkshopsList";
 }
@@ -57,7 +58,7 @@
                                             <td>@item.Id</td>
                                             <td>@item.DeptId</td>
                                             <td>@item.Name</td>
-                                            <td>@item.Description</td>
+                                            <td> @Html.Raw(HttpUtility.HtmlDecode(item.Description))</td>
                                             <td><img src="@item.Image" class="rimg" style="width:50px;" /></td>
                                             <td>
                                                 <a href="@Url.Action("LabWorkshopsView","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
@@ -112,9 +113,11 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
     <script type="text/javascript">
         $(function () {
-            $("#labworkshopList").DataTable();
-
-
+            $("#labworkshopList").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+            
         });
         function DeleteLabWorkshop(id) {
 

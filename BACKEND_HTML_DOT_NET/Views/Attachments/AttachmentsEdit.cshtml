@@ -142,9 +142,6 @@
                     "PageId": {
                         required: true,
                         number: true
-                    },
-                    "InputFile": {
-                        required: true
                     }
 
                 },
@@ -162,9 +159,6 @@
                         required: "this field is required"
                     },
                     "PageId": {
-                        required: "this field is required"
-                    },
-                    "InputFile": {
                         required: "this field is required"
                     }
 
@@ -194,7 +188,7 @@
                     }
 
                     data.append("Title", title);
-                    data.append("Name", fileName);
+                    data.append("Name", name);
                     data.append("Type", type);
                     data.append("PageId", pageId);
                     data.append("Description", description);
@@ -214,7 +208,7 @@
                             if (data.status_code == "200") {
                                 console.log("Success")
                                 Swal.fire({
-                                    title: "Added!",
+                                    title: "Updated!",
                                     text: data.message,
                                     timer: 6000,
                                     icon: "success"

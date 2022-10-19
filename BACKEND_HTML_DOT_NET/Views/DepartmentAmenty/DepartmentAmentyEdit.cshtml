@@ -214,19 +214,23 @@
                         success: function (data) {
                             setTimeout(loaderStop(), 2000);
                             if (data.status_code == "200") {
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: data.message
+                                Swal.fire({
+                                    title: "Updated!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
                                 }).then(function () {
                                     $('#departmentAmentyForm')[0].reset();
                                     window.location.href = '@Url.Action("DepartmentAmentyList","DepartmentAmenty")';
                                 });
                             }
                             else {
-                                Toast.fire({
-                                    icon: 'error',
-                                    title: data.message
-                                })
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
                             }
                         }
                     });

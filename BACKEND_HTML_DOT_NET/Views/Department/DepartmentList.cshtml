@@ -1,4 +1,5 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using System.Web
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "DepartmentView"; }
 
 <div class="content-wrapper">
@@ -59,13 +60,13 @@
                                             @item.Name
                                         </td>
                                         <td>
-                                            @item.Description
+                                            @Html.Raw(HttpUtility.HtmlDecode(item.Description))
                                         </td>
                                         <td>
                                             @item.Head
                                         </td>
                                         <td>
-                                            @item.Message
+                                            @Html.Raw(HttpUtility.HtmlDecode(item.Message))
                                         </td>
                                         <td>
                                             <img src="@item.Image" class="rimg" style="width:50px;"/>
