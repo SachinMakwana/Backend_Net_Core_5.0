@@ -139,7 +139,7 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
     <script type="text/javascript">
         $(function () {
-            $("#departmentAmentyList").DataTable();
+            $("#departmentAmentyList").DataTable({ "responsive": true, "lengthChange": false, "autoWidth": false});
 
 
         });

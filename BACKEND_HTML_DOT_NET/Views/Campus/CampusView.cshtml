@@ -33,7 +33,7 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-striped">
+                            <table id="campustable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -113,7 +113,7 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
     <script type="text/javascript">
         $(function () {
-            $("#example2").DataTable();
+            $("#campustable").DataTable({ "responsive": true, "lengthChange": false, "autoWidth": false});
 
 
         });
