@@ -1,4 +1,4 @@
-﻿
+﻿@model BACKEND_HTML_DOT_NET.Models.CircularVM
 @{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "CircularEdit";
 }
@@ -30,17 +30,17 @@
 
                                 <div class="form-group">
                                     <label for="fileName">Title</label>
-                                    <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter id">
+                                    <input type="text" class="form-control" id="Title" value="@Model.Title" name="Title" placeholder="Enter Title">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fileName">Description</label>
-                                    <textarea type="text" class="form-control" id="Class" name="Class" rows="4" placeholder="Write content"></textarea>
+                                    <textarea type="text" class="form-control" id="Class" name="Description" rows="4" placeholder="Write content">@Model.Description</textarea>
                                 </div>
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     <label for="fileName">Date</label>
-                                    <input type="text" class="form-control" id="Title" name="Date" placeholder="Enter Date">
-                                </div>
+                                    <input type="text" class="form-control" id="Title" name="Date" value="@Model.Date" placeholder="Enter Date">
+                                </div>*@
 
                             </div>
                         </div>
@@ -85,10 +85,7 @@
                     "Title": {
                         required: true
                     },
-                    "Class": {
-                        required: true
-                    },
-                    "Date": {
+                    "Description": {
                         required: true
                     }
                 },
@@ -96,10 +93,7 @@
                     "Title": {
                         required: "this felid is required"
                     },
-                    "Class": {
-                        required: "this felid is required"
-                    },
-                    "Date": {
+                    "Description": {
                         required: "this felid is required"
                     }
                 }

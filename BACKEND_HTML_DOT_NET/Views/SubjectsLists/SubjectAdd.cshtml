@@ -1,4 +1,5 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model BACKEND_HTML_DOT_NET.Models.SubjectVM
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "SubjectAdd"; }
 
 <div class="content-wrapper">
@@ -26,7 +27,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER SUBJECT CODE</label>
-                                        <input type="text" class="form-control" name="Code" id="exampleInputEmail1"
+                                        <input type="number" class="form-control" name="Code" id="exampleInputEmail1"
                                                placeholder="Enter code.. ">
                                     </div>
                                 </div>
@@ -199,7 +200,7 @@
                                     icon: "success"
                                 }).then(function () {
                                     $('#subjectadd')[0].reset();
-                                    window.location.href = '@Url.Action("SubjectAdd","SubjectsLists")';
+                                    window.location.href = '@Url.Action("SubjectView","SubjectsLists")';
                                 });
                             }
                             else {

@@ -3,6 +3,7 @@ using GECP_DOT_NET_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
@@ -12,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +23,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     public class SubjectsLists : Controller
     {
         HttpClient hc = new HttpClient();
-        private static List<SubjectVM> attachmentVMList = new List<SubjectVM>();
+        private static List<SubjectVM> subjectVM = new List<SubjectVM>();
         RestClient client;
 
         private readonly AppIdentitySettings _config;
@@ -37,47 +39,6 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             client = new RestClient(apiBaseUrl);
         }
 
-        public IActionResult SubjectAdd()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SubjectAdd(SubjectVM subjectVM)
-        {
-
-            subjectVM.CreatedDate = DateTime.Now;
-            subjectVM.UpdatedDate = DateTime.Now;
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    var uri = new Uri(apiBaseUrl + "/AddSubjectDetails");
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(subjectVM), Encoding.UTF8, "application/json");
-
-                    using (var response = client.PostAsync(uri, content))
-                    {
-                        response.Wait();
-                        var results = response.Result;
-                        var jsonString = await results.Content.ReadAsStringAsync();
-
-                        var res = JsonConvert.DeserializeObject<ServiceResponse<bool>>(jsonString);
-                        if (results.IsSuccessStatusCode)
-                        {
-                            return Json(res);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return Json(new { message = ex.Message.ToString() });
-            }
-            return Json(new { message = "something went wrong." });
-
-            
-
-        }
         public IActionResult SubjectView()
         {
 
@@ -91,19 +52,87 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             if (content != null)
             {
                 var user = JsonConvert.DeserializeObject<ServiceResponse<List<SubjectVM>>>(content);
-                attachmentVMList = user.data;
-                
+                subjectVM = user.data;
+
             }
-            return View(attachmentVMList);
+            return View(subjectVM);
+        }
+        public IActionResult SubjectAdd(long id = 0)
+        {
+            SubjectVM departmentVM = new SubjectVM();
+            try
+            {
+                if (id > 0)
+                {
+                    departmentVM = subjectVM.Where(m => m.Id == id).FirstOrDefault();
+                }
+                var restRequest = new RestRequest("/GetSubjectDetails", Method.Get);
+                restRequest.AddHeader("Accept", "application/json");
+                restRequest.RequestFormat = DataFormat.Json;
+                RestResponse response = client.Execute(restRequest);
+
+                var content = response.Content;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(departmentVM);
+        }
+
+
+        [HttpPost]
+        public IActionResult SubjectAdd([FromForm] SubjectVM SubjectVM, [Optional] IFormCollection collection)
+        {
+            try
+            {
+                RestRequest request = new RestRequest("/AddSubjectDetails", Method.Post);
+                SubjectVM.CreatedDate = DateTime.Now;
+                SubjectVM.UpdatedDate = DateTime.Now;
+
+                if (collection.Files.Count() > 0)
+                {
+                    //add files to request
+                    foreach (var file in collection.Files)
+                    {
+                        var memorystream = new MemoryStream();
+                        file.CopyTo(memorystream);
+                        var bytes = memorystream.ToArray();
+                        request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                    }
+                }
+
+                //iterate and add model to request as parameter
+                PropertyInfo[] properties = typeof(SubjectVM).GetProperties();
+                foreach (PropertyInfo property in properties)
+                {
+                    if (property.Name.ToString() != "FacultySelectList")
+                    {
+                        var value = property.GetValue(SubjectVM);
+                        request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
+                    }
+                }
+
+                var response = client.Execute(request);
+                ServiceResponse<bool> serviceResponse = JsonConvert.DeserializeObject<ServiceResponse<bool>>(response.Content);
+                return Json(serviceResponse);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { status_code = "000", message = ex.Message.ToString() });
+            }
+
         }
 
         public IActionResult SubjectEdit(long id = 0)
         {
-            SubjectVM subjectVM = new SubjectVM();
+            SubjectVM SubjectVM = new SubjectVM();
             try
             {
 
-                subjectVM = attachmentVMList.Where(m => m.Id == id).FirstOrDefault();
+                SubjectVM = subjectVM.Where(m => m.Id == id).FirstOrDefault();
 
                 var restRequest = new RestRequest("/GetSubjectDetails", Method.Get);
                 restRequest.AddHeader("Accept", "application/json");
@@ -111,27 +140,21 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 RestResponse response = client.Execute(restRequest);
 
                 var content = response.Content;
-                if (content != null)
-                {
-                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<SubjectVM>>>(content);
 
-                }
             }
             catch (Exception ex)
             {
 
             }
-            return View(subjectVM);
+            return View(SubjectVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> SubjectEdit(IFormCollection collection)
+        public IActionResult SubjectEdit([FromForm] SubjectVM SubjectVM, [Optional] IFormCollection collection)
         {
             try
             {
-                SubjectVM subjectVM = new SubjectVM();
-                await TryUpdateModelAsync<SubjectVM>(subjectVM);
-                subjectVM.UpdatedDate = DateTime.Now;
+                SubjectVM.UpdatedDate = DateTime.Now;
                 RestRequest request = new RestRequest("/UpdateSubjectDetails", Method.Post);
 
                 if (collection.Files.Count() > 0)
@@ -158,7 +181,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 {
                     if (property.Name.ToString() != "FacultySelectList")
                     {
-                        var value = property.GetValue(subjectVM);
+                        var value = property.GetValue(SubjectVM);
                         request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
                     }
                 }
@@ -176,6 +199,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         }
 
+
         [HttpPost]
         public async Task<IActionResult> SubjectDelete(long id)
         {
@@ -186,7 +210,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 {
                     return Json(new { message = "Invalid Record." });
                 }
-                var updateItem = attachmentVMList.Where(m => m.Id == id).FirstOrDefault();
+                var updateItem = subjectVM.Where(m => m.Id == id).FirstOrDefault();
                 updateItem.IsDeleted = true;
                 updateItem.UpdatedDate = DateTime.Now;
                 using (var client = new HttpClient())
@@ -214,6 +238,14 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             }
             return Json(new { message = "something went wrong." });
         }
+        
 
+        public IActionResult SubjectAllView()
+        {
+            return View();
+        }
     }
 }
+
+
+
