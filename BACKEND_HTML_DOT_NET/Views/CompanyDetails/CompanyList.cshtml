@@ -50,7 +50,7 @@
                                                 <th>ReleventDepartment</th>
                                                 <th>Image</th>
                                                 <th>Logo</th>
-                                                <th>View</th>
+                                                @*<th>View</th>*@
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                             </tr>
@@ -75,9 +75,9 @@
                                                     <td>
                                                         <img src="@item.Logo" class="rimg" style="width:50px;" />
                                                     </td>
-                                                    <td>
+                                                    @*<td>
                                                         <a href="@Url.Action("CompanyView","CompanyDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                                    </td>
+                                                    </td>*@
                                                     <td>
                                                         <a href="@Url.Action("CompanyEdit","CompanyDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                                     </td>
@@ -94,7 +94,7 @@
                                                 <th>ReleventDepartment</th>
                                                 <th>Image</th>
                                                 <th>Logo</th>
-                                                <th>View</th>
+                                                @*<th>View</th>*@
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                             </tr>

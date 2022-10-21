@@ -50,7 +50,7 @@
                                                 <th>Slogan</th>
                                                 <th>CommitteeID</th>
                                                 <th>Image</th>
-                                                <th>View</th>
+                                                @*<th>View</th>*@
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                             </tr>
@@ -67,7 +67,7 @@
                                                     <td>
                                                         <img src="@item.Image" class="rimg" style="width:50px;" />
                                                     </td>
-                                                    <td><a href="@Url.Action("CommitteeView","Committee",new {@id=item.Id})" class="nav-icon fas fa-edit"></a></td>
+                                                    @*<td><a href="@Url.Action("CommitteeView","Committee",new {@id=item.Id})" class="nav-icon fas fa-edit"></a></td>*@
                                                     <td>
                                                         <a href="@Url.Action("CommitteeEdit","Committee",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                                     </td>
@@ -85,7 +85,7 @@
                                                 <th>Slogan</th>
                                                 <th>CommitteeID</th>
                                                 <th>Image</th>
-                                                <th>View</th>
+                                                @*<th>View</th>*@
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                             </tr>

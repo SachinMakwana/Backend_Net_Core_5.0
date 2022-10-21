@@ -42,7 +42,7 @@
                                         <th>Date</th>
                                         <th>Tag</th>
                                         <th>Image</th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -60,6 +60,7 @@
                                             </td>
                                             <td>
                                                 @item.Description
+
                                             </td>
                                             <td>@item.Date</td>
                                             <td>@item.Tag</td>
@@ -67,9 +68,9 @@
                                             <td>
                                                 <img src="@item.Image" class="rimg" style="width:50px;" />
                                             </td>
-                                            <td>
+                                           @* <td>
                                                 <a href="@Url.Action("AchievementsView","Department",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                            </td>
+                                            </td>*@
                                             <td>
                                                 <a href="@Url.Action("AchievementsEdit","Achievements",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
@@ -87,7 +88,7 @@
                                         <th>Date</th>
                                         <th>Tag</th>
                                         <th>Image</th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>

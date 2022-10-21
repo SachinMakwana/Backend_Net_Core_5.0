@@ -55,7 +55,7 @@
                                             <th>
                                                 Date
                                             </th>
-                                             <th>View</th>
+                                             @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
                                         </tr>
@@ -75,9 +75,9 @@
                                         <td>
                                             @item.Date
                                         </td>
-                                         <td>
+                                         @*<td>
                                             <a href="@Url.Action("NewsView","News",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                        </td>
+                                        </td>*@
                                         <td>
                                             <a href="@Url.Action("NewsEdit","News",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                         </td>
@@ -101,7 +101,7 @@
                                         <th>
                                             Date
                                         </th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>

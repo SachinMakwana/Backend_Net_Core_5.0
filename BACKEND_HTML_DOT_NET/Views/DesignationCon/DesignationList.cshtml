@@ -59,7 +59,7 @@
                                         <th>Title</th>
                                         <th>Class</th>
                                         <th>Payband</th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -79,9 +79,9 @@
                                         <td>
                                             @item.Payband
                                         </td>
-                                         <td>
+                                         @*<td>
                                                 <a href="@Url.Action("DesignationView","DesignationCon",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                        </td>
+                                        </td>*@
                                         <td>
                                                 <a href="@Url.Action("DesignationEdit","DesignationCon",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                         </td>
@@ -98,7 +98,7 @@
                                         <th>Title</th>
                                         <th>Class</th>
                                         <th>Payband</th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>s
                                     </tr>

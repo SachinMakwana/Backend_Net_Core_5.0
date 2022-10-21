@@ -60,7 +60,7 @@
                                         <th>Name</th>
                                         <th>Extension</th>
                                         <th>Image</th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -83,9 +83,9 @@
                                         <td>
                                                 <img src="@item.Image" class="rimg" style="width:50px;" />
                                         </td>
-                                         <td>
+                                         @*<td>
                                             <a href="@Url.Action("GalleryView","CollegeGallery",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                        </td>
+                                        </td>*@
                                         <td>
                                                 <a href="@Url.Action("GalleryEdit","CollegeGallery",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                         </td>
@@ -103,7 +103,7 @@
                                         <th>Name</th>
                                         <th>Extension</th>
                                         <th>Image</th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>

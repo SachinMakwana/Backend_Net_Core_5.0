@@ -47,7 +47,7 @@
                                                 <th>FacultyId</th>
                                                 <th>CommitteeId</th>
                                                 <th>Role</th>
-                                                <th>View</th>
+                                                @*<th>View</th>*@
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                             </tr>
@@ -60,7 +60,7 @@
                                                     <td>@item.FacultyId</td>
                                                     <td>@item.CommitteeId</td>
                                                     <td>@item.Role</td>
-                                                    <td><a href="@Url.Action("CommitteeMemberView","Committee",new {@id=item.Id})" class="nav-icon fas fa-edit"></a></td>
+                                                    @*<td><a href="@Url.Action("CommitteeMemberView","Committee",new {@id=item.Id})" class="nav-icon fas fa-edit"></a></td>*@
                                                     <td>
                                                         <a href="@Url.Action("CommitteeMembersEdit","Committee",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                                     </td>
@@ -76,7 +76,7 @@
                                                 <th>FacultyId</th>
                                                 <th>CommitteeId</th>
                                                 <th>Role</th>
-                                                <th>View</th>
+                                                @*<th>View</th>*@
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                             </tr>

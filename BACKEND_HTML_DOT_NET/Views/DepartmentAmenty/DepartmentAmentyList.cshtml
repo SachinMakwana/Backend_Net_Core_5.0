@@ -46,7 +46,7 @@
                                         <th>Workshop</th>
                                         <th>Classroom</th>
                                         <th>Seminar</th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
 
@@ -79,9 +79,9 @@
                                                 @item.Seminar
 
                                             </td>
-                                            <td>
+                                            @*<td>
                                                 <a href="@Url.Action("DepartmentAmentyView","DepartmentAmenty",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                            </td>
+                                            </td>*@
                                             <td>
                                                 <a href="@Url.Action("DepartmentAmentyEdit","DepartmentAmenty",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
@@ -101,7 +101,7 @@
                                         <th>Workshop</th>
                                         <th>Classroom</th>
                                         <th>Seminar</th>
-                                        <th>View</th>
+                                        @*<th>View</th>*@
                                         <th>Edit</th>
                                         <th>Delete</th>
 
