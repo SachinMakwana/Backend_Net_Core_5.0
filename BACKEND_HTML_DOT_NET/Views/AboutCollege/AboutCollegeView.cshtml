@@ -8,6 +8,8 @@
 <div class="content-wrapper">
     <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
     <section class="content" style="margin-top:20px;">
+        @if (Model.Count > 0)
+        {
         @foreach(var item in Model){
         <div class="row">
             <div class="col-md-12">
@@ -84,8 +86,10 @@
                             </div>
                             <div class="input-group col-md-12 mt-4">
                                 <div class="col-sm-6">
+                                    @if(item.Id >= 0){
                                     <a href="@Url.Action("AboutCollegeEdit","AboutCollege", new { @id = item.Id})" class="btn btn-primary float-right">Edit</a>
-                                    @if(item.Id == 0){
+                                    }else{
+
                                         <a href="@Url.Action("AboutCollegeAdd","AboutCollege", new { @id = item.Id})" class="btn btn-primary float-right ">Add</a>
                                     }
                                 </div>
@@ -102,5 +106,26 @@
             </div>
         </div>
                     }
+                    }else{
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">About College</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="raw">
+                            <h4>No Data Found</h4>
+                        <div class="input-group col-md-12 mt-4">
+                            <br>
+                            <a href="@Url.Action("AboutCollegeAdd","AboutCollege")" class="btn btn-primary center ">Add Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+        </div>
+        }
     </section>
 </div>

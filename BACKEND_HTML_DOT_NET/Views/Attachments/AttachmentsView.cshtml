@@ -46,7 +46,7 @@
                                         <th>Name</th>
                                         <th>Type</th>
                                         <th>Description</th>
-                                        <th>Attachment1</th>
+                                        @*<th>Attachment1</th>*@
                                         <th>PageId</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -71,9 +71,9 @@
                                             <td>
                                                 <div class="add-read-more show-less-content">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</div>
                                             </td>
-                                            <td>
+                                           @* <td>
                                                 @item.Attachment1
-                                            </td>
+                                            </td>*@
                                             <td>
                                                 @item.PageId
                                             </td>
@@ -93,7 +93,7 @@
                                         <th>Name</th>
                                         <th>Type</th>
                                         <th>Description</th>
-                                        <th>Attachment1</th>
+                                        @*<th>Attachment1</th>*@
                                         <th>PageId</th>
                                         <th>Edit</th>
                                         <th>Delete</th>

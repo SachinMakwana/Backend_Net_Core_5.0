@@ -56,8 +56,13 @@
                                 </div>
 *@
                                 <div class="col-md-6">
+                                    <label for="message">Description</label>
+                                    <div id="summernote"></div>
+                                </div>
+
+                                <div class="col-md-6">
                                     <label for="message">Message from Principal</label>
-                                    <div id="summernote2"><p>Hello Summernot</p></div>
+                                    <div id="summernote2"></div>
                                 </div>
 
                                 <div class="col-md-6">
@@ -166,11 +171,11 @@
                 if ($('#aboutCollege').valid()) {
 
                     var PrincipalMessage = $("#summernote2").summernote('code');
+                    var description = $("#summernote").summernote('code');
 
                     var Name = document.getElementById("Name").value;
-                    var description = document.getElementById("Description").value;
                    
-                    var head = document.getElementById("Head").value;
+                    //var head = document.getElementById("Head").value;
                     var Address = document.getElementById("Address").value;
                     var Phone = document.getElementById("Phone").value;
                     var Email = document.getElementById("Email").value;
