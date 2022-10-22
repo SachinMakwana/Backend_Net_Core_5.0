@@ -58,7 +58,7 @@
                                             <td>@item.Id</td>
                                             <td>@item.DeptId</td>
                                             <td>@item.Name</td>
-                                            <td> @Html.Raw(HttpUtility.HtmlDecode(item.Description))</td>
+                                            <td> <div class="add-read-more show-less-content">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</div></td>
                                             <td><img src="@item.Image" class="rimg" style="width:50px;" /></td>
                                             @*<td>
                                                 <a href="@Url.Action("LabWorkshopsView","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
@@ -98,6 +98,34 @@
 </div>
 
 @section script{
+    <script>
+        jQuery(function ($) {
+            function AddReadMore() {
+                var carLmt = 10;
+                var readMoreTxt = " ...read more";
+
+                var readLessTxt = " read less";
+                $(".add-read-more").each(function () {
+                    if ($(this).find(".first-section").length)
+                        return;
+
+                    var allstr = $(this).text();
+                    if (allstr.length > carLmt) {
+                        var firstSet = allstr.substring(0, carLmt);
+                        var secdHalf = allstr.substring(carLmt, allstr.length);
+                        var strtoadd = firstSet + "<span class='second-section'>" + secdHalf + "</span><span class='read-more'  title='Click to Show More'>" + readMoreTxt + "</span><span class='read-less' title='Click to Show Less'>" + readLessTxt + "</span>";
+                        $(this).html(strtoadd);
+                    }
+                });
+
+                $(document).on("click", ".read-more,.read-less", function () {
+                    $(this).closest(".add-read-more").toggleClass("show-less-content show-more-content");
+                });
+            }
+
+            AddReadMore();
+        });
+    </script>
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
@@ -160,4 +188,21 @@
 }
     @section styles{
     <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+    <style>
+        .add-read-more.show-less-content .second-section,
+        .add-read-more.show-less-content .read-less {
+            display: none;
+        }
+
+        .add-read-more.show-more-content .read-more {
+            display: none;
+        }
+
+        .add-read-more .read-more,
+        .add-read-more .read-less {
+            font-weight: bold;
+            margin-left: 2px;
+            color: blue;
+            cursor: pointer;
+        }</style>
 }
