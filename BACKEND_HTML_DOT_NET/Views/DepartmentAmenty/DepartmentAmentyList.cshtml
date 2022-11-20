@@ -57,9 +57,22 @@
                                     {
                                         <tr>
                                             <td>@item.Id</td>
-                                            <td>
-                                                @item.DeptId
-                                            </td>
+                                            
+                                            @if(item.DeptId == 1){
+                                                <td>COMPUTER SCIENCE & ENGG</td>
+                                            }
+                                            @if(item.DeptId == 8){
+                                                <td>CIVIL ENGINEERING</td>
+                                            }
+                                            @if(item.DeptId == 6){
+                                                <td>MECHANICAL ENGINEERING</td>
+                                            }
+                                            @if(item.DeptId == 7){
+                                                <td>ELECTRICAL ENGINEERING</td>
+                                            }
+                                            @if(item.DeptId == 9){
+                                                <td>ELECTRONICS & COMMUNICATION ENGG</td>
+                                            }
                                             <td>
                                                 @item.Intake
                                             </td>

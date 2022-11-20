@@ -31,6 +31,25 @@
                                     <div class="card-body">
                                         <div class="form-group">
 
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+
+                                                    <div class="col-md-3">
+                                                        <label for="department">Honorifics </label>
+                                                        <select name="Honorifics" id="honorifics" class="form-control">
+                                                            <option>Select Honorifics</option>
+
+                                                            <option value="Dr.">Dr.</option>
+                                                            <option value="Mr.">Mr.</option>
+                                                            <option value="Miss.">Miss.</option>
+                                                            <option value="Mrs.">Mrs.</option>
+                                                           
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
                                             <!-- Name Controls -->
                                             <div class="form-group">
                                                 <div class="input-group col-12">
@@ -125,7 +144,12 @@
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
     <script type="text/javascript">
-
+         var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
     $(document).ready(function() {
         //console.log( "ready!" );
@@ -135,6 +159,9 @@
             "name": {
                  required: true
              },
+                    "Honorifics":{
+                        required: true
+                    },
              "Designation": {
                  required: true
              },
@@ -148,6 +175,9 @@
             "name": {
                  required: "this field is required"
              },
+                    "Honorifics":{
+                        required: "This field is required"
+                    },
              "Designation": {
                  required: "this field is required"
              },
@@ -163,8 +193,10 @@
         $('#btnSubmit').click(function(e) {
 
             if ($('#facultyadd').valid()) {
-                    
+
+                    var Honorifics = document.getElementById("honorifics").value;
                     var Name = document.getElementById("Name").value;
+                    var FullName = Honorifics.concat(" ",Name);
                     var Designation = document.getElementById("Designation").value;
                     var deptId = document.getElementById("department").value;
 
@@ -178,6 +210,8 @@
                     data.append("Name", Name);
                     data.append("Designation", Designation);
                     data.append("DeptId", deptId);
+
+                    loaderStart();
 
                     $.ajax({
                         url: '@Url.Action("FacultyAdd", "FacultyDetails")',
@@ -194,7 +228,7 @@
                                     timer: 6000,
                                     icon: "success"
                                 }).then(function () {
-                                    $('#frmdepartment')[0].reset();
+                                    $('#facultyadd')[0].reset();
                                     window.location.href = '@Url.Action("FacultyList","FacultyDetails")';
                                 });
                             }

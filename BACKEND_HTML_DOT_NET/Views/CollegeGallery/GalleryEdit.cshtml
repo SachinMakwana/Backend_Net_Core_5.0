@@ -93,7 +93,12 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
 <script type="text/javascript">
-
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
     $(document).ready(function() {
         //console.log( "ready!" );
@@ -140,7 +145,7 @@
         if($('#gallery').valid()){
 
                     var data = new FormData($('#gallery')[0]);
-            
+            loaderStart();
              $.ajax({
                     url: '@Url.Action("GalleryEdit","CollegeGallery")',
                     type: 'post',
@@ -149,10 +154,11 @@
                     cache: false,
                     data: data,
                     success: function(data) {
+                            setTimeout(loaderStop(), 2000);
                             if (data.status_code == "200") {
                                 console.log("Success")
                                 Swal.fire({
-                                    title: "Added!",
+                                    title: "Updated!",
                                     text: data.message,
                                     timer: 6000,
                                     icon: "success"

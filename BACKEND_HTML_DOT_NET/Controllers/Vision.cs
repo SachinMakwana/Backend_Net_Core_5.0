@@ -19,6 +19,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     {
         HttpClient hc = new HttpClient();
         private static List<VisionVM> visionVMList = new List<VisionVM>();
+        private static List<DepartmentVM> deptList = new List<DepartmentVM>();
+
         RestClient client;
 
         private readonly AppIdentitySettings _config;
@@ -36,6 +38,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         public IActionResult VisionList()
         {
+            var restClient = new RestClient(apiBaseUrl);
             var restRequest = new RestRequest("/GetAllVisionDetails", Method.Get);
             restRequest.AddHeader("Accept", "application/json");
             restRequest.RequestFormat = DataFormat.Json;
@@ -44,8 +47,29 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
             var content = response.Content;
 
+            var restRequest2 = new RestRequest("/GetAllDepartmentDetails", Method.Get);
+            restRequest2.AddHeader("Accept", "application/json");
+            restRequest2.RequestFormat = DataFormat.Json;
+
+            RestResponse response2 = restClient.Execute(restRequest2);
+
+            var content2 = response2.Content;
+
             var user = JsonConvert.DeserializeObject<ServiceResponse<List<VisionVM>>>(content);
+            var dept = JsonConvert.DeserializeObject<ServiceResponse<List<DepartmentVM>>>(content2);
+            deptList = dept.data;
             visionVMList = user.data;
+            foreach (var data in visionVMList)
+            {
+                foreach (var deptment in deptList)
+                {
+                    if (data.DeptId == deptment.Id)
+                    {
+                        data.DeptName = deptment.Name;
+                        break;
+                    }
+                }
+            }
             return View(visionVMList);
         }
         public IActionResult VisionAdd(int id = 0)

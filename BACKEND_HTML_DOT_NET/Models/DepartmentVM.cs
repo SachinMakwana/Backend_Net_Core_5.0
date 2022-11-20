@@ -16,6 +16,7 @@ namespace BACKEND_HTML_DOT_NET.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Head { get; set; }
+        public string HeadOfDept { get; set; }
         public string Message { get; set; }
         public string Image { get; set; }
         public string Slogan { get; set; }

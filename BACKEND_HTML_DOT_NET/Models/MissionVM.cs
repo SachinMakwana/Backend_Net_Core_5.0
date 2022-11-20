@@ -12,6 +12,7 @@ namespace BACKEND_HTML_DOT_NET.Models
         }
         public int Id { get; set; }
         public int DeptId { get; set; }
+        public string DeptName { get; set; }
         public string Description { get; set; }
         public bool? IsDeleted { get; set; }
         public DateTime CreatedDate { get; set; }

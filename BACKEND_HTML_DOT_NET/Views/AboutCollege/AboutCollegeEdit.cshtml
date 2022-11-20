@@ -129,6 +129,12 @@
     </script>
 
     <script type="text/javascript">
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
         $(document).ready(function () {
             $('#aboutCollege').validate({
@@ -193,7 +199,7 @@
 
 
                     console.log(data);
-
+                    loaderStart();
                     $.ajax({
                         url: '@Url.Action("AboutCollegeEdit", "AboutCollege")',
                         type: 'post',
@@ -202,6 +208,7 @@
                         contentType: false,
                         cache: false,
                         success: function (data) {
+                            setTimeout(loaderStop(), 2000);
                             if (data.status_code == "200") {
                                 Swal.fire({
                                     title: "Added!",

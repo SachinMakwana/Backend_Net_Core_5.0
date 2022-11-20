@@ -26,6 +26,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
        
         HttpClient hc = new HttpClient();
         private static List<DepartmentVM> departmentVMList = new List<DepartmentVM>();
+        private static List<FacultyDetailsVM> headofDeptList = new List<FacultyDetailsVM>();
         RestClient client;
 
         private readonly AppIdentitySettings _config;
@@ -51,14 +52,34 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             RestResponse response = client.Execute(restRequest);
 
             var content = response.Content;
+
+            var restRequest2 = new RestRequest("/GetAllFacultyDetails", Method.Get);
+            restRequest2.AddHeader("Accept", "application/json");
+            restRequest2.RequestFormat = DataFormat.Json;
+
+            RestResponse response2 = client.Execute(restRequest2);
+
+            var content2 = response2.Content;
+
             if (content != null)
             {
                 var user = JsonConvert.DeserializeObject<ServiceResponse<List<DepartmentVM>>>(content);
+                var headofDept = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content2);
                 departmentVMList = user.data;
+                headofDeptList = headofDept.data;
                 foreach (var data in departmentVMList)
                 {
+                    foreach (var head in headofDeptList)
+                    {
+                        if(data.Head == head.Id)
+                        {
+                            data.HeadOfDept = head.Name;
+                            break;
+                        }
+                    }
                     data.Image = imageBaseUrl + data.Image;
                 }
+                
             }
             return View(departmentVMList);
         }

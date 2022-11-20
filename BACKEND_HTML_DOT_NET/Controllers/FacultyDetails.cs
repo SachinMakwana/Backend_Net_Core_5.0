@@ -24,6 +24,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     {
         HttpClient hc = new HttpClient();
         private static List<FacultyDetailsVM> facultyDetailsList = new List<FacultyDetailsVM>();
+        private static List<DepartmentVM> deptList = new List<DepartmentVM>();
         RestClient client;
         private readonly AppIdentitySettings _config;
         private string apiBaseUrl = string.Empty;
@@ -48,12 +49,31 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             RestResponse response = restClient.Execute(restRequest);
 
             var content = response.Content;
+
+            var restRequest2 = new RestRequest("/GetAllDepartmentDetails", Method.Get);
+            restRequest2.AddHeader("Accept", "application/json");
+            restRequest2.RequestFormat = DataFormat.Json;
+
+            RestResponse response2 = restClient.Execute(restRequest2);
+
+            var content2 = response2.Content;
+
             if (content != null)
             {
                 var user = JsonConvert.DeserializeObject<ServiceResponse<List<FacultyDetailsVM>>>(content);
+                var dept = JsonConvert.DeserializeObject<ServiceResponse<List<DepartmentVM>>>(content2);
                 facultyDetailsList = user.data;
+                deptList = dept.data;
                 foreach (var data in facultyDetailsList)
                 {
+                    foreach (var deptment in deptList)
+                    {
+                        if (data.DeptId== deptment.Id)
+                        {
+                            data.DeptName = deptment.Name;
+                            break;
+                        }
+                    }
                     data.Image = imageBaseUrl + data.Image;
                 }
             }

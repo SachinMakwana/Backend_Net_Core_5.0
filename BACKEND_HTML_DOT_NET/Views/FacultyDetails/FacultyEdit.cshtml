@@ -32,6 +32,26 @@
                                     <div class="card-body">
                                         <div class="form-group">
 
+                                            @*<div class="form-group">
+                                                <div class="input-group col-12">
+
+                                                    <div class="col-md-3">
+                                                        <label for="department">Honorifics </label>
+                                                        <select name="Honorifics" id="honorifics" class="form-control">
+                                                            <option>Select Honorifics</option>
+
+                                                            <option value="Dr.">Dr.</option>
+                                                            <option value="Mr.">Mr.</option>
+                                                            <option value="Miss.">Miss.</option>
+                                                            <option value="Mrs.">Mrs.</option>
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+*@
+
                                             <!-- Name Controls -->
                                             <div class="form-group">
                                                 <div class="input-group col-12">
@@ -59,8 +79,15 @@
 
                                                     <div class="col-md-3">
                                                         <label for="department">Department ID</label>
-                                                        <input name="deptid" type="number" class="form-control" id="department" value="@Model.DeptId"
-                                                               placeholder="Department ID">
+                                                        
+                                                        <select name="Department" id="department" class="form-control">
+                                                            <option>Select Department</option>
+                                                            @foreach (var item in Model.DepartmentSelectList)
+                                                            {
+                                                                bool selected = item.Value == Model.DeptId.ToString() ? true : false;
+                                                                <option value="@item.Value" selected="@selected"> @item.Text</option>
+                                                            }
+                                                        </select>
                                                     </div>
 
                                                 </div>
@@ -121,6 +148,12 @@
 
     <script type="text/javascript">
 
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
 
     $(document).ready(function() {
         //console.log( "ready!" );
@@ -135,7 +168,10 @@
              },
              "deptid": {
                  required: true
-             }
+             },
+                    "Honorifics": {
+                        required: true
+                    }
 
           },
           messages: {
@@ -147,7 +183,10 @@
              },
              "deptid": {
                  required: "this field is required"
-             }
+             },
+                    "Honorifics": {
+                        required: "This field is required"
+                    }
           }
 
 
@@ -157,9 +196,11 @@
 
 
             if ($('#facultyedit').valid()) {
-                   
 
-                    var departmentName = document.getElementById("Name").value;
+
+                    //var Honorifics = document.getElementById("honorifics").value;
+                    var Name = document.getElementById("Name").value;
+                    //var FullName = Honorifics.concat(" ", Name);
 
                     var DesignationId = document.getElementById("DesignationId").value;
                     var deptid = document.getElementById("department").value;
@@ -174,7 +215,7 @@
                         data.append("image", file);
                     }
 
-                    data.append("Name", departmentName);
+                    data.append("Name", Name);
                     data.append("Designation", DesignationId);
                     data.append("DeptId", deptid);
                     data.append("Id", id);
@@ -194,7 +235,7 @@
                                     icon: 'success',
                                     title: data.message
                                 }).then(function () {
-                                    $('#frmdepartment')[0].reset();
+                                    $('#facultyedit')[0].reset();
                                     window.location.href = '@Url.Action("FacultyList","FacultyDetails")';
                                 });
                             }
