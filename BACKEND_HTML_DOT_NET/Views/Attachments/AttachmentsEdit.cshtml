@@ -64,7 +64,16 @@
 
                                 <div class="form-group">
                                     <label for="fileName">Page id</label>
-                                    <input type="number" class="form-control" id="pageid" value="@Model.PageId" name="PageId" placeholder="Enter page id">
+
+                                    <select name="news" id="newsId" class="form-control">
+                                        <option>Select News</option>
+                                        @foreach (var item in Model.NewsSelectList)
+                                        {
+                                            bool selected = item.Value == Model.PageId.ToString() ? true : false;
+                                            <option value="@item.Value" selected="@selected"> @item.Text</option>
+                                        }
+                                    </select>
+
                                 </div>
 
                                 <div class="form-group">
@@ -139,9 +148,8 @@
                         required: true
                         
                     },
-                    "PageId": {
-                        required: true,
-                        number: true
+                    "news": {
+                        required: true
                     }
 
                 },
@@ -158,7 +166,7 @@
                     "Description": {
                         required: "this field is required"
                     },
-                    "PageId": {
+                    "news": {
                         required: "this field is required"
                     }
 
@@ -175,7 +183,7 @@
                 if ($('#Attachments').valid()) {
                     var title = document.getElementById("title").value;
                     var name = document.getElementById("fileName").value;
-                    var pageId = document.getElementById("pageid").value;
+                    var news = document.getElementById("newsId").value;
                     var type = document.getElementById("type").value;
 
                     var description = $("#summernote").summernote('code');
@@ -190,7 +198,7 @@
                     data.append("Title", title);
                     data.append("Name", name);
                     data.append("Type", type);
-                    data.append("PageId", pageId);
+                    data.append("PageId", news);
                     data.append("Description", description);
 
 

@@ -3,6 +3,7 @@ using GECP_DOT_NET_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
@@ -40,7 +41,31 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         public IActionResult AttachmentsAdd()
         {
-            return View();
+            AttachmentVM attachmentVM = new AttachmentVM();
+            try
+            {
+                
+                var restRequest = new RestRequest("/GetAllNewsDetails", Method.Get);
+                restRequest.AddHeader("Accept", "application/json");
+                restRequest.RequestFormat = DataFormat.Json;
+                RestResponse response = client.Execute(restRequest);
+
+                var content = response.Content;
+                if (content != null)
+                {
+                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<NewsVM>>>(content);
+                    attachmentVM.NewsSelectList = user.data.Select(m => new SelectListItem()
+                    {
+                        Text = m.Title,
+                        Value = m.Id.ToString()
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(attachmentVM);
         }
 
         [HttpPost]
@@ -109,6 +134,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         public IActionResult AttachmentsEdit(long id = 0)
         {
             AttachmentVM attachmentVM = new AttachmentVM();
+           
             try
             {
 
@@ -124,6 +150,22 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 {
                     var user = JsonConvert.DeserializeObject<ServiceResponse<List<AttachmentVM>>>(content);
 
+                }
+
+                var restRequest2 = new RestRequest("/GetAllNewsDetails", Method.Get);
+                restRequest2.AddHeader("Accept", "application/json");
+                restRequest2.RequestFormat = DataFormat.Json;
+                RestResponse response2 = client.Execute(restRequest2);
+
+                var content2 = response2.Content;
+                if (content != null)
+                {
+                    var user = JsonConvert.DeserializeObject<ServiceResponse<List<NewsVM>>>(content2);
+                    attachmentVM.NewsSelectList = user.data.Select(m => new SelectListItem()
+                    {
+                        Text = m.Title,
+                        Value = m.Id.ToString()
+                    }).ToList();
                 }
             }
             catch (Exception ex)
