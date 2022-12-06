@@ -1,0 +1,396 @@
+﻿
+@{
+    ViewData["Title"] = "PersonalDetailUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("PersonalDetailList","PersonalDetail")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i> </li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- your contents here -->
+                            <!-- form start -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Edit Personal Detail</h3>
+                                </div>
+                                <form id="facultydetailadd" name="facultydetailadd" role="form">
+                                    <div class="card-body">
+                                        <div class="form-group">
+
+                                            <!-- Name Controls -->
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="Faculty">Faculty </label>
+                                                    <select name="FacultyId" id="FacultyId" class="form-control">
+                                                        <option>Select Faculty</option>
+                                                        @foreach (var item in Model.FacultySelectList)
+                                                        {
+                                                            bool selected = item.Value == Model.FacultyId.ToString() ? true : false;
+                                                            <option value="@item.Value" selected="@selected">@item.Text</option>
+                                                        }
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="FirstName">FirstName</label>
+                                                    <input name="FirstName" type="text" class="form-control" id="FirstName" value="@Model.FirstName">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="MiddleName">MiddleName</label>
+                                                    <input name="MiddleName" type="text" class="form-control" id="MiddleName" value="@Model.MiddleName">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="LastName">LastName</label>
+                                                    <input name="LastName" type="text" class="form-control" id="LastName" value="@Model.LastName">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="DOB">Date Of Birth</label>
+                                                    <input name="DOB" type="date" class="form-control" id="DOB" value="@Model.Dob">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="MaritalStatus">Marital Status </label>
+                                                    <select name="MaritalStatus" id="MaritalStatus" class="form-control">
+                                                        <option>Select Marital Status</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value="Unmarried">Unmarried</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="CurrentAddress">Current Address</label>
+                                                    <textarea class="form-control" id="CurrentAddress" name="CurrentAddress" rows="3">@Model.CurrentAddress</textarea>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="PermanentAddress">Permanent Address</label>
+                                                    <textarea class="form-control" id="PermanentAddress" name="PermanentAddress" rows="3">@Model.PermanentAddress</textarea>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="ContactNumber">Contact Number</label>
+                                                    <input name="ContactNumber" type="number" class="form-control" id="ContactNumber" value="@Model.ContactNumber">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="WhatsAppNumber">WhatsApp Number</label>
+                                                    <input name="WhatsAppNumber" type="number" class="form-control" id="WhatsAppNumber" value="@Model.WhatsAppNumber">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="EmergencyContactNumber">Emergency Contact Number</label>
+                                                    <input name="EmergencyContactNumber" type="number" class="form-control" id="EmergencyContactNumber" value="@Model.EmergencyContactNumber">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="Email"> Email</label>
+                                                    <input name="Email" type="email" class="form-control" id="Email" value="@Model.Email">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="HighestQualification"> Highest Qualification</label>
+                                                    <input name="HighestQualification" type="text" class="form-control" id="HighestQualification" value="@Model.HighestQualification">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="AreaOfSpecialization"> Area Of Specialization</label>
+                                                    <input name="AreaOfSpecialization" type="text" class="form-control" id="AreaOfSpecialization" value="@Model.AreaOfSpecialization">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="TeachingExperience"> Teaching Experience</label>
+                                                    <input name="TeachingExperience" type="number" class="form-control" id="TeachingExperience" value="@Model.TeachingExperience">
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            @*
+                                            <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label for="Image">Banner</label>
+                                            <div class="input-group">
+                                            <div class="custom-file">
+                                            <input type="file" name="Image" class="custom-file-input" id="Image">
+                                            <label class="custom-file-label" for="Image">
+                                            Choose
+                                            file
+                                            </label>
+                                            </div>
+
+                                            </div>
+                                            </div>
+                                            </div>*@
+
+
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-primary float-right col-md-2" id="btnSubmit">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-default col-md-2">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script type="text/javascript">
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#facultydetailadd').validate({
+                rules: {
+                    "FacultyId": {
+                        required: true
+                    },
+                    "FirstName": {
+                        required: true
+                    },
+                    "MiddleName": {
+                        required: true
+                    },
+                    "LastName": {
+                        required: true
+                    },
+                    "MaritalStatus": { required: true },
+                    "CurrentAddress": { required: true },
+                    "PermanentAddress": { required: true },
+                    "ContactNumber": { required: true },
+                    "WhatsAppNumber": { required: true },
+                    "EmergencyContactNumber": { required: true },
+                    "Email": { required: true },
+                    "HighestQualification": { required: true },
+                    "AreaOfSpecialization": { required: true },
+                    "TeachingExperience": { required: true }
+
+                },
+                messages: {
+                    "FacultyId": {
+                        required: "this field is required"
+                    },
+                    "FirstName": {
+                        required: "This field is required"
+                    },
+                    "MiddleName": {
+                        required: "this field is required"
+                    },
+                    "LastName": {
+                        required: "this field is required"
+                    },
+                    "MaritalStatus": { required: "this field is required" },
+                    "CurrentAddress": { required: "this field is required" },
+                    "PermanentAddress": { required: "this field is required" },
+                    "ContactNumber": { required: "this field is required" },
+                    "WhatsAppNumber": { required: "this field is required" },
+                    "EmergencyContactNumber": { required: "this field is required" },
+                    "Email": { required: "this field is required" },
+                    "HighestQualification": { required: "this field is required" },
+                    "AreaOfSpecialization": { required: "this field is required" },
+                    "TeachingExperience": { required: "this field is required" }
+                }
+
+
+            });
+
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#facultydetailadd').valid()) {
+
+                    var FacultyId = document.getElementById("FacultyId").value;
+                    var FirstName = document.getElementById("FirstName").value;
+                    var MiddleName = document.getElementById("MiddleName").value;
+                    var Dob = document.getElementById("DOB").value;
+                    var LastName = document.getElementById("LastName").value;
+                    var MaritalStatus = document.getElementById("MaritalStatus").value;
+                    var CurrentAddress = document.getElementById("CurrentAddress").value;
+                    var PermanentAddress = document.getElementById("PermanentAddress").value;
+                    var ContactNumber = document.getElementById("ContactNumber").value;
+                    var WhatsAppNumber = document.getElementById("WhatsAppNumber").value;
+                    var EmergencyContactNumber = document.getElementById("EmergencyContactNumber").value;
+                    var Email = document.getElementById("Email").value;
+                    var HighestQualification = document.getElementById("HighestQualification").value;
+                    var AreaOfSpecialization = document.getElementById("AreaOfSpecialization").value;
+                    var TeachingExperience = document.getElementById("TeachingExperience").value;
+
+                    var data = new FormData();
+
+                    data.append("FacultyId", FacultyId);
+                    data.append("FirstName", FirstName);
+                    data.append("MiddleName", MiddleName);
+                    data.append("LastName", LastName);
+                    data.append("Dob", Dob);
+                    data.append("MaritalStatus", MaritalStatus);
+                    data.append("CurrentAddress", CurrentAddress);
+                    data.append("PermanentAddress", PermanentAddress);
+                    data.append("ContactNumber", ContactNumber);
+                    data.append("WhatsAppNumber", WhatsAppNumber);
+                    data.append("EmergencyContactNumber", EmergencyContactNumber);
+                    data.append("Email", Email);
+                    data.append("HighestQualification", HighestQualification);
+                    data.append("AreaOfSpecialization", AreaOfSpecialization);
+                    data.append("TeachingExperience", TeachingExperience);
+
+                    loaderStart();
+
+                    $.ajax({
+                        url: '@Url.Action("PersonalDetailUpdate","PersonalDetail")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            setTimeout(loaderStop(), 2000);
+                            if (data.status_code == "200") {
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.message
+                                }).then(function () {
+                                    $('#facultydetailadd')[0].reset();
+                                    window.location.href = '@Url.Action("PersonalDetailList","PersonalDetail")';
+                                });
+                            }
+                            else {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
+                            }
+                        }
+                    });
+
+                }
+            });
+
+
+        });
+
+    </script>
+
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}

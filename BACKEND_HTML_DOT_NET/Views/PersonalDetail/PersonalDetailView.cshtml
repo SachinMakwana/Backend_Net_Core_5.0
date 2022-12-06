@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewData["Title"] = "PersonalDetailView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <!-- <h3 style="margin-left: 15px;">DEPARTMENT</h3> -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("PersonalDetailList","PersonalDetail")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i> </li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Detail Of Faculty</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var item in Model.facultyList){
+
+                                if (item.Id == Model.personalDetail.FacultyId)
+                                    {
+                                        <div class="preview col-md-3">
+                                            <div class="tab-pane active" id="pic-1">
+                                            <img src="@item.Image" class="img-fluid img-thumbnail border border-dark" alt="Cinque Terre">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <table>
+                                                <tr>
+                                                    <th><b>NAME OF FACULTY:</b></th>
+                                                <td> &nbsp @Model.personalDetail.FirstName @Model.personalDetail.MiddleName @Model.personalDetail.LastName</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>DESIGNATION:</b></th>
+                                                    <td>@item.Designation</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>DEPARTMENT:</b></th>
+                                                    <td>Computer</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>QUALIFICATION:</b></th>
+                                                <td>@Model.personalDetail.HighestQualification</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>AREA OF INTREST:</b></th>
+                                                <td>@Model.personalDetail.AreaOfSpecialization</td>
+                                                </tr>
+
+
+                                            </table>
+                                        </div>
+                                        <div class="row"></div>
+                                        <div class="col-md-5 mt-2">
+                                            <table>
+                                                <tr>
+                                                    <th><b>TOTAL EXPIERENCE:</b></th>
+                                                <td>@Model.personalDetail.TeachingExperience</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>E-MAIL:</b></th>
+                                                <td>@Model.personalDetail.Email</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>CONTACT NUMBER:</b></th>
+                                                <td>@Model.personalDetail.ContactNumber</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>WhatsApp NUMBER:</b></th>
+                                                <td>@Model.personalDetail.WhatsAppNumber</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>Emergency Contact NUMBER:</b></th>
+                                                <td>@Model.personalDetail.EmergencyContactNumber</td>
+                                                </tr>
+                                            </table>
+
+
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="vl mt-4"></div>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+
+                                            <table>
+                                                <tr>
+                                                    <th><b>DATE OF BIRTH:</b></th>
+                                                <td>@Model.personalDetail.Dob</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>MARITAL STATUS:</b></th>
+                                                <td>@Model.personalDetail.MaritalStatus</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>Current ADDRESS:</b></th>
+                                                <td>@Model.personalDetail.CurrentAddress</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><b>Permanent ADDRESS:</b></th>
+                                                <td>@Model.personalDetail.PermanentAddress</td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    
+                                }
+                            }
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="col-md-6">
+                                <a href="faculty_add.html">
+                                    <button type="button"
+                                            class="btn btn-primary float-right col-md-3">
+                                        Edit
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+        </div>
+    </section>
+</div>
+
+
+
+
