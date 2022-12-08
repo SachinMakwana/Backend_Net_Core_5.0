@@ -37,14 +37,17 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("FacultyList","FacultyDetails")" class="nav-link">
-                        <i class="nav-icon fa fa-users"></i>
-                        <p>
-                            Faculty Details
-                        </p>
-                    </a>
-                </li>
+                @if (User.IsInRole("ADMIN"))
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("FacultyList","FacultyDetails")" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Faculty Details
+                            </p>
+                        </a>
+                    </li>
+                }
                 <li class="nav-item">
                     <a href="@Url.Action("PersonalDetailList","PersonalDetail")" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>

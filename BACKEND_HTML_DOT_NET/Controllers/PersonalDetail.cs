@@ -38,21 +38,29 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         public IActionResult PersonalDetailList()
         {
-            var restRequest = new RestRequest("/GetAllPersonalDetails", Method.Get);
-            restRequest.AddHeader("Accept", "application/json");
-            restRequest.RequestFormat = DataFormat.Json;
-
-            RestResponse response = restClient.Execute(restRequest);
-
-            var content = response.Content;
-
-            var user = JsonConvert.DeserializeObject<ServiceResponse<List<PersonalDetailVM>>>(content);
-            personalDetailList = user.data;
-            foreach(var data in user.data)
+            try
             {
-                data.DateOfBirth = data.Dob.ToLongDateString();
+
+                var restRequest = new RestRequest("/GetAllPersonalDetails", Method.Get);
+                restRequest.AddHeader("Accept", "application/json");
+                restRequest.RequestFormat = DataFormat.Json;
+
+                RestResponse response = restClient.Execute(restRequest);
+
+                var content = response.Content;
+
+                var user = JsonConvert.DeserializeObject<ServiceResponse<List<PersonalDetailVM>>>(content);
+                personalDetailList = user.data;
+                foreach (var data in user.data)
+                {
+                    data.DateOfBirth = data.Dob.ToLongDateString();
+                }
+                return View(personalDetailList);
             }
-            return View(personalDetailList);
+            catch (Exception)
+            {
+                return View(null);
+            }
         }
 
         public IActionResult PersonalDetailAdd(long id = 0)

@@ -21,6 +21,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
     {
        HttpClient hc = new HttpClient();
         private static List<UserDetailVM> usersList = new List<UserDetailVM>();
+        private static UserDetailVM UserDetail = new UserDetailVM();
 
         private readonly AppIdentitySettings _config; 
         private string apiBaseUrl = string.Empty;
@@ -51,7 +52,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
 
         [HttpPost("login")]
-        public async  Task<IActionResult> Validate(string username, string password, string returnUrl)
+        public async  Task<IActionResult> Validate(string username,string role, string password, string returnUrl)
         {
             ViewData["ReturnUrl"] = returnUrl;
 
@@ -69,10 +70,13 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 usersList = user.data;
                 foreach (var credentials in usersList)
                 {
-                    if (username == credentials.Username && password == credentials.Password)
+                    if (username == credentials.Username && password == credentials.Password && role == credentials.Role)
                     {
+                        User.IsInRole(role);
+                        UserDetail = credentials;
                         var claims = new List<Claim>();
                         claims.Add(new Claim("username", username));
+                        claims.Add(new Claim("role",role));
                         claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
