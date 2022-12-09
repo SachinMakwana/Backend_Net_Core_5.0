@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,6 +52,14 @@ namespace BACKEND_HTML_DOT_NET
             services.AddSession(option =>
             {
                 option.IdleTimeout = TimeSpan.FromSeconds(30);
+            });
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("ADMIN"));
+            });
+            services.ConfigureApplicationCookie(option =>
+            {
+                option.AccessDeniedPath = new PathString("/AccessDenied");
             });
 
             var identitySettingsSection =

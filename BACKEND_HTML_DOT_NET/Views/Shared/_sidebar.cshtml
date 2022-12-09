@@ -1,4 +1,5 @@
-﻿<!-- Main Sidebar Container -->
+﻿
+<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../dashboard/dashboard.html" class="brand-link">
@@ -13,22 +14,25 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <li class="nav-item">
-                    <a href="@Url.Action("Index","Home")" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("AboutCollegeView","AboutCollege")" class="nav-link">
-                        <i class="nav-icon fas fa-university"></i>
-                        <p>
-                            About College
-                        </p>
-                    </a>
-                </li>
+               
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index","Home")" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+            
+                
+                    <li class="nav-item">
+                        <a href="@Url.Action("AboutCollegeView","AboutCollege")" class="nav-link">
+                            <i class="nav-icon fas fa-university"></i>
+                            <p>
+                                About College
+                            </p>
+                        </a>
+                    </li>
                 <li class="nav-item">
                     <a href="@Url.Action("CampusView","Campus")" class="nav-link">
                         <i class="nav-icon fas fa-graduation-cap"></i>
@@ -37,8 +41,6 @@
                         </p>
                     </a>
                 </li>
-                @if (User.IsInRole("ADMIN"))
-                {
                     <li class="nav-item">
                         <a href="@Url.Action("FacultyList","FacultyDetails")" class="nav-link">
                             <i class="nav-icon fa fa-users"></i>
@@ -47,7 +49,6 @@
                             </p>
                         </a>
                     </li>
-                }
                 <li class="nav-item">
                     <a href="@Url.Action("PersonalDetailList","PersonalDetail")" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -19,11 +20,11 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 {
     public class HomeController : Controller
     {
-       HttpClient hc = new HttpClient();
+        HttpClient hc = new HttpClient();
         private static List<UserDetailVM> usersList = new List<UserDetailVM>();
-        private static UserDetailVM UserDetail = new UserDetailVM();
+        public static UserDetailVM UserDetail = new UserDetailVM();
 
-        private readonly AppIdentitySettings _config; 
+        private readonly AppIdentitySettings _config;
         private string apiBaseUrl = string.Empty;
         private string imageBaseUrl = string.Empty;
 
@@ -38,7 +39,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             client = new RestClient(apiBaseUrl);
         }
 
-        [Authorize]
+        [Authorize(Policy ="AdminRolePolicy")]
         public IActionResult Index()
         {
             return View();
@@ -72,12 +73,12 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 {
                     if (username == credentials.Username && password == credentials.Password && role == credentials.Role)
                     {
-                        User.IsInRole(role);
                         UserDetail = credentials;
                         var claims = new List<Claim>();
                         claims.Add(new Claim("username", username));
-                        claims.Add(new Claim("role",role));
+                        claims.Add(new Claim("role", role));
                         claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
+                        claims.Add(new Claim(ClaimTypes.Role, role));
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                         await HttpContext.SignInAsync(claimsPrincipal);
@@ -106,6 +107,13 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        [Route("/Account/AccessDenied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
