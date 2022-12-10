@@ -39,7 +39,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             client = new RestClient(apiBaseUrl);
         }
 
-        [Authorize(Policy ="AdminRolePolicy")]
+        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -95,7 +95,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return Redirect("/");
+            return Redirect("/login");
         }
 
         public IActionResult Privacy()
