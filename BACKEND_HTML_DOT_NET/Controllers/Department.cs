@@ -42,6 +42,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             client = new RestClient(apiBaseUrl);
         }
 
+        [Authorize(Roles ="ADMIN")]
         public IActionResult DepartmentList()
         {
 
@@ -83,6 +84,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             }
             return View(departmentVMList);
         }
+        [Authorize(Roles = "ADMIN")]
         public IActionResult DepartmentAdd(long id = 0)
         {
             DepartmentVM departmentVM = new DepartmentVM();
@@ -117,6 +119,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult DepartmentAdd([FromForm] DepartmentVM departmentVM, [Optional] IFormCollection collection)
         {
             try
@@ -160,6 +163,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
         }
 
+        [Authorize(Roles = "ADMIN")]
         public IActionResult DepartmentEdit(long id = 0)
         {
             DepartmentVM departmentVM = new DepartmentVM();
@@ -191,6 +195,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             return View(departmentVM);
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         public IActionResult DepartmentEdit([FromForm] DepartmentVM departmentVM, [Optional] IFormCollection collection)
         {
@@ -243,6 +248,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> DepartmentDelete(long id)
         {
 
@@ -280,11 +286,12 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             }
             return Json(new { message = "something went wrong." });
         }
+        [Authorize(Roles = "ADMIN")]
         public IActionResult DepartmentView()
         {
             return View();
         }
-
+        [Authorize(Roles = "ADMIN")]
         public IActionResult DepartmentAllView()
         {
             return View();

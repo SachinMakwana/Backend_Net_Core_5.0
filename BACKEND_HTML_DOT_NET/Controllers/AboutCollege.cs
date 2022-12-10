@@ -38,6 +38,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             client = new RestClient(apiBaseUrl);
         }
 
+        [Authorize(Roles="ADMIN")]
         public IActionResult AboutCollegeView()
         {
             var restRequest = new RestRequest("/GetCollegeDetail", Method.Get);

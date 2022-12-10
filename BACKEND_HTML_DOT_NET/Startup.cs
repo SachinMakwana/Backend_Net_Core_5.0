@@ -56,6 +56,7 @@ namespace BACKEND_HTML_DOT_NET
             services.AddAuthorization(option =>
             {
                 option.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("ADMIN"));
+                option.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("FACULTY"));
             });
             services.ConfigureApplicationCookie(option =>
             {

@@ -37,19 +37,21 @@
                 <li class="nav-item">
                     <a href="@Url.Action("CampusView","Campus")" class="nav-link">
                         <i class="nav-icon fas fa-graduation-cap"></i>
-                        <p>
-                            Campus
-                        </p>
+                            <p>
+                                Campus
+                            </p>
                     </a>
                 </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("FacultyList","FacultyDetails")" class="nav-link">
-                            <i class="nav-icon fa fa-users"></i>
+                @if (User.IsInRole("FACULTY") || User.IsInRole("ADMIN")){
+                <li class="nav-item">
+                     <a href="@Url.Action("FacultyList","FacultyDetails")" class="nav-link">
+                        <i class="nav-icon fa fa-users"></i>
                             <p>
                                 Faculty Details
                             </p>
-                        </a>
+                     </a>
                     </li>
+                }
                 <li class="nav-item">
                     <a href="@Url.Action("PersonalDetailList","PersonalDetail")" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
@@ -58,14 +60,17 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("DepartmentList","Department")" class="nav-link">
-                        <i class="nav-icon fas fa-building"></i>
-                        <p>
-                            Department
-                        </p>
-                    </a>
-                </li>
+                @if (User.IsInRole("ADMIN"))
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("DepartmentList","Department")" class="nav-link">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Department
+                            </p>
+                        </a>
+                    </li>
+                }
                 <li class="nav-item">
                     <a href="@Url.Action("DepartmentAmentyList","DepartmentAmenty")" class="nav-link">
                         <i class="nav-icon fas fa-building"></i>
