@@ -15,6 +15,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace BACKEND_HTML_DOT_NET.Controllers
 {
@@ -71,7 +72,12 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 usersList = user.data;
                 foreach (var credentials in usersList)
                 {
-                    if (username == credentials.Username && password == credentials.Password && role == credentials.Role)
+                    var saltkey = credentials.SaltKey;
+                    var Vrifypassword = password + saltkey;
+                    var IsVarifide = Crypto.VerifyHashedPassword(credentials.Password, Vrifypassword);
+                    //string hashPassword = Crypto.HashPassword(password);
+
+                    if (username == credentials.Username && IsVarifide == true && role == credentials.Role)
                     {
                         UserDetail = credentials;
                         var claims = new List<Claim>();

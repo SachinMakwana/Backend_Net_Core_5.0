@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewData["Title"] = "UserDetailAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("UserDetailList","UserDetails")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i> </li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- your contents here -->
+                            <!-- form start -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add Detail</h3>
+                                </div>
+                                <form id="facultydetailadd" name="facultydetailadd" role="form">
+                                    <div class="card-body">
+                                        <div class="form-group">
+
+                                            <!-- Name Controls -->
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="Username">User Name</label>
+                                                    <input name="Username" type="text" class="form-control" id="Username" placeholder="Username">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="Password">Password</label>
+                                                    <input name="Password" type="text" class="form-control" id="Password" placeholder="Password">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="input-group col-12">
+
+                                                <div class="col-md-3">
+                                                    <label for="Role">Role</label>
+                                                    <select name="Role" id="Role" class="form-control">
+                                                        <option>Select Role</option>
+                                                        <option value="ADMIN">ADMIN</option>
+                                                        <option value="HOD">HOD</option>
+                                                        <option value="FACULTY">FACULTY</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-primary float-right col-md-2" id="btnSubmit">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="button"
+                                                        class="btn btn-default col-md-2">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script type="text/javascript">
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#facultydetailadd').validate({
+                rules: {
+                    "Username": {
+                        required: true
+                    },
+                    "Password": {
+                        required: true
+                    },
+                    "Role": {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    "Username": {
+                        required: "this field is required"
+                    },
+                    "Password": {
+                        required: "This field is required"
+                    },
+                    "Role": {
+                        required: "this field is required"
+                    }
+                }
+
+
+            });
+
+            $('#btnSubmit').click(function (e) {
+
+                if ($('#facultydetailadd').valid()) {
+
+                    var Username = document.getElementById("Username").value;
+                    var Password = document.getElementById("Password").value;
+                    var Role = document.getElementById("Role").value;
+                   
+
+                    var data = new FormData();
+
+                    data.append("Role", Role);
+                    data.append("Password", Password);
+                    data.append("Username", Username);
+                    
+                    loaderStart();
+
+                    $.ajax({
+                        url: '@Url.Action("UserDetailAdd", "UserDetails")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            loaderStop();
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#facultyadd')[0].reset();
+                                    window.location.href = '@Url.Action("PersonalDetailList","PersonalDetail")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
+
+
+        });
+
+    </script>
+
+}
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}

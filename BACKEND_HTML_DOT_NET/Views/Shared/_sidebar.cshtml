@@ -34,6 +34,17 @@
                         </a>
                     </li>
                 }
+                @if (User.IsInRole("ADMIN"))
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("UserDetailList","UserDetails")" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                User Detail
+                            </p>
+                        </a>
+                    </li>
+                }
                 <li class="nav-item">
                     <a href="@Url.Action("CampusView","Campus")" class="nav-link">
                         <i class="nav-icon fas fa-graduation-cap"></i>
