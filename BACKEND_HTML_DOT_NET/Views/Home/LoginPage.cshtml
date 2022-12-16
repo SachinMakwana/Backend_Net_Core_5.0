@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "LoginPage";
     Layout = "~/Views/Shared/Login.cshtml";
-    var returnUrl = ViewData["ReturnUrl"] as string;
+    //var returnUrl = ViewData["ReturnUrl"] as string;
     var error = TempData["Error"] as string;
 }
 
@@ -14,7 +14,8 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Login to start your session</p>
 
-            <form action="/login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
+            @*<form action="/login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">*@
+            <form action="/login/auth" method="post">
 
                 @if (!string.IsNullOrEmpty(error))
                 {

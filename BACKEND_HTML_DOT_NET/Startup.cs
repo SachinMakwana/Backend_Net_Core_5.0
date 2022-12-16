@@ -31,7 +31,7 @@ namespace BACKEND_HTML_DOT_NET
             services.AddControllersWithViews();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
             {
-                option.LoginPath = "/login";
+                option.LoginPath = "/";
                 option.ExpireTimeSpan = TimeSpan.FromSeconds(1000);
                 option.Events = new CookieAuthenticationEvents()
                 {

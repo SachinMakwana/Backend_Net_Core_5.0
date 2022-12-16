@@ -41,22 +41,26 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         }
 
         [Authorize]
+        [Route("/Home")]
         public IActionResult Index()
         {
             return View();
         }
 
+        
         [HttpGet("login")]
+        [Route("/")]
         public IActionResult LoginPage(string returnUrl)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            //ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost("login")]
+        [Route("/login/auth")]
         public async  Task<IActionResult> Validate(string username,string role, string password, string returnUrl)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            //ViewData["ReturnUrl"] = returnUrl;
 
             var restClient = new RestClient(apiBaseUrl);
             var restRequest = new RestRequest("/GetAllUsersDetails", Method.Get);
@@ -88,20 +92,20 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                         await HttpContext.SignInAsync(claimsPrincipal);
-                        return Redirect("/");
+                        return Redirect("/Home");
                     }
                 }
             }
 
             TempData["Error"] = "Error : Username or Password Wrong";
-            return Redirect("/login");
+            return Redirect("/");
         }
 
         [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return Redirect("/login");
+            return Redirect("/");
         }
 
         public IActionResult Privacy()
