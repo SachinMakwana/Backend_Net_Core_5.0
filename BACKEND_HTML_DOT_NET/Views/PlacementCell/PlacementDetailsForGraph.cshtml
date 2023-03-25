@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "UserDetailList";
+    ViewData["Title"] = "PlacementDetailsForGraph";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,19 +10,19 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Users Details</h1>
+                    <h1>Placement Details For Graph</h1>
                 </div>
                 <div class="col-sm-6" style="margin-top:10px;">
-                    <a href="@Url.Action("UserDetailAdd","UserDetails")">
+                    <a href="@Url.Action("PlacementDetailsForGraphAdd","PlacementCell")">
                         <ol class="breadcrumb float-sm-right">
                             <li><i class="nav-icon fas fa-plus-circle"></i></li>
-                            <li>Add Details</li>
+                            <li>Add New Details</li>
                         </ol>
                     </a>
                 </div>
             </div>
-            <!-- /.container-fluid -->
         </div>
+        <!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
@@ -32,61 +32,89 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">List Of Users</h3>
+                            <h3 class="card-title" style="font-size: 25px;">List Of Placement Year Vise</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="userTable" class="table table-bordered table-hover">
-
-
+                            <table id="placementList" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Username</th>
-                                        <th>Role</th>
-                                        <th>View</th>
-                                        <th>Reset Password</th>
+                                        <th>Department</th>
+                                        <th>Placement Year</th>
+                                        <th>RegisterdStudent</th>
+                                        <th>PlacedStudent</th>
+                                        <th>HigestPackage</th>
+                                        <th>Edit</th>
                                         <th>Delete</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
+                                            <td>@item.Id</td>
+
+                                            @if (item.DeptId == 1)
+                                            {
+                                                <td>COMPUTER SCIENCE & ENGG</td>
+                                            }
+                                            @if (item.DeptId == 8)
+                                            {
+                                                <td>CIVIL ENGINEERING</td>
+                                            }
+                                            @if (item.DeptId == 6)
+                                            {
+                                                <td>MECHANICAL ENGINEERING</td>
+                                            }
+                                            @if (item.DeptId == 7)
+                                            {
+                                                <td>ELECTRICAL ENGINEERING</td>
+                                            }
+                                            @if (item.DeptId == 9)
+                                            {
+                                                <td>ELECTRONICS & COMMUNICATION ENGG</td>
+                                            }
                                             <td>
-                                                @item.Id
+                                                @item.PlacementYear
                                             </td>
                                             <td>
-                                                @item.Username
+                                                @item.NumberofRegisterdStudent
                                             </td>
                                             <td>
-                                                @item.Role
+                                                @item.PlacedStudent
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("UserDetailView","UserDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                                @item.HigestPackage
+                                            </td>
+                                            
+                                            @*<td>
+                                        <a href="@Url.Action("DepartmentAmentyView","DepartmentAmenty",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                        </td>*@
+                                            <td>
+                                                <a href="@Url.Action("PlacementDetailsForGraphEdit","PlacementCell",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
                                             <td>
-                                                @*<a href="@Url.Action("UserDetailUpdate","UserDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>*@
-                                                <a href="javascript:void(0)" onclick="UserDetailUpdate(@item.Id)"><i class="nav-icon fas fa-unlock"></i></a>
-                                            </td>
-                                            <td>
-                                                <a href="javascript:void(0)" onclick="DeleteUserDetail(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
+                                                <a href="javascript:void(0)" onclick="PlacementDetailsForGraphDelete(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     }
                                 </tbody>
-                                <thead>
+                                <tfoot>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Username</th>
-                                        <th>Role</th>
-                                        <th>View</th>
-                                        <th>Reset Password</th>
+                                        <th>Department</th>
+                                        <th>Placement Year</th>
+                                        <th>RegisterdStudent</th>
+                                        <th>PlacedStudent</th>
+                                        <th>HigestPackage</th>
+                                        <th>Edit</th>
                                         <th>Delete</th>
+
                                     </tr>
-                                </thead>
+                                </tfoot>
                             </table>
-                            <span class="text-danger">* Default Password is gecp@123</span>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -103,34 +131,6 @@
 <!-- /.container-fluid -->
 <!-- /.content -->
 @section script{
-    <script>
-        jQuery(function ($) {
-            function AddReadMore() {
-                var carLmt = 10;
-                var readMoreTxt = " ...read more";
-
-                var readLessTxt = " read less";
-                $(".add-read-more").each(function () {
-                    if ($(this).find(".first-section").length)
-                        return;
-
-                    var allstr = $(this).text();
-                    if (allstr.length > carLmt) {
-                        var firstSet = allstr.substring(0, carLmt);
-                        var secdHalf = allstr.substring(carLmt, allstr.length);
-                        var strtoadd = firstSet + "<span class='second-section'>" + secdHalf + "</span><span class='read-more'  title='Click to Show More'>" + readMoreTxt + "</span><span class='read-less' title='Click to Show Less'>" + readLessTxt + "</span>";
-                        $(this).html(strtoadd);
-                    }
-                });
-
-                $(document).on("click", ".read-more,.read-less", function () {
-                    $(this).closest(".add-read-more").toggleClass("show-less-content show-more-content");
-                });
-            }
-
-            AddReadMore();
-        });
-    </script>
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables/jquery.dataTables.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
@@ -144,20 +144,19 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
-
-
     <script type="text/javascript">
         $(function () {
+            $("#departmentAmentyList").DataTable({ "responsive": true, "lengthChange": false, "autoWidth": false });
 
-            $("#userTable").DataTable({ "responsive": true, "lengthChange": false, "autoWidth": false });
 
         });
+        function PlacementDetailsForGraphDelete(id) {
 
-        function DeleteUserDetail(id) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You will not be able to recover this imaginary file!",
                 type: "warning",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
@@ -167,73 +166,30 @@
                 if (!isConfirm) return;
                 if (id != null) {
                     $.ajax({
-                        url: '@Url.Action("UserDetailDelete","UserDetails")',
+                        url: '@Url.Action("PlacementDetailsForGraphDelete","PlacementCell")',
                         type: 'post',
                         data: { id: id },
                         success: function (data) {
                             if (data.status_code == "200") {
-                                Swal.fire(data.message, '', 'success')
-                                window.setTimeout(window.location.reload(), 5000);
-
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.reload();
+                                });
                             }
 
                         }
                     });
                 }
-            });
 
-        }
-        function UserDetailUpdate(id) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-            }).then(function (isConfirm) {
-
-                if (!isConfirm) return;
-                if (id != null) {
-                    $.ajax({
-                        url: '@Url.Action("UserDetailUpdate","UserDetails")',
-                        type: 'post',
-                        data: { id: id },
-                        success: function (data) {
-                            if (data.status_code == "200") {
-                                Swal.fire(data.message, '', 'success')
-                                window.setTimeout(window.location.reload(), 5000);
-
-                            }
-
-                        }
-                    });
-                }
             });
 
         }
     </script>
 }
-
     @section styles{
     <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
-    <style>
-        .add-read-more.show-less-content .second-section,
-        .add-read-more.show-less-content .read-less {
-            display: none;
-        }
-
-        .add-read-more.show-more-content .read-more {
-            display: none;
-        }
-
-        .add-read-more .read-more,
-        .add-read-more .read-less {
-            font-weight: bold;
-            margin-left: 2px;
-            color: blue;
-            cursor: pointer;
-        }</style>
 }
-

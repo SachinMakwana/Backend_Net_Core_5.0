@@ -94,6 +94,24 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 return Json(new { status_code = "000", message = ex.Message.ToString() });
             }
         }
+        //public IActionResult UserDetailUpdate(int id)
+        //{
+        //    UserDetailVM userdetail = new UserDetailVM();
+        //    try
+        //    {
+        //        if (id > 0)
+        //        {
+        //            userdetail = usersList.Where(m => m.Id == id).FirstOrDefault();
+        //        }
+                
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    return View(userdetail);
+        //}
+        [HttpPost]
         public IActionResult UserDetailUpdate(int id)
         {
             UserDetailVM userdetail = new UserDetailVM();
@@ -103,28 +121,15 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 {
                     userdetail = usersList.Where(m => m.Id == id).FirstOrDefault();
                 }
-                
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return View(userdetail);
-        }
-        [HttpPost]
-        public IActionResult UserDetailUpdate(UserDetailVM updatedDetail)
-        {
-            try
-            {
                 string salt = Crypto.GenerateSalt();
-                string password = updatedDetail.Password + salt;
+                string password = "gecp@123" + salt;
                 string hashedPassword = Crypto.HashPassword(password);
 
-                RestRequest request = new RestRequest("/UpdateUsersDetail", Method.Post);
-                updatedDetail.SaltKey = salt;
-                updatedDetail.Password = hashedPassword;
-                updatedDetail.CreatedDate = DateTime.Now;
-                updatedDetail.UpdatedDate = DateTime.Now;
+                RestRequest request = new RestRequest("/RestPasswordUsersDetail", Method.Post);
+                userdetail.SaltKey = salt;
+                userdetail.Password = hashedPassword;
+                userdetail.CreatedDate = DateTime.Now;
+                userdetail.UpdatedDate = DateTime.Now;
 
                 //iterate and add model to request as parameter
                 PropertyInfo[] properties = typeof(UserDetailVM).GetProperties();
@@ -132,7 +137,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 {
                     if (property.Name.ToString() != "FacultySelectList")
                     {
-                        var value = property.GetValue(updatedDetail);
+                        var value = property.GetValue(userdetail);
                         request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
                     }
                 }

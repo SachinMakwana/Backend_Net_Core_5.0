@@ -1,0 +1,264 @@
+﻿
+@{
+    ViewData["Title"] = "PlacementDetailsForGraphEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("PlacementDetailsForGraph","PlacementCell")">
+                    <ol class="breadcrumb float-sm-right">
+                        <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
+                        <li style="margin-left: 00px;">Back to Details</li>
+                    </ol>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- your contents here -->
+                            <!-- form start -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Edit Data</h3>
+                                </div>
+                                <form role="form" id="placementGraphForm">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <!-- Name Controls -->
+                                            <div class="form-group">
+                                                <div class="input-group col-12">
+
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="labId">Department ID Of Department Amenty</label>
+                                                            <select name="Dept" id="Department" class="form-control">
+                                                                <option>Select Department</option>
+                                                                @foreach (var item in Model.DepartmentList)
+                                                                {
+                                                                    bool selected = item.Value == Model.DeptId.ToString() ? true : false;
+                                                                    <option value="@item.Value" selected="@selected"> @item.Text</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="fname">PlacementYear</label>
+                                                            <input type="number" name="PlacementYear" class="form-control" id="PlacementYear" placeholder="PlacementYear" value="@Model.PlacementYear">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="NumberofRegisterdStudent">Number of Registerd Student</label>
+                                                            <input type="number" name="NumberofRegisterdStudent" class="form-control" id="NumberofRegisterdStudent" placeholder="NumberofRegisterdStudent" value="@Model.NumberofRegisterdStudent">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="PlacedStudent">Placed Student</label>
+                                                            <input type="number" name="PlacedStudent" class="form-control" id="PlacedStudent" placeholder="PlacedStudent" value="@Model.PlacedStudent">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="TotalStudent">Total Student</label>
+                                                            <input type="number" name="TotalStudent" class="form-control" id="TotalStudent" placeholder="TotalStudent" value="@Model.TotalStudent">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="NoOfCompany">No Of Company</label>
+                                                            <input type="number" name="NoOfCompany" class="form-control" id="NoOfCompany" placeholder="NoOfCompany" value="@Model.NoOfCompany">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="HigestPackage">Higest Package</label>
+                                                            <input type="number" name="HigestPackage" class="form-control" id="HigestPackage" placeholder="HigestPackage" value="@Model.HigestPackage">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="LowestPackage">Lowest Package</label>
+                                                            <input type="number" name="LowestPackage" class="form-control" id="LowestPackage" placeholder="LowestPackage" value="@Model.LowestPackage">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <div class="input-group col-12">
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">Submit</button></div>
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2">Clear</button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+@section script{
+
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#departmentAmentyForm').validate({
+                rules: {
+                    "PlacementYear": {
+                        required: true
+                    },
+                    "NumberofRegisterdStudent": {
+                        required: true
+                    },
+                    "PlacedStudent": {
+                        required: true
+                    },
+                    "TotalStudent": {
+                        required: true
+                    },
+                    "NoOfCompany": {
+                        required: true
+
+                    },
+                    "HigestPackage": {
+                        required: true
+                    },
+                    "LowestPackage": {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    "PlacementYear": {
+                        required: "this field is required"
+                    },
+                    "NumberofRegisterdStudent": {
+                        required: "this field is required"
+                    },
+                    "PlacedStudent": {
+                        required: "this field is required"
+                    },
+                    "TotalStudent": {
+                        required: "this field is required"
+                    },
+                    "NoOfCompany": {
+                        required: "this field is required"
+
+                    },
+                    "HigestPackage": {
+                        required: "this field is required"
+                    },
+                    "LowestPackage": {
+                        required: "this field is required"
+                    }
+
+                }
+
+
+            });
+
+            $('#btnSubmit').click(function (e) {
+                if ($('#placementGraphForm').valid()) {
+
+                    var PlacementYear = document.getElementById("PlacementYear").value;
+                    var NumberofRegisterdStudent = document.getElementById("NumberofRegisterdStudent").value;
+                    var PlacedStudent = document.getElementById("PlacedStudent").value;
+                    var TotalStudent = document.getElementById("TotalStudent").value;
+                    var NoOfCompany = document.getElementById("NoOfCompany").value;
+                    var HigestPackage = document.getElementById("HigestPackage").value;
+                    var LowestPackage = document.getElementById("LowestPackage").value;
+                    var Department = document.getElementById("Department").value;
+
+                    //var data = $('#department').serialize();
+                    var data = new FormData();
+
+
+                    data.append("PlacementYear", PlacementYear);
+                    data.append("NumberofRegisterdStudent", NumberofRegisterdStudent);
+                    data.append("PlacedStudent", PlacedStudent);
+                    data.append("TotalStudent", TotalStudent);
+                    data.append("NoOfCompany", NoOfCompany);
+                    data.append("HigestPackage", HigestPackage);
+                    data.append("LowestPackage", LowestPackage);
+                    data.append("DeptId", Department);
+
+
+                    console.log(data);
+
+                    $.ajax({
+                        url: '@Url.Action("PlacementDetailsForGraphEdit","PlacementCell")',
+                        type: 'post',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Edited!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    $('#placementGraphForm')[0].reset();
+                                    window.location.href = '@Url.Action("PlacementDetailsForGraph","PlacementCell")';
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    });
+                }
+
+            });
+
+
+        });
+
+    </script>
+
+}
+
+    @section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
