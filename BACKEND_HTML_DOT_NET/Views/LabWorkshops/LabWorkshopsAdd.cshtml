@@ -1,5 +1,7 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "LabWorkshopsAdd"; }
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "LabWorkshopsAdd";
+}
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <!-- /.content-header -->
@@ -93,7 +95,7 @@
 </div>
 
 
-                                            
+
 @section script{
 
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
@@ -104,46 +106,48 @@
 
     </script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-
-    $(document).ready(function() {
-        //console.log( "ready!" );
-
-        $('#LabWorkshop').validate({
-          rules: {
-            "labname": {
-                 required: true                
-             },
-             "labId": {
-                 required: true
-             },
-             "description":{
-                 required: true
-             },
-                "Image": {
-                    required: true
-                }
-
-          },
-          messages: {
-            "labname": {
-                 required: "this field is required"
-             },
-             "labId": {
-               required: "this field is required"
-             },
-             "description":{
-               required: "this field is required"
-             },
-                "Image": {
-                 required: "this field is required"
-                }
-
-          }
-         
-
+        $(function () {
+            bsCustomFileInput.init();
         });
+        $(document).ready(function () {
+            //console.log( "ready!" );
+
+            $('#LabWorkshop').validate({
+                rules: {
+                    "labname": {
+                        required: true
+                    },
+                    "labId": {
+                        required: true
+                    },
+                    "description": {
+                        required: true
+                    },
+                    "Image": {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    "labname": {
+                        required: "this field is required"
+                    },
+                    "labId": {
+                        required: "this field is required"
+                    },
+                    "description": {
+                        required: "this field is required"
+                    },
+                    "Image": {
+                        required: "this field is required"
+                    }
+
+                }
+
+
+            });
 
             $('#btnSubmit').click(function (e) {
                 if ($('#LabWorkshopForm').valid()) {
@@ -151,7 +155,7 @@
                     var labname = document.getElementById("labname").value;
                     var deptlabId = document.getElementById("Department").value;
                     var description = $("#summernote").summernote('code');
-                    
+
                     //var data = $('#department').serialize();
                     var data = new FormData();
                     var totalFiles = document.getElementById("Image").files.length;
@@ -161,9 +165,9 @@
                     }
 
                     data.append("Name", labname);
-                    data.append("DeptId",deptlabId);
-                    data.append("Description",description);
-                   
+                    data.append("DeptId", deptlabId);
+                    data.append("Description", description);
+
 
 
 
@@ -198,17 +202,17 @@
                             }
                         }
                     });
-        }
+                }
 
-    });
+            });
 
 
-    });
+        });
 
-</script>
+    </script>
 
 }
 
-    @section styles{
+@section styles{
     <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }

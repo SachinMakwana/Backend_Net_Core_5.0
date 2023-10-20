@@ -34,9 +34,9 @@
 
                                             <!-- Name Controls -->
 
-                                            <div class="input-group col-12">
-
-                                                <div class="col-md-3">
+                                            <div class="input-group">
+                                                <div class=" row align-items-center p-2">
+                                                    <div class="col">
                                                     <label for="Faculty">Faculty </label>
                                                     <select name="FacultyId" id="FacultyId" class="form-control">
                                                         <option>Select Faculty</option>
@@ -46,52 +46,31 @@
                                                             <option value="@item.Value" selected="@selected">@item.Text</option>
                                                         }
                                                     </select>
+                                                     </div>
+                                        
                                                 </div>
-
                                             </div>
 
-                                            <div class="input-group col-12">
-
-                                                <div class="col-md-3">
+                                            <div class="input-group row align-items-center p-2">
+                                                <div class="col">
                                                     <label for="FirstName">FirstName</label>
                                                     <input name="FirstName" type="text" class="form-control" id="FirstName" value="@Model.FirstName">
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="input-group col-12">
-
-                                                <div class="col-md-3">
+                                                <div class="col">
                                                     <label for="MiddleName">MiddleName</label>
                                                     <input name="MiddleName" type="text" class="form-control" id="MiddleName" value="@Model.MiddleName">
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="input-group col-12">
-
-                                                <div class="col-md-3">
+                                                <div class="col">
                                                     <label for="LastName">LastName</label>
                                                     <input name="LastName" type="text" class="form-control" id="LastName" value="@Model.LastName">
                                                 </div>
                                             </div>
 
-
-
-                                            <div class="input-group col-12">
-
+                                            <div class="input-group row align-items-center p-2">
                                                 <div class="col-md-3">
                                                     <label for="DOB">Date Of Birth</label>
                                                     <input name="DOB" type="date" class="form-control" id="DOB" value="@Model.Dob">
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="input-group col-12">
-
                                                 <div class="col-md-3">
                                                     <label for="MaritalStatus">Marital Status </label>
                                                     <select name="MaritalStatus" id="MaritalStatus" class="form-control">
@@ -100,23 +79,14 @@
                                                         <option value="Unmarried">Unmarried</option>
                                                     </select>
                                                 </div>
-
                                             </div>
 
-
-
-                                            <div class="input-group col-12">
-
-                                                <div class="col-md-3">
+                                            <div class="input-group row align-items-center p-2">
+                                                <div class="col-md-6">
                                                     <label for="CurrentAddress">Current Address</label>
                                                     <textarea class="form-control" id="CurrentAddress" name="CurrentAddress" rows="3">@Model.CurrentAddress</textarea>
                                                 </div>
-                                            </div>
-
-
-                                            <div class="input-group col-12">
-
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <label for="PermanentAddress">Permanent Address</label>
                                                     <textarea class="form-control" id="PermanentAddress" name="PermanentAddress" rows="3">@Model.PermanentAddress</textarea>
                                                 </div>
@@ -124,96 +94,46 @@
 
 
 
-                                            <div class="input-group col-12">
 
+                                            <div class="input-group row align-items-center p-2">
                                                 <div class="col-md-3">
                                                     <label for="ContactNumber">Contact Number</label>
                                                     <input name="ContactNumber" type="number" class="form-control" id="ContactNumber" value="@Model.ContactNumber">
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="input-group col-12">
+                                           
 
                                                 <div class="col-md-3">
                                                     <label for="WhatsAppNumber">WhatsApp Number</label>
                                                     <input name="WhatsAppNumber" type="number" class="form-control" id="WhatsAppNumber" value="@Model.WhatsAppNumber">
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="input-group col-12">
-
+                                           
                                                 <div class="col-md-3">
                                                     <label for="EmergencyContactNumber">Emergency Contact Number</label>
                                                     <input name="EmergencyContactNumber" type="number" class="form-control" id="EmergencyContactNumber" value="@Model.EmergencyContactNumber">
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="input-group col-12">
-
                                                 <div class="col-md-3">
                                                     <label for="Email"> Email</label>
                                                     <input name="Email" type="email" class="form-control" id="Email" value="@Model.Email">
                                                 </div>
                                             </div>
 
-
-
-                                            <div class="input-group col-12">
-
+                                            <div class="input-group row align-items-center p-2">
                                                 <div class="col-md-3">
                                                     <label for="HighestQualification"> Highest Qualification</label>
                                                     <input name="HighestQualification" type="text" class="form-control" id="HighestQualification" value="@Model.HighestQualification">
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="input-group col-12">
-
                                                 <div class="col-md-3">
                                                     <label for="AreaOfSpecialization"> Area Of Specialization</label>
                                                     <input name="AreaOfSpecialization" type="text" class="form-control" id="AreaOfSpecialization" value="@Model.AreaOfSpecialization">
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="input-group col-12">
 
                                                 <div class="col-md-3">
                                                     <label for="TeachingExperience"> Teaching Experience</label>
                                                     <input name="TeachingExperience" type="number" class="form-control" id="TeachingExperience" value="@Model.TeachingExperience">
                                                 </div>
+                                                
                                             </div>
-
-
-
-
-
-                                            @*
-                                            <div class="col-md-6">
-                                            <div class="form-group">
-                                            <label for="Image">Banner</label>
-                                            <div class="input-group">
-                                            <div class="custom-file">
-                                            <input type="file" name="Image" class="custom-file-input" id="Image">
-                                            <label class="custom-file-label" for="Image">
-                                            Choose
-                                            file
-                                            </label>
-                                            </div>
-
-                                            </div>
-                                            </div>
-                                            </div>*@
-
-
+                                            
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -223,11 +143,11 @@
                                             <div class="col-sm-6">
                                                 <button type="button"
                                                         class="btn btn-primary float-right col-md-2" id="btnSubmit">
-                                                    Submit
+                                                    Reset
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button"
+                                                <button type="button" id="btnclear"
                                                         class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
@@ -384,7 +304,9 @@
 
                 }
             });
-
+            $("#btnclear").click(function (e) {
+                $("#facultydetailadd")[0].reset();
+            });
 
         });
 

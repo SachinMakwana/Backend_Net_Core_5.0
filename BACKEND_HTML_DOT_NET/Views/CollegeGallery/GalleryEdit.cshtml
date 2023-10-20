@@ -55,7 +55,7 @@
                                                 </label>
                                             </div>
                                             <div class="input-group-append">
-                                                <span class="input-group-text" >Upload</span>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -66,9 +66,9 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <div class="input-group col-12">
-                                <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-2">Reset</button></div>
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" class="btn btn-default col-md-2" id="btnclear">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -100,6 +100,9 @@
             timer: 3000
         });
 
+        $(function () {
+            bsCustomFileInput.init();
+        });
     $(document).ready(function() {
         //console.log( "ready!" );
 
@@ -182,6 +185,10 @@
         
 
     });
+
+            $("#btnclear").click(function (e) {
+                $("#gallery")[0].reset();
+            });
 
 
     });

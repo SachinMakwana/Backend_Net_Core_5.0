@@ -9,50 +9,47 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("DesignationView","DesignationCon")">
+                <a href="@Url.Action("CircularList","Circular")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
                         <li style="margin-left: px;">Back to Details</li>
                     </ol>
                 </a>
             </div>
-            <div class="col-md-12">
-                <div class="card card-primary">
+            <div class="col-md-12" style="margin: auto;">
+                <div class="card card-primary ">
                     <div class="card-header">
-                        <h3 class="card-title">Add Designation</h3>
+                        <h3 class="card-title">Add Circular</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form role="form" id="gallery" asp-action="DesignationConAdd" asp-controller="DesignationCon" method="post">
-                        <div class="card-body">
-                            <div class="row">
+                        
+                            
 
-                                <div class="form-group">
-                                    <label for="fileName">Title</label>
-                                    <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter Title">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="fileName">Description</label>
-                                    <textarea type="text" class="form-control" id="Class" name="Description" rows="4" placeholder="Write content"></textarea>
-                                </div>
-                                @*<div class="form-group">
-                                    <label for="fileName">Date</label>
-                                    <input type="text" class="form-control" id="Title" name="Date" placeholder="Enter Date">
-                                </div>*@
+                        <div class="input-group row align-items-center p-3 d-flex justify-content-center">
+                            <div class="col-md-6 col align-self-start">
+                                <label for="fileName">Title</label>
+                                <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter Title">
+                            </div>
+                            <div class="col-md-6 col align-self-start">
+                                <label for="fileName">Date</label>
+                                <input type="text" class="form-control" id="Date" name="Date" placeholder="Enter Date">
+                            </div>
+                        </div>
 
-                              
-                               
-
-
+                        <div class="input-group row align-items-center p-3 d-flex justify-content-center ">
+                            <div class="col-md-12">
+                                <label for="fileName">Description</label>
+                                <textarea type="text" class="form-control" id="Description" name="Description" rows="4" placeholder="Write content"></textarea>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <div class="input-group col-12">
-                                <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-4">Submit</button></div>
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" class="btn btn-default col-md-4" id="btnclear">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -81,6 +78,8 @@
 
     $(document).ready(function() {
         //console.log( "ready!" );
+            $('#Description').summernote()
+        $("#Date").datepicker();
 
         $('#gallery').validate({
           rules: {
@@ -107,9 +106,11 @@
         });
 
             $('#btnGallery').click(function (e) {
-               // alert("enterted");
+                //alert("enterted");
         //prevent Default functionality
         e.preventDefault();
+
+               
 
 
         if($('#gallery').valid()){
@@ -154,6 +155,14 @@
 
 
     });
+
+        $("#btnclear").click(function (e) {
+            $("#gallery")[0].reset();
+            $('#Description').summernote('reset');
+
+
+
+        });
 </script>
 }
     @section styles{
