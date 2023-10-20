@@ -107,8 +107,8 @@
                                     <!-- /.card-body -->
                                     <div class="card-footer">
                                         <div class="input-group col-12">
-                                            <div class="col-sm-6"><button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">Submit</button></div>
-                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2">Clear</button></div>
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">Update</button></div>
+                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2" id=btnclear>Clear</button></div>
                                         </div>
                                     </div>
                                 </form>
@@ -251,6 +251,11 @@
                 }
 
             });
+
+            $("#btnclear").click(function (e) {
+                $("#placementGraphForm")[0].reset();
+            });
+
 
 
         });

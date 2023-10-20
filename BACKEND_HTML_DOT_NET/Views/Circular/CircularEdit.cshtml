@@ -8,7 +8,7 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("DesignationList","DesignationCon")">
+                <a href="@Url.Action("CircularList","Circular")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
                         <li style="margin-left: px;">Back to Details</li>
@@ -24,32 +24,34 @@
                     <!-- form start -->
                     <form role="form" id="gallery" asp-action="GalleryAdd" asp-controller="CollegeGallery" method="post" >
                         <div class="card-body">
-                            <div class="row">
-                                <input type="hidden" name="Id" id="Id" value="@Model.Id" />
-
-
-                                <div class="form-group">
+                            <div class="input-group row align-items-center p-3 d-flex justify-content-center">
+                                <div class="col-md-12 col align-self-start">
                                     <label for="fileName">Title</label>
                                     <input type="text" class="form-control" id="Title" value="@Model.Title" name="Title" placeholder="Enter Title">
                                 </div>
-
-                                <div class="form-group">
+                            </div>
+                            <div class="input-group row align-items-center p-3 d-flex justify-content-center">
+                                <div class="col-md-12 col align-self-start">
                                     <label for="fileName">Description</label>
-                                    <textarea type="text" class="form-control" id="Class" name="Description" rows="4" placeholder="Write content">@Model.Description</textarea>
+                                    <textarea type="text" class="form-control" id="Description" name="Description" rows="4" placeholder="Write content">@Model.Description</textarea>
                                 </div>
+                            </div>
                                 @*<div class="form-group">
                                     <label for="fileName">Date</label>
                                     <input type="text" class="form-control" id="Title" name="Date" value="@Model.Date" placeholder="Enter Date">
                                 </div>*@
 
-                            </div>
+                            
                         </div>
+
+                        
+
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <div class="input-group col-12">
                                 <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-2">Submit</button></div>
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" class="btn btn-default col-md-2" id="btnclear">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -77,6 +79,7 @@
 
 
     $(document).ready(function() {
+            $('#Description').summernote()
         //console.log( "ready!" );
 
             $('#gallery').validate({
@@ -149,8 +152,15 @@
 
 
     });
+        $("#btnclear").click(function (e) {
+            $("#gallery")[0].reset();
+            $('#Description').summernote('reset');
+
+
+
+        });
 </script>
 }
-    @section styles{
+    @section styles{    
     <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }

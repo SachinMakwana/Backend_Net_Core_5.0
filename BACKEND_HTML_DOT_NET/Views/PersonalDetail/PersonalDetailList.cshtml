@@ -46,7 +46,7 @@
                                         <th>DOB</th>
                                         <th>ContactNumber</th>
                                         <th>Email</th>
-                                        <th>View</th>
+                                        <th>View</th>   
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -71,7 +71,7 @@
                                                 @item.Email
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("PersonalDetailView","PersonalDetail",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                                <a href="@Url.Action("PersonalDetailView","PersonalDetail",new {@id=item.Id})" class="nav-icon fas fa-eye"> </a>
                                             </td>
                                             <td>
                                                 <a href="@Url.Action("PersonalDetailUpdate","PersonalDetail",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>

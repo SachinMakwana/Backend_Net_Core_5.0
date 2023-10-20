@@ -108,6 +108,8 @@
 
 
 @section script{
+
+        
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
     <script>
         $(document).ready(function () {
@@ -120,6 +122,9 @@
 
     <script type="text/javascript">
 
+        $(function () {
+            bsCustomFileInput.init();
+        });
         $(document).ready(function () {
             $('#frmdepartment').validate({
                 rules: {

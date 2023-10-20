@@ -32,7 +32,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-8">
+                <div class="col-12">
                     <!--ur contents here-->
                     <!-- form start -->
                     <div class="card card-primary">
@@ -124,6 +124,10 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
 <script type="text/javascript">
 
+
+        $(function () {
+            bsCustomFileInput.init();
+        });
 
     $(document).ready(function() {
         //console.log( "ready!" );

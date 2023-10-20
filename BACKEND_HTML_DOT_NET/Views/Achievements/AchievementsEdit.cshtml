@@ -48,18 +48,20 @@
 
                                                 <div class="col-4">
                                                     <label for="Title"> Enter Achievement date</label>
-                                                    <input type="datetime" class="form-control" id="date" name="date" value="@Model.Date" placeholder="Enter Achievement Date">
+                                                    <input type="date" class="form-control" id="date" name="date" value="@Model.Date" placeholder="Enter Achievement Date">
                                                 </div>
-
+                                                </div> 
+                                                <div class="row p-2">
                                                 <div class="col-md-6">
                                                     <label for="description">ENTER DESCRIPTION</label>
                                                     <<div id="summernote">@Html.Raw(Model.Description)</div>
                                                 </div>
                                                 
-                                                <div class="col-4">
+                                                <div class="co-md-4">
                                                     <label for="exampleInputFile">Enter Image File </label>
                                                     <div class="input-group">
-                                                        <div class="custom-file">
+                                                        <div class="custom-file ">
+                                                            <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="Image" name="Image" >
                                                             <label class="custom-file-label" for="exampleInputFile">
                                                                 Choose
@@ -67,7 +69,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="input-group-append">
-                                                            <span class="input-group-text" >Upload</span>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,8 +83,8 @@
 
                                 <div class="card-footer">
                                     <div class="input-group col-12">
-                                        <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button></div>
-                                        <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2">Clear</button></div>
+                                        <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Update</button></div>
+                                        <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2" id="btnclear">Clear</button></div>
                                     </div>
                                 </div>
 
@@ -155,35 +157,43 @@
 
 
                     //console.log(data);
-                    loaderStart();
+                    //loaderStart();
                     $.ajax({
-                        url: '@Url.Action("AchievementsEdit", "Achievements")',
+                        url: '@Url.Action("AchievementsEdit","Achievements")',
                         type: 'post',
-                        data: data,
                         processData: false,
                         contentType: false,
                         cache: false,
+                        data: data,
                         success: function (data) {
-                            setTimeout(loaderStop(), 2000);
                             if (data.status_code == "200") {
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: data.message
+                                console.log("Success")
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
                                 }).then(function () {
-                                    $('#achimentDetails')[0].reset();
+                                    $('#campusadd')[0].reset();
                                     window.location.href = '@Url.Action("AchievementsView","Achievements")';
                                 });
                             }
                             else {
-                                Toast.fire({
-                                    icon: 'error',
-                                    title: data.message
-                                })
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
                             }
                         }
                     });
 
                 }
+            });
+
+            $("#btnclear").click(function (e) {
+                $("#achimentDetails")[0].reset();
             });
         });
     </script>

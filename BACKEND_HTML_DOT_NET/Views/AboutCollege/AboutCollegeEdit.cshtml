@@ -82,7 +82,7 @@
                                                 </label>
                                             </div>
                                             <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -136,6 +136,9 @@
             timer: 3000
         });
 
+        $(function () {
+            bsCustomFileInput.init();
+        });
         $(document).ready(function () {
             $('#aboutCollege').validate({
                 rules: {

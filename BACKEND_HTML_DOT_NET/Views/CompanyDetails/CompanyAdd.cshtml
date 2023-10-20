@@ -71,7 +71,7 @@
                                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                     </div>
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text" id="">Upload</span>
+                                                        
                                                     </div>
                                                 </div>
 
@@ -82,7 +82,7 @@
                                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                     </div>
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text" id="">Upload</span>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -97,7 +97,7 @@
                             <div class="card-footer">
                                 <div class="input-group col-12">
                                     <div class="col-sm-6"><button id="btnSubmit" type="button" class="btn btn-primary float-right col-md-2">Submit</button></div>
-                                    <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2">Clear</button></div>
+                                    <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2" id="btnclear">Clear</button></div>
                                 </div>
                             </div>
                         </form>
@@ -125,6 +125,9 @@
 
     <script type="text/javascript">
 
+        $(function () {
+            bsCustomFileInput.init();
+        });
         $(document).ready(function () {
             $('#companyDetail').validate({
                 rules: {
@@ -206,6 +209,10 @@
                     });
 
                 }
+            });
+
+            $("#btnclear").click(function (e) {
+                $("#companyDetail")[0].reset();
             });
         });
     </script>
