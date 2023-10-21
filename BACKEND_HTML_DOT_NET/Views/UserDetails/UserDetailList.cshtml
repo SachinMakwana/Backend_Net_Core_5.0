@@ -181,6 +181,37 @@
             });
 
         }
+
+        function UserDetailUpdate(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover password",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Reset",
+                closeOnConfirm: false
+            }).then(function (isConfirm) {
+
+                if (!isConfirm) return;
+                if (id != null) {
+                    $.ajax({
+                        url: '@Url.Action("UserDetailUpdate","UserDetails")',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.status_code == "200") {
+                                Swal.fire(data.message, '', 'success')
+                                window.setTimeout(window.location.reload(), 5000);
+
+                            }
+
+                        }
+                    });
+                }
+            });
+
+        }
     </script>
 }
 

@@ -53,6 +53,7 @@
 *@
 
                                             <!-- Name Controls -->
+
                                             <div class="form-group">
                                                 <div class="input-group col-12">
 
@@ -118,11 +119,11 @@
                                             <div class="col-sm-6">
                                                 <button type="button"
                                                         class="btn btn-primary float-right col-md-2" id="btnSubmit">
-                                                    Submit
+                                                    Reset
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button"
+                                                <button type="button" id="btnclear"
                                                         class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
@@ -153,6 +154,10 @@
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000
+        });
+
+        $(function () {
+            bsCustomFileInput.init();
         });
 
     $(document).ready(function() {
@@ -250,6 +255,9 @@
         }
 
     });
+            $("#btnclear").click(function (e) {
+                $("#facultyedit")[0].reset();
+            });
 
 
     });

@@ -39,8 +39,8 @@
 
                                             <div class="col-md-6">
                                                 <label>Enter Category:</label>
-                                                <select Name="Category" class="form-control select2" style="width: 100%;">
-                                                    <option selected="selected">Canteen</option>
+                                                <select Name="Category" class="form-control select2" style="width: 100%;" >
+                                                    <option>Canteen</option>
                                                     <option>Seminar Hall</option>
                                                     <option>Ground</option>
                                                     <option>Administrative Department</option>
@@ -83,7 +83,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text" >Upload</span>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +98,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button"
+                                                <button type="button" id="btnclear"
                                                         class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
@@ -133,7 +133,9 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
 <script type="text/javascript">
 
-
+        $(function () {
+            bsCustomFileInput.init();
+        });
     $(document).ready(function() {
         //console.log( "ready!" );
 
@@ -214,8 +216,13 @@
                     });
 
         }
+                
 
     });
+
+            $("#btnclear").click(function (e) {
+                $("#campusadd")[0].reset();
+            });
 
 
     });

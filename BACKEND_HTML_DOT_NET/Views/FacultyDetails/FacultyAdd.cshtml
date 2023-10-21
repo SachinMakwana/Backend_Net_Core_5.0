@@ -1,7 +1,9 @@
 ﻿@model BACKEND_HTML_DOT_NET.Models.FacultyDetailsVM
 
-@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "FacultyAdd"; }
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "FacultyAdd";
+}
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -29,85 +31,73 @@
                                 </div>
                                 <form id="facultyadd" name="facultyadd" role="form">
                                     <div class="card-body">
-                                        <div class="form-group">
+                                        <div class="input-group row">
 
-                                            <div class="form-group">
-                                                <div class="input-group col-12">
+                                            <div class="col-md-6">
+                                                <label for="department">Honorifics </label>
+                                                <select name="Honorifics" id="honorifics" class="form-control">
+                                                    <option>Select Honorifics</option>
 
-                                                    <div class="col-md-3">
-                                                        <label for="department">Honorifics </label>
-                                                        <select name="Honorifics" id="honorifics" class="form-control">
-                                                            <option>Select Honorifics</option>
+                                                    <option value="Dr.">Dr.</option>
+                                                    <option value="Mr.">Mr.</option>
+                                                    <option value="Miss.">Miss.</option>
+                                                    <option value="Mrs.">Mrs.</option>
 
-                                                            <option value="Dr.">Dr.</option>
-                                                            <option value="Mr.">Mr.</option>
-                                                            <option value="Miss.">Miss.</option>
-                                                            <option value="Mrs.">Mrs.</option>
-                                                           
-                                                        </select>
-                                                    </div>
-
-                                                </div>
+                                                </select>
                                             </div>
 
                                             <!-- Name Controls -->
-                                            <div class="form-group">
-                                                <div class="input-group col-12">
-
-                                                    <div class="col-md-3">
-                                                        <label for="name">Name</label>
-                                                        <input name="name" type="text" class="form-control" id="Name"
-                                                               placeholder="Name">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="input-group col-12">
-                                                    <div class="col-md-2">
-                                                        <label for="ddldesgn">Designation </label>
-                                                        <input name="Designation" type="text" class="form-control" id="Designation"
-                                                               placeholder="Designation ">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="input-group col-12">
-
-                                                    <div class="col-md-3">
-                                                        <label for="department">Department </label>
-                                                        <select name="Department" id="department" class="form-control">
-                                                            <option>Select Department</option>
-                                                            @foreach (var item in Model.DepartmentSelectList)
-                                                            {
-
-                                                                <option value="@item.Value"> @item.Text</option>
-                                                            }
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Image">Banner</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" name="Image" class="custom-file-input" id="Image">
-                                                            <label class="custom-file-label" for="Image">
-                                                                Choose
-                                                                file
-                                                            </label>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
+                                                <label for="name">Name</label>
+                                                <input name="name" type="text" class="form-control" id="Name"
+                                                       placeholder="Name">
                                             </div>
 
 
                                         </div>
+                                        <div class="input-group row p-3">
+
+                                            <div class="col-md-6">
+                                                <label for="ddldesgn">Designation </label>
+                                                <input name="Designation" type="text" class="form-control" id="Designation"
+                                                       placeholder="Designation ">
+                                            </div>
+
+
+
+                                            <div class="col-md-6">
+                                                <label for="department">Department </label>
+                                                <select name="Department" id="department" class="form-control">
+                                                    <option>Select Department</option>
+                                                    @foreach (var item in Model.DepartmentSelectList)
+                                                    {
+
+                                                        <option value="@item.Value"> @item.Text</option>
+                                                    }
+                                                </select>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-md-6 p-3">
+                                            <div class="form-group">
+                                                <label for="Image">Banner</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="Image" class="custom-file-input" id="Image">
+                                                        <label class="custom-file-label" for="Image">
+                                                            Choose
+                                                            file
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
                                     <!-- /.card-body -->
 
@@ -120,7 +110,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button"
+                                                <button type="button" id="btnclear"
                                                         class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
@@ -144,59 +134,62 @@
 @section script{
     <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
     <script type="text/javascript">
-         var Toast = Swal.mixin({
+        var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000
         });
 
-    $(document).ready(function() {
-        //console.log( "ready!" );
+        $(function () {
+            bsCustomFileInput.init();
+        });
+        $(document).ready(function () {
+            //console.log( "ready!" );
 
-        $('#facultyadd').validate({
-          rules: {
-            "name": {
-                 required: true
-             },
-                    "Honorifics":{
+            $('#facultyadd').validate({
+                rules: {
+                    "name": {
                         required: true
                     },
-             "Designation": {
-                 required: true
-             },
-             "deptid": {
-                 required: true
-             },
-             "Image":{ required: true}
+                    "Honorifics": {
+                        required: true
+                    },
+                    "Designation": {
+                        required: true
+                    },
+                    "deptid": {
+                        required: true
+                    },
+                    "Image": { required: true }
 
-          },
-          messages: {
-            "name": {
-                 required: "this field is required"
-             },
-                    "Honorifics":{
+                },
+                messages: {
+                    "name": {
+                        required: "this field is required"
+                    },
+                    "Honorifics": {
                         required: "This field is required"
                     },
-             "Designation": {
-                 required: "this field is required"
-             },
-             "deptid": {
-                 required: "this field is required"
-             },
+                    "Designation": {
+                        required: "this field is required"
+                    },
+                    "deptid": {
+                        required: "this field is required"
+                    },
                     "Image": { required: "this field is required" }
-          }
+                }
 
 
-        });
+            });
 
-        $('#btnSubmit').click(function(e) {
+            $('#btnSubmit').click(function (e) {
 
-            if ($('#facultyadd').valid()) {
+                if ($('#facultyadd').valid()) {
 
                     var Honorifics = document.getElementById("honorifics").value;
                     var Name = document.getElementById("Name").value;
-                    var FullName = Honorifics.concat(" ",Name);
+                    var FullName = Honorifics.concat(" ", Name);
                     var Designation = document.getElementById("Designation").value;
                     var deptId = document.getElementById("department").value;
 
@@ -243,11 +236,15 @@
                         }
                     });
 
-            }
+                }
+            });
+
+            $("#btnclear").click(function (e) {
+                $("#facultyadd")[0].reset();
+            });
+
+
         });
-
-
-    });
 
     </script>
 

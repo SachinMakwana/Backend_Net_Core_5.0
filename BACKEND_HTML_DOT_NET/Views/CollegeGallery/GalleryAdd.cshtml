@@ -9,7 +9,7 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("GalleryView","CollegeGallery")">
+                <a href="@Url.Action("GalleryList","CollegeGallery")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
                         <li style="margin-left: px;">Back to Details</li>
@@ -26,40 +26,39 @@
                     <form role="form" id="gallery" asp-action="GalleryAdd" asp-controller="CollegeGallery" method="post" >
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group">
+                                <div class="form-group col-md-4">
                                     <label for="fileName">Gallery Tag Id</label>
                                     <input type="number" class="form-control" id="tagid" name="GalleryTagId" placeholder="Enter id">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-4">
                                     <label for="fileName">Name</label>
                                     <input type="text" class="form-control" id="name" name="Name" placeholder="Enter name">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-4">
                                     <label for="fileName">Extention</label>
                                     <input type="text" class="form-control" id="extention" name="Extension" placeholder="Enter extention">
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">CHOOSE IMAGE</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" name="file" class="custom-file-input"
-                                                       id="InputFile">
-                                                <label class="custom-file-label" for="exampleInputFile">
-                                                    Choose
-                                                    file
-                                                </label>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" >Upload</span>
-                                            </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">CHOOSE IMAGE</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="file" class="custom-file-input"
+                                                   id="InputFile">
+                                            <label class="custom-file-label" for="exampleInputFile">
+                                                Choose
+                                                file
+                                            </label>
+                                        </div>
+                                        <div class="input-group-append">
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -67,7 +66,7 @@
                             <div class="input-group col-12">
                                 <div class="col-sm-6"><button type="button" id="btnGallery" class="btn btn-primary float-right col-md-2">Submit</button></div>
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" class="btn btn-default col-md-2" id="btnclear">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -99,6 +98,9 @@
             timer: 3000
         });
 
+        $(function () {
+            bsCustomFileInput.init();
+        });
     $(document).ready(function() {
         //console.log( "ready!" );
 
@@ -177,10 +179,16 @@
                     }
             });
         }
-
+        $("#btnclear").click(function (e) {
+                $("#gallery")[0].reset();
+            });
         
 
     });
+
+            $("#btnclear").click(function (e) {
+                $("#gallery")[0].reset();
+            });
 
 
     });

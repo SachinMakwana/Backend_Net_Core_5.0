@@ -59,11 +59,11 @@
                             <div class="input-group col-12">
                                 <div class="col-sm-6">
                                     <button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">
-                                        Submit
+                                        Reset
                                     </button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" class="btn btn-default col-md-2" id="btnclear">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -152,6 +152,10 @@
                     });
 
                 }
+            });
+
+            $("#btnclear").click(function (e) {
+                $("#visionData")[0].reset();
             });
         });
     </script>

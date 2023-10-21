@@ -63,7 +63,7 @@
                                     </button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" class="btn btn-default col-md-2" id="btnclear">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -149,6 +149,10 @@
                     });
 
                 }
+            });
+
+            $("#btnclear").click(function (e) {
+                $("#MissionData")[0].reset();
             });
         });
     </script>
