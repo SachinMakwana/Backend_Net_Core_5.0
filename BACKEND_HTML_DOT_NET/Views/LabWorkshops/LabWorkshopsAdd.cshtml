@@ -7,7 +7,7 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("LabWorkshopsView","LabWorkshops")">
+                <a href="@Url.Action("LabWorkshopsList","LabWorkshops")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
                         <li style="margin-left: 00px;">Back to Details</li>
@@ -76,7 +76,7 @@
                                     <div class="card-footer">
                                         <div class="input-group col-12">
                                             <div class="col-sm-6"><button type="button" class="btn btn-primary float-right col-md-2" id="btnSubmit">Submit</button></div>
-                                            <div class="col-sm-6"><button type="button" class="btn btn-primary col-md-2">Clear</button></div>
+                                            <div class="col-sm-6"><button type="button" id="btnclear" class="btn btn-primary col-md-2">Clear</button></div>
                                         </div>
                                     </div>
                                 </form>
@@ -144,6 +144,10 @@
          
 
         });
+            $("#btnclear").click(function (e) {
+                $("#LabWorkshopForm")[0].reset();
+                $("#summernote").summernote('reset');
+            });
 
             $('#btnSubmit').click(function (e) {
                 if ($('#LabWorkshopForm').valid()) {

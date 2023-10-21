@@ -163,9 +163,9 @@
                 confirmButtonText: "Yes, delete it!",
                 closeOnConfirm: false
             }).then(function (isConfirm) {
-
-                if (!isConfirm) return;
-                if (id != null) {
+                var isCancel = !isConfirm == false && isConfirm['dismiss'] == 'cancel' ? true : false;
+                //if (!isConfirm) return;
+                if (isCancel == false && id != null) {
                     $.ajax({
                         url: '@Url.Action("UserDetailDelete","UserDetails")',
                         type: 'post',
