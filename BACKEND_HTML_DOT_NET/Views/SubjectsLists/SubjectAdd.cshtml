@@ -27,7 +27,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER SUBJECT CODE</label>
-                                        <input type="number" class="form-control" name="Code" id="exampleInputEmail1"
+                                        <input type="number" maxlength="10" class="form-control" name="Code" id="exampleInputEmail1"
                                                placeholder="Enter code.. ">
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER NAME OF THE SUBJECT</label>
-                                        <input type="text" name="Subject1" class="form-control" id="exampleInputEmail1"
+                                        <input type="text" maxlength="100" name="Subject1" class="form-control" id="exampleInputEmail1"
                                                placeholder="Enter name.. ">
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">ENTER ACRONYM FOR THE SUBJECT</label>
-                                        <input name="Acronym" type="text" class="form-control" id="exampleInputEmail1"
+                                        <input name="Acronym" maxlength="100"  type="text" class="form-control" id="exampleInputEmail1"
                                                placeholder="Enter name.. ">
                                     </div>
                                 </div>
@@ -86,11 +86,15 @@
                     </form>
 
                     <div class="card-footer">
-                                    <div class="input-group col-12">
-                                        <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button></div>
-                                        <div class="col-sm-6"><button type="button" class="btn btn-default col-md-2">Clear</button></div>
-                                    </div>
-                                </div>
+                        <div class="input-group col-12">
+                             <div class="col-sm-6">
+                                 <button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button>
+                             </div>
+                             <div class="col-sm-6">
+                                 <button type="button" id="btnclear" class="btn btn-default col-md-2">Clear</button>
+                             </div>
+                                    
+                        </div>
                 </div>
             </div>
         </div>
@@ -168,58 +172,62 @@
 
         });
 
-            $('#btnSubmit').click(function (e) {
+        $('#btnSubmit').click(function (e) {
 
-        //prevent Default functionality
-        e.preventDefault();
-        //alert( "firee!" );
+            //prevent Default functionality
+            e.preventDefault();
+            //alert( "firee!" );
+            
+            //get the action-url of the form
+            //var actionurl = e.currentTarget.action;
+            
+            //do your own request an handle the results
+            if($('#subjectadd').valid()){
+                 var data = new FormData($('#subjectadd')[0]);
+            
+            
+                 $.ajax({
+                     url: '@Url.Action("SubjectAdd","SubjectsLists")',
+                     type: 'post',
+                     processData: false,
+                     contentType: false,
+                     cache: false,
+                     data: data,
+                     success: function (data) {
+                             console.log(data);
+            
+                         if (data.status_code == "200") {
+                             Swal.fire({
+                                 title: "Added!",
+                                 text: data.message,
+                                 timer: 6000,
+                                 icon: "success"
+                             }).then(function () {
+                                 $('#subjectadd')[0].reset();
+                                 window.location.href = '@Url.Action("SubjectView","SubjectsLists")';
+                             });
+                         }
+                         else {
+                             Swal.fire({
+                                 title: "Failed!",
+                                 text: data.message,
+                                 timer: 6000,
+                                 icon: "error"
+                             });
+                         }
+                     }
+                 });
+            
+            
+            }
 
-        //get the action-url of the form
-        //var actionurl = e.currentTarget.action;
+        });
 
-        //do your own request an handle the results
-        if($('#subjectadd').valid()){
-                    var data = new FormData($('#subjectadd')[0]);
-
-
-                    $.ajax({
-                        url: '@Url.Action("SubjectAdd","SubjectsLists")',
-                        type: 'post',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        data: data,
-                        success: function (data) {
-                                console.log(data);
-
-                            if (data.status_code == "200") {
-                                Swal.fire({
-                                    title: "Added!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    icon: "success"
-                                }).then(function () {
-                                    $('#subjectadd')[0].reset();
-                                    window.location.href = '@Url.Action("SubjectView","SubjectsLists")';
-                                });
-                            }
-                            else {
-                                Swal.fire({
-                                    title: "Failed!",
-                                    text: data.message,
-                                    timer: 6000,
-                                    icon: "error"
-                                });
-                            }
-                        }
-                    });
-
-
-        }
 
     });
 
-
+    $("#btnclear").click(function (e) {
+         $("#subjectadd")[0].reset();
     });
 
 </script>

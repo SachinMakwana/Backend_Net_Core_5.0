@@ -84,8 +84,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button"
-                                                        class="btn btn-default col-md-2">
+                                                <button type="button" id="btnclear" class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
                                             </div>
@@ -170,6 +169,11 @@
                 }
             });
         });
+
+        $("#btnclear").click(function (e) {
+            $("#CommitteeMemberForm")[0].reset();
+        });
+
     </script>
 
 }

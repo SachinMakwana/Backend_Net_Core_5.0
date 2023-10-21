@@ -38,20 +38,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="department">Principal Name</label>
-                                        <input type="text" class="form-control" name="Principal" id="Principal" value="@Model.Principal" />
+                                        <input type="text" maxlength="100" class="form-control" name="Principal" id="Principal" value="@Model.Principal" />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="description">Description</label>
-                                    <div id="summernote">@Html.Raw(Model.Description)</div>
 
+                                <div class="col-md-6">
+                                    <label for="message">Phone</label>
+                                    <input type="number" minlength="9" maxlength="15" name="Phone" class="form-control" id="Phone" rows="4" value="@Model.Phone" />
                                 </div>
 
-
-
                                 <div class="col-md-6">
-                                    <label for="message">Message from Principal</label>
-                                    <div id="summernote2">@Html.Raw(Model.PrincipalMessage)</div>
+                                    <label for="message">Email</label>
+                                    <input type="text" maxlength="100" name="Email" class="form-control" id="Email" rows="4" value="@Model.Email" />
                                 </div>
 
                                 <div class="col-md-6">
@@ -60,16 +58,6 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="message">Phone</label>
-                                    <input type="text" name="Phone" class="form-control" id="Phone" rows="4" value="@Model.Phone" />
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="message">Email</label>
-                                    <input type="text" name="Email" class="form-control" id="Email" rows="4" value="@Model.Email" />
-                                </div>
-
-                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="exampleInputFile">CHOOSE IMAGE OF COLLEGE</label>
                                         <div class="input-group">
@@ -88,6 +76,17 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <label for="description">Description</label>
+                                    <div id="summernote">@Html.Raw(Model.Description)</div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="message">Message from Principal</label>
+                                    <div id="summernote2">@Html.Raw(Model.PrincipalMessage)</div>
+                                </div>
+
                             </div>
 
                         </div>
@@ -95,14 +94,12 @@
                         <div class="card-footer">
                             <div class="input-group col-12">
                                 <div class="col-sm-6">
-                                    <button type="button" id="btnSubmit"
-                                            class="btn btn-primary float-right col-md-2">
+                                    <button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">
                                         Submit
                                     </button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="button"
-                                            class="btn btn-default col-md-2">
+                                    <button type="button" id="btnclear" class="btn btn-default col-md-2">
                                         Clear
                                     </button>
                                 </div>
@@ -237,6 +234,13 @@
                 }
             });
         });
+
+        $("#btnclear").click(function (e) {
+            $("#aboutCollege")[0].reset();
+            $('#summernote').summernote('reset');
+            $('#summernote2').summernote('reset');
+        });
+
     </script>
 
 }

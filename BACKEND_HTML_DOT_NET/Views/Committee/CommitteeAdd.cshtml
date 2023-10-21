@@ -53,11 +53,11 @@
                                                     <textarea type="text" name="Description" class="form-control" id="Description" rows="4" placeholder="Write content"></textarea>
                                                 </div>*@
 
-                                                 <div class="col-md-6">
-                                    <label for="description">Description</label>
-                                    <div id="summernote"></div>
+                                                <div class="col-md-6">
+                                                    <label for="description">Description</label>
+                                                    <div id="summernote" ></div>
                                     
-                                </div>
+                                                </div>
 
                                                 <div class="col-6">
                                                     <label for="Name">Committee Slogan</label>
@@ -75,12 +75,9 @@
                                                                     file
                                                                 </label>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -88,14 +85,12 @@
                                     <div class="card-footer">
                                         <div class="input-group col-12">
                                             <div class="col-sm-6">
-                                                <button type="button" id="btnSubmit"
-                                                        class="btn btn-primary float-right col-md-2">
+                                                <button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">
                                                     Submit
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button"
-                                                        class="btn btn-default col-md-2">
+                                                <button type="button" id="btnclear" class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
                                             </div>
@@ -123,6 +118,9 @@
         
     </script>
     <script type="text/javascript">
+        $(function () {
+            bsCustomFileInput.init();
+        })
 
         $(document).ready(function () {
             $('#CommitteeForm').validate({
@@ -201,6 +199,11 @@
 
                 }
             });
+        });
+
+        $("#btnclear").click(function (e) {
+            $("#CommitteeForm")[0].reset();
+            $('#summernote').summernote('reset');
         });
     </script>
 

@@ -87,8 +87,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button"
-                                                        class="btn btn-default col-md-2">
+                                                <button type="button" id="btnclear" class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
                                             </div>
@@ -150,20 +149,24 @@
                         cache: false,
                         success: function (data) {
                             setTimeout(loaderStop(), 2000);
-                                if (data.status_code == "200") {
-                                    Toast.fire({
-                                        icon: 'success',
-                                        title: data.message
-                                    }).then(function () {
+                            if (data.status_code == "200") {
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
                                     $('#CommitteeMemberForm')[0].reset();
                                     window.location.href = '@Url.Action("CommitteeMembersList","Committee")';
                                 });
                             }
                             else {
-                                Toast.fire({
-                                    icon: 'error',
-                                    title: data.message
-                                })
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "error"
+                                });
                             }
                         }
                     });
@@ -171,6 +174,11 @@
                 }
             });
         });
+
+        $("#btnclear").click(function (e) {
+            $("#CommitteeMemberForm")[0].reset();
+        });
+
     </script>
 
 }
