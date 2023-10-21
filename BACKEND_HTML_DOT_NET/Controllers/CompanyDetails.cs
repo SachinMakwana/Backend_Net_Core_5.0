@@ -67,6 +67,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
                 {
                     companyVM = companyList.Where(m => m.Id == id).FirstOrDefault();
                 }
+
                 var restRequest = new RestRequest("/GetAllDepartmentDetails", Method.Get);
                 restRequest.AddHeader("Accept", "application/json");
                 restRequest.RequestFormat = DataFormat.Json;
@@ -137,7 +138,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             try
             {
                 companyVM = companyList.Where(m => m.Id == id).FirstOrDefault();
-                
+
                 var restRequest = new RestRequest("/GetAllDepartmentDetails", Method.Get);
                 restRequest.AddHeader("Accept", "application/json");
                 restRequest.RequestFormat = DataFormat.Json;
@@ -246,7 +247,7 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             }
             return Json(new { message = "something went wrong." });
         }
-            public IActionResult CompanyView()
+        public IActionResult CompanyView()
         {
             return View();
         }

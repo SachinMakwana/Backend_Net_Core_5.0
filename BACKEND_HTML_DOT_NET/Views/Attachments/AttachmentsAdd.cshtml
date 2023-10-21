@@ -1,5 +1,7 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "AttachmentsAdd"; }
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AttachmentsAdd";
+}
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -11,15 +13,14 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
-                            <a href="@Url.Action("AttachmentsView","Attachments")">
-                    <ol class="breadcrumb float-sm-right">
-                        <li>
-                                <i class="nav-icon fas fa-plus-circle">
-                                    Back to Attachments Details
-                                </i>
-                            </a>
-                        </li>
-                    </ol>
+
+
+                    <a href="@Url.Action("AttachmentsView","Attachments")">
+                        <ol class="breadcrumb float-sm-right">
+                            <li><i class="nav-icon fas fa-minus-circle"></i></li>
+                            <li>Back to Attachments Details</li>
+                        </ol>
+                    </a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -37,29 +38,24 @@
                     <!-- form start -->
                     <div class="card card-primary">
                         <form role="form" id="Attachments">
-                            <div class="card-body">
+                            <div class="input-group row align-items-center p-2 ">
 
-                                <div class="form-group">
+                                <div class="col">
                                     <label for="fileName">Name Of File</label>
                                     <input type="text" class="form-control" id="fileName" name="Name" placeholder="Enter file name">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col">
                                     <label for="fileName">Title</label>
                                     <input type="text" class="form-control" id="title" name="Title" placeholder="Enter title name">
                                 </div>
-
-                                <div class="form-group">
+                            </div>
+                            <div class="input-group row align-items-center p-2 ">
+                                <div class="col">
                                     <label for="fileName">Type Of File</label>
                                     <input type="text" class="form-control" id="type" name="Type" placeholder="Enter type">
                                 </div>
-
-                                <div class="col-md-6">
-                                   <label for="description">ENTER DESCRIPTION</label>
-                                    <div id="summernote"></div>
-                               </div>
-
-                               <div class="form-group">
+                                <div class="col">
                                     <label for="fileName">News</label>
 
                                     <select name="news" id="newsId" class="form-control">
@@ -71,7 +67,15 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                            </div>
+                            <div class="input-group row align-items-center p-2 ">
+
+
+                                <div class="col">
+                                    <label for="description">ENTER DESCRIPTION</label>
+                                    <div id="summernote"></div>
+                                </div>
+                                <div class="col">
                                     <label for="exampleInputFile">File Upload</label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -79,17 +83,18 @@
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
                                         </div>
                                     </div>
                                 </div>
+
+
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
                                 <div class="input-group col-12">
                                     <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right">Submit</button></div>
-                                    <div class="col-sm-6"><button type="button" class="btn btn-default">Clear</button></div>
+                                    <div class="col-sm-6"><button type="button" class="btn btn-default" id="btnclear">Clear</button></div>
                                 </div>
                             </div>
                         </form>
@@ -122,70 +127,72 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
 
 
         $(function () {
             bsCustomFileInput.init();
         });
 
-    $(document).ready(function() {
-        //console.log( "ready!" );
+        $('#summernote').summernote()
+        $(document).ready(function () {
+            //console.log( "ready!" );
 
-        $('#Attachments').validate({
-          rules: {
-            "Name": {
-                 required: true                
-             },
-             "Title": {
-                 required: true
-             },
-                "Type": {
-                    required: true
-                },
-             "Description":{
-                 required: true
-                 
-             },
+            $('#Attachments').validate({
+                rules: {
+                    "Name": {
+                        required: true
+                    },
+                    "Title": {
+                        required: true
+                    },
+                    "Type": {
+                        required: true
+                    },
+                    "Description": {
+                        required: true
+
+                    },
                     "news": {
-                    required: true
+                        required: true
+                    },
+                    "InputFile": {
+                        required: true
+                    }
+
                 },
-                "InputFile":{
-                    required: true
+                messages: {
+                    "Name": {
+                        required: "this field is required"
+                    },
+                    "Title": {
+                        required: "this field is required"
+                    },
+                    "Type": {
+                        required: "this field is required"
+                    },
+                    "Description": {
+                        required: "this field is required"
+                    },
+                    "news": {
+                        required: "this field is required"
+                    },
+                    "InputFile": {
+                        required: "this field is required"
+                    }
+
                 }
 
-          },
-          messages: {
-            "Name": {
-                 required: "this field is required"             
-             },
-             "Title": {
-                 required: "this field is required"
-             },
-              "Type": {
-                 required: "this field is required"
-              },
-             "Description":{
-                  required: "this field is required"
-             },
-                    "news": {
-                   required: "this field is required"
-                },
-                "InputFile":{
-                     required: "this field is required"
-                }
 
-          }
-         
+            });
 
-        });
+            $('#btnSubmit').click(function (e) {
 
-        $('#btnSubmit').click(function(e) {
+                //prevent Default functionality
+                e.preventDefault();
 
-        //prevent Default functionality
-        e.preventDefault();
+                if ($('#Attachments').valid()) {
 
-        if($('#Attachments').valid()){
                     var title = document.getElementById("title").value;
                     var name = document.getElementById("fileName").value;
                     var news = document.getElementById("newsId").value;
@@ -194,6 +201,7 @@
                     var description = $("#summernote").summernote('code');
 
                     var data = new FormData();
+
                     var totalFiles = document.getElementById("InputFile").files.length;
                     for (var i = 0; i < totalFiles; i++) {
                         var file = document.getElementById("InputFile").files[i];
@@ -242,16 +250,24 @@
                         }
                     });
 
-        }
+                }
 
-    });
+            });
 
 
-    });
+        });
 
-</script>
+        $("#btnclear").click(function (e) {
+            $("#Attachments")[0].reset();
+            $('#summernote').summernote('reset');
+
+
+
+        });
+
+    </script>
 
 }
-    @section styles{
+@section styles{
     <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
 }

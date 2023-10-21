@@ -68,7 +68,7 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-6 p-2">
                                                     <label for="Name">Role</label>
                                                     <input type="text" class="form-control" id="Role" name="CommitteeId" value="@Model.Role" />
                                                 </div>
@@ -88,7 +88,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <button type="button"
-                                                        class="btn btn-default col-md-2">
+                                                        class="btn btn-default col-md-2" id="btnclear">
                                                     Clear
                                                 </button>
                                             </div>
@@ -170,6 +170,11 @@
 
                 }
             });
+        });
+
+        $("#btnclear").click(function (e) {
+            $("#CommitteeMemberForm")[0].reset();
+            
         });
     </script>
 

@@ -15,13 +15,11 @@
                 <div class="col-sm-6">
                     <a href="@Url.Action("AttachmentsView","Attachments")">
                         <ol class="breadcrumb float-sm-right">
-                            <li>
-                                <i class="nav-icon fas fa-plus-circle">
-                                    Back to Attachments Details
-                                </i>
+                            <li><i class="nav-icon fas fa-minus-circle"></i></li>
+                            <li>Back to Attachments Details</li>
+                        </ol>
                     </a>
-                    </li>
-                    </ol>
+                   
                 </div>
                 <!-- /.col -->
             </div>
@@ -34,35 +32,30 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-8">
+                <div class="col-12">
                     <!--ur contents here-->
                     <!-- form start -->
                     <div class="card card-primary">
                         <form role="form" id="Attachments">
-                            <div class="card-body">
+                            <div class="input-group row align-items-center p-2 ">
 
-                                <div class="form-group">
+                                <div class="col">
                                     <label for="fileName">Name Of File</label>
                                     <input type="text" class="form-control" id="fileName" name="Name" value="@Model.Name" placeholder="Enter file name">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col">
                                     <label for="fileName">Title</label>
                                     <input type="text" class="form-control" id="title" name="Title" value="@Model.Title" placeholder="Enter title name">
                                 </div>
-
-                                <div class="form-group">
+                            </div>
+                            <div class="input-group row align-items-center p-2 ">
+                                <div class="col">
                                     <label for="fileName">Type Of File</label>
                                     <input type="text" class="form-control" id="type" name="Type" value="@Model.Type" placeholder="Enter type">
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label for="description">ENTER DESCRIPTION</label>
-                                    <div id="summernote">@Html.Raw(Model.Description)</div>
-
-                                </div>
-
-                                <div class="form-group">
+                                <div class="col">
                                     <label for="fileName">Page id</label>
 
                                     <select name="news" id="newsId" class="form-control">
@@ -75,8 +68,15 @@
                                     </select>
 
                                 </div>
+                            </div>
+                            <div class="input-group row align-items-center p-2 ">
+                                
+                                <div class="col">
+                                    <label for="description">ENTER DESCRIPTION</label>
+                                    <div id="summernote">@Html.Raw(Model.Description)</div>
 
-                                <div class="form-group">
+                                </div>
+                                <div class="col">
                                     <label for="exampleInputFile">File Upload</label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -84,10 +84,11 @@
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
+                                            
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <!-- /.card-body -->
 

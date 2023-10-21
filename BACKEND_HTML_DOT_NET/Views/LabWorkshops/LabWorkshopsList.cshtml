@@ -53,7 +53,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(var item in Model){
+                                    @foreach (var item in Model)
+                                    {
                                         <tr>
                                             <td>@item.Id</td>
                                             <td>@item.DeptId</td>
@@ -61,8 +62,8 @@
                                             <td> <div class="add-read-more show-less-content">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</div></td>
                                             <td><img src="@item.Image" class="rimg" style="width:50px;" /></td>
                                             @*<td>
-                                                <a href="@Url.Action("LabWorkshopsView","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
-                                            </td>*@
+                                        <a href="@Url.Action("LabWorkshopsView","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                        </td>*@
                                             <td>
                                                 <a href="@Url.Action("LabWorkshopsEdit","LabWorkshops",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
@@ -145,14 +146,17 @@
                 "responsive": true,
                 "autoWidth": false,
             });
-            
+
         });
+        
+
         function DeleteLabWorkshop(id) {
 
             Swal.fire({
                 title: "Are you sure?",
                 text: "You will not be able to recover this imaginary file!",
                 type: "warning",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
@@ -171,7 +175,7 @@
                                     title: "Deleted!",
                                     text: data.message,
                                     timer: 6000,
-                                    type: "success"
+                                    icon: "success"
                                 }).then(function () {
                                     window.location.reload();
                                 });
@@ -186,7 +190,7 @@
         }
     </script>
 }
-    @section styles{
+@section styles{
     <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
     <style>
         .add-read-more.show-less-content .second-section,
