@@ -96,7 +96,7 @@
                                     </button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="button" class="btn btn-default col-md-2">Clear</button>
+                                    <button type="button" id="btnclear" class="btn btn-default col-md-2">Reset</button>
                                 </div>
                             </div>
                         </div>
@@ -146,6 +146,13 @@
 
                 }
             });
+
+            $("#btnclear").click(function (e) {
+                $("#frmdepartment")[0].reset();
+                $("#summernote").summernote('reset');
+                $("#summernote2").summernote('reset');
+            });
+
 
             $('#btnSubmit').click(function (e) {
 

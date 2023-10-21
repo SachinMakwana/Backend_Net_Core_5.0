@@ -39,7 +39,8 @@
                                                 <div class="col-md-3">
                                                     <label for="Username">User Name</label>
                                                     <input name="Username" type="text" class="form-control" id="Username" placeholder="Username">
-                                                </div>
+                                                    </div>
+
                                             </div>
 
 
@@ -48,10 +49,10 @@
 
                                                 <div class="col-md-3">
                                                     <label for="Password">Password</label>
-                                                    <input name="Password" type="text" class="form-control" id="Password" placeholder="Password">
-                                                </div>
+                                                        <input name="Password" type="text" class="form-control" id="Password" placeholder="Password" >
+                                                        </div>
                                             </div>
-
+                                            
 
                                             <div class="input-group col-12">
 
@@ -78,8 +79,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button"
-                                                        class="btn btn-default col-md-2">
+                                                <button type="button" id="btnclear" class="btn btn-default col-md-2">
                                                     Clear
                                                 </button>
                                             </div>
@@ -112,13 +112,18 @@
         $(document).ready(function () {
             //console.log( "ready!" );
 
+
+
             $('#facultydetailadd').validate({
                 rules: {
                     "Username": {
                         required: true
                     },
                     "Password": {
-                        required: true
+                        required: true,
+                        pwcheck: true,
+                        minlength: 8
+                        
                     },
                     "Role": {
                         required: true
@@ -130,7 +135,10 @@
                         required: "this field is required"
                     },
                     "Password": {
-                        required: "This field is required"
+                        required: "This field is required",
+                        pwcheck: "The password does not match the criteria!",
+                        minlength: "The password does not match the criteria!"
+                        
                     },
                     "Role": {
                         required: "this field is required"
@@ -138,6 +146,16 @@
                 }
 
 
+            });
+
+            $.validator.addMethod("pwcheck", function(value) {
+                return /^[A-Za-z0-9\d=!\-.@@_*]*$/.test(value) // consists of only these
+                    && /[a-z]/.test(value) // has a lowercase letter
+                    && /\d/.test(value) // has a digit
+});
+
+            $("#btnclear").click(function (e) {
+                $("#facultydetailadd")[0].reset();
             });
 
             $('#btnSubmit').click(function (e) {
@@ -173,7 +191,7 @@
                                     timer: 6000,
                                     icon: "success"
                                 }).then(function () {
-                                    $('#facultyadd')[0].reset();
+                                    $('#facultydetailadd')[0].reset();
                                     window.location.href = '@Url.Action("UserDetailList","UserDetails")';
                                 });
                             }
@@ -194,6 +212,7 @@
 
         });
 
+       
     </script>
 
 }
