@@ -45,7 +45,7 @@
                                         <th>Username</th>
                                         <th>Role</th>
                                         <th>View</th>
-                                        <th>Reset Password</th>
+                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -66,8 +66,7 @@
                                                 <a href="@Url.Action("UserDetailView","UserDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
                                             <td>
-                                                @*<a href="@Url.Action("UserDetailUpdate","UserDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>*@
-                                                <a href="javascript:void(0)" onclick="UserDetailUpdate(@item.Id)"><i class="nav-icon fas fa-unlock"></i></a>
+                                                <a href="@Url.Action("UserDetailUpdate","UserDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
                                             </td>
                                             <td>
                                                 <a href="javascript:void(0)" onclick="DeleteUserDetail(@item.Id)"><i class="nav-icon fas fa-trash"></i></a>
@@ -81,12 +80,11 @@
                                         <th>Username</th>
                                         <th>Role</th>
                                         <th>View</th>
-                                        <th>Reset Password</th>
+                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                             </table>
-                            <span class="text-danger">* Default Password is gecp@123</span>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -183,6 +181,7 @@
             });
 
         }
+
         function UserDetailUpdate(id) {
             Swal.fire({
                 title: "Are you sure?",

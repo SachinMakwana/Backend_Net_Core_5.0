@@ -1,13 +1,17 @@
-﻿using BACKEND_HTML_DOT_NET.Models;
+﻿using BACKEND_HTML_DOT_NET.Helper;
+using BACKEND_HTML_DOT_NET.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.WebPages.Html;
@@ -21,6 +25,8 @@ namespace BACKEND_HTML_DOT_NET.Controllers
         private readonly AppIdentitySettings _config;
         private string apiBaseUrl = string.Empty;
         private string imageBaseUrl = string.Empty;
+
+        CommonAPICall_Helper helper;
         RestClient client;
         public PlacementCell(IOptions<AppIdentitySettings> appIdentitySettingsAccessor)
         {
@@ -30,16 +36,64 @@ namespace BACKEND_HTML_DOT_NET.Controllers
             apiBaseUrl = _config.apiBaseUrl;
             imageBaseUrl = _config.imageBaseUrl;
             client = new RestClient(apiBaseUrl);
+            helper = new CommonAPICall_Helper(appIdentitySettingsAccessor);
         }
         public IActionResult PlacementAdd()
         {
-            return View();
+            PlacementVM placementVM = new PlacementVM();
+            try
+            {
+                placementVM.CompanyList = helper.GetCompanySelectList();
+                placementVM.DepartmentList = helper.GetDepartmentSelectList();
+                return View(placementVM);
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> PlacementAdd(IFormCollection collection)
+        {
+            try
+            {
+                PlacementVM placementVM = new PlacementVM();
+                await TryUpdateModelAsync<PlacementVM>(placementVM);
+                placementVM.CreatedDate = DateTime.Now;
+                placementVM.UpdatedDate = DateTime.Now;
+                var request = new RestRequest("/AddPlacementDetail", Method.Post);
+                //add files to request
+                foreach (var file in collection.Files)
+                {
+                    var memorystream = new MemoryStream();
+                    file.CopyTo(memorystream);
+                    var bytes = memorystream.ToArray();
+                    request.AddFile(file.Name.ToString(), bytes, file.FileName.ToString());
+                }
+                //iterate and add model to request as parameter
+                PropertyInfo[] properties = typeof(PlacementVM).GetProperties();
+                foreach (PropertyInfo property in properties)
+                {
+                    var value = property.GetValue(placementVM);
+                    request.AddParameter(property.Name.ToString(), value == null ? "" : value.ToString());
+                }
+
+                var response = client.Execute(request);
+                //use response.content --> this will directly give the parsed result.
+                ServiceResponse<bool> serviceResponse = JsonConvert.DeserializeObject<ServiceResponse<bool>>(response.Content);
+                return Json(serviceResponse);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { status_code = "000", message = ex.Message.ToString() });
+            }
         }
         public IActionResult PlacementView()
         {
             return View();
         }
-        public IActionResult PlacementEdit()
+        public IActionResult PlacementEdit(int id)
         {
             return View();
         }
