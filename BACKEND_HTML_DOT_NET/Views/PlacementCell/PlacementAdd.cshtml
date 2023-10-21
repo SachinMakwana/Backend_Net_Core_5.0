@@ -1,4 +1,5 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model BACKEND_HTML_DOT_NET.Models.PlacementVM
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "PlacementAdd"; }
 
 
@@ -26,7 +27,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Add New Placement Details</h3>
                                 </div>
-                                <form role="form">
+                                <form role="form" id="frmPlacement">
                                     <div class="card-body">
                                         <div class="form-group row justify-content-center">
                                             <div class="col-11">
@@ -34,29 +35,30 @@
                                                     <!---->
                                                     <div class="form-group">
                                                         <div class="input-group">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-4">
                                                                 <label for="ddlCompany">Company Name</label>
-                                                                <select class="form-control select2" style="width: 100%;" id="ddlCompany">
-                                                                    <option selected="selected" disabled>
-                                                                        Select Company
-                                                                    </option>
-                                                                    <option>Microsoft</option>
-                                                                    <option>L & T PVT LTD</option>
-                                                                    <option>Infosys</option>
-                                                                    <option>TCS</option>
-                                                                    <option>Infochips</option>
+                                                                <select class="form-control select2" style="width: 100%;" id="CompanyId" name="CompanyId">
+                                                                    <option>Select Company</option>
+                                                                    @foreach (var item in Model.CompanyList)
+                                                                    {
+                                                                        <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                                                                    }
                                                                 </select>
                                                             </div>
 
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-4">
                                                                 <label for="ddlDepartment">Department Name</label>
-                                                                <select class="form-control select2" style="width: 100%;" id="ddlDepartment">
-                                                                    <option>Computer</option>
-                                                                    <option>Civil</option>
-                                                                    <option>Mechanical</option>
-                                                                    <option>Eletrical</option>
-                                                                    <option>Electronics & Communications</option>
+                                                                <select class="form-control select2" style="width: 100%;" id="DeptId" name="DeptId">
+                                                                    <option>Select Department</option>
+                                                                    @foreach (var item in Model.DepartmentList)
+                                                                    {
+                                                                        <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                                                                    }
                                                                 </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="StudentName">Students Name</label>
+                                                                <input type="text" class="form-control" name="StudentName" id="StudentName" placeholder="Student Name">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -64,18 +66,31 @@
 
                                                         <div class="input-group">
                                                             <div class="col-md-3">
-                                                                <label for="studentTaken">Students Taken</label>
-                                                                <input type="number" class="form-control" id="studentTaken" placeholder="No. Of Students Taken">
+                                                                <label for="exampleInputFile">
+                                                                    StudentPic
+                                                                </label>
+                                                                <div class="input-group">
+                                                                    <div class="custom-file">
+                                                                        
+                                                                        <input type="file" name="StudentPic" class="custom-file-input"
+                                                                               id="StudentPic">
+                                                                        <label class="custom-file-label"
+                                                                               for="exampleInputFile">
+                                                                            Choose
+                                                                            file
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
 
                                                             <div class="col-md-3">
-                                                                <label for="lowestPackage">Lowest Package</label>
-                                                                <input type="number" class="form-control" id="lowestPackage" placeholder="Lowest Package">
+                                                                <label for="AnnualPackage">Annual Package</label>
+                                                                <input type="number" class="form-control" id="AnnualPackage" name="AnnualPackage" placeholder="Annual Package">
                                                             </div>
 
                                                             <div class="col-md-3">
-                                                                <label for="highestPackage">Highest Package</label>
-                                                                <input type="number" class="form-control" id="highestPackage" placeholder="Highest Package">
+                                                                <label for="MonthlyPackage">Monthly Package</label>
+                                                                <input type="number" class="form-control" id="MonthlyPackage" name="MonthlyPackage" placeholder="Monthly Package">
                                                             </div>
 
                                                             <div class="col-md-3">
@@ -86,7 +101,7 @@
                                                                             <i class="far fa-calendar-alt"></i>
                                                                         </span>
                                                                     </div>
-                                                                    <input id="dateofcampus" type="text" class="form-control datemask" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                                    <input id="PlacementDate" name="PlacementDate" type="text" class="form-control datemask" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -99,7 +114,7 @@
 
                                     <div class="card-footer">
                                         <div class="input-group col-12">
-                                            <div class="col-sm-6"><button type="submit" class="btn btn-primary float-right col-md-2">Submit</button></div>
+                                            <div class="col-sm-6"><button type="button" id="btnSubmit" class="btn btn-primary float-right col-md-2">Submit</button></div>
                                             <div class="col-sm-6"><button type="clear" class="btn btn-primary col-md-2">Clear</button></div>
                                         </div>
                                     </div>
@@ -116,3 +131,55 @@
     </section>
     <!-- /.content -->
 </div>
+
+@section script{
+    <script src="@Url.Content("~/css/plugins/sweetalert2/sweetalert2.min.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#PlacementDate").datepicker();
+            $("#btnSubmit").click(function () {
+                var data = new FormData($('#frmPlacement')[0]);
+                //var data = $('#frmPlacement').serialize();
+                $.ajax({
+                    url: '@Url.Action("PlacementAdd","PlacementCell")',
+                    type: 'post',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: data,
+                    success: function (data) {
+                        if (data.status_code == "200") {
+                            console.log("Success")
+                                Swal.fire({
+                                    title: "Added!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                $('#frmPlacement')[0].reset();
+                                window.location.href = '@Url.Action("PlacementView","PlacementCell")';
+                                });
+                        }
+                        else {
+                            Swal.fire({
+                                title: "Failed!",
+                                text: data.message,
+                                timer: 6000,
+                                icon: "error"
+                            });
+                        }
+                    }
+                });
+            });
+    })
+    </script>
+    <script>
+        $(function () {
+            bsCustomFileInput.init();
+        });
+    </script>
+}
+
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")">
+}
