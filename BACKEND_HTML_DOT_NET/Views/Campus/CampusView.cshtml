@@ -18,6 +18,8 @@
                         </ol>
                     </a>
                 </div>
+
+              
                 <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -141,11 +143,11 @@
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
     <script src="@Url.Content("~/css/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
     <script type="text/javascript">
-        $(function () {
-            $("#campustable").DataTable({ "responsive": true, "lengthChange": false, "autoWidth": false});
+         $(function () {
+             $("#campustable").DataTable({ "responsive": true, "lengthChange": false, "autoWidth": false});
 
 
-        });
+         });
         function DeleteCampus(id) {
 
             Swal.fire({

@@ -42,7 +42,7 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Username</th>
+                                        <th>User name</th>
                                         <th>Role</th>
                                         <th>View</th>
                                         <th>Reset Password</th>
@@ -63,7 +63,7 @@
                                                 @item.Role
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("UserDetailView","UserDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>
+                                                <a href="@Url.Action("UserDetailView","UserDetails",new {@id=item.Id})" class="nav-icon fas fa-eye"></a>
                                             </td>
                                             <td>
                                                 @*<a href="@Url.Action("UserDetailUpdate","UserDetails",new {@id=item.Id})" class="nav-icon fas fa-edit"></a>*@
@@ -153,11 +153,15 @@
 
         });
 
+
+
         function DeleteUserDetail(id) {
+
             Swal.fire({
                 title: "Are you sure?",
                 text: "You will not be able to recover this imaginary file!",
                 type: "warning",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
@@ -172,14 +176,20 @@
                         data: { id: id },
                         success: function (data) {
                             if (data.status_code == "200") {
-                                Swal.fire(data.message, '', 'success')
-                                window.setTimeout(window.location.reload(), 4000);
-
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.message,
+                                    timer: 6000,
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.reload();
+                                });
                             }
 
                         }
                     });
                 }
+
             });
 
         }

@@ -28,34 +28,30 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Add Detail</h3>
                                 </div>
-                                <form id="facultydetailadd" name="facultydetailadd" role="form">
+                                <form id="userdetailadd" name="userdetailadd" role="form">
                                     <div class="card-body">
                                         <div class="form-group">
 
                                             <!-- Name Controls -->
 
-                                            <div class="input-group col-12">
+                                            <div class="input-group-row col-12 row">
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <label for="Username">User Name</label>
                                                     <input name="Username" type="text" class="form-control" id="Username" placeholder="Username">
                                                 </div>
-                                            </div>
+                                       
 
-
-
-                                            <div class="input-group col-12">
-
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <label for="Password">Password</label>
                                                     <input name="Password" type="text" class="form-control" id="Password" placeholder="Password">
                                                 </div>
+
                                             </div>
 
+                                            <div class="input-group col-12 row p-2">
 
-                                            <div class="input-group col-12">
-
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <label for="Role">Role</label>
                                                     <select name="Role" id="Role" class="form-control">
                                                         <option>Select Role</option>
@@ -112,7 +108,7 @@
         $(document).ready(function () {
             //console.log( "ready!" );
 
-            $('#facultydetailadd').validate({
+            $('#userdetailadd').validate({
                 rules: {
                     "Username": {
                         required: true
@@ -142,7 +138,7 @@
 
             $('#btnSubmit').click(function (e) {
 
-                if ($('#facultydetailadd').valid()) {
+                if ($('#userdetailadd').valid()) {
 
                     var Username = document.getElementById("Username").value;
                     var Password = document.getElementById("Password").value;
@@ -173,7 +169,7 @@
                                     timer: 6000,
                                     icon: "success"
                                 }).then(function () {
-                                    $('#facultyadd')[0].reset();
+                                    $('#userdetailadd')[0].reset();
                                     window.location.href = '@Url.Action("UserDetailList","UserDetails")';
                                 });
                             }

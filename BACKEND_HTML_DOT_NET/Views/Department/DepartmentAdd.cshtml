@@ -172,7 +172,7 @@
 
 
                     console.log(data);
-
+                    loaderStart();
                         $.ajax({
                             url: '@Url.Action("DepartmentAdd", "Department")',
                             type: 'post',
@@ -181,6 +181,7 @@
                             contentType: false,
                             cache: false,
                             success: function (data) {
+                            loaderStop();
                                 if (data.status_code == "200") {
                                     Swal.fire({
                                         title: "Added!",
