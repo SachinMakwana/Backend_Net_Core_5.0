@@ -9,7 +9,7 @@
     <section class="content" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-                <a href="@Url.Action("DesignationView","DesignationCon")">
+                <a href="@Url.Action("DesignationList","DesignationCon")">
                     <ol class="breadcrumb float-sm-right">
                         <li style="margin-left: 00px;"><i class="nav-icon fas fa-minus-circle"></i></li>
                         <li style="margin-left: px;">Back to Details</li>
@@ -26,17 +26,17 @@
                     <form role="form" id="gallery" asp-action="DesignationConAdd" asp-controller="DesignationCon" method="post">
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group">
+                                <div class="form-group col-md-4 ">
                                     <label for="fileName">Title</label>
                                     <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter id">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group  col-md-4 ">
                                     <label for="fileName">Class</label>
                                     <input type="text" class="form-control" id="Class" name="Class" placeholder="Enter name">
                                 </div> 
                                 
-                                <div class="form-group">
+                                <div class="form-group  col-md-4 ">
                                     <label for="fileName">Payband</label>
                                     <input type="text" class="form-control" id="Payband" name="Payband" placeholder="Enter name">
                                 </div>
